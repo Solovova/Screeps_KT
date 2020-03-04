@@ -46,24 +46,16 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
 }
 
 fun constantSlaveRoomInitMain(slaveRoom: SlaveRoom) {
-    if (slaveRoom.parent.name == "E51N39" && slaveRoom.name == "E51N41") {
-        slaveRoom.need[0][0] = 0
-        slaveRoom.need[0][1] = 5
-    }
 
-    if (slaveRoom.parent.name == "E49N39" && slaveRoom.name == "E47N39") {
-        slaveRoom.need[0][0] = 0
-        slaveRoom.need[0][1] = 5
-        slaveRoom.need[0][2] = 1
-    }
 
-    if (slaveRoom.parent.name == "E52N36" && slaveRoom.name == "E52N35") {
-        slaveRoom.need[0][0] = 0
+    if (slaveRoom.parent.name == "E52N36" && slaveRoom.name == "E52N34") {
+        slaveRoom.need[0][0] = 1
         slaveRoom.need[0][1] = 4
     }
 
-    if (slaveRoom.parent.name == "E52N36" && slaveRoom.name == "E51N35") {
-        slaveRoom.need[0][0] = 0
+    if (slaveRoom.parent.name == "E52N36" && slaveRoom.name == "E53N33") {
+        slaveRoom.need[0][0] = 1
         slaveRoom.need[0][1] = 4
     }
+
 }

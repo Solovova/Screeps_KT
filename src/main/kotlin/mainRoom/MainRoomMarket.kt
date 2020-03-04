@@ -4,7 +4,7 @@ import screeps.api.*
 import screeps.utils.toMap
 
 fun MainRoom.marketCreateBuyOrders() {
-    if (!this.constant.marketBuyEnergy) return
+    if (!this.constant.marketBuyEnergy || this.getResource() > 300000) return
     if (Game.market.credits < this.mainRoomCollector.mainContext.constants.globalConstant.marketMinCreditForOpenBuyOrder) return
 
     val priceEnergy = mainRoomCollector.mainContext.constants.globalConstant.marketBuyPriceEnergy

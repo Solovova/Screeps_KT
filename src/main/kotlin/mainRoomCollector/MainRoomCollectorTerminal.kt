@@ -15,6 +15,7 @@ fun MainRoomCollector.runTerminalsTransfer() {
     this.terminalSentEnergyFrom3To2()
     this.terminalSentMineral()
     this.terminalSentEnergyOverflow()
+    this.terminalSentEnergyLevelMax()
 }
 
 fun MainRoomCollector.terminalSentEnergy() {
@@ -137,7 +138,7 @@ fun MainRoomCollector.terminalSentEnergyOverflow() {
 fun MainRoomCollector.terminalSentEnergyFrom3To2() {
     val sentQuantity = 5000
     val energyMinQuantityIn2 = 120000
-    val energyMinQuantityIn3 = 40000
+    val energyMinQuantityIn3 = 80000
 
     //Emergency to
     val mainRoomTo: MainRoom? = this.rooms.values.filter {
@@ -150,6 +151,37 @@ fun MainRoomCollector.terminalSentEnergyFrom3To2() {
         it.constant.levelOfRoom == 3
                 && it.getResource() > energyMinQuantityIn3
     }.maxBy { it.getResource() - energyMinQuantityIn3 }
+
+
+
+    if (mainRoomFrom != null && mainRoomTo != null) {
+        val terminalFrom: StructureTerminal = mainRoomFrom.structureTerminal[0] ?: return
+        val terminalTo: StructureTerminal = mainRoomTo.structureTerminal[0] ?: return
+        if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
+            val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
+            if (result == OK)
+                mainContext.messenger("INFO", mainRoomFrom.name,
+                        "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}", COLOR_GREEN)
+        }
+    }
+}
+
+fun MainRoomCollector.terminalSentEnergyLevelMax() {
+    val sentQuantity = 5000
+    val energyMinQuantityTo = 120000
+    val energyMinQuantityFrom = 140000
+
+    //Emergency to
+    val mainRoomTo: MainRoom? = this.rooms.values.filter {
+        it.structureTerminal[0] != null
+                && it.constant.levelOfRoom == 3
+                && it.getResource() < energyMinQuantityTo
+    }.minBy { it.getResource() }
+
+    val mainRoomFrom: MainRoom? = this.rooms.values.filter {
+        it.constant.levelOfRoom == 3
+                && it.getResource() > energyMinQuantityFrom
+    }.maxBy { it.getResource() - energyMinQuantityFrom }
 
 
 
