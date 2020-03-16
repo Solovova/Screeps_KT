@@ -29,7 +29,7 @@ fun Creep.doTask(mainContext: MainContext) {
 
     when (task.type) {
         TypeOfTask.Harvest -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0,1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
             if (task.come) {
                 val source: Source? = (Game.getObjectById(task.idObject0) as Source?)
                 if (source != null) this.harvest(source)
@@ -52,24 +52,22 @@ fun Creep.doTask(mainContext: MainContext) {
         TypeOfTask.TransferToCreep -> {
             val objForFilling: Creep? = Game.getObjectById(task.idObject0)
             if (objForFilling != null) {
-                if (this.pos.inRangeTo(objForFilling.pos,1)){
+                if (this.pos.inRangeTo(objForFilling.pos, 1)) {
                     val carryCreepTo = objForFilling.carry.toMap().map { it.value }.sum()
                     if (carryCreepTo == 0)
                         this.transfer(objForFilling, task.resource)
-                }
-                else this.moveTo(objForFilling.pos)
+                } else this.moveTo(objForFilling.pos)
             }
         }
 
         TypeOfTask.TransferFromCreep -> {
             val objForFilling: Creep? = Game.getObjectById(task.idObject0)
             if (objForFilling != null) {
-                if (this.pos.inRangeTo(objForFilling.pos,1)){
+                if (this.pos.inRangeTo(objForFilling.pos, 1)) {
                     val carryCreepTo = objForFilling.carry.toMap().map { it.value }.sum()
                     if (carryCreepTo != 0)
-                        objForFilling.transfer(this,task.resource)
-                }
-                else this.moveTo(objForFilling.pos)
+                        objForFilling.transfer(this, task.resource)
+                } else this.moveTo(objForFilling.pos)
             }
         }
 
@@ -78,15 +76,14 @@ fun Creep.doTask(mainContext: MainContext) {
 
             val objForFilling: Creep? = Game.getObjectById(mainRoom.constant.creepIdOfBigBuilder)
             if (objForFilling != null) {
-                if (this.pos.inRangeTo(objForFilling.pos,1))
+                if (this.pos.inRangeTo(objForFilling.pos, 1))
                     this.heal(objForFilling)
                 else {
-                    if (this.pos.inRangeTo(objForFilling.pos,3)) this.heal(objForFilling)
+                    if (this.pos.inRangeTo(objForFilling.pos, 3)) this.heal(objForFilling)
                     this.moveTo(objForFilling.pos)
                 }
             }
         }
-
 
 
         TypeOfTask.Upgrade -> {
@@ -136,15 +133,31 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToRoom -> {
-            val flag: Flag? = this.room.find(FIND_FLAGS).firstOrNull { it.color == COLOR_GREY && it.secondaryColor == COLOR_GREY }
+            var flag: Flag? = this.room.find(FIND_FLAGS).firstOrNull { it.color == COLOR_GREY && it.secondaryColor == COLOR_GREY }
             if (flag != null) {
-                this.moveTo(flag.pos.x,flag.pos.y)
-            }else {
-                if (this.pos.roomName != this.memory.slaveRoom) {
-                    val exitDir = this.room.findExitTo(this.memory.slaveRoom)
-                    val exitPath = this.pos.findClosestByRange(exitDir)
-                    if (exitPath != null) if (this.fatigue == 0) this.moveTo(exitPath.x, exitPath.y)
+                this.moveTo(flag.pos.x, flag.pos.y)
+                return
+            }
+
+            //Use global guide flag
+            val slaveRoom: SlaveRoom? = mainRoom.slaveRooms[this.memory.slaveRoom]
+            if (slaveRoom != null && slaveRoom.constant.useGlobalGuideFlag) {
+                flag = Game.flags.toMap().values.firstOrNull { it.color == COLOR_GREY && it.secondaryColor == COLOR_GREY }
+                if (flag != null) {
+                    console.log("Find flag:" + flag.pos.roomName)
+                    if (flag.pos.roomName != this.pos.roomName) {
+                        val exitDir = this.room.findExitTo(flag.pos.roomName)
+                        val exitPath = this.pos.findClosestByRange(exitDir)
+                        if (exitPath != null) if (this.fatigue == 0) this.moveTo(exitPath.x, exitPath.y)
+                        return
+                    }
                 }
+            }
+
+            if (this.pos.roomName != this.memory.slaveRoom) {
+                val exitDir = this.room.findExitTo(this.memory.slaveRoom)
+                val exitPath = this.pos.findClosestByRange(exitDir)
+                if (exitPath != null) if (this.fatigue == 0) this.moveTo(exitPath.x, exitPath.y)
             }
         }
 
@@ -217,7 +230,7 @@ fun Creep.doTask(mainContext: MainContext) {
             if (task.come) {
                 val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 val slaveRoom: SlaveRoom? = mainRoom.slaveRooms[this.memory.slaveRoom]
-                if (structureController != null && slaveRoom!=null) this.signController(structureController, slaveRoom.describe)
+                if (structureController != null && slaveRoom != null) this.signController(structureController, slaveRoom.describe)
             }
         }
 
@@ -234,7 +247,7 @@ fun Creep.doTask(mainContext: MainContext) {
                     }
                     task.take = true
                     task.come = false
-                }else{
+                } else {
                     val structure: Structure? = (Game.getObjectById(task.idObject1) as Structure?)
                     if (structure != null) {
                         if (task.quantity == 0) this.transfer(structure, task.resource)
@@ -279,28 +292,27 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
 
-
         else -> {
         }
     }
 }
 
 
-
 fun Creep.doTaskGoTo(task: CreepTask, pos: RoomPosition, range: Int) {
     if (this.pos.inRangeTo(pos, range)) task.come = true
     else {
-        if (this.memory.role in arrayOf(106,108,1106,1108,121,123,125))
+        if (this.memory.role in arrayOf(106, 108, 1106, 1108, 121, 123, 125))
             if (this.room.name != this.memory.mainRoom) {
                 val room: Room? = Game.rooms[this.pos.roomName]
                 if (room != null) {
-                    val fFind: Array<Structure> = (room.lookForAt(LOOK_STRUCTURES,this.pos.x, this.pos.y) ?: arrayOf())
-                            .filter { it.structureType == STRUCTURE_ROAD && it.hits < (it.hitsMax - 100)}.toTypedArray()
+                    val fFind: Array<Structure> = (room.lookForAt(LOOK_STRUCTURES, this.pos.x, this.pos.y)
+                            ?: arrayOf())
+                            .filter { it.structureType == STRUCTURE_ROAD && it.hits < (it.hitsMax - 100) }.toTypedArray()
                     if (fFind.isNotEmpty()) this.repair(fFind[0])
                 }
             }
 
-        if (this.fatigue ==0) {
+        if (this.fatigue == 0) {
             this.moveTo(pos)
         }
     }

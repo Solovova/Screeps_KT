@@ -24,7 +24,14 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
             mainRoom.constant.creepUseBigBuilder = true
             mainRoom.constant.defenceHits = 100000
             mainRoom.constant.energyExcessSent = 90000
+            //mainRoom.constant.creepUpgradeRole
         }
+
+
+    }
+
+    if (mainRoom.constant.levelOfRoom == 2) {
+        mainRoom.constant.creepUpgradeRole[7] = true
     }
 
 //    if (mainRoom.name == "E57N34") mainRoom.constant.energyExcessSent = 220000
@@ -48,14 +55,8 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
 fun constantSlaveRoomInitMain(slaveRoom: SlaveRoom) {
 
 
-    if (slaveRoom.parent.name == "E52N36" && slaveRoom.name == "E52N34") {
-        slaveRoom.need[0][0] = 1
-        slaveRoom.need[0][1] = 4
+    if (slaveRoom.parent.name == "E59N46" && slaveRoom.name == "E57N51") {
+        slaveRoom.need[0][0] = 0
+        slaveRoom.need[0][1] = 0
     }
-
-    if (slaveRoom.parent.name == "E52N36" && slaveRoom.name == "E53N33") {
-        slaveRoom.need[0][0] = 1
-        slaveRoom.need[0][1] = 4
-    }
-
 }

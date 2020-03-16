@@ -7,6 +7,7 @@ import constants.MainRoomConstant
 import constants.SlaveRoomConstant
 import slaveRoom.SlaveRoom
 import constants.CacheCarrier
+import logic.lab.LabGetSort
 import mainContext.getCacheRecordRoom
 import mainContext.messenger
 import mainRoomCollector.MainRoomCollector
@@ -267,45 +268,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureLabSort: Map<Int, StructureLab>
         get() {
             if (this._structureLabSort == null) {
-                val result: MutableMap<Int, StructureLab> = mutableMapOf()
-
-                val minX: Int = this.structureLab.values.minBy { it.pos.x }?.pos?.x
-                        ?: return result
-                val minY: Int = this.structureLab.values.minBy { it.pos.y }?.pos?.y
-                        ?: return result
-                if (this.structureLab.size == 3) {
-                    val arrDx = arrayOf(0, 1, 1)
-                    val arrDy = arrayOf(2, 1, 0)
-                    for (ind in 0..2) {
-                        val tmpLab: StructureLab? = this.structureLab.values.firstOrNull {
-                            it.pos.x == (minX + arrDx[ind]) && it.pos.y == (minY + arrDy[ind])
-                        }
-                        if (tmpLab != null) result[ind] = tmpLab
-                    }
-                }
-                if (this.structureLab.size == 6) {
-                    val arrDx = arrayOf(0, 1, 1, 2, 2, 2)
-                    val arrDy = arrayOf(2, 1, 0, 0, 1, 2)
-                    for (ind in 0..5) {
-                        val tmpLab: StructureLab? = this.structureLab.values.firstOrNull {
-                            it.pos.x == (minX + arrDx[ind]) && it.pos.y == (minY + arrDy[ind])
-                        }
-                        if (tmpLab != null) result[ind] = tmpLab
-                    }
-                }
-
-                if (this.structureLab.size == 10) {
-                    val arrDx = arrayOf(1, 2, 2, 3, 3, 3, 0, 0, 0, 1)
-                    val arrDy = arrayOf(2, 1, 0, 0, 1, 2, 1, 2, 3, 3)
-                    for (ind in 0..9) {
-                        val tmpLab: StructureLab? = this.structureLab.values.firstOrNull {
-                            it.pos.x == (minX + arrDx[ind]) && it.pos.y == (minY + arrDy[ind])
-                        }
-                        if (tmpLab != null) result[ind] = tmpLab
-                    }
-                }
-
-                this._structureLabSort = result.toMap()
+                this._structureLabSort = LabGetSort().getLabSort(this.structureLab)
             }
             return _structureLabSort ?: throw AssertionError("Error get StructureLabSort")
         }

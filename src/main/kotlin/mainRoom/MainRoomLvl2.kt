@@ -94,7 +94,8 @@ fun MainRoom.needCorrection2() {
     if (this.constant.needCleaner) this.need[2][17] = 1
 
     //18 Lab filler
-    if (this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") {
+    if ((this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") ||
+            this.constant.creepUpgradeRole[7] == true) { //ToDo check another upgrades need
         this.need[1][18] = 1
     }
 

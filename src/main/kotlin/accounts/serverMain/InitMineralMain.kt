@@ -46,7 +46,7 @@ fun initMineralMain(mainContext: MainContext) {
             sellFromRoom = "E59N36"
     )
 
-    mainContext.mineralData["Z".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+    mainContext.mineralData["X".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.500,
             priceMin = 0.350,
             marketSellExcess = 400000,
