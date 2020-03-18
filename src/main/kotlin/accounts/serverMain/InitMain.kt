@@ -32,7 +32,7 @@ fun Constants.initMainHead() {
     this.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                //M18
     this.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
     this.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf())                                        //M20
-    this.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf())                                        //M21
+    this.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                        //M21
     this.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43","E59N43"))   //M22
     this.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     this.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
@@ -60,10 +60,13 @@ fun Constants.initMainBody() {
 //    m(19).creepUpgradeRole[7] = true
 //    m(20).creepUpgradeRole[7] = true
 
+    m(26).creepSpawn = false
     s(25,0).model = 1
-    //s(25,0).useGlobalGuideFlag = true
+    //s(25,0).pathUseGlobalGuideFlag = true
+    s(25,0).pathToRoom = arrayOf("E59N46","E60N46","E60N47","E60N48","E60N49",
+            "E60N50","E59N50","E58N50","E57N50","E57N51")
     //s(22,3).model = 1
-    s(23,0).autoBuildRoad = true
+    //s(21,0).autoBuildRoad = true
     //s(22,1).autoBuildRoad = true
 
 

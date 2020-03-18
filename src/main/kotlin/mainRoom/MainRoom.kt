@@ -7,7 +7,7 @@ import constants.MainRoomConstant
 import constants.SlaveRoomConstant
 import slaveRoom.SlaveRoom
 import constants.CacheCarrier
-import logic.lab.LabGetSort
+import logic.lab.mainRoom.GetLabSort
 import mainContext.getCacheRecordRoom
 import mainContext.messenger
 import mainRoomCollector.MainRoomCollector
@@ -268,7 +268,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureLabSort: Map<Int, StructureLab>
         get() {
             if (this._structureLabSort == null) {
-                this._structureLabSort = LabGetSort().getLabSort(this.structureLab)
+                this._structureLabSort = GetLabSort().getLabSort(this.structureLab)
             }
             return _structureLabSort ?: throw AssertionError("Error get StructureLabSort")
         }

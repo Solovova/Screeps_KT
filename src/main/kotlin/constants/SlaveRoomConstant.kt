@@ -2,7 +2,6 @@ package constants
 
 class SlaveRoomConstant {
     var model: Int = 0 //simple //0 - harvesting room, 1 - colonize room, 2 - danged harvesting room
-    var useGlobalGuideFlag: Boolean = false //if true find flag GREY GREY and all creeps go to it
     var autoBuildRoad: Boolean = false
 
     //Profit
@@ -22,10 +21,9 @@ class SlaveRoomConstant {
 
     var creepIdMineralHarvester: String = ""
 
-
-
-
-
+    //PathToRoom
+    var pathUseGlobalGuideFlag: Boolean = false //if true find flag GREY GREY and all creeps go to it
+    var pathToRoom: Array<String> = arrayOf() //index 0 - mainRoom,  index last -slaveRoom
 
     fun fromDynamic(d: dynamic) {
         if (d == null) return

@@ -57,6 +57,6 @@ fun constantSlaveRoomInitMain(slaveRoom: SlaveRoom) {
 
     if (slaveRoom.parent.name == "E59N46" && slaveRoom.name == "E57N51") {
         slaveRoom.need[0][0] = 0
-        slaveRoom.need[0][1] = 0
+        slaveRoom.need[0][1] = 6
     }
 }

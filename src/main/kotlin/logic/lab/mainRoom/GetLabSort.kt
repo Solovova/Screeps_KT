@@ -1,8 +1,8 @@
-package logic.lab
+package logic.lab.mainRoom
 
 import screeps.api.structures.StructureLab
 
-class LabGetSort {
+class GetLabSort {
     private fun getLabSortedByArrays(structureLab: Map<String, StructureLab>,
                                      arrDx: Array<Int>, arrDy: Array<Int>,
                                      minX: Int, minY: Int): Map<Int, StructureLab> {

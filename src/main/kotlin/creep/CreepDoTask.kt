@@ -6,6 +6,7 @@ import screeps.api.*
 import screeps.api.structures.*
 import slaveRoom.SlaveRoom
 import CreepTask
+import logic.creep.slaveRoom.tasks.TaskGoToRoom
 import mainContext.messenger
 import role
 import mainRoom
@@ -133,32 +134,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToRoom -> {
-            var flag: Flag? = this.room.find(FIND_FLAGS).firstOrNull { it.color == COLOR_GREY && it.secondaryColor == COLOR_GREY }
-            if (flag != null) {
-                this.moveTo(flag.pos.x, flag.pos.y)
-                return
-            }
-
-            //Use global guide flag
-            val slaveRoom: SlaveRoom? = mainRoom.slaveRooms[this.memory.slaveRoom]
-            if (slaveRoom != null && slaveRoom.constant.useGlobalGuideFlag) {
-                flag = Game.flags.toMap().values.firstOrNull { it.color == COLOR_GREY && it.secondaryColor == COLOR_GREY }
-                if (flag != null) {
-                    console.log("Find flag:" + flag.pos.roomName)
-                    if (flag.pos.roomName != this.pos.roomName) {
-                        val exitDir = this.room.findExitTo(flag.pos.roomName)
-                        val exitPath = this.pos.findClosestByRange(exitDir)
-                        if (exitPath != null) if (this.fatigue == 0) this.moveTo(exitPath.x, exitPath.y)
-                        return
-                    }
-                }
-            }
-
-            if (this.pos.roomName != this.memory.slaveRoom) {
-                val exitDir = this.room.findExitTo(this.memory.slaveRoom)
-                val exitPath = this.pos.findClosestByRange(exitDir)
-                if (exitPath != null) if (this.fatigue == 0) this.moveTo(exitPath.x, exitPath.y)
-            }
+            TaskGoToRoom(this,mainRoom).goToRoom()
         }
 
         TypeOfTask.Claim -> {

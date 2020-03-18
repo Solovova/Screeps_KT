@@ -38,8 +38,8 @@ class MainContext {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
         this.mainRoomCollector.runInStartOfTick()
 
-        this.mineralDataFill()
-        this.mineralProductionFill()
+        LogicMineral().runInStartOfTick(this)
+        LogicLab().runInStartOfTick(this)
 
         this.battleGroupContainer.runInStartOfTick()
     }

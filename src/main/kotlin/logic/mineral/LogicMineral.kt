@@ -1,5 +1,9 @@
 package logic.mineral
 
-class LogicMineral {
+import mainContext.MainContext
 
+class LogicMineral {
+    fun runInStartOfTick(mainContext: MainContext) {
+        this.mineralDataFill(mainContext)
+    }
 }
