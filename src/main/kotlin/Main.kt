@@ -15,7 +15,11 @@ fun loop() {
     val cpuStart = Game.cpu.getUsed()
 
     // Initialisation and protect mainContext
-    if (mainContextGlob == null) mainContextGlob = MainContext()
+    if (mainContextGlob == null) {
+        //Game.market.createOrder(ORDER_BUY,RESOURCE_KEANIUM,0.032,200000,"E47N39")
+        //Game.market.changeOrderPrice("5e72724b3265835947152333",0.04)
+        mainContextGlob = MainContext()
+    }
 
     val protectedMainContext = mainContextGlob ?: return
 

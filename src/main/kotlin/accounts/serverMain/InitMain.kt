@@ -36,8 +36,8 @@ fun Constants.initMainHead() {
     this.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43","E59N43"))   //M22
     this.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     this.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
-    this.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf("E57N51")) //M25
-    this.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf()) //M26
+    this.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
+    this.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E58N51")) //M26
 
 
     //E53N32 E56N31 E54N31
@@ -60,14 +60,14 @@ fun Constants.initMainBody() {
 //    m(19).creepUpgradeRole[7] = true
 //    m(20).creepUpgradeRole[7] = true
 
-    m(26).creepSpawn = false
-    s(25,0).model = 1
+    //m(26).creepSpawn = false
+    //s(25,0).model = 1
     //s(25,0).pathUseGlobalGuideFlag = true
-    s(25,0).pathToRoom = arrayOf("E59N46","E60N46","E60N47","E60N48","E60N49",
-            "E60N50","E59N50","E58N50","E57N50","E57N51")
+    //s(25,0).pathToRoom = arrayOf("E59N46","E60N46","E60N47","E60N48","E60N49",
+    //        "E60N50","E59N50","E58N50","E57N50","E57N51")
     //s(22,3).model = 1
     //s(21,0).autoBuildRoad = true
-    //s(22,1).autoBuildRoad = true
+    s(26,0).autoBuildRoad = true
 
 
     //m(6).creepUpgradeRole[7] = true
@@ -89,6 +89,7 @@ fun Constants.initMainBody() {
     m(13).reactionActive = "XGH2O"
     m(14).reactionActive = "XGH2O"
     m(15).reactionActive = "XGH2O"
+    m(16).reactionActive = "UL"
 }
 
 

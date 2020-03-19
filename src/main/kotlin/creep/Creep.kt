@@ -213,6 +213,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
+        //if (!isTask) isTask = this.slaveTransferToStorageOrContainer(1,creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
