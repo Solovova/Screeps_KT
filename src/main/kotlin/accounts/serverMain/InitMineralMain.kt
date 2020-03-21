@@ -7,44 +7,67 @@ import screeps.api.ResourceConstant
 
 fun initMineralMain(mainContext: MainContext) {
     mainContext.mineralData["energy".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.044,
-            priceMin = 0.030,
+            priceMax = 0.200,
+            priceMin = 0.005,
             marketSellExcess = mainContext.getNumRoomWithContainer()*500000,
             marketBuyLack = mainContext.getNumRoomWithContainer()*200000,
             buyToRoom = "E54N37"
     )
 
     mainContext.mineralData["O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.030,
-            priceMin = 0.006,
+            priceMax = 0.200,
+            priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 6000000,
-            sellFromRoom = "E54N37"
+            marketBuyLack = 20000,
+            sellFromRoom = "E54N37",
+            buyToRoom = "E59N38"
     )
 
     mainContext.mineralData["H".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.040,
-            priceMin = 0.015,
+            priceMax = 0.200,
+            priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 6000000,
-            sellFromRoom = "E58N39"
+            marketBuyLack = 20000,
+            sellFromRoom = "E58N39",
+            buyToRoom = "E59N38"
     )
 
     mainContext.mineralData["L".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.100,
-            priceMin = 0.080,
+            priceMax = 0.200,
+            priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 6000000,
-            sellFromRoom = "E52N37"
+            marketBuyLack = 20000,
+            sellFromRoom = "E52N37",
+            buyToRoom = "E47N39"
     )
 
     mainContext.mineralData["Z".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.055,
-            priceMin = 0.027,
+            priceMax = 0.200,
+            priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 6000000,
-            sellFromRoom = "E59N36"
+            marketBuyLack = 20000,
+            sellFromRoom = "E59N36",
+            buyToRoom = "E54N39"
     )
+
+    mainContext.mineralData["K".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            priceMax = 0.200,
+            priceMin = 0.005,
+            marketSellExcess = 200000,
+            marketBuyLack = 20000,
+            buyToRoom = "E54N39"
+    )
+
+    mainContext.mineralData["U".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            priceMax = 0.200,
+            priceMin = 0.005,
+            marketSellExcess = 200000,
+            marketBuyLack = 20000,
+            sellFromRoom = "E57N39",
+            buyToRoom = "E47N39"
+    )
+
+
 
     mainContext.mineralData["X".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.500,
@@ -52,14 +75,6 @@ fun initMineralMain(mainContext: MainContext) {
             marketSellExcess = 400000,
             marketBuyLack = 70000,
             sellFromRoom = "E51N39"
-    )
-
-    mainContext.mineralData["U".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.035,
-            priceMin = 0.030,
-            marketSellExcess = 200000,
-            marketBuyLack = 6000000,
-            sellFromRoom = "E57N39"
     )
 
     mainContext.mineralData["XGH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
@@ -72,6 +87,7 @@ fun initMineralMain(mainContext: MainContext) {
     mainContext.mineralData["GH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 1.200,
             priceMin = 0.900,
+            storeMax = 400000,
             marketSellExcess = 0,
             sellFromRoom = "E54N39"
     )
@@ -98,5 +114,9 @@ fun initMineralMain(mainContext: MainContext) {
             storeMax = 100000,
             buyToRoom = "E53N39",
             onlyDirectBuy = true
+    )
+
+    mainContext.mineralData["G".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000
     )
 }

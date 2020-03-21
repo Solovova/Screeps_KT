@@ -176,6 +176,55 @@ fun MainContext.mineralSellOrderCreate(resource: ResourceConstant, mineralDataRe
     return myOrderPrice
 }
 
+fun MainContext.mineralGetBuyPrice(resource: ResourceConstant, mineralDataRecord: MineralDataRecord): Double {
+    val quantitySkip = 5000
+
+    val orders = Game.market.getAllOrders().filter {
+        it.resourceType == resource
+                && it.type == ORDER_BUY
+                && it.remainingAmount != 0
+                && it.amount != 0
+                && it.roomName != mineralDataRecord.sellFromRoom
+    }.sortedByDescending { it.price }
+    var sumQuantity = 0
+    var buyOrder: Market.Order? = null
+    for (order in orders) {
+        sumQuantity += order.remainingAmount
+        buyOrder = order
+        if (sumQuantity > quantitySkip) break
+    }
+
+    return  if (buyOrder == null) {
+        mineralDataRecord.priceMin
+    }else{
+        min(mineralDataRecord.priceMax, buyOrder.price + 0.001)
+    }
+}
+
+//ToDo need test
+fun MainContext.mineralBuyOrderCreate(resource: ResourceConstant, mineralDataRecord: MineralDataRecord): Double? {
+    if (mineralDataRecord.quantity > mineralDataRecord.marketBuyLack) return null
+    val myOrderPrice: Double = this.mineralGetBuyPrice(resource, mineralDataRecord)
+    val quantityOrderAmount = 10000
+
+    //console.log("Create SELL order for $resource price: $myOrderPrice")
+
+    val myOrders = Game.market.orders.values.toList().firstOrNull {
+        it.resourceType == resource
+                && it.type == ORDER_BUY
+    }
+
+    if (myOrders == null) {
+        if (mineralDataRecord.buyToRoom == "") return null
+        Game.market.createOrder(ORDER_BUY, resource, myOrderPrice, quantityOrderAmount, mineralDataRecord.buyToRoom)
+    } else {
+        if (myOrders.remainingAmount < quantityOrderAmount) Game.market.extendOrder(myOrders.id, quantityOrderAmount - myOrders.remainingAmount)
+        if (myOrderPrice != myOrders.price) Game.market.changeOrderPrice(myOrders.id, myOrderPrice)
+    }
+
+    return myOrderPrice
+}
+
 fun MainContext.mineralSellDirect(resource: ResourceConstant, mineralDataRecord: MineralDataRecord, minPrice: Double) {
     if (mineralDataRecord.quantity < mineralDataRecord.marketSellExcess) return
     val mainRoomForSale: MainRoom = this.mainRoomCollector.rooms.values.firstOrNull { it.getResourceInTerminal(resource) > 5000 }
@@ -203,12 +252,23 @@ fun MainContext.mineralBuyDirect(resource: ResourceConstant, mineralDataRecord: 
 fun MainContext.mineralSellBuy() {
     for (resource in RESOURCES_ALL) {
         val mineralDataRecord = mineralData[resource] ?: continue
-        val minPrice = this.mineralSellOrderCreate(resource, mineralDataRecord)
-        if (minPrice != null) this.mineralSellDirect(resource, mineralDataRecord, minPrice)
+        this.mineralSellOrderCreate(resource, mineralDataRecord)
+        //if (minPrice != null) this.mineralSellDirect(resource, mineralDataRecord, minPrice)
 
         if (Game.market.credits > 200000.0) {
-            if (mineralDataRecord.onlyDirectBuy) this.mineralBuyDirect(resource,mineralDataRecord,mineralDataRecord.priceMin)
+            //if (mineralDataRecord.onlyDirectBuy) this.mineralBuyDirect(resource,mineralDataRecord,mineralDataRecord.priceMin)
+            this.mineralBuyOrderCreate(resource,mineralDataRecord)
         }
 
+    }
+}
+
+fun MainContext.mineralShowBuySellPrice(minerals: Array<ResourceConstant>) {
+    for (mineral in minerals) {
+        val mineralDataRecord: MineralDataRecord? = this.mineralData[mineral]
+        if ( mineralDataRecord!= null) {
+            val buyPrice = this.mineralGetBuyPrice(mineral,mineralDataRecord)
+            console.log("Mineral $mineral : Buy price: $buyPrice")
+        }
     }
 }

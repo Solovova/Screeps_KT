@@ -430,6 +430,18 @@ fun Creep.takeDroppedEnergy(creepCarry: Int, mainContext: MainContext, range: In
     return result
 }
 
+fun Creep.takeFromTombStone(creepCarry: Int, mainContext: MainContext, range: Int = 100): Boolean {
+    var result = false
+    if (creepCarry == 0) {
+        val objTombStone: Tombstone? = this.room.find(FIND_TOMBSTONES).filter { it.store.energy != 0 }.minBy { this.pos.getRangeTo(it.pos) }
+        if (objTombStone != null && objTombStone.pos.inRangeTo(this.pos, range)) {
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = objTombStone.id, posObject0 = objTombStone.pos))
+            result = true
+        }
+    }
+    return result
+}
+
 fun Creep.slaveTakeFromContainer(type: Int, creepCarry: Int, mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
     var result = false
     if (creepCarry == 0 && slaveRoom != null) {
@@ -728,6 +740,29 @@ fun Creep.slaveAttack(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean 
         val hostileCreep: Creep? = slaveRoom.room.find(FIND_HOSTILE_CREEPS).firstOrNull()
         if (hostileCreep != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.AttackMile, idObject0 = hostileCreep.id, posObject0 = hostileCreep.pos))
+            result = true
+        }
+    }
+    return result
+}
+
+fun Creep.slaveAttackStructure(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
+    var result = false
+    if (slaveRoom?.room != null) {
+        var hostileStructure: Structure?
+        if (slaveRoom.name == "E56N51") {
+            hostileStructure = Game.getObjectById("59f962d941ddbb5a3dd1e92f")
+            if (hostileStructure == null) {
+                hostileStructure = slaveRoom.room.find(FIND_HOSTILE_STRUCTURES).minBy { this.pos.getRangeTo(it.pos) }
+            }
+        }else{
+            hostileStructure = slaveRoom.room.find(FIND_HOSTILE_STRUCTURES).minBy { this.pos.getRangeTo(it.pos) }
+        }
+
+
+
+        if (hostileStructure != null) {
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.AttackMile, idObject0 = hostileStructure.id, posObject0 = hostileStructure.pos))
             result = true
         }
     }

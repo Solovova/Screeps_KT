@@ -21,7 +21,7 @@ class MainContext {
     val logicUpgrade: LogicUpgrade = LogicUpgrade()
     val logicBuilding: LogicBuilding = LogicBuilding()
     val logicTerminal: LogicTerminal = LogicTerminal()
-    val logicMineral: LogicMineral = LogicMineral()
+    val logicMineral: LogicMineral = LogicMineral(this)
     val logicMarket: LogicMarket = LogicMarket()
     val logicMessenger: LogicMessenger = LogicMessenger()
     val logicDevelop: LogicDevelop = LogicDevelop()
@@ -32,16 +32,19 @@ class MainContext {
     val constants: Constants = Constants(this)
     val tasks: Tasks = Tasks(this)
     var mainRoomCollector: MainRoomCollector = MainRoomCollector(this, arrayOf())
+
+
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
     fun runInStartOfTick() {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
         this.mainRoomCollector.runInStartOfTick()
 
-        LogicMineral().runInStartOfTick(this)
+        logicMineral.runInStartOfTick()
         LogicLab().runInStartOfTick(this)
 
         this.battleGroupContainer.runInStartOfTick()
+
     }
 
     fun runNotEveryTick() {

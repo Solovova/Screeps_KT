@@ -8,7 +8,7 @@ fun Constants.initMainHead() {
                                                //M0       M1       M2       M3       M4       M5       M6       M7       M8       M9
     this.initMainRoomConstantContainer( arrayOf("E54N37","E59N36","E52N38","E52N37","E54N39","E51N39","E53N38","E51N37","E59N38","E58N37",
                                                 "E52N36","E58N39","E57N39","E57N37","E53N39","E49N39","E47N39","E51N41","E52N35","E51N35",
-                                                "E54N41","E53N35","E58N43","E58N44","E58N45","E59N46","E57N51") )
+                                                "E54N41","E53N35","E58N43","E58N44","E58N45","E59N46","E57N51","E55N51") )
 
     //Colonization E51N41
     this.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37","E54N36"))                       //M0
@@ -37,8 +37,8 @@ fun Constants.initMainHead() {
     this.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     this.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
     this.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
-    this.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E58N51")) //M26
-
+    this.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51","E56N51")) //M26 //"E58N51"
+    this.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf()) //M27
 
     //E53N32 E56N31 E54N31
 }
@@ -60,14 +60,14 @@ fun Constants.initMainBody() {
 //    m(19).creepUpgradeRole[7] = true
 //    m(20).creepUpgradeRole[7] = true
 
-    //m(26).creepSpawn = false
-    //s(25,0).model = 1
+    //m(27).creepSpawn = false
+    s(26,2).model = 1
     //s(25,0).pathUseGlobalGuideFlag = true
     //s(25,0).pathToRoom = arrayOf("E59N46","E60N46","E60N47","E60N48","E60N49",
     //        "E60N50","E59N50","E58N50","E57N50","E57N51")
     //s(22,3).model = 1
     //s(21,0).autoBuildRoad = true
-    s(26,0).autoBuildRoad = true
+    //s(26,1).autoBuildRoad = true
 
 
     //m(6).creepUpgradeRole[7] = true

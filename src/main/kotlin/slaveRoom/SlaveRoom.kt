@@ -201,6 +201,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             121 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
             123 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
             125 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2", this.parent,this)?.timeForDeath ?: 0
+
             else -> 0
         }
     }

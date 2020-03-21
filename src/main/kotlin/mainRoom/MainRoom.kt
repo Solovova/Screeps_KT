@@ -321,6 +321,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
         return when (fRole) {
             2 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0", this)?.timeForDeath ?: 0
             4 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1", this)?.timeForDeath ?: 0
+            1,3 -> 10
             else -> 0
         }
     }
