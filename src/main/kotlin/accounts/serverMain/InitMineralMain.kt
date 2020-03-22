@@ -10,8 +10,8 @@ fun initMineralMain(mainContext: MainContext) {
             priceMax = 0.200,
             priceMin = 0.005,
             marketSellExcess = mainContext.getNumRoomWithContainer()*500000,
-            marketBuyLack = mainContext.getNumRoomWithContainer()*200000,
-            buyToRoom = "E54N37"
+            marketBuyLack = mainContext.getNumRoomWithContainer()*100000
+            //buyToRoom = "E54N37"
     )
 
     mainContext.mineralData["O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
@@ -123,6 +123,14 @@ fun initMineralMain(mainContext: MainContext) {
     )
 
     mainContext.mineralData["GH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000
+    )
+
+    mainContext.mineralData["LH20".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000
+    )
+
+    mainContext.mineralData["LH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             storeMax = 100000
     )
 }

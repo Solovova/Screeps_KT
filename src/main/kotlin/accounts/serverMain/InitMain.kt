@@ -81,16 +81,20 @@ fun Constants.initMainBody() {
     m(4).reactionActive = "ZK"
     m(5).reactionActive = "GH"
     m(6).reactionActive = "G"
-    m(7).reactionActive = "GH"
+    m(7).reactionActive = "G"
     m(8).reactionActive = "OH"
     m(9).reactionActive = "GH"
     m(10).reactionActive = "OH"
     m(11).reactionActive = "OH"
-    m(12).reactionActive = ""
+    m(12).reactionActive = "OH"
     m(13).reactionActive = "XGH2O"
     m(14).reactionActive = "XGH2O"
     m(15).reactionActive = "XGH2O"
     m(16).reactionActive = "UL"
+    m(17).reactionActive = "LH"
+    m(18).reactionActive = "LH2O"
+    m(19).reactionActive = "LH"
+    m(21).reactionActive = "OH"
 }
 
 

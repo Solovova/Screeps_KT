@@ -26,7 +26,7 @@ class GlobalConstant(val constants: Constants) {
 
     init {
         constants.mainContext.logicUpgrade.setGlobalConstants(this)
-        constants.mainContext.logicLab.setGlobalConstants(this)
+        constants.mainContext.logicMineral.setGlobalConstants(this)
     }
 
 

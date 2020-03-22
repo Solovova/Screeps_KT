@@ -167,7 +167,20 @@ fun Creep.buildStructure(creepCarry: Int, mainContext: MainContext, mainRoom: Ma
 
 fun Creep.buildBigStructure(mainContext: MainContext, mainRoom: MainRoom): Boolean {
     var result = false
-    if (mainRoom.constructionSite.isNotEmpty()) {
+    //first upgrage ramparts if less 5000 to 10000
+    var structure: Structure? = mainRoom.room.find(FIND_STRUCTURES).filter {
+        (it.structureType == STRUCTURE_RAMPART)
+                && it.hits < 5000
+                && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0
+    }.minBy {it.hits + it.pos.getRangeTo(this.pos) * 2000}
+
+    if (structure != null) {
+        mainContext.tasks.add(this.id, CreepTask(TypeOfTask.UpgradeStructure, idObject0 = structure.id, posObject0 = structure.pos, quantity = 10000))
+        result = true
+    }
+
+
+    if (mainRoom.constructionSite.isNotEmpty() && !result) {
         val tConstructionSite = mainRoom.getConstructionSite(this.pos)
         if (tConstructionSite != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Build, idObject0 = tConstructionSite.id, posObject0 = tConstructionSite.pos))
@@ -175,7 +188,7 @@ fun Creep.buildBigStructure(mainContext: MainContext, mainRoom: MainRoom): Boole
         }
     }
     if (!result) {
-        var structure: Structure? = mainRoom.room.find(FIND_STRUCTURES).filter {
+        structure = mainRoom.room.find(FIND_STRUCTURES).filter {
             (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
                     && it.hits < mainRoom.constant.defenceHits
                     && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0

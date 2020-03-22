@@ -7,7 +7,6 @@ import logic.building.LogicBuilding
 import logic.defence.LogicDefence
 import logic.develop.LogicDevelop
 import logic.lab.LogicLab
-import logic.market.LogicMarket
 import logic.messenger.LogicMessenger
 import logic.mineral.LogicMineral
 import logic.terminal.LogicTerminal
@@ -20,9 +19,8 @@ class MainContext {
     val logicLab: LogicLab = LogicLab()
     val logicUpgrade: LogicUpgrade = LogicUpgrade()
     val logicBuilding: LogicBuilding = LogicBuilding()
-    val logicTerminal: LogicTerminal = LogicTerminal()
+    val logicTerminal: LogicTerminal = LogicTerminal(this)
     val logicMineral: LogicMineral = LogicMineral(this)
-    val logicMarket: LogicMarket = LogicMarket()
     val logicMessenger: LogicMessenger = LogicMessenger(this)
     val logicDevelop: LogicDevelop = LogicDevelop()
     val logicDefence: LogicDefence = LogicDefence(this)
@@ -43,7 +41,6 @@ class MainContext {
         this.mainRoomCollector.runInStartOfTick()
 
         logicMineral.runInStartOfTick()
-        LogicLab().runInStartOfTick(this)
 
         this.battleGroupContainer.runInStartOfTick()
 
@@ -70,6 +67,7 @@ class MainContext {
 
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
+        logicTerminal.doAllTransaction()
         this.tasks.toMemory()
         this.constants.toMemory()
 

@@ -68,7 +68,7 @@ fun LogicMessengerMainRoom.getInfoConstructionSites(mainRoom: MainRoom): MainRoo
 
     if (mainRoom.constructionSite.isEmpty()) return resultEmpty
     mainRoom.structureController[0] ?: return resultEmpty
-    return MainRoomInfoRecord("building: ${mainRoom.constructionSite.size}",true)
+    return MainRoomInfoRecord("b:${mainRoom.constructionSite.size}",true)
 }
 
 fun LogicMessengerMainRoom.getInfoEnergy(mainRoom: MainRoom): MainRoomInfoRecord {
@@ -94,7 +94,7 @@ fun LogicMessengerMainRoom.getInfoPlaceInTerminal(mainRoom: MainRoom): MainRoomI
 }
 
 fun LogicMessengerMainRoom.getInfoNeedUpgrade(mainRoom: MainRoom): MainRoomInfoRecord {
-    return MainRoomInfoRecord(if (mainRoom.constant.defenceNeedUpgrade) "upgrade" else "",
+    return MainRoomInfoRecord(if (mainRoom.constant.defenceNeedUpgrade) "upg" else "",
             mainRoom.constant.defenceNeedUpgrade)
 }
 
@@ -107,7 +107,7 @@ fun LogicMessengerMainRoom.getInfoReactionInfo(mainRoom: MainRoom): MainRoomInfo
 
 fun LogicMessengerMainRoom.getInfoDefenceArea(mainRoom: MainRoom): MainRoomInfoRecord {
     return MainRoomInfoRecord("D:${mainRoom.constant.autoDefenceArea}",
-            (mainRoom.constant.autoDefenceArea !in 30..600))
+            (mainRoom.constant.autoDefenceArea !in 30..1300))
 }
 
 

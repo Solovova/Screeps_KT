@@ -192,8 +192,6 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
             }
         }
 
-        this.runTerminalsTransfer()
-
         val cpuStartCreeps = Game.cpu.getUsed()
         for (creep in Game.creeps.values) {
             try {
