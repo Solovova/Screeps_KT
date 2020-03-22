@@ -59,7 +59,10 @@ class MainRoomConstant(val parent: Constants) {
     var manualDefenceRoomMainColorFlag: ColorConstant = COLOR_PURPLE
     var manualDefenceGroupPos: RoomPosition? = null //manualDefenceRoomMainColorFlag
     var manualDefenceTargetCreep: Creep? = null
-    //var
+
+    //Auto defence
+    var autoDefenceAreaMatrix: Array<Array<Int>> = arrayOf()
+    var autoDefenceArea: Int = 0
 
     val creepUpgradableParts: MutableMap<Int, Map<BodyPartConstant,ResourceConstant>> = mutableMapOf()
     val creepUpgradeRole: MutableMap<Int, Boolean> = mutableMapOf()
@@ -98,7 +101,8 @@ class MainRoomConstant(val parent: Constants) {
         result["defenceNeedUpgrade"] = this.defenceNeedUpgrade
         result["reactionActive"] = this.reactionActive
 
-
+        result["autoDefenceArea"] = this.autoDefenceArea
+        result["autoDefenceAreaMatrix"] = this.autoDefenceAreaMatrix
 
         if (this.slaveRooms.isNotEmpty()) {
             result["slaveRoomConstantContainer"] = object {}
@@ -117,6 +121,10 @@ class MainRoomConstant(val parent: Constants) {
         if (d["needCleaner"] != null) this.needCleaner = d["needCleaner"] as Boolean
         if (d["defenceNeedUpgrade"] != null) this.defenceNeedUpgrade = d["defenceNeedUpgrade"] as Boolean
         if (d["reactionActive"] != null) this.reactionActive = d["reactionActive"] as String
+
+        if (d["autoDefenceArea"] != null) this.autoDefenceArea = d["autoDefenceArea"] as Int
+        if (d["autoDefenceAreaMatrix"] != null) this.autoDefenceAreaMatrix = d["autoDefenceAreaMatrix"] as Array<Array<Int>>
+
 
         if (d["slaveRoomConstantContainer"] != null)
             for (record in slaveRoomConstantContainer)

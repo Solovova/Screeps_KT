@@ -40,6 +40,17 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
                     && creep.carry.toMap().map { it.value }.sum() == 0
             ) creep.suicide()
 
+            //
+            if (creep.memory.role == 5 || creep.memory.role == 1005) {
+                if (Memory["5Busy"] == null) Memory["5Busy"] = 0
+                if (Memory["5Free"] == null) Memory["5Free"] = 0
+                if (this.mainContext.tasks.isTaskForCreep(creep)) {
+                    Memory["5Busy"] = Memory["5Busy"] + 1
+                }else{
+                    Memory["5Free"] = Memory["5Free"] + 1
+                }
+            }
+
             // Main rooms
             if (creep.memory.role in 0..99) {
                 val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue

@@ -34,6 +34,10 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
         mainRoom.constant.creepUpgradeRole[7] = true
     }
 
+    if (mainRoom.name in arrayOf("E51N35","E52N35","E53N35")) {
+        mainRoom.constant.defenceHits = 3000000
+    }
+
 //    if (mainRoom.name == "E57N34") mainRoom.constant.energyExcessSent = 220000
 //    if (mainRoom.name == "E57N35") mainRoom.constant.energyExcessSent = 220000
 //    if (mainRoom.name == "E52N33") mainRoom.constant.energyExcessSent = 220000

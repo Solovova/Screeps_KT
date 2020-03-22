@@ -38,7 +38,7 @@ fun Constants.initMainHead() {
     this.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
     this.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
     this.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51","E56N51")) //M26 //"E58N51"
-    this.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf()) //M27
+    this.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
 
     //E53N32 E56N31 E54N31
 }
@@ -62,6 +62,7 @@ fun Constants.initMainBody() {
 
     //m(27).creepSpawn = false
     s(26,2).model = 1
+    s(27,0).autoBuildRoad = true
     //s(25,0).pathUseGlobalGuideFlag = true
     //s(25,0).pathToRoom = arrayOf("E59N46","E60N46","E60N47","E60N48","E60N49",
     //        "E60N50","E59N50","E58N50","E57N50","E57N51")
@@ -74,18 +75,18 @@ fun Constants.initMainBody() {
     //m(3).creepUpgradeRole[7] = true
 
     m(0).reactionActive = "GH2O"
-    m(1).reactionActive = "XGH2O"
+    m(1).reactionActive = "GH"
     m(2).reactionActive = "GH2O"
     m(3).reactionActive = "GH2O"
     m(4).reactionActive = "ZK"
-    m(5).reactionActive = "XGH2O"
+    m(5).reactionActive = "GH"
     m(6).reactionActive = "G"
     m(7).reactionActive = "GH"
     m(8).reactionActive = "OH"
     m(9).reactionActive = "GH"
     m(10).reactionActive = "OH"
     m(11).reactionActive = "OH"
-    m(12).reactionActive = "XGH2O"
+    m(12).reactionActive = ""
     m(13).reactionActive = "XGH2O"
     m(14).reactionActive = "XGH2O"
     m(15).reactionActive = "XGH2O"

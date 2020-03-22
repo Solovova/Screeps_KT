@@ -4,6 +4,7 @@ import Tasks
 import battleGroup.BattleGroupContainer
 import constants.Constants
 import logic.building.LogicBuilding
+import logic.defence.LogicDefence
 import logic.develop.LogicDevelop
 import logic.lab.LogicLab
 import logic.market.LogicMarket
@@ -25,6 +26,7 @@ class MainContext {
     val logicMarket: LogicMarket = LogicMarket()
     val logicMessenger: LogicMessenger = LogicMessenger()
     val logicDevelop: LogicDevelop = LogicDevelop()
+    val logicDefence: LogicDefence = LogicDefence(this)
 
 
     val messengerMap: MutableMap<String, String> = mutableMapOf()
@@ -58,10 +60,23 @@ class MainContext {
     }
 
     fun runInEndOfTick() {
+        //ToDo rewrite
+        for (room in mainRoomCollector.rooms.values) {
+            if (room.constant.autoDefenceArea == 0) {
+                this.logicDefence.mainRoomDefence.mainRoomDefenceArea.getArea(room)
+                break
+            }
+        }
+
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
         this.tasks.toMemory()
+
+        var cpuStartMCStart = Game.cpu.getUsed()
         this.constants.toMemory()
+        cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
+        console.log("Constants to memory: $cpuStartMCStart")
+
         this.mineralInfoShow()
         this.messengerShow()
         this.mainRoomCollector.infoShow()

@@ -38,4 +38,10 @@ fun MainRoom.directControl() {
     val flagsRedGrey = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_GREY }
     if (flagsRedGrey.isNotEmpty()) this.mainRoomCollector.mainContext.logicDevelop.runMainRoom(this)
     for (flag in flagsRedGrey) flag.remove()
+
+    val flagsRedBlue = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_BLUE }
+    if (flagsRedBlue.isNotEmpty()) {
+        this.mainRoomCollector.mainContext.logicDefence.mainRoomDefence.mainRoomDefenceArea.getArea(this)
+    }
+    for (flag in flagsRedBlue) flag.remove()
 }

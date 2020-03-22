@@ -104,6 +104,11 @@ fun MainRoom.getInfoReactionInfo(): MainRoomInfoRecord {
             this.constant.reactionActive == "")
 }
 
+fun MainRoom.getInfoDefenceArea(): MainRoomInfoRecord {
+    return MainRoomInfoRecord("D:${this.constant.autoDefenceArea}",
+            (this.constant.autoDefenceArea !in 30..500))
+}
+
 
 fun MainRoom.getInfo(): Map<TypeOfMainRoomInfo, MainRoomInfoRecord> {
     val result: MutableMap<TypeOfMainRoomInfo, MainRoomInfoRecord> = mutableMapOf()
@@ -119,8 +124,6 @@ fun MainRoom.getInfo(): Map<TypeOfMainRoomInfo, MainRoomInfoRecord> {
     result[TypeOfMainRoomInfo.infoPlaceInTerminal] = this.getInfoPlaceInTerminal()
     result[TypeOfMainRoomInfo.infoReaction] = this.getInfoReactionInfo()
     result[TypeOfMainRoomInfo.infoNeedUpgrade] = this.getInfoNeedUpgrade()
-
-
-
+    result[TypeOfMainRoomInfo.infoAutoDefence] = this.getInfoDefenceArea()
     return result
 }

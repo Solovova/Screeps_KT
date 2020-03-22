@@ -255,7 +255,6 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
             this.room.createConstructionSite(this.pos, STRUCTURE_CONTAINER)
         if (!isTask) isTask = this.slaveRepairContainer(0, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveTransferToStorageOrContainer(0, creepCarry, mainContext, slaveRoom)
-
     }
 
     if (this.memory.role == 109) {
