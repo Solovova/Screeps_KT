@@ -1,5 +1,4 @@
 import mainContext.MainContext
-import mainContext.messenger
 import screeps.api.RoomPosition
 import screeps.api.*
 import screeps.api.Memory
@@ -80,12 +79,12 @@ class  Tasks(private val parent: MainContext) {
     }
 
     fun add(idCreep: String, task: CreepTask) {
-        if (task.posObject0!= null) parent.messenger("TASK", task.posObject0.roomName, "New task: $idCreep ${task.type}", COLOR_CYAN)
+        if (task.posObject0!= null) parent.logicMessenger.messenger("TASK", task.posObject0.roomName, "New task: $idCreep ${task.type}", COLOR_CYAN)
         tasks[idCreep] = task
         try {
             Game.getObjectById<Creep>(idCreep)?.say(task.type.toString())
         }catch (e: Exception) {
-            parent.messenger("ERROR", idCreep , "Task say", COLOR_RED)
+            parent.logicMessenger.messenger("ERROR", idCreep , "Task say", COLOR_RED)
         }
     }
 
@@ -114,7 +113,7 @@ class  Tasks(private val parent: MainContext) {
     }
 
     fun deleteTask(key: String) {
-        parent.messenger("TASK", "", "Delete task: $key ", COLOR_CYAN)
+        parent.logicMessenger.messenger("TASK", "", "Delete task: $key ", COLOR_CYAN)
         this.tasks.remove(key)
     }
 

@@ -1,7 +1,5 @@
 package mainRoom
 
-import mainContext.messenger
-import screeps.api.COLOR_RED
 
 fun MainRoom.needCorrection0() {
     when {

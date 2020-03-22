@@ -3,7 +3,6 @@ package battleGroup
 import constants.BattleGroupConstant
 import BattleGroupData
 import screeps.api.*
-import mainContext.messenger
 import mainRoom.MainRoom
 import BattleGroupCreep
 import BgSpawnResult
@@ -175,7 +174,7 @@ class BattleGroup {
         if (nearestMainRoom != null) {
             this.constants.assembleRoom = nearestMainRoom.name
             return true
-        } else this.parent.parent.messenger("ERROR", this.constants.roomName, "Battle group ${this.name} can't set assemble room", COLOR_RED)
+        } else this.parent.parent.logicMessenger.messenger("ERROR", this.constants.roomName, "Battle group ${this.name} can't set assemble room", COLOR_RED)
         return false
     }
 

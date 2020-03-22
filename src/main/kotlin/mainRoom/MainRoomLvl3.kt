@@ -1,6 +1,5 @@
 package mainRoom
 
-import mainContext.messenger
 import screeps.api.*
 import screeps.api.structures.StructureContainer
 
@@ -59,7 +58,7 @@ fun MainRoom.needCorrection3() {
         if (getResource(this.mineral.mineralType) < (this.constant.mineralMaxInRoom+50000))
             this.need[1][15] = 1
         if (getResource(this.mineral.mineralType) > this.constant.mineralMaxInRoom)
-            mainRoomCollector.mainContext.messenger("INFO", this.name, "Mineral full", COLOR_RED)
+            mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Mineral full", COLOR_RED)
     }
 
     val container: StructureContainer? = this.structureContainerNearMineral[0]

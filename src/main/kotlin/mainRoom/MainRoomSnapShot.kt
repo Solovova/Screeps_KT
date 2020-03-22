@@ -1,6 +1,5 @@
 package mainRoom
 
-import mainContext.messenger
 import screeps.api.*
 import snapshotDeserialize
 import snapshotSerialize
@@ -18,7 +17,7 @@ fun MainRoom.restoreSnapShot(){
     if (flags.isNotEmpty()) return
 
     if (Memory["snap"] == null || Memory["snap"][this.name] == null){
-        mainRoomCollector.mainContext.messenger("INFO", this.name, "Snapshot not present", COLOR_RED)
+        mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Snapshot not present", COLOR_RED)
         return
     }
     val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][this.name] as String,this.name)

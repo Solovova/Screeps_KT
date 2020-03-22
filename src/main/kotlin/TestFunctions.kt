@@ -1,12 +1,5 @@
 import creep.newTask
 import mainContext.MainContext
-import mainContext.messenger
-import mainRoom.MainRoom
-import mainRoom.doSnapShot
-import screeps.api.*
-import screeps.utils.unsafe.delete
-import slaveRoom.SlaveRoom
-import kotlin.math.roundToInt
 
 fun testingFunctions(mainContext: MainContext) {
 //    val mCash:MutableMap<ResourceConstant,Int> = mutableMapOf()

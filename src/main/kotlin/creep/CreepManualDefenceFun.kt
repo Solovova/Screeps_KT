@@ -1,7 +1,6 @@
 package creep
 
 import mainContext.MainContext
-import mainContext.messenger
 import mainRoom
 import mainRoom.MainRoom
 import role
@@ -37,7 +36,7 @@ fun Creep.manualDefenceMove(mainContext: MainContext, color: ColorConstant, role
     }else{
         val flag: Flag? = this.manualDefenceGetMyFlag(color)
         if (flag == null) {
-            mainContext.messenger("ERROR", this.memory.mainRoom, "$role id: ${this.id} cant find flag", COLOR_RED)
+            mainContext.logicMessenger.messenger("ERROR", this.memory.mainRoom, "$role id: ${this.id} cant find flag", COLOR_RED)
             return
         }
         if (!this.pos.inRangeTo(flag.pos, 0)) this.moveTo(flag)

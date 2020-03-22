@@ -13,7 +13,6 @@ import logic.mineral.LogicMineral
 import logic.terminal.LogicTerminal
 import logic.upgrade.LogicUpgrade
 import mainRoomCollector.MainRoomCollector
-import mainRoomCollector.infoShow
 import screeps.api.*
 import kotlin.random.Random
 
@@ -24,12 +23,13 @@ class MainContext {
     val logicTerminal: LogicTerminal = LogicTerminal()
     val logicMineral: LogicMineral = LogicMineral(this)
     val logicMarket: LogicMarket = LogicMarket()
-    val logicMessenger: LogicMessenger = LogicMessenger()
+    val logicMessenger: LogicMessenger = LogicMessenger(this)
     val logicDevelop: LogicDevelop = LogicDevelop()
     val logicDefence: LogicDefence = LogicDefence(this)
 
-
     val messengerMap: MutableMap<String, String> = mutableMapOf()
+
+
     val mineralData: MutableMap<ResourceConstant, MineralDataRecord> = mutableMapOf()
     val constants: Constants = Constants(this)
     val tasks: Tasks = Tasks(this)
@@ -71,22 +71,19 @@ class MainContext {
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
         this.tasks.toMemory()
+        this.constants.toMemory()
 
         var cpuStartMCStart = Game.cpu.getUsed()
-        this.constants.toMemory()
+        logicMessenger.showInfo()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
-        console.log("Constants to memory: $cpuStartMCStart")
-
-        this.mineralInfoShow()
-        this.messengerShow()
-        this.mainRoomCollector.infoShow()
+        console.log("Show info CPU: $cpuStartMCStart")
     }
 
     private fun setNextTickRun(): Boolean {
         if (this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext > Game.time) return false
         this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext = Game.time + Random.nextInt(this.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 this.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        this.messenger("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
+        this.logicMessenger.messenger("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
         return true
     }
 }

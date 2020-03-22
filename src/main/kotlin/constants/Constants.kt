@@ -3,7 +3,6 @@ package constants
 import accounts.initBody
 import accounts.initHead
 import mainContext.MainContext
-import mainContext.messenger
 import screeps.api.*
 import screeps.utils.unsafe.delete
 
@@ -30,21 +29,21 @@ class Constants(val mainContext: MainContext) {
             if (Game.rooms[name] != null && (Game.rooms[name]?.controller?.my == true)) {
                 mainRoomConstantContainer[name] = MainRoomConstant(this)
                 resultMainRooms += name
-            } else mainContext.messenger("ERROR", name, "initialization don't see room in Game.rooms", COLOR_RED)
+            } else mainContext.logicMessenger.messenger("ERROR", name, "initialization don't see room in Game.rooms", COLOR_RED)
         this.mainRooms = resultMainRooms
     }
 
     fun getMainRoomConstant(mainRoomName: String): MainRoomConstant {
         val mainRoomConstant: MainRoomConstant? = mainRoomConstantContainer[mainRoomName]
         return if (mainRoomConstant == null) {
-            mainContext.messenger("ERROR", mainRoomName, "initialization don't see MainRoomConstant", COLOR_RED)
+            mainContext.logicMessenger.messenger("ERROR", mainRoomName, "initialization don't see MainRoomConstant", COLOR_RED)
             MainRoomConstant(this)
         } else mainRoomConstant
     }
 
     fun m(index: Int): MainRoomConstant {
         if (index >= this.mainRoomsInit.size) {
-            mainContext.messenger("ERROR", "$index", "initialization M out of range main room", COLOR_RED)
+            mainContext.logicMessenger.messenger("ERROR", "$index", "initialization M out of range main room", COLOR_RED)
             return MainRoomConstant(this)
         }
         return this.getMainRoomConstant(this.mainRoomsInit[index])
@@ -52,7 +51,7 @@ class Constants(val mainContext: MainContext) {
 
     fun s(indexMain: Int, indexSlave: Int): SlaveRoomConstant {
         if (indexMain >= this.mainRoomsInit.size) {
-            mainContext.messenger("ERROR", "$indexMain", "initialization S out of range main room", COLOR_RED)
+            mainContext.logicMessenger.messenger("ERROR", "$indexMain", "initialization S out of range main room", COLOR_RED)
             return SlaveRoomConstant()
         }
         val mainRoomConstant: MainRoomConstant = this.getMainRoomConstant(this.mainRoomsInit[indexMain])
@@ -73,7 +72,7 @@ class Constants(val mainContext: MainContext) {
                 result["battleGroupConstantContainer"][record.key] = record.value.toDynamic()
             result["battleGroupContainerConstant"] = this.battleGroupContainerConstant.toDynamic()
         } catch (e: Exception) {
-            mainContext.messenger("ERROR", "Battle group to dynamic", "", COLOR_RED)
+            mainContext.logicMessenger.messenger("ERROR", "Battle group to dynamic", "", COLOR_RED)
         }
 
         return result
@@ -107,7 +106,7 @@ class Constants(val mainContext: MainContext) {
             if (d["battleGroupContainerConstant"] != null)
                 battleGroupContainerConstant.fromDynamic(d["battleGroupContainerConstant"])
         } catch (e: Exception) {
-            mainContext.messenger("ERROR", "Battle group from dynamic", "", COLOR_RED)
+            mainContext.logicMessenger.messenger("ERROR", "Battle group from dynamic", "", COLOR_RED)
         }
     }
 

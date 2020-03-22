@@ -2,7 +2,6 @@ package mainRoom
 
 import screeps.utils.toMap
 import CreepTask
-import mainContext.messenger
 import screeps.api.*
 import kotlin.math.min
 
@@ -81,7 +80,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
     val haveInTerminal05: Int = this.getResourceInTerminal() - this.constant.energyMaxTerminal
     val haveInStore05: Int = this.getResourceInStorage() - this.constant.energyMaxStorage
     if (haveInTerminal05>0 && haveInStore05 > 0)
-        mainRoomCollector.mainContext.messenger("INFO",this.name,"Too many energy", COLOR_RED)
+        mainRoomCollector.mainContext.logicMessenger.messenger("INFO",this.name,"Too many energy", COLOR_RED)
 
 
     //Mineral work
@@ -95,7 +94,7 @@ fun MainRoom.setLogistTask(creep: Creep) {
         val needInTerminal = this.constant.mineralMinTerminal - quantityTerminal
         val canMineralAllTerminal = this.constant.mineralAllMaxTerminal - (terminal.store.toMap().map { it.value }.sum()
         -this.getResourceInTerminal(RESOURCE_ENERGY))
-        if (canMineralAllTerminal <= 0) mainRoomCollector.mainContext.messenger("INFO",this.name,"Terminal mineral is full", COLOR_RED)
+        if (canMineralAllTerminal <= 0) mainRoomCollector.mainContext.logicMessenger.messenger("INFO",this.name,"Terminal mineral is full", COLOR_RED)
         carry = min(min(min(needInTerminal, quantityStorage), creep.carryCapacity), canMineralAllTerminal)
         if (carry > 0) {
             mainRoomCollector.mainContext.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, resourceStorage, carry))

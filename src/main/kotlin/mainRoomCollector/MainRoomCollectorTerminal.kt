@@ -1,6 +1,5 @@
 package mainRoomCollector
 
-import mainContext.messenger
 import mainRoom.MainRoom
 import screeps.api.COLOR_GREEN
 import screeps.api.OK
@@ -129,7 +128,7 @@ fun MainRoomCollector.terminalSentEnergyOverflow() {
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
             if (result == OK)
-                mainContext.messenger("INFO", mainRoomFrom.name,
+                mainContext.logicMessenger.messenger("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}", COLOR_GREEN)
         }
     }
@@ -160,7 +159,7 @@ fun MainRoomCollector.terminalSentEnergyFrom3To2() {
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
             if (result == OK)
-                mainContext.messenger("INFO", mainRoomFrom.name,
+                mainContext.logicMessenger.messenger("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}", COLOR_GREEN)
         }
     }
@@ -191,7 +190,7 @@ fun MainRoomCollector.terminalSentEnergyLevelMax() {
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
             if (result == OK)
-                mainContext.messenger("INFO", mainRoomFrom.name,
+                mainContext.logicMessenger.messenger("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}", COLOR_GREEN)
         }
     }

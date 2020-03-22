@@ -121,4 +121,8 @@ fun initMineralMain(mainContext: MainContext) {
     mainContext.mineralData["G".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             storeMax = 100000
     )
+
+    mainContext.mineralData["GH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000
+    )
 }

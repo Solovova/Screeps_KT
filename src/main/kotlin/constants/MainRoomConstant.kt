@@ -1,6 +1,5 @@
 package constants
 
-import mainContext.messenger
 import screeps.api.*
 
 class MainRoomConstant(val parent: Constants) {
@@ -70,14 +69,14 @@ class MainRoomConstant(val parent: Constants) {
     private fun getSlaveRoomConstant(slaveRoomName: String) : SlaveRoomConstant {
         val slaveRoomConstant:SlaveRoomConstant ? = this.slaveRoomConstantContainer[slaveRoomName]
         return if (slaveRoomConstant == null) {
-            parent.mainContext.messenger("ERROR", slaveRoomName, "initialization don't see SlaveRoomConstant", COLOR_RED)
+            parent.mainContext.logicMessenger.messenger("ERROR", slaveRoomName, "initialization don't see SlaveRoomConstant", COLOR_RED)
             SlaveRoomConstant()
         }else slaveRoomConstant
     }
 
     fun s(index: Int) : SlaveRoomConstant {
         if (index >= this.slaveRooms.size) {
-            parent.mainContext.messenger("ERROR", "$index", "initialization S out of range slave room", COLOR_RED)
+            parent.mainContext.logicMessenger.messenger("ERROR", "$index", "initialization S out of range slave room", COLOR_RED)
             return SlaveRoomConstant()
         }
         return this.getSlaveRoomConstant(this.slaveRooms[index])

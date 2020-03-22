@@ -4,7 +4,6 @@ import accounts.constantSlaveRoomInit
 import constants.CacheCarrier
 import constants.SlaveRoomConstant
 import mainContext.getCacheRecordRoom
-import mainContext.messenger
 import mainRoom.MainRoom
 import mainRoom.QueueSpawnRecord
 import screeps.api.*
@@ -251,7 +250,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             106 -> {
                 val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -261,7 +260,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             108 -> {
                 val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -291,7 +290,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             121 -> {
                 val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -301,7 +300,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             123 -> {
                 val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -311,7 +310,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             125 -> {
                 val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2",this.parent,this)
                 if (carrierAuto==null) {
-                    parent.mainRoomCollector.mainContext.messenger("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
                     result = arrayOf()
                 }else{
                     result = carrierAuto.needBody
@@ -363,7 +362,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
                 //5 Defender
                 if (this.constant.roomHostile) {
-                    parent.mainRoomCollector.mainContext.messenger("INFO",this.name,"Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO",this.name,"Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
                     if (this.constant.roomHostileNum > 1 ) {
                         if (this.room == null) this.need[0][4] = 1
                     }else {
@@ -431,7 +430,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
                 //5 Defender
                 if (this.constant.roomHostile) {
-                    parent.mainRoomCollector.mainContext.messenger("INFO",this.name,"Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO",this.name,"Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
                     if (this.constant.roomHostileNum > 1 ) {
                         if (this.room == null) this.need[0][4] = 1
                     }
@@ -473,7 +472,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                     if (mineral.mineralAmount > 0) {
                         if (parent.getResource(mineral.mineralType) < parent.constant.mineralMaxInRoom)
                             this.need[1][26] = 1
-                        else parent.mainRoomCollector.mainContext.messenger("INFO", this.name, "Mineral full in parent room", COLOR_RED)
+                        else parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Mineral full in parent room", COLOR_RED)
                     }
 
                     this.need[1][27] = this.have[26]
@@ -496,7 +495,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
         if (this.constant.roomRunNotEveryTickNextTickRun > Game.time) return false
         this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(parent.mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 parent.mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        parent.mainRoomCollector.mainContext.messenger("TEST", this.name, "Slave room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
+        parent.mainRoomCollector.mainContext.logicMessenger.messenger("TEST", this.name, "Slave room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
         return true
     }
 
@@ -505,38 +504,9 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
     fun runInEndOfTick() {
         this.directControl()
-        if (this.constant.model != 1) this.profitShow()
     }
 
-    private fun profitShow() {
-        if ( ((Game.time.toDouble() / 1500.0).toInt() * 1500) == Game.time) {
-            for (index in 4 downTo  1)
-                this.constant.profitPerTickPreviousArr[index] = this.constant.profitPerTickPreviousArr[index-1]
-            this.constant.profitPerTickPreviousArr[0] =  this.constant.profitUp - this.constant.profitDown
-            this.profitClear()
-        }
-
-        if (this.constant.profitPerTickPreviousArr[0] > parent.mainRoomCollector.mainContext.constants.globalConstant.showProfitWhenLessWhen * this.source.size ) return
-
-
-        var sProfitPT = "0"
-        if (this.constant.profitStart != Game.time)
-            sProfitPT = (((this.constant.profitUp - this.constant.profitDown).toDouble() /
-                (Game.time - this.constant.profitStart).toDouble()) * 1500.0 ).roundToInt().toString().padStart(10)
-
-        var sProfitPerTickPrevious = ""
-        for (index in 0 .. 4) sProfitPerTickPrevious += this.constant.profitPerTickPreviousArr[index].toString().padStart(8) + ":"
-        val sUp : String = this.constant.profitUp.toString().padEnd(10)
-        val sDown : String = this.constant.profitDown.toString().padEnd(10)
-        val sProfit : String = (this.constant.profitUp - this.constant.profitDown).toString().padEnd(10)
-        val sTicks: String = (Game.time - this.constant.profitStart).toString().padEnd(8)
-        val sSources = this.source.size.toString()
-
-        parent.mainRoomCollector.mainContext.messenger("PROFIT", this.describe,
-                "Profit ----> ${this.name} Road: ${this.constant.roadBuild.toString().padEnd(5)} ($sProfitPT per. 1500 ticks) ticks: $sTicks  + $sUp  - $sDown  $sProfit ($sProfitPerTickPrevious sources: $sSources)", COLOR_WHITE)
-    }
-
-    private fun profitClear() {
+    fun profitClear() {
         this.constant.profitUp = 0
         this.constant.profitDown = 0
         this.constant.profitStart = Game.time

@@ -83,41 +83,6 @@ fun MainContext.marketShowBuyOrdersRealPrice(resourceConstant: ResourceConstant 
     }
 }
 
-fun MainContext.mineralInfoShow() {
-    val mineralInfo = MineralInfo(numRows = 5)
-    mineralInfo.addColumn(arrayOf(
-            "Res:",
-            "Quantity:",
-            "Balance:",
-            "Need:"))
-    for (res in RESOURCES_ALL) {
-        val mineralDataRecord: MineralDataRecord? = mineralData[res]
-        if (mineralDataRecord != null) {
-            val strQuantity = if (mineralDataRecord.quantity == 0) "" else mineralDataRecord.quantity.toString().toSecDigit()
-            //val strMinPrice = if (mineralDataRecord.priceMin == 0.0) "" else mineralDataRecord.priceMin.toString()
-            //val strMaxPrice = if (mineralDataRecord.priceMax == 0.0) "" else mineralDataRecord.priceMax.toString()
-            //val strProduceUp = if (mineralDataRecord.quantityUp == 0) "" else mineralDataRecord.quantityUp.toString()
-            //val strProduceDown = if (mineralDataRecord.quantityDown == 0) "" else mineralDataRecord.quantityDown.toString()
-            val strBalance = if (mineralDataRecord.quantityUp - mineralDataRecord.quantityDown == 0) ""
-            else (mineralDataRecord.quantityUp - mineralDataRecord.quantityDown).toString()
-
-            val strNeed = if (mineralDataRecord.need > mineralDataRecord.quantity) (-mineralDataRecord.need + mineralDataRecord.quantity).toString()
-            else ""
-
-
-            mineralInfo.addColumn(arrayOf(
-                    "$res",
-                    strQuantity,
-                    strBalance,
-                    strNeed))
-        }
-    }
-
-    mineralInfo.show(this)
-}
-
-
-
 fun MainContext.mineralSellExcess() {
     for (resource in RESOURCES_ALL) {
         val mineralDataRecord = mineralData[resource] ?: continue

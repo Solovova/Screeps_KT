@@ -1,12 +1,36 @@
-package mainRoomCollector
+package logic.messenger.mainRoom
 
-import MainRoomInfoSetup
-import TypeOfMainRoomInfo
-import mainRoom.getInfo
+import mainContext.MainContext
+import mainRoom.MainRoom
 import screeps.api.*
 
-fun MainRoomCollector.infoShow() {
-    fun colorToHTMLColor(color: ColorConstant): String {
+enum class TypeOfMainRoomInfo {
+    infoQueue,
+    infoController,
+    infoConstructionSites,
+    infoNeedBuild,
+    infoNeedSnapshot,
+    infoReaction,
+    infoRoomName,
+    infoRoomDescribe,
+    infoRoomLevel,
+    infoRoomEnergy,
+    infoPlaceInStorage,
+    infoPlaceInTerminal,
+    infoNeedUpgrade,
+    infoAutoDefence
+}
+
+data class MainRoomInfoSetup(val type: TypeOfMainRoomInfo,
+                             val describe: String,
+                             val color: ColorConstant,
+                             val colorAlarm: ColorConstant,
+                             val width: Int,
+                             val prefix: String = "",
+                             val suffix: String = "")
+
+class LogicMessengerMainRoom(val mainContext: MainContext) {
+    private fun colorToHTMLColor(color: ColorConstant): String {
         return when (color) {
             COLOR_YELLOW -> "yellow"
             COLOR_RED -> "red"
@@ -19,7 +43,7 @@ fun MainRoomCollector.infoShow() {
         }
     }
 
-    val mainRoomInfoSetup: List<MainRoomInfoSetup> = listOf(
+    private val mainRoomInfoSetup: List<MainRoomInfoSetup> = listOf(
             MainRoomInfoSetup(TypeOfMainRoomInfo.infoRoomName,
                     "",
                     COLOR_WHITE,
@@ -120,8 +144,8 @@ fun MainRoomCollector.infoShow() {
 
     )
 
-    for (mainRoom in this.rooms.values) {
-        val roomInfo = mainRoom.getInfo()
+    fun showInfo(mainRoom: MainRoom) {
+        val roomInfo = this.getInfo(mainRoom)
         var allText = ""
         for (mainRoomInfoSetupRecord in mainRoomInfoSetup) {
             var text: String = roomInfo[mainRoomInfoSetupRecord.type]?.text ?: ""
@@ -135,8 +159,8 @@ fun MainRoomCollector.infoShow() {
             text = mainRoomInfoSetupRecord.prefix + text + mainRoomInfoSetupRecord.suffix
             text = "<font color=${colorToHTMLColor(color)} >$text</font>"
             allText += text
-        }
 
+        }
         console.log(allText)
     }
 }

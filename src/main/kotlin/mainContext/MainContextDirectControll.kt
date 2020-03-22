@@ -9,7 +9,7 @@ fun MainContext.directControlTaskClearInRoom(nameSlaveRoom: String) {
             if (creep.memory.slaveRoom == nameSlaveRoom) tasks.deleteTask(creep.id)
 
     }catch (e: Exception) {
-        messenger("ERROR", "Direct control","", COLOR_RED)
+        logicMessenger.messenger("ERROR", "Direct control","", COLOR_RED)
     }
-    messenger("TEST", "Direct control"," Erase all tasks in slave room: $nameSlaveRoom", COLOR_RED)
+    logicMessenger.messenger("TEST", "Direct control"," Erase all tasks in slave room: $nameSlaveRoom", COLOR_RED)
 }

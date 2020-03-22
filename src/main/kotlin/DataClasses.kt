@@ -37,32 +37,11 @@ enum class TypeOfTask {
     UpgradeCreep
 }
 
-enum class TypeOfMainRoomInfo {
-    infoQueue,
-    infoController,
-    infoConstructionSites,
-    infoNeedBuild,
-    infoNeedSnapshot,
-    infoReaction,
-    infoRoomName,
-    infoRoomDescribe,
-    infoRoomLevel,
-    infoRoomEnergy,
-    infoPlaceInStorage,
-    infoPlaceInTerminal,
-    infoNeedUpgrade,
-    infoAutoDefence
-}
+
 
 data class OrderRecord(val order: Market.Order, val realPrice: Double)
 data class MainRoomInfoRecord(val text: String, val alarm: Boolean)
-data class MainRoomInfoSetup(val type: TypeOfMainRoomInfo,
-                             val describe: String,
-                             val color: ColorConstant,
-                             val colorAlarm: ColorConstant,
-                             val width: Int,
-                             val prefix: String = "",
-                             val suffix: String = "")
+
 
 data class LabFillerTask(val StructureFrom: Structure,
                          val StructureTo: Structure,
