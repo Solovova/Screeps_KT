@@ -10,20 +10,17 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
         if (controller.level == 8) {
             mainRoom.constant.creepUseBigBuilder = true
             mainRoom.constant.defenceHits = 300000
-            mainRoom.constant.energyExcessSent = 90000
 
         }
 
         if (controller.level == 7) {
             mainRoom.constant.creepUseBigBuilder = true
             mainRoom.constant.defenceHits = 300000
-            mainRoom.constant.energyExcessSent = 90000
         }
 
         if (controller.level == 6) {
             mainRoom.constant.creepUseBigBuilder = true
             mainRoom.constant.defenceHits = 100000
-            mainRoom.constant.energyExcessSent = 90000
             //mainRoom.constant.creepUpgradeRole
         }
 

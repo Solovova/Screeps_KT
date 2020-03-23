@@ -19,8 +19,8 @@ class MainRoomConstant(val parent: Constants) {
     //Creep commands
     var energyBuilder : Int = 60000 //simple //how much energy must be in storage for start building
     var energyUpgradeDefence : Int = 100000
-    var upgradeEnergyLow : Int = 110000 //simple //how much energy must be in storage for start upgrade controller
-    var upgradeEnergyForce: Int = 150000 //simple //how much energy must be in storage for start upgrade controller
+    var upgradeEnergyLow : Int = 100000 //simple //how much energy must be in storage for start upgrade controller
+    var upgradeEnergyForce: Int = 110000 //simple //how much energy must be in storage for start upgrade controller
     var upgradeEnergyLvl8Controller: Int = 250000 //simple //how much energy must be in storage for start upgrade controller
     var creepSpawn: Boolean = true
     var needCleaner: Boolean = false //cashed

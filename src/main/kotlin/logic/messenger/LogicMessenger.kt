@@ -94,9 +94,9 @@ class LogicMessenger(val mainContext: MainContext) {
     }
 
     fun showInfo() {
-        this.showMessengerInfo()
         this.showMineralInfo()
         this.showSlaveRoomInfo()
+        this.showMessengerInfo()
         this.showMainRoomInfo()
     }
 }
