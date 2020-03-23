@@ -12,6 +12,8 @@ import screeps.utils.toMap
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
+external val STRUCTURE_INVADER_CORE: BuildableStructureConstant
+
 class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, val constant: SlaveRoomConstant) {
     val room: Room? = Game.rooms[this.name]
 
@@ -27,7 +29,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 _structureController = mapOf()
             else
                 if (this._structureController == null)
-                    _structureController = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTROLLER }.withIndex().associate { it.index to it.value as StructureController}
+                    _structureController = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTROLLER }.withIndex().associate { it.index to it.value as StructureController }
 
             return _structureController ?: throw AssertionError("Error get StructureController")
         }
@@ -39,13 +41,14 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             if (this.room == null)
                 _source = mapOf()
             else
-                if (this._source == null){
-                    _source = this.room.find(FIND_SOURCES).sortedWith(Comparator<Source>{ a, b ->
+                if (this._source == null) {
+                    _source = this.room.find(FIND_SOURCES).sortedWith(Comparator<Source> { a, b ->
                         when {
                             a.id > b.id -> 1
                             a.id < b.id -> -1
                             else -> 0
-                        }}).withIndex().associate { it.index to it.value}
+                        }
+                    }).withIndex().associate { it.index to it.value }
                 }
 
 
@@ -73,7 +76,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 _structureContainer = mapOf()
             else
                 if (this._structureContainer == null)
-                    _structureContainer = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTAINER }.associate { it.id to it as StructureContainer}
+                    _structureContainer = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTAINER }.associate { it.id to it as StructureContainer }
 
             return _structureContainer ?: throw AssertionError("Error get StructureContainer")
         }
@@ -90,7 +93,8 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                             resultContainer[sourceRec.key] = container
                 _structureContainerNearSource = resultContainer
             }
-            return _structureContainerNearSource ?: throw AssertionError("Error get StructureContainerNearSource")
+            return _structureContainerNearSource
+                    ?: throw AssertionError("Error get StructureContainerNearSource")
         }
 
     //StructureStorage
@@ -111,7 +115,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             if (this.room == null)
                 _mineral = mapOf()
             else if (this._mineral == null) {
-                val result:MutableMap<Int, Mineral> = mutableMapOf()
+                val result: MutableMap<Int, Mineral> = mutableMapOf()
                 result[0] = this.room.find(FIND_MINERALS).first()
                 _mineral = result.toMap()
             }
@@ -195,18 +199,23 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
 
     private fun getTimeDeath(fRole: Int): Int {
         return when (fRole) {
-            106 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
-            108 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
-            121 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent,this)?.timeForDeath ?: 0
-            123 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent,this)?.timeForDeath ?: 0
-            125 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2", this.parent,this)?.timeForDeath ?: 0
+            106 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent, this)?.timeForDeath
+                    ?: 0
+            108 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent, this)?.timeForDeath
+                    ?: 0
+            121 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent, this)?.timeForDeath
+                    ?: 0
+            123 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent, this)?.timeForDeath
+                    ?: 0
+            125 -> parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2", this.parent, this)?.timeForDeath
+                    ?: 0
 
             else -> 0
         }
     }
 
     fun buildQueue(queue: MutableList<QueueSpawnRecord>, priority: Int) {
-        val fPriorityOfRole = arrayOf(10, 11, 15, 4, 0, 1 , 2 , 3, 5, 7, 9, 6, 8,20,22,24,21,23,25,26,27)
+        val fPriorityOfRole = arrayOf(10, 11, 15, 4, 0, 1, 2, 3, 5, 7, 9, 6, 8, 20, 22, 24, 21, 23, 25, 26, 27)
         for (fRole in fPriorityOfRole) {
             var fNeed = this.need[0][fRole]
             if (priority >= 1) fNeed += this.need[1][fRole]
@@ -227,12 +236,12 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             101 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY)
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             102 -> {
-                 if (this.parent.room.energyCapacityAvailable>=1500) result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
-                 else result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+                if (this.parent.room.energyCapacityAvailable >= 1500) result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
+                else result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             103 -> {
@@ -244,85 +253,85 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
 
             105, 107 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY)
+                result = arrayOf(MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY)
             }
 
             106 -> {
-                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
-                if (carrierAuto==null) {
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent, this)
+                if (carrierAuto == null) {
                     parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
-                }else{
+                } else {
                     result = carrierAuto.needBody
                 }
             }
 
             108 -> {
-                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
-                if (carrierAuto==null) {
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent, this)
+                if (carrierAuto == null) {
                     parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
-                }else{
+                } else {
                     result = carrierAuto.needBody
                 }
             }
 
             109 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             110 -> {
-                result = arrayOf(TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK)
+                result = arrayOf(TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK)
             }
 
             111 -> {
-                result = arrayOf(TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK)
+                result = arrayOf(TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK)
             }
 
             115 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,HEAL,HEAL,HEAL,HEAL,HEAL)
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, HEAL, HEAL, HEAL, HEAL, HEAL)
             }
 
-            120,122,124 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+            120, 122, 124 -> {
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             121 -> {
-                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
-                if (carrierAuto==null) {
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent, this)
+                if (carrierAuto == null) {
                     parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
-                }else{
+                } else {
                     result = carrierAuto.needBody
                 }
             }
 
             123 -> {
-                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
-                if (carrierAuto==null) {
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent, this)
+                if (carrierAuto == null) {
                     parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
                     result = arrayOf()
-                }else{
+                } else {
                     result = carrierAuto.needBody
                 }
             }
 
             125 -> {
-                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2",this.parent,this)
-                if (carrierAuto==null) {
+                val carrierAuto: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2", this.parent, this)
+                if (carrierAuto == null) {
                     parent.mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
                     result = arrayOf()
-                }else{
+                } else {
                     result = carrierAuto.needBody
                 }
             }
 
             126 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             127 -> {
-                result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
         }
         return result
@@ -346,37 +355,51 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             0 -> {
                 //ToDo костыль
                 //if (this.name == "W5N2") this.need[1][11] = 1
-                if (this.room!=null && this.constant.model == 0) {
-                    val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS)
-                    this.constant.roomHostile = hostileCreeps.isNotEmpty()
-                    var typeAttack = 2 //ranged
-                    for (hostileCreep in hostileCreeps)
-                        if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
-                            typeAttack = 1
-                            break
-                        }
-                    this.constant.roomHostileType =typeAttack
-                    this.constant.roomHostileNum = hostileCreeps.size
+                if (this.room != null && this.constant.model == 0) {
+                    val invader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_INVADER_CORE }
+                    if (invader != null) {
+                        this.constant.roomHostileType = 3
+                        this.constant.roomHostileNum = 1
+                        this.constant.roomHostile = true
+                    } else {
+                        val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS)
+                        this.constant.roomHostile = hostileCreeps.isNotEmpty()
+                        var typeAttack = 2 //ranged
+                        for (hostileCreep in hostileCreeps)
+                            if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
+                                typeAttack = 1
+                                break
+                            }
+                        this.constant.roomHostileType = typeAttack
+                        this.constant.roomHostileNum = hostileCreeps.size
+                    }
                 }
-
 
                 //5 Defender
                 if (this.constant.roomHostile) {
-                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO",this.name,"Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
-                    if (this.constant.roomHostileNum > 1 ) {
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+                    if (this.constant.roomHostileNum > 2) {
                         if (this.room == null) this.need[0][4] = 1
-                    }else {
-                        if (this.constant.roomHostileType == 2) this.need[1][10] = 1
-                        else this.need[1][11] = 1
+                    } else {
+                        if (this.constant.roomHostileType == 2) this.need[1][10] = this.constant.roomHostileNum
+                        else this.need[1][11] = this.constant.roomHostileNum
                     }
-
                     return
                 }
 
+                //Reservation not my
+                val protectedStructureController: StructureController? = this.structureController[0]
+                if (protectedStructureController != null) {
+                    val reservation = protectedStructureController.reservation
+                    if (reservation != null && reservation.username == "Invader") {
+                        this.need[0][4] = 1
+                        return
+                    }
+                }
 
 
                 //
-                if (this.room!=null) {
+                if (this.room != null) {
                     if (this.room.find(FIND_STRUCTURES).any { it.structureType == STRUCTURE_POWER_BANK }) return
                     if (this.room.find(FIND_HOSTILE_CREEPS).isNotEmpty()) return
                 }
@@ -388,34 +411,36 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 }
 
                 //2 Reserve 103
-                val protectedStructureController: StructureController? = this.structureController[0]
                 if (protectedStructureController != null) {
                     val reservation = protectedStructureController.reservation
-                    if (reservation != null && reservation.ticksToEnd < 2200) this.need[0][3] = 1
-                    if (reservation == null ) this.need[0][3] = 1
+                    if (reservation != null && reservation.ticksToEnd < 2200) {
+                        this.need[0][3] = 1
+                    }
+                    if (reservation == null) this.need[0][3] = 1
                 }
 
                 //3 Harvester 105
-                if (this.source[0] != null)  this.need[0][5] = 1
-                if (this.source[1] != null)  this.need[0][7] = 1
+                if (this.source[0] != null) this.need[0][5] = 1
+                if (this.source[1] != null) this.need[0][7] = 1
 
                 //4 Carrier
-                val carrierAuto0: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
-                if (carrierAuto0!=null) {
+                val carrierAuto0: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent, this)
+                if (carrierAuto0 != null) {
                     if (this.need[1][6] == 0) this.need[1][6] = carrierAuto0.needCarriers
                 }
 
-                val carrierAuto1: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
-                if (carrierAuto1!=null) {
+                val carrierAuto1: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent, this)
+                if (carrierAuto1 != null) {
                     if (this.need[1][8] == 0) this.need[1][8] = carrierAuto1.needCarriers
                 }
 
                 //4 Builder 109
                 if (this.constructionSite.size > 2 && this.need[1][9] == 0 &&
                         this.structureContainerNearSource.size == this.source.size) this.need[1][9] = 2
+
             }
             2 -> {
-                if (this.room!=null && this.constant.model == 2) {
+                if (this.room != null && this.constant.model == 2) {
                     val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS).filter { it.name.startsWith("invader") }
                     this.constant.roomHostile = hostileCreeps.isNotEmpty()
                     var typeAttack = 2 //ranged
@@ -424,14 +449,14 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                             typeAttack = 1
                             break
                         }
-                    this.constant.roomHostileType =typeAttack
+                    this.constant.roomHostileType = typeAttack
                     this.constant.roomHostileNum = hostileCreeps.size
                 }
 
                 //5 Defender
                 if (this.constant.roomHostile) {
-                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO",this.name,"Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
-                    if (this.constant.roomHostileNum > 1 ) {
+                    parent.mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+                    if (this.constant.roomHostileNum > 1) {
                         if (this.room == null) this.need[0][4] = 1
                     }
 //                    else {
@@ -447,22 +472,22 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
                 this.need[1][15] = 1
 
                 if (this.source.containsKey(0) && this.rescueFlag.containsKey(0)) this.need[1][20] = 1
-                val carrierAuto0: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0",this.parent,this)
+                val carrierAuto0: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer0", this.parent, this)
                 //if (this.name == "E56N34") console.log("null")
-                if (carrierAuto0!=null) {
+                if (carrierAuto0 != null) {
                     //if (this.name == "E56N34") console.log("${carrierAuto0.needCarriers}")
                     if (this.need[1][21] == 0) this.need[1][21] = carrierAuto0.needCarriers
                 }
 
                 if (this.source.containsKey(1) && this.rescueFlag.containsKey(1)) this.need[1][22] = 1
-                val carrierAuto1: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1",this.parent,this)
-                if (carrierAuto1!=null) {
+                val carrierAuto1: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer1", this.parent, this)
+                if (carrierAuto1 != null) {
                     if (this.need[1][23] == 0) this.need[1][23] = carrierAuto1.needCarriers
                 }
 
                 if (this.source.containsKey(2) && this.rescueFlag.containsKey(2)) this.need[1][24] = 1
-                val carrierAuto2: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2",this.parent,this)
-                if (carrierAuto2!=null) {
+                val carrierAuto2: CacheCarrier? = parent.mainRoomCollector.mainContext.getCacheRecordRoom("slaveContainer2", this.parent, this)
+                if (carrierAuto2 != null) {
                     if (this.need[1][25] == 0) this.need[1][25] = carrierAuto2.needCarriers
                 }
 
@@ -521,7 +546,7 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
         this.constant.profitUp += put
     }
 
-    private fun needClean(store: StoreDefinition?, resource: ResourceConstant):Boolean {
+    private fun needClean(store: StoreDefinition?, resource: ResourceConstant): Boolean {
         if (store == null) return false
         return (store[resource] ?: 0) != (store.toMap().map { it.value }.sum())
     }

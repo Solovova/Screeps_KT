@@ -126,7 +126,7 @@ fun initMineralMain(mainContext: MainContext) {
             storeMax = 100000
     )
 
-    mainContext.mineralData["LH20".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+    mainContext.mineralData["LH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             storeMax = 100000
     )
 

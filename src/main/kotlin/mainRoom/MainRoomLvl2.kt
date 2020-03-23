@@ -63,7 +63,7 @@ fun MainRoom.needCorrection2() {
         if ((this.constructionSite.isNotEmpty() || this.constant.defenceNeedUpgrade)
                 && (this.getResourceInStorage() > (this.constant.energyBuilder + 40000))) {
             this.need[1][10]=1
-            this.need[1][11]=this.have[10] * if (this.room.energyCapacityAvailable>=3500) 2 else 1
+            this.need[1][11]=this.have[10] //* if (this.room.energyCapacityAvailable>=3500) 2 else 1
         }
     }else {
         if ((this.constructionSite.isNotEmpty()) && (this.getResourceInStorage() > this.constant.energyBuilder)) {

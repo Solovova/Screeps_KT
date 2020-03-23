@@ -52,7 +52,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
     //00 starting creep, harvester, upgrader, builder to level 4
     if (this.memory.role == 0) {
-        if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext)
+        //if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext)
         if (!isTask) isTask = this.takeFromStorage(creepCarry, mainContext, mainRoom)
         if (!isTask) isTask = this.takeFromTerminal(creepCarry, mainContext, mainRoom)
         if (!isTask) isTask = this.takeFromContainer(3, creepCarry, mainContext, mainRoom)
@@ -251,7 +251,8 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = this.slaveGoToPosOfContainer(0, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveHarvest(0, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom, 2)
-        if (!isTask) if (slaveRoom != null && slaveRoom.structureContainerNearSource[0] == null)
+        if (!isTask) if (slaveRoom != null &&
+                slaveRoom.name == this.room.name && slaveRoom.structureContainerNearSource[0] == null)
             this.room.createConstructionSite(this.pos, STRUCTURE_CONTAINER)
         if (!isTask) isTask = this.slaveRepairContainer(0, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveTransferToStorageOrContainer(0, creepCarry, mainContext, slaveRoom)
@@ -268,7 +269,9 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = this.slaveGoToPosOfContainer(1, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveHarvest(1, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom, 2)
-        if (!isTask) if (slaveRoom != null && slaveRoom.structureContainerNearSource[0] == null)
+
+        if (!isTask) if (slaveRoom != null &&
+                slaveRoom.name == this.room.name && slaveRoom.structureContainerNearSource[1] == null)
             this.room.createConstructionSite(this.pos, STRUCTURE_CONTAINER)
         if (!isTask) isTask = this.slaveRepairContainer(1, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveTransferToStorageOrContainer(1, creepCarry, mainContext, slaveRoom)

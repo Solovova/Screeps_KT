@@ -34,6 +34,10 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
         mainRoom.constant.creepUpgradeRole[7] = true
     }
 
+    if (mainRoom.constant.levelOfRoom == 3) {
+        mainRoom.constant.creepUpgradeRole[10] = true
+    }
+
     if (mainRoom.name in arrayOf("E51N35","E52N35","E53N35")) {
         mainRoom.constant.defenceHits = 3000000
     }
@@ -66,5 +70,9 @@ fun constantSlaveRoomInitMain(slaveRoom: SlaveRoom) {
 
     if (slaveRoom.parent.name == "E57N51" && slaveRoom.name == "E56N51") {
         slaveRoom.need[0][11] = 3
+    }
+
+    if (slaveRoom.parent.name == "E57N51" && slaveRoom.name == "E58N51") {
+        slaveRoom.need[0][11] = 1
     }
 }

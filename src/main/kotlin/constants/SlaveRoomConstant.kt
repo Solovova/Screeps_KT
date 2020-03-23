@@ -15,7 +15,7 @@ class SlaveRoomConstant {
     //Room algorithm
     var roomRunNotEveryTickNextTickRun: Int = 0 //cashed
     var roomHostile: Boolean = false
-    var roomHostileType: Int = 0 // 1 -  mile, 2 - ranged
+    var roomHostileType: Int = 0 // 1 -  mile, 2 - ranged, 3 - invader
     var roomHostileNum: Int = 0
     var needCleaner: Boolean = false
 

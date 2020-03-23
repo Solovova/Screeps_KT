@@ -10,6 +10,7 @@ fun loop() {
     Memory["account"] = ""
     if (Game.rooms["E54N37"] != null)  Memory["account"] = "main"
     if (Game.rooms["W5N3"] != null)    Memory["account"] = "test"
+    if (Game.rooms["W8N3"] != null)    Memory["account"] = "test2"
 
     val cpuStart = Game.cpu.getUsed()
 

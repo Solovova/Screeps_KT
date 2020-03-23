@@ -764,7 +764,7 @@ fun Creep.slaveAttackStructure(mainContext: MainContext, slaveRoom: SlaveRoom?):
     if (slaveRoom?.room != null) {
         var hostileStructure: Structure?
         if (slaveRoom.name == "E56N51") {
-            hostileStructure = Game.getObjectById("59f962d941ddbb5a3dd1e92f")
+            hostileStructure = Game.getObjectById("5e782d3f37bb159707daaa37")
             if (hostileStructure == null) {
                 hostileStructure = slaveRoom.room.find(FIND_HOSTILE_STRUCTURES).minBy { this.pos.getRangeTo(it.pos) }
             }
