@@ -23,7 +23,7 @@ class LogicTerminal(val mainContext: MainContext) {
         val terminalTo: StructureTerminal = mainRoomTo.structureTerminal[0] ?: return
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
             //
-            val cost = Game.market.calcTransactionCost(sentQuantity,mainRoomFrom.name,mainRoomTo.name)
+            val cost = Game.market.calcTransactionCost(sentQuantity, mainRoomFrom.name, mainRoomTo.name)
             if (Memory["transCost"] == null) {
                 Memory["transCost"] = 0
                 Memory["transCount"] = 0
@@ -40,63 +40,58 @@ class LogicTerminal(val mainContext: MainContext) {
     }
 
     private fun terminalSentMineral() {
-        //Logic
-        //needResource term, haveResource term, haveResourceInRoom term+storage
-        //needResource > haveResource && needResource <= haveResourceInRoom -> wait
-        //needResource < haveResource && needResource <100 -> needResource = 100
-
         for (roomTo in mainContext.mainRoomCollector.rooms.values) {
             val terminalTo = roomTo.structureTerminal[0] ?: continue
             if (terminalTo.cooldown != 0) continue
             for (needResourceRecord in roomTo.needMineral) {
                 val needResource = needResourceRecord.key
                 var needResourceQuantity = needResourceRecord.value - roomTo.getResource(needResourceRecord.key)
-                //if (needResource == "GH2O".unsafeCast<ResourceConstant>())
-                //   console.log("TEST Room ${roomTo.name} need: ${needResourceRecord.value} have: ${roomTo.getResource(needResourceRecord.key)} trans: $needResourceQuantity")
 
+                val canMineralTakeTerminal = roomTo.constant.mineralAllMaxTerminal
+                -(terminalTo.store.toMap().map { it.value }.sum() - roomTo.getResourceInTerminal(RESOURCE_ENERGY))
+
+                needResourceQuantity = min(needResourceQuantity, canMineralTakeTerminal)
 
                 if (needResourceQuantity <= 0) continue
                 needResourceQuantity = max(needResourceQuantity, 100)
 
-                val canMineralTakeTerminal = roomTo.constant.mineralAllMaxTerminal - (terminalTo.store.toMap().map { it.value }.sum()
-                        - roomTo.getResourceInTerminal(RESOURCE_ENERGY))
+
+                val roomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values
+                        .filter {
+                            it.name != roomTo.name
+                                    && it.structureTerminal[0] != null
+                                    && it.structureTerminal[0]?.cooldown == 0
+                                    && (it.getResource(needResource) - (it.needMineral[needResource]
+                                    ?: 0)) > 100
+                        }
+                        .maxBy {
+                            it.getResource(needResource) - (it.needMineral[needResource] ?: 0)
+                        }
+                        ?: continue
 
 
+                val haveResourceQuantityInTerminal = roomFrom.getResourceInTerminal(needResource)
+                val haveResourceQuantity = roomFrom.getResource(needResource) - (roomFrom.needMineral[needResource]
+                        ?: 0)
 
-                for (roomFrom in mainContext.mainRoomCollector.rooms.values) {
-                    if (roomFrom.name == roomTo.name) continue
-                    val terminalFrom = roomFrom.structureTerminal[0] ?: continue
-                    if (terminalFrom.cooldown != 0) continue
-                    val haveResourceQuantity = roomFrom.getResourceInTerminal(needResource)
-                    val haveResourceQuantityInRoom = roomFrom.getResource(needResource) -
-                            (roomFrom.needMineral[needResource] ?: 0)
+                val quantityTransfer = min(min(
+                        haveResourceQuantity, needResourceQuantity),
+                        mainContext.constants.globalConstant.sentMaxMineralQuantity)
 
-                    val quantityTransfer = min(min(min(
-                            haveResourceQuantity, needResourceQuantity),
-                            mainContext.constants.globalConstant.sentMaxMineralQuantity),
-                            canMineralTakeTerminal)
-
-                    //if (needResource == "GH2O".unsafeCast<ResourceConstant>())
-                    //    console.log("TEST Room ${roomFrom.name} transfer: $quantityTransfer")
-
-                    if (quantityTransfer < needResourceQuantity
-                            && quantityTransfer < mainContext.constants.globalConstant.sentMaxMineralQuantity
-                            && quantityTransfer < haveResourceQuantityInRoom) continue  //wait because not all resource transfer from storage to terminal
-
-                    //if (needResource == "GH2O".unsafeCast<ResourceConstant>())
-                    //    console.log("TEST Room ${roomFrom.name} transfer: $quantityTransfer")
-
-                    if (quantityTransfer < 100) continue
-                    //One transfer per tick
-
-                    //if (needResource == "GH2O".unsafeCast<ResourceConstant>())
-                    //   console.log("TEST Transfer Room ${roomFrom.name} transfer: $quantityTransfer roomTo: ${roomTo.name}")
-                    val result = terminalFrom.send(needResource, quantityTransfer, roomTo.name)
-                    //console.log(result)
-                    if (result == OK) return
+                //wait because not all resource transfer from storage to terminal
+                if (haveResourceQuantityInTerminal < quantityTransfer) continue
+                if (quantityTransfer < 100) continue
+                val terminalFrom: StructureTerminal = roomFrom.structureTerminal[0]
+                        ?: continue
+                val result = terminalFrom.send(needResource, quantityTransfer, roomTo.name)
+                if (result == OK) {
+                    mainContext.logicMessenger.messenger("INFO", roomFrom.name,
+                            "Send $needResource $quantityTransfer from ${roomFrom.name} -> ${roomTo.name} ", COLOR_YELLOW)
+                    return
                 }
             }
         }
+
     }
 
     private fun terminalSentEnergyEmergency() {
@@ -123,7 +118,7 @@ class LogicTerminal(val mainContext: MainContext) {
                 ?: return
 
 
-        this.terminalSentFromTo(mainRoomFrom, mainRoomTo,"Emergency")
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "Emergency")
     }
 
     private fun terminalSentEnergyFrom3To2() {
@@ -135,7 +130,7 @@ class LogicTerminal(val mainContext: MainContext) {
                     && it.constant.levelOfRoom == 2
                     && it.getResource() < energyMinQuantityIn2
         }.minBy { it.getResource() }
-                ?:return
+                ?: return
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom == 3
@@ -143,14 +138,14 @@ class LogicTerminal(val mainContext: MainContext) {
         }.maxBy { it.getResource() }
                 ?: return
 
-        this.terminalSentFromTo(mainRoomFrom, mainRoomTo,"From3To2")
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "From3To2")
     }
 
     private fun terminalSentEnergyExcessSent() {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
                     && it.getResource() > it.constant.energyExcessSent
-        }.maxBy { it.getResource()}
+        }.maxBy { it.getResource() }
                 ?: return
 
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
@@ -159,6 +154,6 @@ class LogicTerminal(val mainContext: MainContext) {
         }.minBy { it.getResource() }
                 ?: return
 
-        this.terminalSentFromTo(mainRoomFrom, mainRoomTo,"ExcessSent")
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "ExcessSent")
     }
 }

@@ -27,7 +27,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMax = 0.200,
             priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 20000,
+            marketBuyLack = 40000,
             sellFromRoom = "E58N39",
             buyToRoom = "E59N38"
     )

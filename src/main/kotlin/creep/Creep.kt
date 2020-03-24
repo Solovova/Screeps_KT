@@ -151,6 +151,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 10) {
+        if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.buildBigStructure(mainContext, mainRoom)
     }
 

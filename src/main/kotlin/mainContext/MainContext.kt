@@ -19,7 +19,7 @@ class MainContext {
     val logicLab: LogicLab = LogicLab()
     val logicUpgrade: LogicUpgrade = LogicUpgrade()
     val logicBuilding: LogicBuilding = LogicBuilding()
-    val logicTerminal: LogicTerminal = LogicTerminal(this)
+    private val logicTerminal: LogicTerminal = LogicTerminal(this)
     val logicMineral: LogicMineral = LogicMineral(this)
     val logicMessenger: LogicMessenger = LogicMessenger(this)
     val logicDevelop: LogicDevelop = LogicDevelop()
