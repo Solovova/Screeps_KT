@@ -64,7 +64,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 1 || this.memory.role == 1001) {
-        if ((this.memory.role == 1) && this.ticksToLive < 100) this.memory.role = this.memory.role + 1000
+        if ((this.memory.role == 1) && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
 
         if (!isTask) isTask = this.harvestFromSource(0, creepCarry, mainContext, mainRoom)
 
@@ -76,7 +76,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 3 || this.memory.role == 1003) {
-        if ((this.memory.role == 3) && this.ticksToLive < 100) this.memory.role = this.memory.role + 1000
+        if ((this.memory.role == 3) && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
 
         if (!isTask) isTask = this.harvestFromSource(1, creepCarry, mainContext, mainRoom)
         if (!isTask) isTask =

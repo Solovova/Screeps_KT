@@ -7,6 +7,7 @@ import logic.building.LogicBuilding
 import logic.defence.LogicDefence
 import logic.develop.LogicDevelop
 import logic.lab.LogicLab
+import logic.main.LogicMain
 import logic.messenger.LogicMessenger
 import logic.mineral.LogicMineral
 import logic.terminal.LogicTerminal
@@ -25,6 +26,8 @@ class MainContext {
     val logicDevelop: LogicDevelop = LogicDevelop()
     val logicDefence: LogicDefence = LogicDefence(this)
 
+    val logicMain: LogicMain = LogicMain(this)
+
     val messengerMap: MutableMap<String, String> = mutableMapOf()
 
 
@@ -40,6 +43,7 @@ class MainContext {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
         this.mainRoomCollector.runInStartOfTick()
 
+        logicMain.runInStartOfTick()
         logicMineral.runInStartOfTick()
 
         this.battleGroupContainer.runInStartOfTick()

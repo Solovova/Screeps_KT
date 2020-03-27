@@ -41,7 +41,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureSpawn: Map<String, StructureSpawn>
         get() {
             if (this._structureSpawn == null)
-                _structureSpawn = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_SPAWN && it.isActive()}.associate { it.id to it as StructureSpawn }
+                _structureSpawn = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_SPAWN && it.isActive() }.associate { it.id to it as StructureSpawn }
             return _structureSpawn ?: throw AssertionError("Error get StructureSpawn")
         }
 
@@ -50,7 +50,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     private val structureExtension: Map<String, StructureExtension>
         get() {
             if (this._structureExtension == null)
-                _structureExtension = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTENSION && it.isActive()}.associate { it.id to it as StructureExtension }
+                _structureExtension = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTENSION && it.isActive() }.associate { it.id to it as StructureExtension }
             return _structureExtension ?: throw AssertionError("Error get StructureExtension")
         }
 
@@ -59,7 +59,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureController: Map<Int, StructureController>
         get() {
             if (this._structureController == null)
-                _structureController = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTROLLER && it.isActive()}.withIndex().associate { it.index to it.value as StructureController }
+                _structureController = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTROLLER && it.isActive() }.withIndex().associate { it.index to it.value as StructureController }
             return _structureController ?: throw AssertionError("Error get StructureController")
         }
 
@@ -92,7 +92,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureTower: Map<String, StructureTower>
         get() {
             if (this._structureTower == null)
-                _structureTower = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_TOWER && it.isActive()}.associate { it.id to it as StructureTower }
+                _structureTower = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_TOWER && it.isActive() }.associate { it.id to it as StructureTower }
             return _structureTower ?: throw AssertionError("Error get StructureTower")
         }
 
@@ -101,7 +101,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureContainer: Map<String, StructureContainer>
         get() {
             if (this._structureContainer == null)
-                _structureContainer = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTAINER && it.isActive()}.associate { it.id to it as StructureContainer }
+                _structureContainer = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTAINER && it.isActive() }.associate { it.id to it as StructureContainer }
             return _structureContainer ?: throw AssertionError("Error get StructureContainer")
         }
 
@@ -143,7 +143,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureStorage: Map<Int, StructureStorage>
         get() {
             if (this._structureStorage == null)
-                _structureStorage = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_STORAGE && it.isActive()}.withIndex().associate { it.index to it.value as StructureStorage }
+                _structureStorage = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_STORAGE && it.isActive() }.withIndex().associate { it.index to it.value as StructureStorage }
             return _structureStorage ?: throw AssertionError("Error get StructureStorage")
         }
 
@@ -152,7 +152,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     private val structureLink: Map<String, StructureLink>
         get() {
             if (this._structureLink == null)
-                _structureLink = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LINK && it.isActive()}.associate { it.id to it as StructureLink }
+                _structureLink = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LINK && it.isActive() }.associate { it.id to it as StructureLink }
             return _structureLink ?: throw AssertionError("Error get StructureLink")
         }
 
@@ -215,7 +215,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureTerminal: Map<Int, StructureTerminal>
         get() {
             if (this._structureTerminal == null)
-                _structureTerminal = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_TERMINAL && it.isActive()}.withIndex().associate { it.index to it.value as StructureTerminal }
+                _structureTerminal = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_TERMINAL && it.isActive() }.withIndex().associate { it.index to it.value as StructureTerminal }
             return _structureTerminal ?: throw AssertionError("Error get StructureTerminal")
         }
 
@@ -233,7 +233,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureExtractor: Map<Int, StructureExtractor>
         get() {
             if (this._structureExtractor == null)
-                _structureExtractor = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTRACTOR && it.isActive()}.withIndex().associate { it.index to it.value as StructureExtractor }
+                _structureExtractor = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTRACTOR && it.isActive() }.withIndex().associate { it.index to it.value as StructureExtractor }
             return _structureExtractor ?: throw AssertionError("Error get StructureExtractor")
         }
 
@@ -258,7 +258,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     val structureLab: Map<String, StructureLab>
         get() {
             if (this._structureLab == null)
-                _structureLab = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LAB && it.isActive()}.associate { it.id to it as StructureLab }
+                _structureLab = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LAB && it.isActive() }.associate { it.id to it as StructureLab }
             return _structureLab ?: throw AssertionError("Error get StructureLab")
         }
 
@@ -318,9 +318,11 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
 
     private fun getTimeDeath(fRole: Int): Int {
         return when (fRole) {
-            2 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0", this)?.timeForDeath ?: 0
-            4 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1", this)?.timeForDeath ?: 0
-            1,3 -> 10
+            2 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0", this)?.timeForDeath
+                    ?: 0
+            4 -> mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1", this)?.timeForDeath
+                    ?: 0
+            1, 3 -> 10
             else -> 0
         }
     }
@@ -444,12 +446,12 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             }
 
             10 -> {
-                if (this.room.energyCapacityAvailable >= 3500) result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
+                if (this.room.energyCapacityAvailable >= 3500) result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 else result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             11 -> {
-                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
+                result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
 
             13 -> {
@@ -519,7 +521,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
 
             //Battle group
             if (this.queue[0].role == 99) {
-                val resultBgSpawn = this.mainRoomCollector.mainContext.battleGroupContainer.spawnCreep(this,spawn)
+                val resultBgSpawn = this.mainRoomCollector.mainContext.battleGroupContainer.spawnCreep(this, spawn)
                 if (resultBgSpawn == BgSpawnResult.StartSpawn) continue
                 if (resultBgSpawn == BgSpawnResult.CantSpawn) return
                 if (resultBgSpawn == BgSpawnResult.QueueEmpty) {
@@ -710,7 +712,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     }
 
     private fun alarmStorage() {
-        val storage : StructureStorage = this.structureStorage[0] ?: return
+        val storage: StructureStorage = this.structureStorage[0] ?: return
         if (storage.store.values.sum() > 800000) {
             mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Storage full", COLOR_RED)
         }

@@ -22,37 +22,40 @@ fun MainRoom.needCorrection2() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-    this.need[1][7] = 1
-    this.need[2][7] = 0
 
-    if ((this.getResourceInStorage() > this.constant.upgradeEnergyForce)
-            && this.constructionSite.isEmpty()) {
-        this.need[1][7] = 2
-        this.need[2][7] = 2
-    } else {
-        this.need[1][7] = 2
+    val controller = this.structureController[0]
+    if (controller!=null && controller.level<8) {
+        this.need[1][7] = 1
         this.need[2][7] = 0
+
+        if ((this.getResourceInStorage() > this.constant.upgradeEnergyForce)
+                && this.constructionSite.isEmpty()) {
+            this.need[1][7] = 2
+            this.need[2][7] = 2
+        } else {
+            this.need[1][7] = 2
+            this.need[2][7] = 0
+        }
+
+        if (this.constant.sentEnergyToRoom != "") {
+            this.need[1][7] = 0
+            this.need[2][7] = 0
+        }
+
+        if (this.getResourceInStorage() < this.constant.upgradeEnergyLow) {
+            this.need[1][7] = 0
+            this.need[2][7] = 0
+        }
+
+        if (this.structureController[0]?.level == 8) {
+            this.need[1][7] = 0
+            this.need[2][7] = 0
+        }
+
+        //carrier
+
+        this.need[1][6] = this.have[7]
     }
-
-    if (this.constant.sentEnergyToRoom != "") {
-        this.need[1][7] = 0
-        this.need[2][7] = 0
-    }
-
-    if (this.getResourceInStorage() < this.constant.upgradeEnergyLow) {
-        this.need[1][7] = 0
-        this.need[2][7] = 0
-    }
-
-    if (this.structureController[0]?.level == 8) {
-        this.need[1][7] = 0
-        this.need[2][7] = 0
-    }
-
-    //carrier
-
-    if (this.have[7] > 3) this.need[1][6] = this.have[7] - 1
-    else this.need[1][6] = this.have[7]
 
     //2.1 Small upgrader
     if (this.need[0][6] == 0 && this.need[1][6] == 0 && this.need[2][6] == 0 &&
@@ -62,12 +65,21 @@ fun MainRoom.needCorrection2() {
 
     //8 Builder
 
+    //8 Builder
     if (this.constant.creepUseBigBuilder) {
-        if ((this.constructionSite.isNotEmpty() || this.constant.defenceNeedUpgrade)
-                && (this.getResourceInStorage() > (this.constant.energyBuilder + 40000))) {
+        if ((this.constructionSite.isNotEmpty())
+                && (this.getResourceInStorage() > this.constant.energyBuilder)) {
             this.need[1][10] = 1
-            this.need[1][11] = this.have[10] //* if (this.room.energyCapacityAvailable>=3500) 2 else 1
         }
+        this.need[1][11] = this.have[10]
+    }
+
+    if (this.constant.creepUseBigBuilder) {
+        if (this.constant.defenceNeedUpgrade
+                && (this.getResourceInStorage() > this.constant.energyUpgradeDefence)) {
+            this.need[1][10] = 1
+        }
+        this.need[1][11] = this.have[10]
     } else {
         if ((this.constructionSite.isNotEmpty()) && (this.getResourceInStorage() > this.constant.energyBuilder)) {
             if (this.constructionSite.size > 2) this.need[1][8] = 2

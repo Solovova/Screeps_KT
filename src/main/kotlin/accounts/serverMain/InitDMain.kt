@@ -5,37 +5,32 @@ import screeps.api.ResourceConstant
 import slaveRoom.SlaveRoom
 
 fun constantMainRoomInitMain(mainRoom: MainRoom) {
-    val controller = mainRoom.structureController[0]
-    if (controller != null) {
-        if (controller.level == 8) {
-            mainRoom.constant.creepUseBigBuilder = true
-            mainRoom.constant.defenceHits = 300000
+    val defenceRoomLow: Array<String> = arrayOf("E52N38","E58N37","E53N38")
+    val defenceRoomLowHits = 200000
+    val defenceRoomNormHits = 300000 //Default
+    val defenceRoomHi: Array<String> = arrayOf("E51N35","E52N35","E53N35","E58N43")
+    val defenceRoomHiHits = 900000
 
+    if (mainRoom.name in defenceRoomLow) {
+        mainRoom.constant.defenceHits = defenceRoomLowHits
+    } else {
+        if (mainRoom.name in defenceRoomHi) {
+            mainRoom.constant.defenceHits = defenceRoomHiHits
+        }else{
+            mainRoom.constant.defenceHits = defenceRoomNormHits
         }
-
-        if (controller.level == 7) {
-            mainRoom.constant.creepUseBigBuilder = true
-            mainRoom.constant.defenceHits = 300000
-        }
-
-        if (controller.level == 6) {
-            mainRoom.constant.creepUseBigBuilder = true
-            mainRoom.constant.defenceHits = 100000
-            //mainRoom.constant.creepUpgradeRole
-        }
-
-
     }
 
     if (mainRoom.constant.levelOfRoom == 2) {
         mainRoom.constant.creepUpgradeRole[7] = true
+        mainRoom.constant.creepUpgradeRole[10] = true
     }
 
     if (mainRoom.constant.levelOfRoom == 3) {
         mainRoom.constant.creepUpgradeRole[10] = true
     }
 
-    if (mainRoom.name in arrayOf("E51N35","E52N35","E53N35")) {
+    if (mainRoom.name in arrayOf("E51N35", "E52N35", "E53N35")) {
         mainRoom.constant.defenceHits = 3000000
     }
 

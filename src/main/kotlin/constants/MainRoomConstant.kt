@@ -25,7 +25,7 @@ class MainRoomConstant(val parent: Constants) {
     var creepSpawn: Boolean = true
     var needCleaner: Boolean = false //cashed
     var creepIdOfBigBuilder: String = "" //simple
-    var creepUseBigBuilder: Boolean = false
+    var creepUseBigBuilder: Boolean = true
 
     //Room algorithm
     var roomRunNotEveryTickNextTickRun: Int = 0

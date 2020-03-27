@@ -11,6 +11,11 @@ class GlobalConstant(val constants: Constants) {
     val buttleGroupList: MutableList<String> = MutableList(0){""}
     val sentMaxMineralQuantity: Int = 10000
 
+    var gcl: Int = 0  //cashed
+    var gclFromTick: Int = 0 //cashed
+    var gclArray: Array<Int> = arrayOf() //cashed
+    var gclArrayMaxSize: Int = 100
+    var gclPeriod: Int = 1000
 
     //Market
     val marketMinCreditForOpenBuyOrder: Double = 100000.0
@@ -32,6 +37,9 @@ class GlobalConstant(val constants: Constants) {
 
     fun toDynamic(): dynamic {
         val result: dynamic = object {}
+        result["gcl"] = this.gcl
+        result["gclFromTick"] = this.gclFromTick
+        result["gclArray"] = this.gclArray
         result["roomRunNotEveryTickNextTickRunMainContext"] = this.roomRunNotEveryTickNextTickRunMainContext
         //dataCacheCarrierAuto
         result["dataCacheCarrierAuto"] = object {}
@@ -45,6 +53,11 @@ class GlobalConstant(val constants: Constants) {
 
     fun fromDynamic(d: dynamic) {
         if (d["roomRunNotEveryTickNextTickRunMainContext"] != null) this.roomRunNotEveryTickNextTickRunMainContext = d["roomRunNotEveryTickNextTickRunMainContext"] as Int
+
+        if (d["gcl"] != null) this.gcl = d["gcl"] as Int
+        if (d["gclFromTick"] != null) this.gclFromTick = d["gclFromTick"] as Int
+        if (d["gclArray"] != null) this.gclArray = d["gclArray"] as Array<Int>
+
         //dataCacheCarrierAuto
         if (d["dataCacheCarrierAuto"] != null)
             for (recordKey in js("Object").keys(d["dataCacheCarrierAuto"]).unsafeCast<Array<String>>())
