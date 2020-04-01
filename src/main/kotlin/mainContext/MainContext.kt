@@ -39,35 +39,43 @@ class MainContext {
 
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
-    fun runInStartOfTick() {
+    fun run() {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
-        this.mainRoomCollector.runInStartOfTick()
+
+        this.mainRoomCollector.creepsCalculate()
+        this.mainRoomCollector.creepsCalculateProfit()
+
+        for (room in this.mainRoomCollector.rooms.values) {
+            try {
+                room.runInStartOfTick()
+            } catch (e: Exception) {
+                this.logicMessenger.messenger("ERROR", "Room in start of tick", room.name, COLOR_RED)
+            }
+        }
 
         logicMain.runInStartOfTick()
         logicMineral.runInStartOfTick()
 
         this.battleGroupContainer.runInStartOfTick()
 
-    }
-
-    fun runNotEveryTick() {
+        //Not every tick
         this.mainRoomCollector.runNotEveryTick()
 
-        this.mineralSellBuy()
-        if (!this.setNextTickRun()) return
-        this.tasks.deleteTaskDiedCreep()
-        this.battleGroupContainer.runNotEveryTick()
-        this.marketDeleteEmptyOffers()
-    }
-
-    fun runInEndOfTick() {
-        //ToDo rewrite
-        for (room in mainRoomCollector.rooms.values) {
-            if (room.constant.autoDefenceArea == 0) {
-                this.logicDefence.mainRoomDefence.mainRoomDefenceArea.getArea(room)
-                break
-            }
+        if (this.setNextTickRun()) {
+            this.mineralSellBuy()
+            this.tasks.deleteTaskDiedCreep()
+            this.battleGroupContainer.runNotEveryTick()
+            this.marketDeleteEmptyOffers()
         }
+
+        //End of tick
+        //ToDo rewrite
+//        for (room in mainRoomCollector.rooms.values) {
+//            if (room.constant.autoDefenceArea == 0) {
+//                this.logicDefence.mainRoomDefence.mainRoomDefenceArea.getArea(room)
+//                break
+//            }
+//        }
 
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
@@ -79,6 +87,7 @@ class MainContext {
         logicMessenger.showInfo()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Show info CPU: $cpuStartMCStart")
+
     }
 
     private fun setNextTickRun(): Boolean {

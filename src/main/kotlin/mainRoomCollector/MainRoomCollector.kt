@@ -32,7 +32,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
         }
     }
 
-    private fun creepsCalculate() {
+    fun creepsCalculate() {
         for (creep in Game.creeps.values) {
             if (creep.memory.tickDeath != 0
                     && creep.ticksToLive < creep.memory.tickDeath
@@ -131,7 +131,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
         }
     }
 
-    private fun creepsCalculateProfit() {
+    fun creepsCalculateProfit() {
         if (Memory["profit"] == null) Memory["profit"] = object {}
 
         for (creep in Game.creeps.values) {
@@ -160,16 +160,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
     }
 
     fun runInStartOfTick() {
-        this.creepsCalculate()
-        this.creepsCalculateProfit()
 
-        for (room in rooms.values) {
-            try {
-                room.runInStartOfTick()
-            } catch (e: Exception) {
-                mainContext.logicMessenger.messenger("ERROR", "Room in start of tick", room.name, COLOR_RED)
-            }
-        }
     }
 
     fun runNotEveryTick() {

@@ -22,9 +22,9 @@ fun MainRoom.needCorrection3() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-//    if (this.getResourceInStorage() > this.constant.upgradeEnergyLvl8Controller) {
-//        this.need[1][19] = 1
-//    }
+    if (this.getResourceInStorage() > this.constant.upgradeEnergyLvl8Controller) {
+        this.need[1][19] = 1
+    }
 
     //2.1 Small upgrader
     if (this.need[0][6] == 0 && this.need[1][6] == 0 && this.need[2][6] == 0 &&

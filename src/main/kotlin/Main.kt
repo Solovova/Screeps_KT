@@ -31,21 +31,16 @@ fun loop() {
 
     // Start tick functions
     var cpuStartMCStart = Game.cpu.getUsed()
-    protectedMainContext.runInStartOfTick()
+    protectedMainContext.run()
     cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
 
-    var cpuStartMCNotEvery = Game.cpu.getUsed()
-    protectedMainContext.runNotEveryTick()
-    cpuStartMCNotEvery = Game.cpu.getUsed() - cpuStartMCNotEvery
     // Testing functions
     testingFunctions(protectedMainContext)
 
     // End tick functions
-    var cpuStartMCEnd = Game.cpu.getUsed()
-    protectedMainContext.runInEndOfTick()
-    cpuStartMCEnd = Game.cpu.getUsed() - cpuStartMCEnd
+
 
     console.log("Construction sites: ${Game.constructionSites.size}")
 
-    console.log("CPU: ${(Game.cpu.getUsed() - cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]} McStart: ${cpuStartMCStart.roundToInt()} McNotEvery: ${cpuStartMCNotEvery.roundToInt()} McEnd: ${(cpuStartMCEnd - Game.cpu.getUsed() + cpuStart).roundToInt()}")
+    console.log("CPU: ${(Game.cpu.getUsed() - cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]} McStart: ${cpuStartMCStart.roundToInt()}")
 }
