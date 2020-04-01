@@ -2,6 +2,7 @@ package logic.terminal
 
 import mainContext.MainContext
 import mainRoom.MainRoom
+import mainRoom.buildStructure
 import screeps.api.*
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
@@ -11,6 +12,7 @@ import kotlin.math.min
 class LogicTerminal(val mainContext: MainContext) {
     fun doAllTransaction() {
         this.terminalSentEnergyEmergency()
+        this.terminalSentEnergyForBuild()
         this.terminalSentMineral()
 
         this.terminalSentEnergyExcessSent()
@@ -92,6 +94,33 @@ class LogicTerminal(val mainContext: MainContext) {
             }
         }
 
+    }
+
+    private fun terminalSentEnergyForBuild() {
+        val emergencyMineralQuantity = 30000
+        //Build to
+        val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.structureTerminal[0] != null
+                    && it.getResource() < 100000
+                    && it.constructionSite.isNotEmpty()
+        }.minBy { it.getResource() }
+                ?: return
+
+        //Take max room resource, but priority lvl3
+        val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.constant.levelOfRoom >= 2
+                    && it.getResource() > emergencyMineralQuantity
+        }.maxBy {
+            it.getResource() + if (it.constant.levelOfRoom == 3) {
+                1000000
+            } else {
+                0
+            }
+        }
+                ?: return
+
+
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "For building")
     }
 
     private fun terminalSentEnergyEmergency() {

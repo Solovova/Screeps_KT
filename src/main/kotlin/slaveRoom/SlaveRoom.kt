@@ -353,25 +353,30 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
     fun needCorrection() {
         when (this.constant.model) {
             0 -> {
-                //ToDo костыль
-                //if (this.name == "W5N2") this.need[1][11] = 1
                 if (this.room != null && this.constant.model == 0) {
-                    val invader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_INVADER_CORE }
-                    if (invader != null) {
-                        this.constant.roomHostileType = 3
-                        this.constant.roomHostileNum = 1
+                    val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER }
+                    if (towerInvader != null && towerInvader.isActive()) {
+                        this.constant.roomHostileType = 4
+                        this.constant.roomHostileNum = 5
                         this.constant.roomHostile = true
                     } else {
-                        val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS)
-                        this.constant.roomHostile = hostileCreeps.isNotEmpty()
-                        var typeAttack = 2 //ranged
-                        for (hostileCreep in hostileCreeps)
-                            if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
-                                typeAttack = 1
-                                break
-                            }
-                        this.constant.roomHostileType = typeAttack
-                        this.constant.roomHostileNum = hostileCreeps.size
+                        val invader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_INVADER_CORE }
+                        if (invader != null) {
+                            this.constant.roomHostileType = 3
+                            this.constant.roomHostileNum = 1
+                            this.constant.roomHostile = true
+                        } else {
+                            val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS)
+                            this.constant.roomHostile = hostileCreeps.isNotEmpty()
+                            var typeAttack = 2 //ranged
+                            for (hostileCreep in hostileCreeps)
+                                if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
+                                    typeAttack = 1
+                                    break
+                                }
+                            this.constant.roomHostileType = typeAttack
+                            this.constant.roomHostileNum = hostileCreeps.size
+                        }
                     }
                 }
 
@@ -441,16 +446,30 @@ class SlaveRoom(val parent: MainRoom, val name: String, val describe: String, va
             }
             2 -> {
                 if (this.room != null && this.constant.model == 2) {
-                    val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS).filter { it.name.startsWith("invader") }
-                    this.constant.roomHostile = hostileCreeps.isNotEmpty()
-                    var typeAttack = 2 //ranged
-                    for (hostileCreep in hostileCreeps)
-                        if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
-                            typeAttack = 1
-                            break
+                    val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER }
+                    if (towerInvader != null ) {
+                        this.constant.roomHostileType = 4
+                        this.constant.roomHostileNum = 5
+                        this.constant.roomHostile = true
+                    } else {
+                        val invader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_INVADER_CORE }
+                        if (invader != null) {
+                            this.constant.roomHostileType = 3
+                            this.constant.roomHostileNum = 1
+                            this.constant.roomHostile = true
+                        } else {
+                            val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS).filter { it.name.startsWith("invader") }
+                            this.constant.roomHostile = hostileCreeps.isNotEmpty()
+                            var typeAttack = 2 //ranged
+                            for (hostileCreep in hostileCreeps)
+                                if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
+                                    typeAttack = 1
+                                    break
+                                }
+                            this.constant.roomHostileType = typeAttack
+                            this.constant.roomHostileNum = hostileCreeps.size
                         }
-                    this.constant.roomHostileType = typeAttack
-                    this.constant.roomHostileNum = hostileCreeps.size
+                    }
                 }
 
                 //5 Defender
