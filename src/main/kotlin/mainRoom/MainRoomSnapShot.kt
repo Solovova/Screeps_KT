@@ -40,7 +40,7 @@ fun MainRoom.directControl() {
 
     val flagsRedBlue = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_BLUE }
     if (flagsRedBlue.isNotEmpty()) {
-        this.mainRoomCollector.mainContext.lm.defence.mainRoomDefence.mainRoomDefenceArea.getArea(this)
+        this.mainRoomCollector.mainContext.lm.defence.lmMainRoomDefenceArea.calculate(this)
     }
     for (flag in flagsRedBlue) flag.remove()
 }

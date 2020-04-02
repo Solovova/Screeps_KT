@@ -30,6 +30,8 @@ class MainContext {
     fun run() {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
+        lm.defence.lmMainRoomUpgradeWall.calculate()
+
         this.mainRoomCollector.creepsCalculate()
         this.mainRoomCollector.creepsCalculateProfit()
 
@@ -49,9 +51,12 @@ class MainContext {
         //Not every tick
         this.mainRoomCollector.runNotEveryTick()
 
+        if (Game.time % 10 == 0) {
+            this.mineralSellBuy()
+        }
 
         if (this.setNextTickRun()) {
-            this.mineralSellBuy()
+
             this.tasks.deleteTaskDiedCreep()
             this.battleGroupContainer.runNotEveryTick()
             this.marketDeleteEmptyOffers()

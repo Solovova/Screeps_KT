@@ -93,10 +93,14 @@ fun Constants.initMainBody() {
     m(17).reactionActive = "LH"
     m(18).reactionActive = "LH2O"
     m(19).reactionActive = "LH"
-    m(20).reactionActive = ""
+    m(20).reactionActive = "XGH2O"
     m(21).reactionActive = "OH"
     m(22).reactionActive = "XGH2O"
+    m(23).reactionActive = "XGH2O"
     m(24).reactionActive = "XGH2O"
+    m(25).reactionActive = "ZK"
+    m(26).reactionActive = "UL"
+    m(27).reactionActive = "G"
 }
 
 

@@ -11,23 +11,24 @@ class MainRoomConstant(val parent: Constants) {
     var energyUpgradeDefence : Int = 230000
     var energyExcessSent: Int = 300000
 
-    //Lvl less 8
     var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start upgrade controller
     var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start upgrade controller
 
+    //Upgrade defence
+    var defenceHits: Int    = 200000
+    var defenceNeedUpgrade: Boolean = false //cashed
 
 
-    //Builder
 
     var note : String = ""
 
+
+    //service
     var towerLastTarget: String = ""        //cashed
 
 
 
     //Creep commands
-
-
     var creepSpawn: Boolean = true
     var needCleaner: Boolean = false //cashed
     var creepIdOfBigBuilder: String = "" //simple
@@ -45,16 +46,13 @@ class MainRoomConstant(val parent: Constants) {
     var mineralMinTerminal: Int = 10000
     var mineralAllMaxTerminal: Int = 150000
 
-    //Market
+    //old
     var marketBuyEnergy: Boolean = false
 
     //Mineral
     var mineralMaxInRoom: Int = 200000
     var mineralAllMaxInStorage: Int = 500000
 
-    //Wall and Ramparts upgrade
-    var defenceHits: Int    = 200000
-    var defenceNeedUpgrade: Boolean = false //cashed
 
     //Reaction control set in ProductionController
     var reactionActive: String = "" //cashed

@@ -4,7 +4,7 @@ import mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureStorage
 
-class MainRoomDefenceArea() {
+class LMMainRoomDefenceArea() {
     private data class DataCell(val y: Int, val x: Int)
     private class FillBy(val matrix: Array<Array<Int>>, val fillList: MutableList<DataCell>,
                          val whiteList: Array<Int>, val whatFill: Int){
@@ -127,7 +127,7 @@ class MainRoomDefenceArea() {
         console.log("end_____________________________________________________")
     }
 
-    fun getArea(mainRoom: MainRoom) {
+    fun calculate(mainRoom: MainRoom) {
         var cpuStartMCStart = Game.cpu.getUsed()
 
 

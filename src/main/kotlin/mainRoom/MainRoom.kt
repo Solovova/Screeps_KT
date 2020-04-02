@@ -734,7 +734,6 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
         this.marketCreateBuyOrders()
         this.marketCreateBuyOrdersMineral()
         this.needCleanerCalculate()
-        this.needDefenceUpgradeCalculate()
     }
 
     fun missingStructures(): String {
@@ -904,15 +903,6 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
         if (!result) result = needClean(this.structureContainerNearController[0]?.store, RESOURCE_ENERGY)
         if (!result) result = needClean(this.structureContainerNearMineral[0]?.store, this.mineral.mineralType)
         this.constant.needCleaner = result
-    }
-
-    private fun needDefenceUpgradeCalculate() {
-        val structure: Structure? = this.room.find(FIND_STRUCTURES).filter {
-            (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
-                    && it.hits < this.constant.defenceHits
-                    && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0
-        }.firstOrNull()
-        this.constant.defenceNeedUpgrade = (structure != null)
     }
 
     private fun runReactions() {
