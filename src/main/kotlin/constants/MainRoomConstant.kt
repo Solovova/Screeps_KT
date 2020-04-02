@@ -5,7 +5,16 @@ import screeps.api.*
 class MainRoomConstant(val parent: Constants) {
     var slaveRooms : Array<String> = arrayOf() //simple
     val slaveRoomConstantContainer: MutableMap<String,SlaveRoomConstant> = mutableMapOf() //cashed
-    //Upgrader
+    //Energy management
+    var energyBuilder : Int = 60000 //simple //how much energy must be in storage for start building
+    var energyUpgradeLvl8Controller: Int = 200000 //simple //how much energy must be in storage for start upgrade controller
+    var energyUpgradeDefence : Int = 230000
+    var energyExcessSent: Int = 300000
+
+    //Lvl less 8
+    var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start upgrade controller
+    var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start upgrade controller
+
 
 
     //Builder
@@ -17,11 +26,8 @@ class MainRoomConstant(val parent: Constants) {
 
 
     //Creep commands
-    var energyBuilder : Int = 60000 //simple //how much energy must be in storage for start building
-    var energyUpgradeDefence : Int = 100000
-    var upgradeEnergyLow : Int = 100000 //simple //how much energy must be in storage for start upgrade controller
-    var upgradeEnergyForce: Int = 110000 //simple //how much energy must be in storage for start upgrade controller
-    var upgradeEnergyLvl8Controller: Int = 250000 //simple //how much energy must be in storage for start upgrade controller
+
+
     var creepSpawn: Boolean = true
     var needCleaner: Boolean = false //cashed
     var creepIdOfBigBuilder: String = "" //simple
@@ -38,7 +44,6 @@ class MainRoomConstant(val parent: Constants) {
     var energyMaxTerminal: Int = 60000
     var mineralMinTerminal: Int = 10000
     var mineralAllMaxTerminal: Int = 150000
-    var energyExcessSent: Int = 300000
 
     //Market
     var marketBuyEnergy: Boolean = false

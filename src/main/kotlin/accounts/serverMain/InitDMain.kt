@@ -6,10 +6,10 @@ import slaveRoom.SlaveRoom
 
 fun constantMainRoomInitMain(mainRoom: MainRoom) {
     val defenceRoomLow: Array<String> = arrayOf("E52N38","E58N37","E53N38")
-    val defenceRoomLowHits = 500000
-    val defenceRoomNormHits = 1000000 //Default
+    val defenceRoomLowHits = 1_000_000
+    val defenceRoomNormHits = 2_000_000 //Default
     val defenceRoomHi: Array<String> = arrayOf("E51N35","E52N35","E53N35","E58N43")
-    val defenceRoomHiHits = 2000000
+    val defenceRoomHiHits = 3_000_000
 
     if (mainRoom.name in defenceRoomLow) {
         mainRoom.constant.defenceHits = defenceRoomLowHits

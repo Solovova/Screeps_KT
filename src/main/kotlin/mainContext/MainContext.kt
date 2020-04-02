@@ -22,6 +22,11 @@ class MainContext {
 
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
+    init {
+
+        //this.marketShowSellOrdersRealPrice("L".unsafeCast<ResourceConstant>())
+    }
+
     fun run() {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
@@ -43,6 +48,7 @@ class MainContext {
 
         //Not every tick
         this.mainRoomCollector.runNotEveryTick()
+
 
         if (this.setNextTickRun()) {
             this.mineralSellBuy()

@@ -28,7 +28,7 @@ fun MainRoom.needCorrection2() {
         this.need[1][7] = 1
         this.need[2][7] = 0
 
-        if ((this.getResourceInStorage() > this.constant.upgradeEnergyForce)
+        if ((this.getResourceInStorage() > this.constant.energyUpgradeForce)
                 && this.constructionSite.isEmpty()) {
             this.need[1][7] = 2
             this.need[2][7] = 2
@@ -42,7 +42,7 @@ fun MainRoom.needCorrection2() {
             this.need[2][7] = 0
         }
 
-        if (this.getResourceInStorage() < this.constant.upgradeEnergyLow) {
+        if (this.getResourceInStorage() < this.constant.energyUpgradeLow) {
             this.need[1][7] = 0
             this.need[2][7] = 0
         }

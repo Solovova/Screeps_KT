@@ -36,7 +36,7 @@ fun MainRoom.needCorrection1() {
         this.need[2][7] = 2
     }
 
-    if (this.getResourceInStorage()<this.constant.upgradeEnergyLow) {
+    if (this.getResourceInStorage()<this.constant.energyUpgradeLow) {
         this.need[1][7]=0
         this.need[2][7]=0
     }

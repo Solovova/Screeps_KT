@@ -22,7 +22,7 @@ fun MainRoom.needCorrection3() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-    if (this.getResourceInStorage() > this.constant.upgradeEnergyLvl8Controller) {
+    if (this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller) {
         this.need[1][19] = 1
     }
 

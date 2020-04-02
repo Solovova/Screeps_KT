@@ -19,6 +19,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 200000,
             marketBuyLack = 20000,
+            storeMax = 300000,
             sellFromRoom = "E54N37",
             buyToRoom = "E59N38"
     )
@@ -28,6 +29,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 200000,
             marketBuyLack = 40000,
+            storeMax = 300000,
             sellFromRoom = "E58N39",
             buyToRoom = "E59N38"
     )
@@ -37,6 +39,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 200000,
             marketBuyLack = 20000,
+            storeMax = 300000,
             sellFromRoom = "E52N37",
             buyToRoom = "E47N39"
     )
@@ -46,6 +49,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 200000,
             marketBuyLack = 20000,
+            storeMax = 300000,
             sellFromRoom = "E59N36",
             buyToRoom = "E54N39"
     )
@@ -55,6 +59,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 200000,
             marketBuyLack = 20000,
+            storeMax = 300000,
             buyToRoom = "E54N39"
     )
 
@@ -63,6 +68,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 200000,
             marketBuyLack = 20000,
+            storeMax = 300000,
             sellFromRoom = "E57N39",
             buyToRoom = "E47N39"
     )
@@ -74,6 +80,7 @@ fun initMineralMain(mainContext: MainContext) {
             priceMin = 0.005,
             marketSellExcess = 400000,
             marketBuyLack = 20000,
+            storeMax = 500000,
             sellFromRoom = "E52N36",
             buyToRoom = "E57N39"
     )
