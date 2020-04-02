@@ -130,7 +130,6 @@ class LMMainRoomDefenceArea() {
     fun calculate(mainRoom: MainRoom) {
         var cpuStartMCStart = Game.cpu.getUsed()
 
-
         this.matrix = Array(50) { Array(50) { 0 } }
         fillStructure(mainRoom)
         fillFromBorder()

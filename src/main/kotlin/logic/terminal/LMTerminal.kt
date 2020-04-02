@@ -9,6 +9,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 class LMTerminal(val mainContext: MainContext) {
+    private val emergencyMineralQuantity = 30000
+    private val sentQuantity = 5000
+
     fun transactions() {
         this.terminalSentEnergyEmergency()
         this.terminalSentEnergyForBuild()
@@ -19,7 +22,7 @@ class LMTerminal(val mainContext: MainContext) {
     }
 
     private fun terminalSentFromTo(mainRoomFrom: MainRoom, mainRoomTo: MainRoom, describe: String) {
-        val sentQuantity = 5000
+
         val terminalFrom: StructureTerminal = mainRoomFrom.structureTerminal[0] ?: return
         val terminalTo: StructureTerminal = mainRoomTo.structureTerminal[0] ?: return
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
@@ -96,7 +99,7 @@ class LMTerminal(val mainContext: MainContext) {
     }
 
     private fun terminalSentEnergyForBuild() {
-        val emergencyMineralQuantity = 30000
+
         //Build to
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
@@ -178,7 +181,7 @@ class LMTerminal(val mainContext: MainContext) {
 
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
-                    && it.getResource() < it.constant.energyExcessSent
+                    && it.getResource() < (it.constant.energyExcessSent - sentQuantity)
         }.minBy { it.getResource() }
                 ?: return
 

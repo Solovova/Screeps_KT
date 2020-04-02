@@ -5,7 +5,6 @@ import mainContext.MainContext
 import mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.Structure
-import kotlin.math.min
 
 class LMMainRoomUpgradeWall (val mainContext: MainContext) {
     private fun getMinHits(mainRoom: MainRoom): Double {
@@ -22,7 +21,7 @@ class LMMainRoomUpgradeWall (val mainContext: MainContext) {
         if (Game.time % 1500 != 0) return
 
         val rooms = mainContext.mainRoomCollector.rooms.values.sortedBy { this.getMinHits(it) }
-        val countOfRoomForUpgrade = 15
+        val countOfRoomForUpgrade = 8
         var counter = 0
         for (room in rooms) {
             counter++
