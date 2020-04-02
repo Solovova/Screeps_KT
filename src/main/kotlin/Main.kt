@@ -27,7 +27,7 @@ fun loop() {
 
 
 
-    protectedMainContext.logicMessenger.messenger("HEAD", "", "Current game tick is ${Game.time} _________________________________________", COLOR_WHITE)
+    protectedMainContext.lm.lmMessenger.log("HEAD", "", "Current game tick is ${Game.time} _________________________________________", COLOR_WHITE)
 
     // Start tick functions
     var cpuStartMCStart = Game.cpu.getUsed()

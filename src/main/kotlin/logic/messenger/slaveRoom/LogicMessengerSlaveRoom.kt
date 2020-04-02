@@ -30,7 +30,7 @@ class LogicMessengerSlaveRoom (val mainContext: MainContext) {
         val sTicks: String = (Game.time - slaveRoom.constant.profitStart).toString().padEnd(8)
         val sSources = slaveRoom.source.size.toString()
 
-        this.mainContext.logicMessenger.messenger("PROFIT", slaveRoom.describe,
+        this.mainContext.lm.lmMessenger.log("PROFIT", slaveRoom.describe,
                 "Profit ----> ${slaveRoom.name} Road: ${slaveRoom.constant.roadBuild.toString().padEnd(5)} ($sProfitPT per. 1500 ticks) ticks: $sTicks  + $sUp  - $sDown  $sProfit ($sProfitPerTickPrevious sources: $sSources)", COLOR_WHITE)
     }
 }

@@ -1,6 +1,6 @@
 package logic.develop
 
-private fun LogicDevelop.rdFillFree(data: Array<Array<Int>>){
+private fun LMDevelop.rdFillFree(data: Array<Array<Int>>){
     val free = Array(50) { Array(50) {  Array(2) {0} } }
 //    for (y in ){
 //        var i = 0

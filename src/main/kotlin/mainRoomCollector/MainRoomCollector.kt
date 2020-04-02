@@ -28,7 +28,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
             val mainRoomConstant: MainRoomConstant? = this.mainContext.constants.mainRoomConstantContainer[name]
             if (mainRoomConstant != null && Game.rooms[name] != null && (Game.rooms[name]?.controller?.my == true))
                 rooms[name] = MainRoom(this, name, "M${index.toString().padStart(2, '0')}", mainRoomConstant)
-            else mainContext.logicMessenger.messenger("ERROR", name, "initialization don't see mainRoomConstant", COLOR_RED)
+            else mainContext.lm.lmMessenger.log("ERROR", name, "initialization don't see mainRoomConstant", COLOR_RED)
         }
     }
 
@@ -155,7 +155,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
                 if (Game.getObjectById<Creep>(key) == null)
                     delete(Memory["profit"][key])
         } catch (e: Exception) {
-            mainContext.logicMessenger.messenger("ERROR", "Clear in creep profit", "", COLOR_RED)
+            mainContext.lm.lmMessenger.log("ERROR", "Clear in creep profit", "", COLOR_RED)
         }
     }
 
@@ -168,7 +168,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
             try {
                 record.value.runNotEveryTick()
             } catch (e: Exception) {
-                mainContext.logicMessenger.messenger("ERROR", "Room not every tick", record.value.room.name, COLOR_RED)
+                mainContext.lm.lmMessenger.log("ERROR", "Room not every tick", record.value.room.name, COLOR_RED)
             }
         }
         this.houseKeeping()
@@ -179,7 +179,7 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
             try {
                 room.runInEndOfTick()
             } catch (e: Exception) {
-                mainContext.logicMessenger.messenger("ERROR", "Room in end of tick", room.name, COLOR_RED)
+                mainContext.lm.lmMessenger.log("ERROR", "Room in end of tick", room.name, COLOR_RED)
             }
         }
 
@@ -188,13 +188,13 @@ class MainRoomCollector(val mainContext: MainContext, names: Array<String>) {
             try {
                 creep.newTask(this.mainContext)
             } catch (e: Exception) {
-                mainContext.logicMessenger.messenger("ERROR", "CREEP New task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
+                mainContext.lm.lmMessenger.log("ERROR", "CREEP New task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
             }
 
             try {
                 creep.doTask(this.mainContext)
             } catch (e: Exception) {
-                mainContext.logicMessenger.messenger("ERROR", "CREEP Do task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
+                mainContext.lm.lmMessenger.log("ERROR", "CREEP Do task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
             }
         }
 

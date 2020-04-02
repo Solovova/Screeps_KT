@@ -3,33 +3,16 @@ package mainContext
 import Tasks
 import battleGroup.BattleGroupContainer
 import constants.Constants
-import logic.building.LogicBuilding
-import logic.defence.LogicDefence
-import logic.develop.LogicDevelop
-import logic.lab.LogicLab
-import logic.main.LogicMain
-import logic.messenger.LogicMessenger
-import logic.mineral.LogicMineral
-import logic.terminal.LogicTerminal
-import logic.upgrade.LogicUpgrade
+import logic.main.LM
+import logic.creep.upgrade.LMUpgrade
 import mainRoomCollector.MainRoomCollector
 import screeps.api.*
 import kotlin.random.Random
 
 class MainContext {
-    val logicLab: LogicLab = LogicLab()
-    val logicUpgrade: LogicUpgrade = LogicUpgrade()
-    val logicBuilding: LogicBuilding = LogicBuilding()
-    private val logicTerminal: LogicTerminal = LogicTerminal(this)
-    val logicMineral: LogicMineral = LogicMineral(this)
-    val logicMessenger: LogicMessenger = LogicMessenger(this)
-    val logicDevelop: LogicDevelop = LogicDevelop()
-    val logicDefence: LogicDefence = LogicDefence(this)
-
-    val logicMain: LogicMain = LogicMain(this)
+    val lm: LM = LM(this)
 
     val messengerMap: MutableMap<String, String> = mutableMapOf()
-
 
     val mineralData: MutableMap<ResourceConstant, MineralDataRecord> = mutableMapOf()
     val constants: Constants = Constants(this)
@@ -49,12 +32,12 @@ class MainContext {
             try {
                 room.runInStartOfTick()
             } catch (e: Exception) {
-                this.logicMessenger.messenger("ERROR", "Room in start of tick", room.name, COLOR_RED)
+                this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
 
-        logicMain.runInStartOfTick()
-        logicMineral.runInStartOfTick()
+        lm.lmGCL.calculate()
+        lm.lmProduction.lmMineral.filldata()
 
         this.battleGroupContainer.runInStartOfTick()
 
@@ -79,12 +62,12 @@ class MainContext {
 
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
-        logicTerminal.doAllTransaction()
+        lm.lmTerminal.transactions()
         this.tasks.toMemory()
         this.constants.toMemory()
 
         var cpuStartMCStart = Game.cpu.getUsed()
-        logicMessenger.showInfo()
+        lm.lmMessenger.show()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Show info CPU: $cpuStartMCStart")
 
@@ -94,7 +77,7 @@ class MainContext {
         if (this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext > Game.time) return false
         this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext = Game.time + Random.nextInt(this.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 this.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        this.logicMessenger.messenger("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
+        this.lm.lmMessenger.log("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
         return true
     }
 }

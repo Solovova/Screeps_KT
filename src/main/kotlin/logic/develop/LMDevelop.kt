@@ -1,12 +1,13 @@
 package logic.develop
 
+import mainContext.MainContext
 import mainRoom.MainRoom
 import screeps.api.Source
 import screeps.api.TERRAIN_MASK_WALL
 import screeps.api.TERRAIN_WALL
 import screeps.api.structures.StructureController
 
-class LogicDevelop {
+class LMDevelop(val mainContext: MainContext) {
     private val matrix = Array(50) { Array(50) { 0 } }
 
     fun runMainRoom(mainRoom: MainRoom) {

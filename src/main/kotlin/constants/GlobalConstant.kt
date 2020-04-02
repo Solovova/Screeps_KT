@@ -30,8 +30,8 @@ class GlobalConstant(val constants: Constants) {
     val labReactionComponent: MutableMap<ResourceConstant,Array<ResourceConstant>> = mutableMapOf()
 
     init {
-        constants.mainContext.logicUpgrade.setGlobalConstants(this)
-        constants.mainContext.logicMineral.setGlobalConstants(this)
+        constants.mainContext.lm.lmCreep.lmUpgrade.setGlobalConstants(this)
+        constants.mainContext.lm.lmProduction.lmMineral.setGlobalConstants(this)
     }
 
 

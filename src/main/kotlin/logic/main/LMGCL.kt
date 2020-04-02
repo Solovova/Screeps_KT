@@ -3,8 +3,8 @@ package logic.main
 import mainContext.MainContext
 import screeps.api.Game
 
-class LogicMainGCL (val mainContext: MainContext){
-    fun gclCalculate() {
+class LMGCL (val mainContext: MainContext){
+    fun calculate() {
         //Initialization
         if (mainContext.constants.globalConstant.gclFromTick == 0) {
             mainContext.constants.globalConstant.gclFromTick = Game.time

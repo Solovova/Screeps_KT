@@ -17,7 +17,7 @@ fun MainRoom.restoreSnapShot(){
     if (flags.isNotEmpty()) return
 
     if (Memory["snap"] == null || Memory["snap"][this.name] == null){
-        mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Snapshot not present", COLOR_RED)
+        mainRoomCollector.mainContext.lm.lmMessenger.log("INFO", this.name, "Snapshot not present", COLOR_RED)
         return
     }
     val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
@@ -35,12 +35,12 @@ fun MainRoom.directControl() {
     for (flag in flagsRedRed) flag.remove()
 
     val flagsRedGrey = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_GREY }
-    if (flagsRedGrey.isNotEmpty()) this.mainRoomCollector.mainContext.logicDevelop.runMainRoom(this)
+    if (flagsRedGrey.isNotEmpty()) this.mainRoomCollector.mainContext.lm.lmDevelop.runMainRoom(this)
     for (flag in flagsRedGrey) flag.remove()
 
     val flagsRedBlue = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_BLUE }
     if (flagsRedBlue.isNotEmpty()) {
-        this.mainRoomCollector.mainContext.logicDefence.mainRoomDefence.mainRoomDefenceArea.getArea(this)
+        this.mainRoomCollector.mainContext.lm.defence.mainRoomDefence.mainRoomDefenceArea.getArea(this)
     }
     for (flag in flagsRedBlue) flag.remove()
 }

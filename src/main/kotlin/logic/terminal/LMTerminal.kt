@@ -2,15 +2,14 @@ package logic.terminal
 
 import mainContext.MainContext
 import mainRoom.MainRoom
-import mainRoom.buildStructure
 import screeps.api.*
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
 import kotlin.math.max
 import kotlin.math.min
 
-class LogicTerminal(val mainContext: MainContext) {
-    fun doAllTransaction() {
+class LMTerminal(val mainContext: MainContext) {
+    fun transactions() {
         this.terminalSentEnergyEmergency()
         this.terminalSentEnergyForBuild()
         this.terminalSentMineral()
@@ -36,7 +35,7 @@ class LogicTerminal(val mainContext: MainContext) {
             //
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
             if (result == OK)
-                mainContext.logicMessenger.messenger("INFO", mainRoomFrom.name,
+                mainContext.lm.lmMessenger.log("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
         }
     }
@@ -87,7 +86,7 @@ class LogicTerminal(val mainContext: MainContext) {
                         ?: continue
                 val result = terminalFrom.send(needResource, quantityTransfer, roomTo.name)
                 if (result == OK) {
-                    mainContext.logicMessenger.messenger("INFO", roomFrom.name,
+                    mainContext.lm.lmMessenger.log("INFO", roomFrom.name,
                             "Send $needResource $quantityTransfer from ${roomFrom.name} -> ${roomTo.name} ", COLOR_YELLOW)
                     return
                 }

@@ -6,7 +6,6 @@ import screeps.api.*
 import screeps.api.structures.*
 import slaveRoom.SlaveRoom
 import CreepTask
-import logic.creep.slaveRoom.tasks.TaskGoToRoom
 import role
 import mainRoom
 import screeps.utils.toMap
@@ -23,7 +22,7 @@ fun Creep.doTask(mainContext: MainContext) {
 
     val task: CreepTask = mainContext.tasks.tasks[this.id] ?: return
     if (task.posObject0 == null) {
-        mainContext.logicMessenger.messenger("ERROR", "", "PosFrom not have", COLOR_RED)
+        mainContext.lm.lmMessenger.log("ERROR", "", "PosFrom not have", COLOR_RED)
         return
     }
 
@@ -133,7 +132,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToRoom -> {
-            TaskGoToRoom(this,mainRoom).goToRoom()
+            mainContext.lm.lmCreep.lmTask.taskGoToRoom.goToRoom(this, mainRoom)
         }
 
         TypeOfTask.Claim -> {

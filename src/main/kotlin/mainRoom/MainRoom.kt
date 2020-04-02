@@ -7,7 +7,7 @@ import constants.MainRoomConstant
 import constants.SlaveRoomConstant
 import slaveRoom.SlaveRoom
 import constants.CacheCarrier
-import logic.lab.mainRoom.GetLabSort
+import logic.production.lab.mainRoom.GetLabSort
 import mainContext.getCacheRecordRoom
 import mainRoomCollector.MainRoomCollector
 import screeps.api.*
@@ -397,7 +397,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             2 -> {
                 val carrierAuto: CacheCarrier? = mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer0", this)
                 if (carrierAuto == null) {
-                    mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
+                    mainRoomCollector.mainContext.lm.lmMessenger.log("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 } else {
                     result = carrierAuto.needBody
@@ -407,7 +407,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             4 -> {
                 val carrierAuto: CacheCarrier? = mainRoomCollector.mainContext.getCacheRecordRoom("mainContainer1", this)
                 if (carrierAuto == null) {
-                    mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
+                    mainRoomCollector.mainContext.lm.lmMessenger.log("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 } else {
                     result = carrierAuto.needBody
@@ -666,7 +666,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             val slaveRoomConstant: SlaveRoomConstant? = this.constant.slaveRoomConstantContainer[slaveName]
             if (slaveRoomConstant != null)
                 slaveRooms[slaveName] = SlaveRoom(this, slaveName, "${this.describe}S$index", slaveRoomConstant)
-            else mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", "${this.name} $slaveName", "initialization don't see constant", COLOR_RED)
+            else mainRoomCollector.mainContext.lm.lmMessenger.log("ERROR", "${this.name} $slaveName", "initialization don't see constant", COLOR_RED)
         }
     }
 
@@ -674,7 +674,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
         if (this.constant.roomRunNotEveryTickNextTickRun > Game.time) return false
         this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 mainRoomCollector.mainContext.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        mainRoomCollector.mainContext.logicMessenger.messenger("TEST", this.name, "Main room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
+        mainRoomCollector.mainContext.lm.lmMessenger.log("TEST", this.name, "Main room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
         return true
     }
 
@@ -685,7 +685,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             try {
                 room.runInStartOfTick()
             } catch (e: Exception) {
-                mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", "Slave room in start", room.name, COLOR_RED)
+                mainRoomCollector.mainContext.lm.lmMessenger.log("ERROR", "Slave room in start", room.name, COLOR_RED)
             }
         }
         this.setMineralNeed()
@@ -702,7 +702,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             try {
                 room.runInEndOfTick()
             } catch (e: Exception) {
-                mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", "Slave room in end", room.name, COLOR_RED)
+                mainRoomCollector.mainContext.lm.lmMessenger.log("ERROR", "Slave room in end", room.name, COLOR_RED)
             }
         }
 
@@ -714,7 +714,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
     private fun alarmStorage() {
         val storage: StructureStorage = this.structureStorage[0] ?: return
         if (storage.store.values.sum() > 800000) {
-            mainRoomCollector.mainContext.logicMessenger.messenger("INFO", this.name, "Storage full", COLOR_RED)
+            mainRoomCollector.mainContext.lm.lmMessenger.log("INFO", this.name, "Storage full", COLOR_RED)
         }
     }
 
@@ -723,7 +723,7 @@ class MainRoom(val mainRoomCollector: MainRoomCollector, val name: String, val d
             try {
                 record.value.runNotEveryTick()
             } catch (e: Exception) {
-                mainRoomCollector.mainContext.logicMessenger.messenger("ERROR", "Slave not every tick", record.value.name, COLOR_RED)
+                mainRoomCollector.mainContext.lm.lmMessenger.log("ERROR", "Slave not every tick", record.value.name, COLOR_RED)
             }
         }
 

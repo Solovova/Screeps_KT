@@ -1,12 +1,12 @@
-package logic.mineral
+package logic.production.mineral
 
 import REACTIONS
 import constants.GlobalConstant
 import mainContext.MainContext
 import screeps.api.ResourceConstant
 
-class LogicMineral(val mainContext: MainContext) {
-    fun runInStartOfTick() {
+class LMMineral(val mainContext: MainContext) {
+    fun filldata() {
         this.mineralDataFill(mainContext)
         this.mineralProductionFill(mainContext)
     }

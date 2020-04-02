@@ -1,4 +1,4 @@
-package logic.lab.mainRoom
+package logic.production.lab.mainRoom
 
 import screeps.api.structures.StructureLab
 

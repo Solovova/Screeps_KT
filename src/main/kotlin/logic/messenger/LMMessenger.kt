@@ -6,14 +6,14 @@ import logic.messenger.slaveRoom.LogicMessengerSlaveRoom
 import mainContext.MainContext
 import screeps.api.*
 
-class LogicMessenger(val mainContext: MainContext) {
+class LMMessenger(val mainContext: MainContext) {
     private val logicMessengerMainRoom: LogicMessengerMainRoom = LogicMessengerMainRoom(mainContext)
     private val logicMessengerSlaveRoom: LogicMessengerSlaveRoom = LogicMessengerSlaveRoom(mainContext)
     private val logicMessengerMineral: LogicMessengerMineral = LogicMessengerMineral(mainContext)
 
-    fun messenger(type: String, room: String, text: String, color: ColorConstant = COLOR_GREY,
-                  testBefore: String = "", colorBefore: ColorConstant = COLOR_WHITE,
-                  testAfter: String = "", colorAfter: ColorConstant = COLOR_WHITE) {
+    fun log(type: String, room: String, text: String, color: ColorConstant = COLOR_GREY,
+            testBefore: String = "", colorBefore: ColorConstant = COLOR_WHITE,
+            testAfter: String = "", colorAfter: ColorConstant = COLOR_WHITE) {
 
         fun colorToHTMLColor(color: ColorConstant): String {
             return when(color) {
@@ -93,7 +93,7 @@ class LogicMessenger(val mainContext: MainContext) {
         logicMessengerMineral.showInfo()
     }
 
-    fun showInfo() {
+    fun show() {
         this.showMineralInfo()
         this.showSlaveRoomInfo()
         this.showMessengerInfo()

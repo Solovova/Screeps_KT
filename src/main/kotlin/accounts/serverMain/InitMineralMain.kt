@@ -80,7 +80,7 @@ fun initMineralMain(mainContext: MainContext) {
 
     mainContext.mineralData["XGH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 2.000,
-            priceMin = 0.920,
+            priceMin = 1.400,
             marketSellExcess = 0,
             storeMax = 400000,
             sellFromRoom = "E52N38"

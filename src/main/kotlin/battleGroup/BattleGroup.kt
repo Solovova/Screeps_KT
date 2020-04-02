@@ -8,7 +8,6 @@ import BattleGroupCreep
 import BgSpawnResult
 import screeps.api.structures.SpawnOptions
 import screeps.api.structures.StructureSpawn
-import screeps.utils.copy
 
 class BattleGroup {
     val constants: BattleGroupConstant
@@ -174,7 +173,7 @@ class BattleGroup {
         if (nearestMainRoom != null) {
             this.constants.assembleRoom = nearestMainRoom.name
             return true
-        } else this.parent.parent.logicMessenger.messenger("ERROR", this.constants.roomName, "Battle group ${this.name} can't set assemble room", COLOR_RED)
+        } else this.parent.parent.lm.lmMessenger.log("ERROR", this.constants.roomName, "Battle group ${this.name} can't set assemble room", COLOR_RED)
         return false
     }
 

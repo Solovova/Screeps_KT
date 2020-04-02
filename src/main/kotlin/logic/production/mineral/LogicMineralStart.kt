@@ -1,15 +1,14 @@
-package logic.mineral
+package logic.production.mineral
 
 import REACTION_TIME
 import RESOURCES_ALL
 import accounts.initMineralData
-import logic.lab.LogicLab
 import mainContext.MainContext
 import mainContext.MineralDataRecord
 import screeps.api.ResourceConstant
 import screeps.api.get
 
-fun LogicMineral.mineralDataFill(mainContext: MainContext) {
+fun LMMineral.mineralDataFill(mainContext: MainContext) {
     initMineralData(mainContext)
     for (res in RESOURCES_ALL) {
         val quantity: Int = mainContext.mainRoomCollector.rooms.values.sumBy { it.getResource(res) }
@@ -26,7 +25,7 @@ fun LogicMineral.mineralDataFill(mainContext: MainContext) {
     }
 }
 
-fun LogicMineral.mineralProductionFill(mainContext: MainContext) {
+fun LMMineral.mineralProductionFill(mainContext: MainContext) {
     for (room in mainContext.mainRoomCollector.rooms.values) {
         if (room.constant.reactionActive != "") {
             val reaction = room.constant.reactionActive.unsafeCast<ResourceConstant>()
