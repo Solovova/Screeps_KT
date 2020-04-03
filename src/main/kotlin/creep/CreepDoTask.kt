@@ -1,11 +1,11 @@
 package creep
 
 import mainContext.MainContext
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.*
-import slaveRoom.SlaveRoom
-import CreepTask
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
+import mainContext.tasks.CreepTask
 import role
 import mainRoom
 import screeps.utils.toMap

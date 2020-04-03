@@ -1,8 +1,8 @@
 package accounts.serverMain
 
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.ResourceConstant
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
 fun constantMainRoomInitMain(mainRoom: MainRoom) {
     val defenceRoomLow: Array<String> = arrayOf("E52N38","E58N37","E53N38")
@@ -56,13 +56,13 @@ fun constantMainRoomInitMain(mainRoom: MainRoom) {
 fun constantSlaveRoomInitMain(slaveRoom: SlaveRoom) {
 
 
-    if (slaveRoom.parent.name == "E57N51" && slaveRoom.name == "E55N51") {
+    if (slaveRoom.mr.name == "E57N51" && slaveRoom.name == "E55N51") {
         slaveRoom.need[0][0] = 0
         slaveRoom.need[0][1] = 6
     }
 
 
-    if (slaveRoom.parent.name == "E57N51" && slaveRoom.name == "E58N51") {
+    if (slaveRoom.mr.name == "E57N51" && slaveRoom.name == "E58N51") {
         slaveRoom.need[0][11] = 1
     }
 }

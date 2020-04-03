@@ -1,9 +1,9 @@
 package mainContext
 
 import constants.CacheCarrier
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import kotlin.math.min
 import kotlin.math.roundToInt
 

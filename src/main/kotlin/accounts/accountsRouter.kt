@@ -3,14 +3,12 @@ package accounts
 import accounts.serverMain.*
 import accounts.serverTest.*
 import accounts.serverTest2.*
-import constants.Constants
+import mainContext.constants.Constants
 import mainContext.MainContext
-import mainContext.MineralDataRecord
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.Memory
-import screeps.api.ResourceConstant
 import screeps.api.get
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
 fun Constants.initHead() {
     if (Memory["account"] == "main") this.initMainHead()

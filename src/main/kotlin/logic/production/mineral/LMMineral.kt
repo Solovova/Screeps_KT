@@ -1,7 +1,7 @@
 package logic.production.mineral
 
 import REACTIONS
-import constants.GlobalConstant
+import mainContext.constants.GlobalConstant
 import mainContext.MainContext
 import screeps.api.ResourceConstant
 

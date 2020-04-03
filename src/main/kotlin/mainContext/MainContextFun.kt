@@ -2,11 +2,11 @@ package mainContext
 
 import screeps.api.*
 import constants.CacheCarrier
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.COLOR_YELLOW
 import screeps.api.Game
 import screeps.api.structures.Structure
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
 
 //Test all need information here, if return null, way is impossible

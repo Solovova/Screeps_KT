@@ -1,15 +1,12 @@
 package creep
 
-import mainRoom.MainRoom
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import kotlin.random.Random
 import mainContext.MainContext
-import CreepTask
+import mainContext.tasks.CreepTask
 import TypeOfTask
-import org.w3c.dom.Storage
-import role
 import screeps.api.*
-import screeps.api.Game.structures
 import screeps.api.structures.*
 import screeps.utils.toMap
 import slaveRoom
@@ -744,7 +741,7 @@ fun Creep.slaveAttack(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean 
 //        if (slaveRoom.name == "W5N2"){
 //            val structure: Structure? = Game.getObjectById("4158ccbdf12cc91")
 //            if (structure != null) {
-//                mainContext.tasks.add(this.id, CreepTask(TypeOfTask.AttackMile, idObject0 = structure.id, posObject0 = structure.pos))
+//                mainContext.tasks.add(this.id, mainContext.tasks.CreepTask(TypeOfTask.AttackMile, idObject0 = structure.id, posObject0 = structure.pos))
 //                return true
 //            }
 //        }

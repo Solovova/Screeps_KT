@@ -1,8 +1,7 @@
 package accounts.serverTest2
 
-import mainRoom.MainRoom
-import screeps.api.ResourceConstant
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
 fun constantMainRoomInitTest2(mainRoom: MainRoom) {
     val controller = mainRoom.structureController[0]
@@ -34,7 +33,7 @@ fun constantMainRoomInitTest2(mainRoom: MainRoom) {
 }
 
 fun constantSlaveRoomInitTest2(slaveRoom: SlaveRoom) {
-    if (slaveRoom.parent.name == "W8N3" && slaveRoom.name == "W5N3") {
+    if (slaveRoom.mr.name == "W8N3" && slaveRoom.name == "W5N3") {
         slaveRoom.need[0][11] = 2
     }
 }

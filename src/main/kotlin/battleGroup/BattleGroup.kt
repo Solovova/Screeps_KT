@@ -3,7 +3,7 @@ package battleGroup
 import constants.BattleGroupConstant
 import BattleGroupData
 import screeps.api.*
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import BattleGroupCreep
 import BgSpawnResult
 import screeps.api.structures.SpawnOptions

@@ -2,7 +2,7 @@ package logic.messenger.mainRoom
 
 import MainRoomInfoRecord
 import creep.getDescribeForQueue
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.Creep
 import screeps.api.Game
 import screeps.api.get

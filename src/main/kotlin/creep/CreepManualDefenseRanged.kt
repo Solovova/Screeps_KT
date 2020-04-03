@@ -2,7 +2,7 @@ package creep
 
 import mainContext.MainContext
 import mainRoom
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 
 fun Creep.manualDefenceRanged(mainContext: MainContext) {

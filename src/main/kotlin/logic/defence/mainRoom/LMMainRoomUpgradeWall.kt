@@ -1,8 +1,8 @@
 package logic.defence.mainRoom
 
-import WALL_HITS_MAX
+import constants.WALL_HITS_MAX
 import mainContext.MainContext
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.Structure
 

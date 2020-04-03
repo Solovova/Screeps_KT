@@ -1,8 +1,8 @@
 package accounts
 
-import constants.Constants
-import mainRoom.MainRoom
-import slaveRoom.SlaveRoom
+import mainContext.constants.Constants
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
 open class AccountInit(val constants: Constants) {
     open fun initHead() {

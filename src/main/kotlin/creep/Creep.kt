@@ -1,17 +1,15 @@
 package creep
 
 import mainContext.MainContext
-import mainRoom.MainRoom
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainRoom
-import mainRoom.setLabFillerTask
-import mainRoom.setLogistTask
+import mainContext.mainRoomCollecror.mainRoom.setLabFillerTask
+import mainContext.mainRoomCollecror.mainRoom.setLogistTask
 import role
 import screeps.api.*
-import screeps.api.structures.StructureStorage
 import screeps.utils.toMap
 import slaveRoom
-import upgrade
 
 fun Creep.getDescribeForQueue(mainContext: MainContext): String {
     val mainRoom: MainRoom = mainContext.mainRoomCollector.rooms[this.memory.mainRoom] ?: return ""
@@ -308,6 +306,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if ((this.memory.role < 1000) && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.slaveEraser(mainContext, slaveRoom)
+        if (!isTask) isTask = this.slaveAttackStructure(mainContext, slaveRoom)
     }
 
 

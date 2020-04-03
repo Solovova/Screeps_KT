@@ -7,7 +7,7 @@ import mainContext.MainContext
 import screeps.api.COLOR_RED
 import BattleGroupData
 import BgSpawnResult
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.structures.StructureSpawn
 
 class BattleGroupContainer(val parent: MainContext) {

@@ -1,7 +1,7 @@
 package logic.messenger.mainRoom
 
 import mainContext.MainContext
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 
 enum class TypeOfMainRoomInfo {

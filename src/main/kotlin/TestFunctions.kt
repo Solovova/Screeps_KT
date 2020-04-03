@@ -32,10 +32,10 @@ fun testingFunctions(mainContext: MainContext) {
 //    }
 
 //    for (mainRoom in mainContext.mainRoomCollector.rooms.values) {
-//        //mainRoom.doSnapShot()
+//        //mainContext.mainRoomCollecror.mainRoom.doSnapShot()
 //        if (mainRoom.constant.needCleaner) mainContext.messenger("INFO",mainRoom.name,"Main need clean", COLOR_RED)
 //        for (slaveRoom in mainRoom.slaveRooms.values){
-//            //slaveRoom.doSnapShot()
+//            //mainContext.mainRoomCollecror.mainRoom.slaveRoom.doSnapShot()
 //            if (slaveRoom.constant.needCleaner) mainContext.messenger("INFO",slaveRoom.name,"Slave need clean", COLOR_RED)
 //        }
 //

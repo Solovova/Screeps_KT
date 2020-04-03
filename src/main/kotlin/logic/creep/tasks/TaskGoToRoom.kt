@@ -3,8 +3,8 @@ package logic.creep.tasks
 import mainContext.MainContext
 import screeps.api.*
 import screeps.utils.toMap
-import mainRoom.MainRoom
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import slaveRoom
 
 class TaskGoToRoom(val mainContext: MainContext) {

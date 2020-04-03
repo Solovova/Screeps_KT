@@ -8,16 +8,18 @@ import screeps.api.ResourceConstant
 fun initMineralMain(mainContext: MainContext) {
     mainContext.mineralData["energy".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.200,
-            priceMin = 0.005,
-            marketSellExcess = mainContext.getNumRoomWithContainer()*500000,
-            marketBuyLack = mainContext.getNumRoomWithContainer()*100000
+            priceMin = 0.020,
+            marketSellExcess = mainContext.getNumRoomWithContainer()*250000,
+            marketBuyLack = mainContext.getNumRoomWithContainer()*100000,
+            sellFromRoom = "E54N37"
             //buyToRoom = "E54N37"
+
     )
 
     mainContext.mineralData["O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.200,
             priceMin = 0.005,
-            marketSellExcess = 200000,
+            marketSellExcess = 300000,
             marketBuyLack = 30000,
             storeMax = 300000,
             sellFromRoom = "E54N37",
@@ -27,8 +29,8 @@ fun initMineralMain(mainContext: MainContext) {
     mainContext.mineralData["H".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.200,
             priceMin = 0.005,
-            marketSellExcess = 200000,
-            marketBuyLack = 40000,
+            marketSellExcess = 400000,
+            marketBuyLack = 60000,
             storeMax = 300000,
             sellFromRoom = "E58N39",
             buyToRoom = "E59N38"
@@ -91,6 +93,14 @@ fun initMineralMain(mainContext: MainContext) {
             marketSellExcess = 0,
             storeMax = 400000,
             sellFromRoom = "E52N38"
+    )
+
+    mainContext.mineralData["XGHO2".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            priceMax = 2.000,
+            priceMin = 1.400,
+            marketSellExcess = 0,
+            storeMax = 400000,
+            sellFromRoom = "E54N37"
     )
 
     mainContext.mineralData["GH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(

@@ -1,14 +1,10 @@
 package mainContext
 
 import OrderRecord
-import REACTION_TIME
 import screeps.api.*
 import RESOURCES_ALL
-import accounts.initMineralData
-import mainRoom.MainRoom
-import mainRoomCollector.MainRoomCollector
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.utils.toMap
-import toSecDigit
 import kotlin.math.max
 import kotlin.math.min
 
@@ -119,7 +115,7 @@ fun MainContext.mineralSellOrderCreate(resource: ResourceConstant, mineralDataRe
     val myOrderPrice:Double = if (sellOrder == null) {
         mineralDataRecord.priceMax
     }else{
-        max(mineralDataRecord.priceMin, sellOrder.price - 0.001)
+        max(mineralDataRecord.priceMin, sellOrder.price )//-0.001
     }
 
 

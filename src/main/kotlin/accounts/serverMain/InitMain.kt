@@ -1,6 +1,6 @@
 package accounts.serverMain
 
-import constants.Constants
+import mainContext.constants.Constants
 
 //Call before init of constants
 fun Constants.initMainHead() {
@@ -88,19 +88,19 @@ fun Constants.initMainBody() {
     m(12).reactionActive = "OH"
     m(13).reactionActive = "XGH2O"
     m(14).reactionActive = "XGH2O"
-    m(15).reactionActive = "XGH2O"
+    m(15).reactionActive = "OH" //XGH2O OH
     m(16).reactionActive = "UL"
     m(17).reactionActive = "LH"
     m(18).reactionActive = "LH2O"
     m(19).reactionActive = "LH"
-    m(20).reactionActive = "XGH2O"
+    m(20).reactionActive = "OH" //GH2O OH
     m(21).reactionActive = "OH"
-    m(22).reactionActive = "XGH2O"
-    m(23).reactionActive = "XGH2O"
-    m(24).reactionActive = "XGH2O"
-    m(25).reactionActive = "ZK"
-    m(26).reactionActive = "UL"
-    m(27).reactionActive = "G"
+    m(22).reactionActive = "OH" //XGH2O OH
+    m(23).reactionActive = "GH" //GH2O GH
+    m(24).reactionActive = "GH" //XGH2O GH
+    m(25).reactionActive = "ZK" //XGH2O ZK
+    m(26).reactionActive = "UL" //XGH2O UL
+    m(27).reactionActive = "G" //XGH2O G
 }
 
 

@@ -1,6 +1,6 @@
 package logic.defence.mainRoom
 
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureStorage
 

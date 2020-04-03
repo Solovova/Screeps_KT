@@ -1,7 +1,7 @@
 package logic.terminal
 
 import mainContext.MainContext
-import mainRoom.MainRoom
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
@@ -179,10 +179,16 @@ class LMTerminal(val mainContext: MainContext) {
         }.maxBy { it.getResource() }
                 ?: return
 
+        //Upgrade and less when energyUpgradeDefence
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
-                    && it.getResource() < (it.constant.energyExcessSent - sentQuantity)
+                    && it.constant.defenceNeedUpgrade
+                    && it.getResource() < it.constant.energyUpgradeDefence
         }.minBy { it.getResource() }
+                ?: mainContext.mainRoomCollector.rooms.values.filter {
+                    it.structureTerminal[0] != null
+                            && it.getResource() < (it.constant.energyExcessSent - sentQuantity)
+                }.minBy { it.getResource() }
                 ?: return
 
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "ExcessSent")

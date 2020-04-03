@@ -1,6 +1,6 @@
 package logic.creep.upgrade
 
-import constants.GlobalConstant
+import mainContext.constants.GlobalConstant
 import mainContext.MainContext
 import screeps.api.BodyPartConstant
 import screeps.api.ResourceConstant

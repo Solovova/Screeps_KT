@@ -1,11 +1,10 @@
 package mainContext
 
-import Tasks
+import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
-import constants.Constants
+import mainContext.constants.Constants
 import logic.main.LM
-import logic.creep.upgrade.LMUpgrade
-import mainRoomCollector.MainRoomCollector
+import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
 import kotlin.random.Random
 
@@ -24,7 +23,7 @@ class MainContext {
 
     init {
 
-        //this.marketShowSellOrdersRealPrice("L".unsafeCast<ResourceConstant>())
+        //this.marketShowBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>())
     }
 
     fun run() {
@@ -70,6 +69,7 @@ class MainContext {
 //                break
 //            }
 //        }
+        this.lm.lmProduction.lmLabMainRoomRun.run()
 
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()

@@ -1,8 +1,6 @@
 package accounts.serverTest
 
-import accounts.serverMain.initMainHead
-import constants.Constants
-import screeps.api.ResourceConstant
+import mainContext.constants.Constants
 
 fun Constants.initTestHead() {
     this.initMainRoomConstantContainer( arrayOf("W5N3") )

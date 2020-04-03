@@ -3,7 +3,7 @@ package logic.messenger.slaveRoom
 import mainContext.MainContext
 import screeps.api.COLOR_WHITE
 import screeps.api.Game
-import slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import kotlin.math.roundToInt
 
 class LogicMessengerSlaveRoom (val mainContext: MainContext) {
