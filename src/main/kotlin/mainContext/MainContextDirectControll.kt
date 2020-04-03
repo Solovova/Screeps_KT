@@ -1,7 +1,7 @@
 package mainContext
 
 import screeps.api.*
-import slaveRoom
+import mainContext.dataclass.slaveRoom
 
 fun MainContext.directControlTaskClearInRoom(nameSlaveRoom: String) {
     try {

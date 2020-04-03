@@ -1,16 +1,13 @@
 package creep
 
 import mainContext.MainContext
+import mainContext.dataclass.*
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.*
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainContext.tasks.CreepTask
-import role
-import mainRoom
 import screeps.utils.toMap
-import slaveRoom
-import upgrade
 
 fun Creep.doTask(mainContext: MainContext) {
     if (!mainContext.tasks.isTaskForCreep(this)) return

@@ -1,7 +1,7 @@
 package mainContext.tasks
 
-import TypeOfTask
 import mainContext.MainContext
+import mainContext.dataclass.TypeOfTask
 import screeps.api.RoomPosition
 import screeps.api.*
 import screeps.api.Memory

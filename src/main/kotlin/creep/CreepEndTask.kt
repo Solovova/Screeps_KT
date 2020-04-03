@@ -1,16 +1,13 @@
 package creep
 
 import mainContext.MainContext
+import mainContext.dataclass.*
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.*
 import screeps.utils.toMap
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainContext.tasks.CreepTask
-import role
-import mainRoom
-import slaveRoom
-import upgrade
 
 fun Creep.endTask(mainContext: MainContext) {
     if (!mainContext.tasks.isTaskForCreep(this)) return
@@ -153,13 +150,13 @@ fun Creep.endTask(mainContext: MainContext) {
         }
 
         TypeOfTask.HealCreep -> {
-//            val mainRoom: MainRoom? = mainContext.mainRoomCollector.rooms[this.memory.mainRoom]
-//            if (mainRoom == null) mainContext.tasks.deleteTask(this.id)
+//            val mainContext.dataclass.getMainRoom: MainRoom? = mainContext.mainRoomCollector.rooms[this.memory.mainContext.dataclass.getMainRoom]
+//            if (mainContext.dataclass.getMainRoom == null) mainContext.tasks.deleteTask(this.id)
 //            else {
-//                val slaveRoom: SlaveRoom?  = mainRoom.slaveRooms[this.memory.slaveRoom]
-//                if (slaveRoom == null) mainContext.tasks.deleteTask(this.id)
+//                val mainContext.dataclass.getSlaveRoom: SlaveRoom?  = mainContext.dataclass.getMainRoom.slaveRooms[this.memory.mainContext.dataclass.getSlaveRoom]
+//                if (mainContext.dataclass.getSlaveRoom == null) mainContext.tasks.deleteTask(this.id)
 //                else{
-//                    val objForFilling: Creep? = Game.getObjectById(slaveRoom.constant.creepIdEraser)
+//                    val objForFilling: Creep? = Game.getObjectById(mainContext.dataclass.getSlaveRoom.constant.creepIdEraser)
 //                    if (objForFilling == null) mainContext.tasks.deleteTask(this.id)
 //                }
 //            }

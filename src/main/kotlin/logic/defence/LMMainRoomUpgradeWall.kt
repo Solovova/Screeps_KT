@@ -1,6 +1,6 @@
 package logic.defence
 
-import constants.WALL_HITS_MAX
+import mainContext.dataclass.WALL_HITS_MAX
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*

@@ -1,8 +1,8 @@
 package logic.messenger
 
-import RESOURCES_ALL
 import mainContext.MainContext
-import mainContext.MineralDataRecord
+import mainContext.dataclass.MineralDataRecord
+import mainContext.dataclass.RESOURCES_ALL
 import toSecDigit
 import kotlin.math.min
 

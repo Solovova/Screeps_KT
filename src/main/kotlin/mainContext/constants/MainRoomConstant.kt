@@ -7,12 +7,12 @@ class MainRoomConstant(val parent: Constants) {
     val slaveRoomConstantContainer: MutableMap<String, SlaveRoomConstant> = mutableMapOf() //cashed
     //Energy management
     var energyBuilder : Int = 60000 //simple //how much energy must be in storage for start building
-    var energyUpgradeLvl8Controller: Int = 200000 //simple //how much energy must be in storage for start upgrade controller
+    var energyUpgradeLvl8Controller: Int = 200000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
     var energyUpgradeDefence : Int = 200000
     var energyExcessSent: Int = 250000
 
-    var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start upgrade controller
-    var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start upgrade controller
+    var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
+    var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
 
     //Upgrade defence
     var defenceHits: Int    = 200000

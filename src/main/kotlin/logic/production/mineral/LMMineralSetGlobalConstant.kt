@@ -1,7 +1,7 @@
 package logic.production.mineral
 
-import REACTIONS
 import mainContext.constants.GlobalConstant
+import mainContext.dataclass.REACTIONS
 import screeps.api.ResourceConstant
 
 class LMMineralSetGlobalConstant {

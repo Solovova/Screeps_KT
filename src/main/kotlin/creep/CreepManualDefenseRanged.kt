@@ -1,7 +1,7 @@
 package creep
 
 import mainContext.MainContext
-import mainRoom
+import mainContext.dataclass.mainRoom
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 

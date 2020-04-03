@@ -1,5 +1,6 @@
 package mainContext.mainRoomCollecror.mainRoom
 
+import mainContext.dataclass.TypeOfTask
 import screeps.utils.toMap
 import mainContext.tasks.CreepTask
 import screeps.api.*

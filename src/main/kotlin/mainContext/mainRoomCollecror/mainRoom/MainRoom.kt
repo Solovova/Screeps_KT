@@ -7,6 +7,7 @@ import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
 import logic.production.lab.LMLabMainRoomGetLabSorted
+import mainContext.dataclass.BgSpawnResult
 import mainContext.getCacheRecordRoom
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
@@ -530,10 +531,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             }
 
             val d: dynamic = object {}
-            d["role"] = this.queue[0].role
-            d["slaveRoom"] = this.queue[0].slaveRoom
-            d["mainRoom"] = this.queue[0].mainRoom
-            d["tickDeath"] = this.queue[0].timeDeath
+            d["mainContext.dataclass.getRole"] = this.queue[0].role
+            d["mainContext.dataclass.getSlaveRoom"] = this.queue[0].slaveRoom
+            d["mainContext.dataclass.getMainRoom"] = this.queue[0].mainRoom
+            d["mainContext.dataclass.getTickDeath"] = this.queue[0].timeDeath
             val spawnOptions: dynamic = object {}
             spawnOptions["memory"] = d
 
@@ -623,7 +624,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         return tSource
     }
 
-    //0 - only role 0 creep
+    //0 - only mainContext.dataclass.getRole 0 creep
     //1 - Storage, 3 container, energy >300+20*50 1300
     fun getLevelOfRoom(): Int {
         if (this.room.energyCapacityAvailable >= 5600

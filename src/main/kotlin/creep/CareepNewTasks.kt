@@ -5,12 +5,12 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import kotlin.random.Random
 import mainContext.MainContext
 import mainContext.tasks.CreepTask
-import TypeOfTask
+import mainContext.dataclass.TypeOfTask
 import screeps.api.*
 import screeps.api.structures.*
 import screeps.utils.toMap
-import slaveRoom
-import upgrade
+import mainContext.dataclass.slaveRoom
+import mainContext.dataclass.upgrade
 
 fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom): Boolean {
     var result = false
@@ -738,7 +738,7 @@ fun Creep.slaveAttack(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean 
     var result = false
     if (slaveRoom?.room != null) {
         //ToDo костыль
-//        if (slaveRoom.name == "W5N2"){
+//        if (mainContext.dataclass.getSlaveRoom.name == "W5N2"){
 //            val structure: Structure? = Game.getObjectById("4158ccbdf12cc91")
 //            if (structure != null) {
 //                mainContext.tasks.add(this.id, mainContext.tasks.CreepTask(TypeOfTask.AttackMile, idObject0 = structure.id, posObject0 = structure.pos))

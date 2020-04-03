@@ -1,8 +1,8 @@
 package logic.production.mineral
 
-import RESOURCES_ALL
 import mainContext.MainContext
-import mainContext.MineralDataRecord
+import mainContext.dataclass.MineralDataRecord
+import mainContext.dataclass.RESOURCES_ALL
 
 class LMMineralFillData (val mc: MainContext) {
     fun fill() {

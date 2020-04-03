@@ -1,8 +1,8 @@
 package logic.messenger
 
-import MainRoomInfoRecord
 import creep.getDescribeForQueue
 import mainContext.MainContext
+import mainContext.dataclass.MainRoomInfoRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureController
@@ -107,7 +107,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                     COLOR_ORANGE,
                     5),
             MainRoomInfoSetup(TypeOfMainRoomInfo.InfoNeedUpgrade,
-                    "Need upgrade",
+                    "Need mainContext.dataclass.getUpgrade",
                     COLOR_WHITE,
                     COLOR_ORANGE,
                     4),

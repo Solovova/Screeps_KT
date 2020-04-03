@@ -5,7 +5,7 @@ import screeps.api.*
 import screeps.utils.toMap
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import slaveRoom
+import mainContext.dataclass.slaveRoom
 
 class LMTasksSlaveRoomGoToRoom(val mainContext: MainContext) {
     private fun goToRoomName(creep: Creep, roomName: String) {

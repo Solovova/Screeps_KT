@@ -1,3 +1,5 @@
+package mainContext.dataclass
+
 import screeps.api.CreepMemory
 
 import screeps.utils.memory.memory

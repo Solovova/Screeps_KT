@@ -1,4 +1,4 @@
-package mainContext
+package mainContext.dataclass
 
 class MineralDataRecord(var quantity: Int = 0,
                         var quantityUp: Int = 0,

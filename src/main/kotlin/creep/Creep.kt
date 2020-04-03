@@ -3,13 +3,13 @@ package creep
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import mainRoom
+import mainContext.dataclass.mainRoom
 import mainContext.mainRoomCollecror.mainRoom.setLabFillerTask
 import mainContext.mainRoomCollecror.mainRoom.setLogistTask
-import role
+import mainContext.dataclass.role
 import screeps.api.*
 import screeps.utils.toMap
-import slaveRoom
+import mainContext.dataclass.slaveRoom
 
 fun Creep.getDescribeForQueue(mainContext: MainContext): String {
     val mainRoom: MainRoom = mainContext.mainRoomCollector.rooms[this.memory.mainRoom] ?: return ""
@@ -39,11 +39,11 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     val creepCarry: Int = this.carry.toMap().map { it.value }.sum()
 
     //Костыль
-    //if (mainRoom.name in setOf("E53N39")) {
-//    val storage: StructureStorage? = mainRoom.structureStorage[0]
+    //if (mainContext.dataclass.getMainRoom.name in setOf("E53N39")) {
+//    val storage: StructureStorage? = mainContext.dataclass.getMainRoom.structureStorage[0]
 //    val sum = storage?.store?.values?.sum()
 //    if (sum != null && sum > 800000) {
-//        if (!isTask) isTask = this.cleanStorageFromMinerals(creepCarry, mainContext, mainRoom)
+//        if (!isTask) isTask = this.cleanStorageFromMinerals(creepCarry, mainContext, mainContext.dataclass.getMainRoom)
 //        if (!isTask) isTask = this.drop(creepCarry, mainContext)
 //    }
     //}
@@ -137,11 +137,11 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (mainRoom.getResourceInStorage() > (mainRoom.constant.energyBuilder - 5000)) {
             if (!isTask) isTask = this.takeFromStorage(creepCarry, mainContext, mainRoom)
         }
-        //if (!isTask) isTask = this.takeDroppedEnergy(creepCarry,mainContext,mainRoom)   //ToDo костиль
-        //if (!isTask) isTask = this.takeFromContainer(3,creepCarry,mainContext,mainRoom) //ToDo костиль
-        //if (!isTask) isTask = this.transferToFilling(creepCarry, mainContext, mainRoom) //ToDo костиль
+        //if (!isTask) isTask = this.takeDroppedEnergy(creepCarry,mainContext,mainContext.dataclass.getMainRoom)   //ToDo костиль
+        //if (!isTask) isTask = this.takeFromContainer(3,creepCarry,mainContext,mainContext.dataclass.getMainRoom) //ToDo костиль
+        //if (!isTask) isTask = this.transferToFilling(creepCarry, mainContext, mainContext.dataclass.getMainRoom) //ToDo костиль
         if (!isTask) isTask = this.buildStructure(creepCarry, mainContext, mainRoom)
-        //if (!isTask) isTask = this.transferToStorage(creepCarry,mainContext,mainRoom) //ToDo костиль
+        //if (!isTask) isTask = this.transferToStorage(creepCarry,mainContext,mainContext.dataclass.getMainRoom) //ToDo костиль
     }
 
     if (this.memory.role == 9) {
@@ -225,7 +225,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
         if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
-        //if (!isTask) isTask = this.slaveTransferToStorageOrContainer(1,creepCarry, mainContext, slaveRoom)
+        //if (!isTask) isTask = this.slaveTransferToStorageOrContainer(1,creepCarry, mainContext, mainContext.dataclass.getSlaveRoom)
         if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
@@ -278,14 +278,14 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 106 || this.memory.role == 1006) {
-        //if ((this.memory.role == 106) && this.ticksToLive<100) this.memory.role = this.memory.role + 1000
+        //if ((this.memory.mainContext.dataclass.getRole == 106) && this.ticksToLive<100) this.memory.mainContext.dataclass.getRole = this.memory.mainContext.dataclass.getRole + 1000
         if (!isTask) isTask = this.slaveTakeFromContainer(0, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom, 2)
         if (!isTask) isTask = this.transferToStorage(creepCarry, mainContext, mainRoom)
     }
 
     if (this.memory.role == 108 || this.memory.role == 1008) {
-        //if ((this.memory.role == 108) && this.ticksToLive<100) this.memory.role = this.memory.role + 1000
+        //if ((this.memory.mainContext.dataclass.getRole == 108) && this.ticksToLive<100) this.memory.mainContext.dataclass.getRole = this.memory.mainContext.dataclass.getRole + 1000
         if (!isTask) isTask = this.slaveTakeFromContainer(1, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom, 2)
         if (!isTask) isTask = this.transferToStorage(creepCarry, mainContext, mainRoom)
@@ -322,7 +322,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
         //ToDo pick up energy and tomb carry ++ 600
         if (!isTask) isTask = this.slaveGoToRescueFlag(indKl, mainContext, slaveRoom)
-        //if (!isTask) if (slaveRoom != null && slaveRoom.structureContainerNearSource[indKl] != null) {
+        //if (!isTask) if (mainContext.dataclass.getSlaveRoom != null && mainContext.dataclass.getSlaveRoom.structureContainerNearSource[indKl] != null) {
         if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext, 3)
         //}
         if (!isTask) isTask = this.slaveGoToPosOfContainer(indKl, mainContext, slaveRoom)

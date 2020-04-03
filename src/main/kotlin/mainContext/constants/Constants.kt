@@ -2,7 +2,6 @@ package mainContext.constants
 
 import accounts.AccountInit
 import accounts.AccountInitRouter
-import constants.*
 import mainContext.MainContext
 import screeps.api.*
 import screeps.utils.unsafe.delete

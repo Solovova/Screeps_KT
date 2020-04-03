@@ -112,7 +112,7 @@ for (key in js("Object").keys(testMutable.asDynamic()).unsafeCast<Array<String>>
 // 6 COLOR_YELLOW    - do not restore snapshot for this room
 // 7 COLOR_ORANGE
 // 8 COLOR_BROWN
-// 9 COLOR_GREY      - logic develop for mainRoom
+// 9 COLOR_GREY      - logic develop for mainContext.dataclass.getMainRoom
 //10 COLOR_WHITE     - ignore this position
 
 //ToDo manual defence system

@@ -1,11 +1,12 @@
 package battleGroup
 
-import constants.BattleGroupConstant
-import BattleGroupData
+import mainContext.constants.BattleGroupConstant
+import mainContext.dataclass.BattleGroupCreep
+import mainContext.dataclass.BattleGroupData
+import mainContext.dataclass.BattleGroupStep
+import mainContext.dataclass.BgSpawnResult
 import screeps.api.*
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
-import BattleGroupCreep
-import BgSpawnResult
 import screeps.api.structures.SpawnOptions
 import screeps.api.structures.StructureSpawn
 
@@ -223,10 +224,10 @@ class BattleGroup {
         val queueBg = this.constants.creeps.firstOrNull { it.creep == null && it.spawnID == "" }
                 ?: return BgSpawnResult.QueueEmpty
         val d: dynamic = object {}
-        d["role"] = queueBg.role + 300
-        d["slaveRoom"] = this.name
-        d["mainRoom"] = mainRoom.name
-        d["tickDeath"] = 0
+        d["mainContext.dataclass.getRole"] = queueBg.role + 300
+        d["mainContext.dataclass.getSlaveRoom"] = this.name
+        d["mainContext.dataclass.getMainRoom"] = mainRoom.name
+        d["mainContext.dataclass.getTickDeath"] = 0
         val spawnOptions: dynamic = object {}
         spawnOptions["memory"] = d
         return if (spawn.spawnCreep(queueBg.body, "bg_${queueBg.role}_${this.name}_${Game.time}_${spawn.id} ", spawnOptions.unsafeCast<SpawnOptions>()) == OK) {

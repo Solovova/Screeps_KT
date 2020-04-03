@@ -4,6 +4,7 @@ import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import mainContext.constants.Constants
 import logic.main.LM
+import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
 import kotlin.random.Random

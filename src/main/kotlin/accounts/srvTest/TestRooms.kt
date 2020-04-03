@@ -23,7 +23,7 @@ fun AccountInitTest.initMainRoomOut(mr: MainRoom) {
             mr.constant.creepUseBigBuilder = true
             mr.constant.defenceHits = 100000
             mr.constant.energyExcessSent = 90000
-            //mainRoom.constant.creepUpgradeRole
+            //mainContext.dataclass.getMainRoom.constant.creepUpgradeRole
         }
 
 

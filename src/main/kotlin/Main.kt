@@ -34,12 +34,6 @@ fun loop() {
     protectedMainContext.run()
     cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
 
-    // Testing functions
-    testingFunctions(protectedMainContext)
-
-    // End tick functions
-
-
     console.log("Construction sites: ${Game.constructionSites.size}")
 
     console.log("CPU: ${(Game.cpu.getUsed() - cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]} McStart: ${cpuStartMCStart.roundToInt()}")

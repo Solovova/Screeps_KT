@@ -1,8 +1,9 @@
 package mainContext
 
-import OrderRecord
 import screeps.api.*
-import RESOURCES_ALL
+import mainContext.dataclass.MineralDataRecord
+import mainContext.dataclass.OrderRecord
+import mainContext.dataclass.RESOURCES_ALL
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.utils.toMap
 import kotlin.math.max

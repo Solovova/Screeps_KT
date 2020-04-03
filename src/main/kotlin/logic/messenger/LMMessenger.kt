@@ -25,12 +25,12 @@ class LMMessenger(val mainContext: MainContext) {
             }
         }
 
-//    val mainRoom: MainRoom? = if (this.constants !== undefined && this.constants.mainRooms.isNotEmpty())
+//    val mainContext.dataclass.getMainRoom: MainRoom? = if (this.constants !== undefined && this.constants.mainRooms.isNotEmpty())
 //        this.mainRoomCollector.rooms[this.constants.mainRooms[0]]
 //    else null
 //
-//    if (mainRoom!= null) {
-//        if (mainRoom.room.find(FIND_FLAGS).none { it.color == COLOR_BROWN && it.secondaryColor == COLOR_RED }) {
+//    if (mainContext.dataclass.getMainRoom!= null) {
+//        if (mainContext.dataclass.getMainRoom.room.find(FIND_FLAGS).none { it.color == COLOR_BROWN && it.secondaryColor == COLOR_RED }) {
 //            if (type == "QUEUE") return
 //        }
 //    }

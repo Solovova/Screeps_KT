@@ -1,0 +1,31 @@
+package mainContext.dataclass
+
+enum class TypeOfTask {
+    GoToRoom,
+    Take,
+    Transport,
+    Build,
+    Repair,
+    Drop,
+    Harvest,
+    TransferTo,
+    Upgrade,
+    Claim,
+    Reserve,
+    GoToPos,
+    TakeDropped,
+    AttackRange,
+    AttackMile,
+    SignRoom,
+    SignSlaveRoom,
+    HarvestMineral,
+    EraserAttack,
+    EraserGoToKL,
+    UpgradeStructure,
+    TransferToCreep,
+    HealCreep,
+    GoToRescueFlag,
+    TransferFromCreep,
+    GoToMainRoomRescueFlag,
+    UpgradeCreep
+}

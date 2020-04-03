@@ -1,9 +1,9 @@
-package constants
+package mainContext.constants
 
-import TypeBattleGroupMode
-import BattleGroupStep
 import screeps.api.BodyPartConstant
-import BattleGroupCreep
+import mainContext.dataclass.BattleGroupCreep
+import mainContext.dataclass.BattleGroupStep
+import mainContext.dataclass.TypeBattleGroupMode
 import screeps.api.Creep
 import screeps.api.Game
 import screeps.api.RoomPosition
@@ -29,9 +29,9 @@ class BattleGroupConstant {
                 if (d["creeps"][ind] == null) break
                 val creep: Creep? = Game.getObjectById(d["creeps"][ind]["creep"] as String)
                 val spawnID: String = (d["creeps"][ind]["spawnID"] ?: "") as String
-                val role: Int = d["creeps"][ind]["role"] as Int
+                val role: Int = d["creeps"][ind]["mainContext.dataclass.getRole"] as Int
                 val body: Array<BodyPartConstant> = d["creeps"][ind]["body"] as Array<BodyPartConstant>
-                val upgrade: String = (d["creeps"][ind]["upgrade"] ?: "") as String
+                val upgrade: String = (d["creeps"][ind]["mainContext.dataclass.getUpgrade"] ?: "") as String
                 var pos: RoomPosition? = null
                 if (d["creeps"][ind]["pos"] != null)
                     pos = RoomPosition(d["creeps"][ind]["pos"]["x"] as Int, d["creeps"][ind]["pos"]["y"] as Int, d["creeps"][ind]["pos"]["roomName"] as String)
@@ -64,8 +64,8 @@ class BattleGroupConstant {
             console.log(battleGroupCreep.creep == null)
             console.log(battleGroupCreep.creep?.id ?: "")
             result["creeps"][ind]["creep"] = battleGroupCreep.creep?.id ?: ""
-            result["creeps"][ind]["role"] = battleGroupCreep.role
-            result["creeps"][ind]["upgrade"] = battleGroupCreep.upgrade
+            result["creeps"][ind]["mainContext.dataclass.getRole"] = battleGroupCreep.role
+            result["creeps"][ind]["mainContext.dataclass.getUpgrade"] = battleGroupCreep.upgrade
             result["creeps"][ind]["body"] = battleGroupCreep.body
             result["creeps"][ind]["spawnID"] = battleGroupCreep.spawnID
 

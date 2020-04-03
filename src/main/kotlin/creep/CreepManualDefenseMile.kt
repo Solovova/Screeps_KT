@@ -3,7 +3,7 @@ package creep
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
-import mainRoom
+import mainContext.dataclass.mainRoom
 
 fun Creep.manualDefenceMile(mainContext: MainContext) {
     this.manualDefenceMove(mainContext,COLOR_PURPLE,"Mile")

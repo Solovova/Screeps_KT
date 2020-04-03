@@ -5,18 +5,18 @@ import mainContext.constants.MainRoomConstant
 import creep.doTask
 import creep.newTask
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import mainRoom
+import mainContext.dataclass.mainRoom
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
-import role
+import mainContext.dataclass.role
 import screeps.api.*
 import screeps.utils.isEmpty
 import screeps.utils.toMap
 import screeps.utils.unsafe.delete
-import slaveRoom
-import tickDeath
-import upgrade
-import upgradeQuantity
-import upgradeResource
+import mainContext.dataclass.slaveRoom
+import mainContext.dataclass.tickDeath
+import mainContext.dataclass.upgrade
+import mainContext.dataclass.upgradeQuantity
+import mainContext.dataclass.upgradeResource
 import kotlin.math.roundToInt
 
 class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
@@ -57,7 +57,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
 
                 if (creep.memory.role == 10) mainRoom.constant.creepIdOfBigBuilder = creep.id
                 //Upgrade
-                //ToDo can be more then one upgrade, not only then spawn
+                //ToDo can be more then one mainContext.dataclass.getUpgrade, not only then spawn
                 if (creep.spawning && creep.memory.upgrade == "") {
                     if (mainRoom.constant.creepUpgradeRole[creep.memory.role] == true) {
                         var upgradeParts = mainRoom.constant.creepUpgradableParts[creep.memory.role]
@@ -84,7 +84,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
                     //after this
                     //LabFiller fill need Resource in Lab2
                     //Lab reaction in Lab2 stop
-                    //creep have 1 task go to lab and upgrade and if OK write "u" to creep.memory.upgrade
+                    //creep have 1 task go to lab and mainContext.dataclass.getUpgrade and if OK write "u" to creep.memory.mainContext.dataclass.getUpgrade
                 }
             }
 
@@ -113,7 +113,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
 
         }
 
-        //Add resource upgrade
+        //Add resource mainContext.dataclass.getUpgrade
         for (mainRoom in this.rooms.values) {
             if (mainRoom.creepNeedUpgradeID == "") continue
             val resource: ResourceConstant = mainRoom.creepNeedUpgradeResource.unsafeCast<ResourceConstant>()

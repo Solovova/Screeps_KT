@@ -1,4 +1,4 @@
-package constants
+package mainContext.constants
 
 class BattleGroupContainerConstant {
     var testCashedBGC: Int = 0 //Cashed

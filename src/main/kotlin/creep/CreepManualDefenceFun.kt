@@ -1,12 +1,12 @@
 package creep
 
 import mainContext.MainContext
-import mainRoom
+import mainContext.dataclass.mainRoom
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
-import role
+import mainContext.dataclass.role
 import screeps.api.*
 import screeps.utils.toMap
-import subRole
+import mainContext.dataclass.subRole
 
 fun Creep.manualDefenceGetMyFlag(color: ColorConstant): Flag? {
 

@@ -1,8 +1,8 @@
 package logic.production.mineral
 
-import REACTION_TIME
 import mainContext.MainContext
-import mainContext.MineralDataRecord
+import mainContext.dataclass.MineralDataRecord
+import mainContext.dataclass.REACTION_TIME
 import screeps.api.ResourceConstant
 import screeps.api.get
 

@@ -1,7 +1,7 @@
 package logic.production.lab
 
 import mainContext.MainContext
-import mainContext.MineralDataRecord
+import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.getQuantityAllMineralInStorage
 import screeps.api.COLOR_RED

@@ -2,7 +2,8 @@ package mainContext.mainRoomCollecror.mainRoom
 
 import screeps.api.Creep
 import screeps.api.ResourceConstant
-import LabFillerTask
+import mainContext.dataclass.LabFillerTask
+import mainContext.dataclass.TypeOfTask
 import screeps.api.RESOURCE_ENERGY
 import mainContext.tasks.CreepTask
 import screeps.utils.toMap

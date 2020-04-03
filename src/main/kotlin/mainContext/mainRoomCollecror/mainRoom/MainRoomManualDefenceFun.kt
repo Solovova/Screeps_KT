@@ -1,9 +1,9 @@
 package mainContext.mainRoomCollecror.mainRoom
 
-import mainRoom
-import role
+import mainContext.dataclass.mainRoom
+import mainContext.dataclass.role
 import screeps.api.*
-import subRole
+import mainContext.dataclass.subRole
 
 fun MainRoom.manualDefenceInStartOfTick() {
     // Group GoTo

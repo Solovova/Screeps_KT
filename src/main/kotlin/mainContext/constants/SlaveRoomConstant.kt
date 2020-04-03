@@ -23,7 +23,7 @@ class SlaveRoomConstant {
 
     //PathToRoom
     var pathUseGlobalGuideFlag: Boolean = false //if true find flag GREY GREY and all creeps go to it
-    var pathToRoom: Array<String> = arrayOf() //index 0 - mainRoom,  index last -slaveRoom
+    var pathToRoom: Array<String> = arrayOf() //index 0 - mainContext.dataclass.getMainRoom,  index last -mainContext.dataclass.getSlaveRoom
 
     fun fromDynamic(d: dynamic) {
         if (d == null) return

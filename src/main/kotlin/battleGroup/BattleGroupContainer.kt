@@ -1,12 +1,14 @@
 package battleGroup
 
-import constants.BattleGroupContainerConstant
-import constants.BattleGroupConstant
+import mainContext.constants.BattleGroupContainerConstant
+import mainContext.constants.BattleGroupConstant
 
 import mainContext.MainContext
+import mainContext.dataclass.BattleGroupData
+import mainContext.dataclass.BattleGroupStep
+import mainContext.dataclass.BgSpawnResult
+import mainContext.dataclass.TypeBattleGroupMode
 import screeps.api.COLOR_RED
-import BattleGroupData
-import BgSpawnResult
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.structures.StructureSpawn
 
