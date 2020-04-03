@@ -1,6 +1,5 @@
 package mainContext.mainRoomCollecror.mainRoom
 
-import accounts.constantMainRoomInit
 import battleGroup.BattleGroup
 import mainContext.MainContext
 import mainContext.constants.MainRoomConstant
@@ -661,7 +660,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     }
 
     init {
-        constantMainRoomInit(this)
+        mc.constants.accountInit.initMainRoom(this)
         this.constant.slaveRooms.forEachIndexed { index, slaveName ->
             val slaveRoomConstant: SlaveRoomConstant? = this.constant.slaveRoomConstantContainer[slaveName]
             if (slaveRoomConstant != null)

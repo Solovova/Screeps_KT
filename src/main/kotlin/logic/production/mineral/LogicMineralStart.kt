@@ -2,14 +2,13 @@ package logic.production.mineral
 
 import REACTION_TIME
 import RESOURCES_ALL
-import accounts.initMineralData
 import mainContext.MainContext
 import mainContext.MineralDataRecord
 import screeps.api.ResourceConstant
 import screeps.api.get
 
 fun LMMineral.mineralDataFill(mainContext: MainContext) {
-    initMineralData(mainContext)
+    mainContext.constants.accountInit.initMineral(mainContext)
     for (res in RESOURCES_ALL) {
         val quantity: Int = mainContext.mainRoomCollector.rooms.values.sumBy { it.getResource(res) }
         val need: Int = mainContext.mainRoomCollector.rooms.values.sumBy { it.needMineral[res] ?: 0 }

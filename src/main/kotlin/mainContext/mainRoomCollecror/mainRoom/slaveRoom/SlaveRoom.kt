@@ -1,6 +1,5 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
-import accounts.constantSlaveRoomInit
 import constants.CacheCarrier
 import mainContext.MainContext
 import mainContext.constants.SlaveRoomConstant
@@ -191,7 +190,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
 
 
     init {
-        constantSlaveRoomInit(this)
+        mc.constants.accountInit.initSlaveRoom(this)
         if (this.constant.model == 0 && this.room != null) {
             if (this.source.size == 3) this.constant.model = 2
         }

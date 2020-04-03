@@ -1,13 +1,14 @@
 package mainContext.constants
 
-import accounts.initBody
-import accounts.initHead
+import accounts.AccountInit
+import accounts.AccountInitRouter
 import constants.*
 import mainContext.MainContext
 import screeps.api.*
 import screeps.utils.unsafe.delete
 
 class Constants(val mainContext: MainContext) {
+    val accountInit: AccountInit = AccountInitRouter().instance()
     val globalConstant: GlobalConstant = GlobalConstant(this)  //cashed
     var mainRoomsInit: Array<String> = arrayOf() //simple
     var mainRooms: Array<String> = arrayOf() //simple after check mainRoomsInit
@@ -18,9 +19,9 @@ class Constants(val mainContext: MainContext) {
     val battleGroupContainerConstant: BattleGroupContainerConstant = BattleGroupContainerConstant() //cashed
 
     init {
-        this.initHead()
+        accountInit.initHead(this)
         this.fromMemory()
-        this.initBody()
+        accountInit.initBody(this)
     }
 
     fun initMainRoomConstantContainer(names: Array<String>) {
