@@ -16,6 +16,7 @@ class MainRoomConstant(val parent: Constants) {
 
     //Upgrade defence
     var defenceHits: Int    = 200000
+
     var defenceNeedUpgrade: Boolean = false //cashed
 
 
@@ -25,8 +26,7 @@ class MainRoomConstant(val parent: Constants) {
 
     //service
     var towerLastTarget: String = ""        //cashed
-
-
+    var defenceMinHits: Int = 0 //cashed
 
     //Creep commands
     var creepSpawn: Boolean = true
@@ -102,6 +102,9 @@ class MainRoomConstant(val parent: Constants) {
         result["needCleaner"] = this.needCleaner
         result["defenceNeedUpgrade"] = this.defenceNeedUpgrade
         result["reactionActive"] = this.reactionActive
+        result["defenceMinHits"] = this.defenceMinHits
+
+
 
         result["autoDefenceArea"] = this.autoDefenceArea
         result["autoDefenceAreaMatrix"] = this.autoDefenceAreaMatrix
@@ -123,6 +126,7 @@ class MainRoomConstant(val parent: Constants) {
         if (d["needCleaner"] != null) this.needCleaner = d["needCleaner"] as Boolean
         if (d["defenceNeedUpgrade"] != null) this.defenceNeedUpgrade = d["defenceNeedUpgrade"] as Boolean
         if (d["reactionActive"] != null) this.reactionActive = d["reactionActive"] as String
+        if (d["defenceMinHits"] != null) this.defenceMinHits = d["defenceMinHits"] as Int
 
         if (d["autoDefenceArea"] != null) this.autoDefenceArea = d["autoDefenceArea"] as Int
         if (d["autoDefenceAreaMatrix"] != null) this.autoDefenceAreaMatrix = d["autoDefenceAreaMatrix"] as Array<Array<Int>>

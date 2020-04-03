@@ -6,6 +6,7 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.Creep
 import screeps.api.Game
 import screeps.api.get
+import screeps.api.structures.StructureController
 import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
@@ -35,15 +36,22 @@ fun LogicMessengerMainRoom.getInfoQueue(mainRoom: MainRoom): MainRoomInfoRecord 
 }
 
 fun LogicMessengerMainRoom.getInfoController(mainRoom: MainRoom): MainRoomInfoRecord {
-    var result = "l: ${mainRoom.structureController[0]?.level} "
-    if (mainRoom.structureController[0]?.level == 8) return MainRoomInfoRecord(result, false)
-    result += "${mainRoom.structureController[0]?.progress}".padStart(9)
-    result += "/ "
-    result += "${mainRoom.structureController[0]?.progressTotal}".padStart(9)
-    result += "  "
-    result += "${(mainRoom.structureController[0]?.progressTotal
-            ?: 0) - (mainRoom.structureController[0]?.progress ?: 0)}".padStart(9)
-    return MainRoomInfoRecord(result, false)
+    val controller: StructureController = mainRoom.structureController[0] ?: return MainRoomInfoRecord("", false)
+    var result: String
+    if (controller.level==8) {
+        val defenceStatus: Int = mainRoom.constant.defenceMinHits - mainRoom.constant.defenceHits
+        result = "def: $defenceStatus".padStart(15)
+        return MainRoomInfoRecord(result, defenceStatus<0)
+    }else{
+        result = "l: ${mainRoom.structureController[0]?.level} "
+        result += "${mainRoom.structureController[0]?.progress}".padStart(9)
+        result += "/ "
+        result += "${mainRoom.structureController[0]?.progressTotal}".padStart(9)
+        result += "  "
+        result += "${(mainRoom.structureController[0]?.progressTotal
+                ?: 0) - (mainRoom.structureController[0]?.progress ?: 0)}".padStart(9)
+        return MainRoomInfoRecord(result, false)
+    }
 }
 
 fun LogicMessengerMainRoom.getInfoRoomLevel(mainRoom: MainRoom): MainRoomInfoRecord {
