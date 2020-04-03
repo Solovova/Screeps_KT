@@ -29,7 +29,7 @@ class MainContext {
     fun run() {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
-        lm.defence.lmMainRoomUpgradeWall.calculate()
+        lm.lmDefence.lmMainRoomUpgradeWall.calculate()
 
         this.mainRoomCollector.creepsCalculate()
         this.mainRoomCollector.creepsCalculateProfit()
@@ -43,7 +43,8 @@ class MainContext {
         }
 
         lm.lmGCL.calculate()
-        lm.lmProduction.lmMineral.filldata()
+        lm.lmProduction.lmMineralFillData.fill()
+        lm.lmProduction.lmMineralFillProduction.fill()
 
         this.battleGroupContainer.runInStartOfTick()
 

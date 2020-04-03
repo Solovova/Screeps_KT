@@ -1,15 +1,12 @@
 package logic.messenger
 
-import logic.messenger.mainRoom.LogicMessengerMainRoom
-import logic.messenger.mineral.LogicMessengerMineral
-import logic.messenger.slaveRoom.LogicMessengerSlaveRoom
 import mainContext.MainContext
 import screeps.api.*
 
 class LMMessenger(val mainContext: MainContext) {
-    private val logicMessengerMainRoom: LogicMessengerMainRoom = LogicMessengerMainRoom(mainContext)
-    private val logicMessengerSlaveRoom: LogicMessengerSlaveRoom = LogicMessengerSlaveRoom(mainContext)
-    private val logicMessengerMineral: LogicMessengerMineral = LogicMessengerMineral(mainContext)
+    private val lmMessengerMainRoom: LMMessengerMainRoom = LMMessengerMainRoom(mainContext)
+    private val lmMessengerSlaveRoom: LMMessengerSlaveRoom = LMMessengerSlaveRoom(mainContext)
+    private val lmMessengerMineral: LMMessengerMineral = LMMessengerMineral(mainContext)
 
     fun log(type: String, room: String, text: String, color: ColorConstant = COLOR_GREY,
             testBefore: String = "", colorBefore: ColorConstant = COLOR_WHITE,
@@ -76,7 +73,7 @@ class LMMessenger(val mainContext: MainContext) {
 
     private fun showMainRoomInfo() {
         for (room in this.mainContext.mainRoomCollector.rooms.values) {
-            this.logicMessengerMainRoom.showInfo(room)
+            this.lmMessengerMainRoom.showInfo(room)
         }
     }
 
@@ -84,13 +81,13 @@ class LMMessenger(val mainContext: MainContext) {
         for (room in this.mainContext.mainRoomCollector.rooms.values)
             for (slaveRoom in room.slaveRooms.values) {
                 if (slaveRoom.constant.model != 1) {
-                    this.logicMessengerSlaveRoom.showInfo(slaveRoom)
+                    this.lmMessengerSlaveRoom.showInfo(slaveRoom)
                 }
             }
     }
 
     private fun showMineralInfo() {
-        logicMessengerMineral.showInfo()
+        lmMessengerMineral.showInfo()
     }
 
     fun show() {

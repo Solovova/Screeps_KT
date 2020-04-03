@@ -62,10 +62,10 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(17).reactionActive = "LH"
     const.m(18).reactionActive = "LH2O"
     const.m(19).reactionActive = "LH"
-    const.m(20).reactionActive = "OH" //GH2O OH
+    const.m(20).reactionActive = "GH2O" //GH2O OH
     const.m(21).reactionActive = "OH"
     const.m(22).reactionActive = "OH" //XGH2O OH
-    const.m(23).reactionActive = "GH" //GH2O GH
+    const.m(23).reactionActive = "GH2O" //GH2O GH
     const.m(24).reactionActive = "GH" //XGH2O GH
     const.m(25).reactionActive = "ZK" //XGH2O ZK
     const.m(26).reactionActive = "UL" //XGH2O UL

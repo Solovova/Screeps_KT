@@ -1,4 +1,4 @@
-package logic.messenger.slaveRoom
+package logic.messenger
 
 import mainContext.MainContext
 import screeps.api.COLOR_WHITE
@@ -6,7 +6,7 @@ import screeps.api.Game
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import kotlin.math.roundToInt
 
-class LogicMessengerSlaveRoom (val mainContext: MainContext) {
+class LMMessengerSlaveRoom (val mainContext: MainContext) {
     fun showInfo(slaveRoom: SlaveRoom) {
         if ( ((Game.time.toDouble() / 1500.0).toInt() * 1500) == Game.time) {
             for (index in 4 downTo  1)

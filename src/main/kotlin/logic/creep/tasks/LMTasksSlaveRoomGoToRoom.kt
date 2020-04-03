@@ -7,7 +7,7 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import slaveRoom
 
-class TaskGoToRoom(val mainContext: MainContext) {
+class LMTasksSlaveRoomGoToRoom(val mainContext: MainContext) {
     private fun goToRoomName(creep: Creep, roomName: String) {
         val exitDir = creep.room.findExitTo(roomName)
         val exitPath = creep.pos.findClosestByRange(exitDir)

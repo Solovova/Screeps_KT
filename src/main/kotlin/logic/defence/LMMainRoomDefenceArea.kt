@@ -1,4 +1,4 @@
-package logic.defence.mainRoom
+package logic.defence
 
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
@@ -25,8 +25,8 @@ class LMMainRoomDefenceArea() {
                     val ny: Int = actualDataCell.y + dy
                     if (nx < 0 || nx > 49) continue
                     if (ny < 0 || ny > 49) continue
-                    if (!fillList.contains(DataCell(ny,nx)) && matrix[ny][nx] in whiteList) {
-                        fillList.add(DataCell(ny,nx))
+                    if (!fillList.contains(DataCell(ny, nx)) && matrix[ny][nx] in whiteList) {
+                        fillList.add(DataCell(ny, nx))
                     }
                 }
             return result
@@ -45,22 +45,22 @@ class LMMainRoomDefenceArea() {
     private fun fillFromBorder(): Int {
         val fillList: MutableList<DataCell> = mutableListOf()
         for (y in 0..49)
-            if (matrix[y][0] == 0) fillList.add(DataCell(y,0))
+            if (matrix[y][0] == 0) fillList.add(DataCell(y, 0))
         for (x in 1..49)
-            if (matrix[0][x] == 0) fillList.add(DataCell(0,x))
+            if (matrix[0][x] == 0) fillList.add(DataCell(0, x))
         for (x in 1..49)
-            if (matrix[49][x] == 0) fillList.add(DataCell(49,x))
+            if (matrix[49][x] == 0) fillList.add(DataCell(49, x))
         for (y in 1..48)
-            if (matrix[y][49] == 0) fillList.add(DataCell(y,49))
-        return FillBy(this.matrix, fillList, arrayOf(0),9).fill()
+            if (matrix[y][49] == 0) fillList.add(DataCell(y, 49))
+        return FillBy(this.matrix, fillList, arrayOf(0), 9).fill()
     }
 
     private fun fillFromCenter(mainRoom: MainRoom):Int {
         val fillList: MutableList<DataCell> = mutableListOf()
         val structureStorage: StructureStorage? = mainRoom.structureStorage[0]
         if (structureStorage != null) {
-            fillList.add(DataCell(structureStorage.pos.y,structureStorage.pos.x))
-            return FillBy(this.matrix, fillList, arrayOf(0,2),8).fill()
+            fillList.add(DataCell(structureStorage.pos.y, structureStorage.pos.x))
+            return FillBy(this.matrix, fillList, arrayOf(0, 2), 8).fill()
         }
         return 0
     }

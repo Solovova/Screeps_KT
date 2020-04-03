@@ -1,4 +1,4 @@
-package logic.defence.mainRoom
+package logic.defence
 
 import constants.WALL_HITS_MAX
 import mainContext.MainContext

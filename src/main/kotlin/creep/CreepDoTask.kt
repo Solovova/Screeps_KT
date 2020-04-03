@@ -132,7 +132,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToRoom -> {
-            mainContext.lm.lmCreep.lmTask.taskGoToRoom.goToRoom(this, mainRoom)
+            mainContext.lm.lmCreep.lmTask.lmTasksSlaveRoomGoToRoom.goToRoom(this, mainRoom)
         }
 
         TypeOfTask.Claim -> {

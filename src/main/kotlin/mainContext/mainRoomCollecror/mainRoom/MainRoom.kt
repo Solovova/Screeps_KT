@@ -6,7 +6,7 @@ import mainContext.constants.MainRoomConstant
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
-import logic.production.lab.mainRoom.GetLabSort
+import logic.production.lab.LMLabMainRoomGetLabSorted
 import mainContext.getCacheRecordRoom
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
@@ -266,7 +266,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     val structureLabSort: Map<Int, StructureLab>
         get() {
             if (this._structureLabSort == null) {
-                this._structureLabSort = GetLabSort().getLabSort(this.structureLab)
+                this._structureLabSort = mc.lm.lmProduction.lmLabMainRoomGetLabSorted.getLabSort(structureLab)
             }
             return _structureLabSort ?: throw AssertionError("Error get StructureLabSort")
         }

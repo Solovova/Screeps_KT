@@ -12,7 +12,7 @@ class LM(val mainContext: MainContext) {
     val lmGCL: LMGCL = LMGCL(mainContext)
     val lmTerminal: LMTerminal = LMTerminal(mainContext)
     val lmProduction: LMProduction = LMProduction(mainContext)
-    val defence: LMDefence = LMDefence(mainContext)
+    val lmDefence: LMDefence = LMDefence(mainContext)
     val lmMessenger: LMMessenger = LMMessenger(mainContext)
     val lmCreep: LMCreep = LMCreep(mainContext)
     val lmDevelop: LMDevelop = LMDevelop(mainContext)

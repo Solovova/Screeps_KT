@@ -1,13 +1,12 @@
-package logic.messenger.mineral
+package logic.messenger
 
 import RESOURCES_ALL
 import mainContext.MainContext
 import mainContext.MineralDataRecord
-import screeps.api.COLOR_ORANGE
 import toSecDigit
 import kotlin.math.min
 
-class LogicMessengerMineral(val mainContext: MainContext) {
+class LMMessengerMineral(val mainContext: MainContext) {
     class MineralInfo(private val numRows: Int = 5, val widthColumn: Int = 15, val numColumnInRow: Int = 10, val mainContext: MainContext) {
         var info = Array(numRows) { "" }
 
@@ -29,7 +28,7 @@ class LogicMessengerMineral(val mainContext: MainContext) {
     }
 
     fun showInfo() {
-        val mineralInfo = MineralInfo(numRows = 5,mainContext = mainContext)
+        val mineralInfo = MineralInfo(numRows = 5, mainContext = mainContext)
         mineralInfo.addColumn(arrayOf(
                 "Res:",
                 "Quantity:",

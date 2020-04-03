@@ -32,7 +32,7 @@ class GlobalConstant(val constants: Constants) {
 
     init {
         constants.mainContext.lm.lmCreep.lmUpgrade.setGlobalConstants(this)
-        constants.mainContext.lm.lmProduction.lmMineral.setGlobalConstants(this)
+        constants.mainContext.lm.lmProduction.lmMineralSetGlobalConstant.setConstant(this)
     }
 
 
