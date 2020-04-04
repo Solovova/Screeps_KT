@@ -91,9 +91,9 @@ class LMMessenger(val mainContext: MainContext) {
     }
 
     fun show() {
-        this.showMineralInfo()
         this.showSlaveRoomInfo()
         this.showMessengerInfo()
+        this.showMineralInfo()
         this.showMainRoomInfo()
     }
 }

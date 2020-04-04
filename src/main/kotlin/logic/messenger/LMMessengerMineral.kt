@@ -8,12 +8,12 @@ import kotlin.math.min
 
 class LMMessengerMineral(val mainContext: MainContext) {
 
-    class MineralInfo(private val numRows: Int = 5, val widthColumn: Int = 15, val numColumnInRow: Int = 10, val mainContext: MainContext) {
+    class MineralInfo(private val numRows: Int = 5, val widthColumn: Int = 12, val numColumnInRow: Int = 20, val mainContext: MainContext) {
         var info = Array(numRows) { "" }
 
         fun addColumn(dataIn: Array<String>) {
             for (ind in 0 until min(dataIn.size, numRows))
-                info[ind] += dataIn[ind].padEnd(widthColumn)
+                info[ind] += ("|${dataIn[ind]}").padEnd(widthColumn)
         }
 
         fun show() {
