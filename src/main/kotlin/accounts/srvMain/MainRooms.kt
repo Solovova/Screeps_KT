@@ -43,6 +43,8 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
     if (mr.name == "E58N39") mr.needMineral["H".unsafeCast<ResourceConstant>()] = 10000
     if (mr.name == "E59N36") mr.needMineral["Z".unsafeCast<ResourceConstant>()] = 10000
     if (mr.name == "E57N39") mr.needMineral["U".unsafeCast<ResourceConstant>()] = 10000
+
+    //if (mr.name == "E54N39") mr.need[0][30] = 1
 }
 
 fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {

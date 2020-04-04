@@ -6,6 +6,19 @@ import screeps.api.structures.StructureContainer
 fun MainRoom.needCorrection3() {
     //1 harvester ,carrier ,filler , small harvester-filler, small filler
     //1.1 harvester ,carrier
+
+    //Defence
+    val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS).filter { !it.name.startsWith("invader") }
+    if (hostileCreeps.isNotEmpty()) {
+        this.need[0][31] = 2
+        this.need[0][5] = 2
+        mc.lm.lmMessenger.log("INFO", this.name, "Attacked type player", COLOR_RED)
+        return
+    }
+
+
+    //-----------------------------
+
     if (this.structureLinkNearSource.containsKey(0))
         if (this.need[1][1] == 0) this.need[1][1] = 1
 

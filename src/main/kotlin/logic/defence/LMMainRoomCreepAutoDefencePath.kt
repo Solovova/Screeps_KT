@@ -1,9 +1,11 @@
-package logic.harvest
+package logic.defence
 
+import mainContext.MainContext
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 
-class LMHarvestGetWayFromPosToPos {
-    fun gets(fPos1: RoomPosition, fPos2: RoomPosition, inSwampCost: Int = 10, inPlainCost: Int = 2): PathFinder.Path {
+class LMMainRoomCreepAutoDefencePath(val mc: MainContext) {
+    fun gets(fPos1: RoomPosition, fPos2: RoomPosition, inSwampCost: Int = 10, inPlainCost: Int = 2, range: Int = 1): PathFinder.Path {
         fun roomCallback(roomName: String): CostMatrix {
             val room: Room = Game.rooms[roomName] ?: return PathFinder.CostMatrix()
             val costs = PathFinder.CostMatrix()
@@ -29,12 +31,20 @@ class LMHarvestGetWayFromPosToPos {
             room.find(FIND_HOSTILE_STRUCTURES).forEach { struct ->
                 costs.set(struct.pos.x, struct.pos.y, 0xff)
             }
+
+            val mainRoom:MainRoom? = mc.mainRoomCollector.rooms[roomName]
+            if (mainRoom!=null) {
+                for (y in 0..49)
+                    for (x in 0..49)
+                        if (mainRoom.constant.autoDefenceAreaMatrix[y][x] == 0)
+                            costs.set(x, y, 0xff)
+            }
             return costs
         }
 
         val goals = object : PathFinder.GoalWithRange {
             override var pos: RoomPosition = fPos2
-            override var range: Int = 1
+            override var range: Int = range
         }
 
         return PathFinder.search(fPos1, goals, options {

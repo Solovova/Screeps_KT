@@ -213,6 +213,10 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         this.manualDefenceHealer(mainContext)
     }
 
+    if (this.memory.role == 30 || this.memory.role == 31) {
+        mainContext.lm.lmDefence.lmMainRoomCreepAutoDefence.task(this)
+    }
+
     if (this.memory.role == 100) {
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.slaveClaim(mainContext, slaveRoom)

@@ -1,9 +1,5 @@
 In future
-//ToDo Room snapshot for auto reconstruction
-//ToDo если в комнате минерала больше чем надо не прозводить
-//ToDo разобраться почему нет минералов
-//ToDo тестировать при downgrade controller
-//ToDo автоподстройка цен мин макс
+//ToDo
 
 //Main
 // 0 - universal +
@@ -31,6 +27,10 @@ In future
 //20 - manual defender mile
 //21 - manual defender range
 //22 - manual defender healer
+
+//30 - auto defender mile
+//31 - auto defender range
+
 
 
 
