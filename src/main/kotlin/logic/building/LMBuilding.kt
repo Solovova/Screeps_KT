@@ -1,5 +1,7 @@
 package logic.building
 
-class LMBuilding {
-    val lmBuildingSnapShot:LMBuildingSnapShot = LMBuildingSnapShot()
+import mainContext.MainContext
+
+class LMBuilding(val mc:MainContext) {
+    val lmBuildingSnapShot:LMBuildingSnapShot = LMBuildingSnapShot(mc)
 }

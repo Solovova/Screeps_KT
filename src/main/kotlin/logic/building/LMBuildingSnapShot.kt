@@ -1,10 +1,12 @@
 package logic.building
 
+import mainContext.MainContext
 import mainContext.dataclass.RecordOfStructurePosition
+import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.Structure
 
-class LMBuildingSnapShot () {
+class LMBuildingSnapShot (val mc:MainContext) {
     private val zipStructure: Map<String,String> = mapOf(
             "0" to STRUCTURE_SPAWN.toString(),
             "1" to STRUCTURE_EXTENSION.toString(),
@@ -46,5 +48,25 @@ class LMBuildingSnapShot () {
             result += RecordOfStructurePosition( (zipStructure[struct[0]] ?: STRUCTURE_ROAD).unsafeCast<StructureConstant>(), RoomPosition(struct[1].toInt(),struct[2].toInt(),name))
         }
         return result
+    }
+
+    fun doSnapShot(mainRoom: MainRoom) {
+        val structures = mainRoom.room.find(FIND_STRUCTURES)
+        if (Memory["snap"] == null) Memory["snap"] = object {}
+        Memory["snap"][mainRoom.name] = snapshotSerialize(structures)
+    }
+
+    fun restoreSnapShot(mainRoom: MainRoom){
+        if (mainRoom.room.find(FIND_CONSTRUCTION_SITES).isNotEmpty()) return
+        val flags = mainRoom.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_YELLOW }
+        if (flags.isNotEmpty()) return
+
+        if (Memory["snap"] == null || Memory["snap"][mainRoom.name] == null){
+            mc.lm.lmMessenger.log("INFO", mainRoom.name, "Snapshot not present", COLOR_RED)
+            return
+        }
+        val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][mainRoom.name] as String,mainRoom.name)
+        for (record in d)
+            mainRoom.room.createConstructionSite(record.roomPosition,record.structureConstant)
     }
 }

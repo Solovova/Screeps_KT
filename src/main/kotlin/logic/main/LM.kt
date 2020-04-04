@@ -4,6 +4,7 @@ import logic.building.LMBuilding
 import logic.creep.LMCreep
 import logic.defence.LMDefence
 import logic.develop.LMDevelop
+import logic.directcontrol.LMDirectControl
 import logic.harvest.LMHarvestCacheRecordRoom
 import logic.harvest.LMHarvestGetCarrierAuto
 import logic.harvest.LMHarvestGetWayFromPosToPos
@@ -20,8 +21,9 @@ class LM(val mc: MainContext) {
     val lmMessenger: LMMessenger = LMMessenger(mc)
     val lmCreep: LMCreep = LMCreep(mc)
     val lmDevelop: LMDevelop = LMDevelop(mc)
-    val lmBuilding: LMBuilding = LMBuilding()
+    val lmBuilding: LMBuilding = LMBuilding(mc)
     val lmHarvestCacheRecordRoom: LMHarvestCacheRecordRoom = LMHarvestCacheRecordRoom(mc)
     val lmHarvestGetCarrierAuto: LMHarvestGetCarrierAuto = LMHarvestGetCarrierAuto()
     val lmHarvestGetWayFromPosToPos: LMHarvestGetWayFromPosToPos = LMHarvestGetWayFromPosToPos()
+    val lmDirectControl: LMDirectControl = LMDirectControl(mc)
 }

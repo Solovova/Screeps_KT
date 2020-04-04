@@ -7,27 +7,30 @@ import logic.main.LM
 import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
+import screeps.utils.toMap
 import kotlin.random.Random
 
 class MainContext {
     val lm: LM = LM(this)
 
+    //Data
+    var flags:List<Flag> = listOf()
     val messengerMap: MutableMap<String, String> = mutableMapOf()
-
     val mineralData: MutableMap<ResourceConstant, MineralDataRecord> = mutableMapOf()
+
     val constants: Constants = Constants(this)
     val tasks: Tasks = Tasks(this)
     var mainRoomCollector: MainRoomCollector = MainRoomCollector(this, arrayOf())
 
-
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
     init {
-
-        this.marketShowBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
+        //lm.lmProduction.lmMarket.showBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
     }
 
     fun run() {
+        flags = Game.flags.toMap().values.toList()
+
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
         lm.lmDefence.lmMainRoomUpgradeWall.calculate()
@@ -53,14 +56,14 @@ class MainContext {
         this.mainRoomCollector.runNotEveryTick()
 
         if (Game.time % 10 == 0) {
-            this.mineralSellBuy()
+            lm.lmProduction.lmMarket.sellBuy()
         }
 
         if (this.setNextTickRun()) {
 
             this.tasks.deleteTaskDiedCreep()
             this.battleGroupContainer.runNotEveryTick()
-            this.marketDeleteEmptyOffers()
+            lm.lmProduction.lmMarket.deleteEmptyOffers()
         }
 
         //End of tick
@@ -71,6 +74,8 @@ class MainContext {
 //                break
 //            }
 //        }
+
+        lm.lmDirectControl.runs()
         this.lm.lmProduction.lmLabMainRoomRun.run()
 
         this.battleGroupContainer.runInEndOfTick()
@@ -83,7 +88,6 @@ class MainContext {
         lm.lmMessenger.show()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Show info CPU: $cpuStartMCStart")
-
     }
 
     private fun setNextTickRun(): Boolean {

@@ -7,7 +7,7 @@ import mainContext.dataclass.subRole
 
 fun MainRoom.manualDefenceInStartOfTick() {
     // Group GoTo
-    val flagGoTo: Flag? = mrCol.flags.firstOrNull {
+    val flagGoTo: Flag? = mc.flags.firstOrNull {
         it.color == this.constant.manualDefenceRoomMainColorFlag
                 && it.secondaryColor == COLOR_RED
     }
@@ -36,14 +36,14 @@ fun MainRoom.manualDefenceInStartOfTick() {
             RecordMove(COLOR_ORANGE, 0, -1, "top"),
             RecordMove(COLOR_BROWN, 0, 1, "bottom"))
 
-    val flagBorder: Flag? = mrCol.flags.firstOrNull {
+    val flagBorder: Flag? = mc.flags.firstOrNull {
         it.color == this.constant.manualDefenceRoomMainColorFlag
                 && it.secondaryColor == COLOR_WHITE
     }
 
     for (listMoveRecord in listMove) {
 
-        val flagMove: Flag? = mrCol.flags.firstOrNull {
+        val flagMove: Flag? = mc.flags.firstOrNull {
             it.color == this.constant.manualDefenceRoomMainColorFlag
                     && it.secondaryColor == listMoveRecord.color
         }
@@ -102,7 +102,7 @@ fun MainRoom.manualDefenceInStartOfTick() {
     }
 
     //Group target
-    val flagTarget: Flag? = mrCol.flags.firstOrNull {
+    val flagTarget: Flag? = mc.flags.firstOrNull {
         it.color == this.constant.manualDefenceRoomMainColorFlag
                 && it.secondaryColor == COLOR_GREY
     }

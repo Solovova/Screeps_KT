@@ -21,7 +21,7 @@ import kotlin.math.roundToInt
 
 class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
     val rooms: MutableMap<String, MainRoom> = mutableMapOf()
-    val flags = Game.flags.toMap().values.toList()
+
 
     init {
         names.forEachIndexed { index, name ->
@@ -159,9 +159,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
         }
     }
 
-    fun runInStartOfTick() {
 
-    }
 
     fun runNotEveryTick() {
         for (record in this.rooms) {

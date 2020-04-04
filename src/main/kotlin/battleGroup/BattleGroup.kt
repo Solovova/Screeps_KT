@@ -198,7 +198,7 @@ class BattleGroup {
 
     private fun turnGroupToAssemblePoint() {
         if (this.constants.assembleRoom == "") return
-        val flag = this.parent.parent.mainRoomCollector.flags.firstOrNull { it.color == COLOR_BROWN
+        val flag = this.parent.parent.flags.firstOrNull { it.color == COLOR_BROWN
                 && it.secondaryColor == COLOR_BROWN
                 && it.pos.roomName == this.constants.assembleRoom } ?: return
 
@@ -210,7 +210,7 @@ class BattleGroup {
 
     private fun turnGroupToNeedRoom() {
         if (this.constants.assembleRoom == "") return
-        val flag = this.parent.parent.mainRoomCollector.flags.firstOrNull { it.color == COLOR_BROWN
+        val flag = this.parent.parent.flags.firstOrNull { it.color == COLOR_BROWN
                 && it.secondaryColor == COLOR_BROWN
                 && it.pos.roomName == this.constants.assembleRoom } ?: return
 

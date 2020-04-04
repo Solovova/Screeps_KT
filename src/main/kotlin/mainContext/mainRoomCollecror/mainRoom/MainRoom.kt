@@ -286,10 +286,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 if (this.need[0][5] == 0) this.need[0][5] = 1 //filler
                 if (this.need[1][5] == 0) this.need[1][5] = 1 //filler
                 this.need[0][8] = 2
-                this.restoreSnapShot()
+                mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(this)
                 return
             } else {
-                this.restoreSnapShot()
+                mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(this)
                 this.constant.levelOfRoom = nowLevelOfRoom
             }
         } else this.constant.levelOfRoom = nowLevelOfRoom
@@ -694,7 +694,6 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         if (this.constant.levelOfRoom > 1) this.runLinkTransfers()
         this.runTower()
         this.buildCreeps()
-        this.directControl()
 
         for (room in this.slaveRooms.values) {
             try {
@@ -726,10 +725,8 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
 
 
         if (!this.setNextTickRun()) return
-        this.restoreSnapShot()
+        mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(this)
         this.building()
-        this.marketCreateBuyOrders()
-        this.marketCreateBuyOrdersMineral()
         this.needCleanerCalculate()
     }
 
