@@ -7,7 +7,11 @@ import screeps.api.*
 import screeps.api.structures.*
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainContext.tasks.CreepTask
+import mainContext.dataclass.mainRoom
+import mainContext.dataclass.role
 import screeps.utils.toMap
+import mainContext.dataclass.slaveRoom
+import mainContext.dataclass.upgrade
 
 fun Creep.doTask(mainContext: MainContext) {
     if (!mainContext.tasks.isTaskForCreep(this)) return

@@ -68,12 +68,13 @@ fun MainContext.marketShowSellOrdersRealPrice(resourceConstant: ResourceConstant
     }
 }
 
-fun MainContext.marketShowBuyOrdersRealPrice(resourceConstant: ResourceConstant = RESOURCE_ENERGY) {
+fun MainContext.marketShowBuyOrdersRealPrice(resourceConstant: ResourceConstant = RESOURCE_ENERGY, showRows: Int = 100) {
     if (this.constants.mainRooms.isEmpty()) return
     val marketSell = this.marketGetBuyOrdersSorted(resourceConstant, this.constants.mainRooms[0])
 
     console.log("Buy orders $resourceConstant}")
-    for (record in marketSell) {
+    for ((count, record) in marketSell.withIndex()) {
+        if (count>showRows) break
         val strPrice = record.order.price.asDynamic().toFixed(3).toString().padEnd(6)
         val strRealPrice = record.realPrice.asDynamic().toFixed(3).toString().padEnd(6)
         console.log("id: ${record.order.id} price: $strPrice real price: $strRealPrice  quantity:${record.order.remainingAmount}")

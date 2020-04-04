@@ -1,12 +1,13 @@
 package logic.messenger
 
+import logic.extfunc.toSecDigit
 import mainContext.MainContext
 import mainContext.dataclass.MineralDataRecord
 import mainContext.dataclass.RESOURCES_ALL
-import toSecDigit
 import kotlin.math.min
 
 class LMMessengerMineral(val mainContext: MainContext) {
+
     class MineralInfo(private val numRows: Int = 5, val widthColumn: Int = 15, val numColumnInRow: Int = 10, val mainContext: MainContext) {
         var info = Array(numRows) { "" }
 

@@ -3,7 +3,6 @@ package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 import constants.CacheCarrier
 import mainContext.MainContext
 import mainContext.constants.SlaveRoomConstant
-import mainContext.getCacheRecordRoom
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.QueueSpawnRecord
 import screeps.api.*
@@ -198,15 +197,15 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
 
     private fun getTimeDeath(fRole: Int): Int {
         return when (fRole) {
-            106 -> mc.getCacheRecordRoom("slaveContainer0", this.mr, this)?.timeForDeath
+            106 -> mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)?.timeForDeath
                     ?: 0
-            108 -> mc.getCacheRecordRoom("slaveContainer1", this.mr, this)?.timeForDeath
+            108 -> mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)?.timeForDeath
                     ?: 0
-            121 -> mc.getCacheRecordRoom("slaveContainer0", this.mr, this)?.timeForDeath
+            121 -> mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)?.timeForDeath
                     ?: 0
-            123 -> mc.getCacheRecordRoom("slaveContainer1", this.mr, this)?.timeForDeath
+            123 -> mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)?.timeForDeath
                     ?: 0
-            125 -> mc.getCacheRecordRoom("slaveContainer2", this.mr, this)?.timeForDeath
+            125 -> mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer2", this.mr, this)?.timeForDeath
                     ?: 0
 
             else -> 0
@@ -256,7 +255,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             }
 
             106 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer0", this.mr, this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
@@ -266,7 +265,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             }
 
             108 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer1", this.mr, this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
@@ -296,7 +295,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             }
 
             121 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer0", this.mr, this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
@@ -306,7 +305,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             }
 
             123 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer1", this.mr, this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
                     result = arrayOf()
@@ -316,7 +315,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             }
 
             125 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer2", this.mr, this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer2", this.mr, this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
                     result = arrayOf()
@@ -432,12 +431,12 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
                 if (this.source[1] != null) this.need[0][7] = 1
 
                 //4 Carrier
-                val carrierAuto0: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer0", this.mr, this)
+                val carrierAuto0: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
                 if (carrierAuto0 != null) {
                     if (this.need[1][6] == 0) this.need[1][6] = carrierAuto0.needCarriers
                 }
 
-                val carrierAuto1: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer1", this.mr, this)
+                val carrierAuto1: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)
                 if (carrierAuto1 != null) {
                     if (this.need[1][8] == 0) this.need[1][8] = carrierAuto1.needCarriers
                 }
@@ -499,7 +498,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
                 this.need[1][15] = 1
 
                 if (this.source.containsKey(0) && this.rescueFlag.containsKey(0)) this.need[1][20] = 1
-                val carrierAuto0: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer0", this.mr, this)
+                val carrierAuto0: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
                 //if (this.name == "E56N34") console.log("null")
                 if (carrierAuto0 != null) {
                     //if (this.name == "E56N34") console.log("${carrierAuto0.needCarriers}")
@@ -507,13 +506,13 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
                 }
 
                 if (this.source.containsKey(1) && this.rescueFlag.containsKey(1)) this.need[1][22] = 1
-                val carrierAuto1: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer1", this.mr, this)
+                val carrierAuto1: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)
                 if (carrierAuto1 != null) {
                     if (this.need[1][23] == 0) this.need[1][23] = carrierAuto1.needCarriers
                 }
 
                 if (this.source.containsKey(2) && this.rescueFlag.containsKey(2)) this.need[1][24] = 1
-                val carrierAuto2: CacheCarrier? = mc.getCacheRecordRoom("slaveContainer2", this.mr, this)
+                val carrierAuto2: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer2", this.mr, this)
                 if (carrierAuto2 != null) {
                     if (this.need[1][25] == 0) this.need[1][25] = carrierAuto2.needCarriers
                 }

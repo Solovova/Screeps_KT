@@ -1,9 +1,7 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
+import mainContext.dataclass.RecordOfStructurePosition
 import screeps.api.*
-import snapshotDeserialize
-import snapshotSerialize
-import RecordOfStructurePosition
 
 fun SlaveRoom.doSnapShot() {
     if (this.room == null) return
@@ -17,7 +15,7 @@ fun SlaveRoom.doSnapShot() {
     }.toTypedArray()
     for (flag in flagsIgnore) flag.remove()
     if (Memory["snap"] == null) Memory["snap"] = object {}
-    Memory["snap"][this.name] = snapshotSerialize(structureFiltered)
+    Memory["snap"][this.name] = mc.lm.lmBuilding.lmBuildingSnapShot.snapshotSerialize(structureFiltered)
 }
 
 fun SlaveRoom.restoreSnapShot(){
@@ -27,7 +25,7 @@ fun SlaveRoom.restoreSnapShot(){
         mc.lm.lmMessenger.log("INFO", this.name, "Slave snapshot not present", COLOR_RED)
         return
     }
-    val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
+    val d:Array<RecordOfStructurePosition> = mc.lm.lmBuilding.lmBuildingSnapShot.snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
     for (record in d)
         this.room.createConstructionSite(record.roomPosition,record.structureConstant)
 }

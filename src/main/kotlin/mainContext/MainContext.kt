@@ -24,7 +24,7 @@ class MainContext {
 
     init {
 
-        //this.marketShowBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>())
+        this.marketShowBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
     }
 
     fun run() {

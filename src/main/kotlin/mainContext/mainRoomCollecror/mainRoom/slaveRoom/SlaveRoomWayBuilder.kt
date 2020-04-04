@@ -1,7 +1,6 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
 import constants.CacheCarrier
-import mainContext.getCacheRecordRoom
 import screeps.api.*
 import screeps.api.structures.Structure
 
@@ -23,7 +22,7 @@ fun SlaveRoom.buildWaysInRoom():Boolean {
 
     for (ind in 0..1) {
         if (this.structureContainerNearSource.containsKey(ind)) {
-            val cacheCarrier: CacheCarrier = mc.getCacheRecordRoom("slaveContainer$ind", mainRoom = this.mr,
+            val cacheCarrier: CacheCarrier = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer$ind", mainRoom = this.mr,
                     slaveRoom = this, inSwampCost = 6, inPlainCost = 6, recalculate = true)
                     ?: return false
             if (cacheCarrier.mPath.isEmpty()) return false

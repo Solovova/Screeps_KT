@@ -1,14 +1,12 @@
 package mainContext.mainRoomCollecror.mainRoom
 
+import mainContext.dataclass.RecordOfStructurePosition
 import screeps.api.*
-import snapshotDeserialize
-import snapshotSerialize
-import RecordOfStructurePosition
 
 fun MainRoom.doSnapShot() {
     val structures = this.room.find(FIND_STRUCTURES)
     if (Memory["snap"] == null) Memory["snap"] = object {}
-    Memory["snap"][this.name] = snapshotSerialize(structures)
+    Memory["snap"][this.name] = mc.lm.lmBuilding.lmBuildingSnapShot.snapshotSerialize(structures)
 }
 
 fun MainRoom.restoreSnapShot(){
@@ -20,7 +18,7 @@ fun MainRoom.restoreSnapShot(){
         mc.lm.lmMessenger.log("INFO", this.name, "Snapshot not present", COLOR_RED)
         return
     }
-    val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
+    val d:Array<RecordOfStructurePosition> = mc.lm.lmBuilding.lmBuildingSnapShot.snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
     for (record in d)
         this.room.createConstructionSite(record.roomPosition,record.structureConstant)
 }

@@ -6,9 +6,7 @@ import mainContext.constants.MainRoomConstant
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
-import logic.production.lab.LMLabMainRoomGetLabSorted
 import mainContext.dataclass.BgSpawnResult
-import mainContext.getCacheRecordRoom
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
 import screeps.api.structures.*
@@ -318,9 +316,9 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
 
     private fun getTimeDeath(fRole: Int): Int {
         return when (fRole) {
-            2 -> mc.getCacheRecordRoom("mainContainer0", this)?.timeForDeath
+            2 -> mc.lm.lmHarvestCacheRecordRoom.gets("mainContainer0", this)?.timeForDeath
                     ?: 0
-            4 -> mc.getCacheRecordRoom("mainContainer1", this)?.timeForDeath
+            4 -> mc.lm.lmHarvestCacheRecordRoom.gets("mainContainer1", this)?.timeForDeath
                     ?: 0
             1, 3 -> 10
             else -> 0
@@ -395,7 +393,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             }
 
             2 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("mainContainer0", this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("mainContainer0", this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
@@ -405,7 +403,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             }
 
             4 -> {
-                val carrierAuto: CacheCarrier? = mc.getCacheRecordRoom("mainContainer1", this)
+                val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("mainContainer1", this)
                 if (carrierAuto == null) {
                     mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
@@ -415,7 +413,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             }
 
             5 -> {
-                if (this.room.energyCapacityAvailable >= 5000) result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
+                if (this.room.energyCapacityAvailable >= 5000) result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 else if (this.room.energyCapacityAvailable >= 1300) result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 else result = arrayOf(MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
             }
@@ -531,10 +529,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             }
 
             val d: dynamic = object {}
-            d["mainContext.dataclass.getRole"] = this.queue[0].role
-            d["mainContext.dataclass.getSlaveRoom"] = this.queue[0].slaveRoom
-            d["mainContext.dataclass.getMainRoom"] = this.queue[0].mainRoom
-            d["mainContext.dataclass.getTickDeath"] = this.queue[0].timeDeath
+            d["role"] = this.queue[0].role
+            d["slaveRoom"] = this.queue[0].slaveRoom
+            d["mainRoom"] = this.queue[0].mainRoom
+            d["tickDeath"] = this.queue[0].timeDeath
             val spawnOptions: dynamic = object {}
             spawnOptions["memory"] = d
 
@@ -624,7 +622,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         return tSource
     }
 
-    //0 - only mainContext.dataclass.getRole 0 creep
+    //0 - only Role 0 creep
     //1 - Storage, 3 container, energy >300+20*50 1300
     fun getLevelOfRoom(): Int {
         if (this.room.energyCapacityAvailable >= 5600

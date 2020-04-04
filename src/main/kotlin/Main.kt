@@ -16,16 +16,13 @@ fun loop() {
 
     // Initialisation and protect mainContext
     if (mainContextGlob == null) {
-        //Game.market.createOrder(ORDER_BUY,RESOURCE_KEANIUM,0.038,100000,"E54N39")
-        //Game.market.changeOrderPrice("5e72724b3265835947152333",0.04)
-        //Game.market.createOrder(ORDER_BUY, RESOURCE_HYDROGEN,0.014,200000,"E52N38")
-        //Game.market.cancelOrder("5e766ac39ae3874f2271f49b")
+//        for (creep in Game.creeps.values) {
+//            creep.suicide()}
+
         mainContextGlob = MainContext()
     }
 
     val protectedMainContext = mainContextGlob ?: return
-
-
 
     protectedMainContext.lm.lmMessenger.log("HEAD", "", "Current game tick is ${Game.time} _________________________________________", COLOR_WHITE)
 
