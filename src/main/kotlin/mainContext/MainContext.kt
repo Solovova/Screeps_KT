@@ -25,7 +25,7 @@ class MainContext {
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
     init {
-        //lm.lmProduction.lmMarket.showBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
+        lm.lmProduction.lmMarket.showBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
     }
 
     fun run() {

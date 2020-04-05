@@ -6,19 +6,13 @@ var mainContextGlob : MainContext? = null
 
 @Suppress("unused")
 fun loop() {
-
     Memory["account"] = ""
     if (Game.rooms["E54N37"] != null)  Memory["account"] = "main"
-    if (Game.rooms["W5N3"] != null)    Memory["account"] = "test"
-    if (Game.rooms["W8N3"] != null)    Memory["account"] = "test2"
-
-    val cpuStart = Game.cpu.getUsed()
+    if (Game.rooms["W3N4"] != null)    Memory["account"] = "ScreepPlus"
+    ///if (Game.rooms["W8N3"] != null)    Memory["account"] = "test2"
 
     // Initialisation and protect mainContext
     if (mainContextGlob == null) {
-//        for (creep in Game.creeps.values) {
-//            creep.suicide()}
-
         mainContextGlob = MainContext()
     }
 
@@ -27,11 +21,11 @@ fun loop() {
     protectedMainContext.lm.lmMessenger.log("HEAD", "", "Current game tick is ${Game.time} _________________________________________", COLOR_WHITE)
 
     // Start tick functions
-    var cpuStartMCStart = Game.cpu.getUsed()
+    var cpuStart = Game.cpu.getUsed()
     protectedMainContext.run()
-    cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
+    cpuStart = Game.cpu.getUsed() - cpuStart
 
     console.log("Construction sites: ${Game.constructionSites.size}")
 
-    console.log("CPU: ${(Game.cpu.getUsed() - cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]} McStart: ${cpuStartMCStart.roundToInt()}")
+    console.log("CPU: ${(cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]}")
 }

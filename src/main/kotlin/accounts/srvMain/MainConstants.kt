@@ -29,7 +29,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E51N41").initSlaveRoomConstantContainer(arrayOf("E51N42","E52N41"))                       //M17
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                //M18
     const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
-    const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf())                                        //M20
+    const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                        //M20
     const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                        //M21
     const.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43","E59N43"))   //M22
     const.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
@@ -40,7 +40,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.s(27,0).autoBuildRoad = true
+    const.s(20,0).autoBuildRoad = true
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"
@@ -57,16 +57,16 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(12).reactionActive = "OH"
     const.m(13).reactionActive = "XGH2O"
     const.m(14).reactionActive = "XGH2O"
-    const.m(15).reactionActive = "OH"
+    const.m(15).reactionActive = "XGH2O"
     const.m(16).reactionActive = "UL"
     const.m(17).reactionActive = "XGH2O" //LH
     const.m(18).reactionActive = "XGH2O" //LH2O
     const.m(19).reactionActive = "XGH2O" //LH
-    const.m(20).reactionActive = "GH2O"
+    const.m(20).reactionActive = "XGH2O"
     const.m(21).reactionActive = "OH"
     const.m(22).reactionActive = "GH" //OH
     const.m(23).reactionActive = "GH2O"
-    const.m(24).reactionActive = "GH"
+    const.m(24).reactionActive = "XGH2O"
     const.m(25).reactionActive = "ZK"
     const.m(26).reactionActive = "UL"
     const.m(27).reactionActive = "G"

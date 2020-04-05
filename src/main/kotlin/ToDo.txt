@@ -1,5 +1,7 @@
 In future
-//ToDo
+//ToDo balance lab
+//ToDo balance upgrade GH2O or XGH2O
+//ToDo sell energy
 
 //Main
 // 0 - universal +
