@@ -659,8 +659,8 @@ fun Creep.slaveBuild(creepCarry: Int, mainContext: MainContext, slaveRoom: Slave
     return result
 }
 
-fun Creep.slaveTransferToStorageOrContainer(type: Int, creepCarry: Int, mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
-    //type 0 - cont 0, 1 - cont 1, 3 - any
+fun Creep.slaveTransferToStorageOrContainer(type: Int, creepCarry: Int, mainContext: MainContext, slaveRoom: SlaveRoom?, putIfEnergyLess: Int = 0): Boolean {
+    //type 0 - cont 0, 1 - cont 1, 3 - any, 4 - storage
     var result = false
     if (slaveRoom != null) {
         if (creepCarry > 0) {
@@ -670,6 +670,15 @@ fun Creep.slaveTransferToStorageOrContainer(type: Int, creepCarry: Int, mainCont
                 3 -> {
                     objForFilling = slaveRoom.structureStorage[0]
                     if (objForFilling == null) objForFilling = slaveRoom.structureContainer.values.firstOrNull()
+                }
+
+                4-> {
+                    objForFilling = slaveRoom.structureStorage[0]
+                    if (objForFilling != null
+                            && putIfEnergyLess!=0
+                            && objForFilling.store.energy> putIfEnergyLess){
+                        objForFilling = null
+                    }
                 }
             }
 

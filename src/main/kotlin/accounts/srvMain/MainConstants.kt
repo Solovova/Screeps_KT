@@ -6,7 +6,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     //M0       M1       M2       M3       M4       M5       M6       M7       M8       M9
     const.initMainRoomConstantContainer( arrayOf("E54N37","E59N36","E52N38","E52N37","E54N39","E51N39","E53N38","E51N37","E59N38","E58N37",
             "E52N36","E58N39","E57N39","E57N37","E53N39","E49N39","E47N39","E51N41","E52N35","E51N35",
-            "E54N41","E53N35","E58N43","E58N44","E58N45","E59N46","E57N51","E55N51") )
+            "E54N41","E53N35","E58N43","E58N44","E58N45","E59N46","E57N51","E55N51","E56N53") )
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37","E54N36"))                       //M0
@@ -35,12 +35,16 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     const.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
     const.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
-    const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51")) //M26
+    const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51","E56N53")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
+    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf()) //28
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.s(20,0).autoBuildRoad = true
+    //const.s(20,0).autoBuildRoad = true
+    const.m(28).creepSpawn = false
+    const.s(26,2).model = 1
+
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"
@@ -59,12 +63,12 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(14).reactionActive = "XGH2O"
     const.m(15).reactionActive = "XGH2O"
     const.m(16).reactionActive = "UL"
-    const.m(17).reactionActive = "XGH2O" //LH
-    const.m(18).reactionActive = "XGH2O" //LH2O
-    const.m(19).reactionActive = "XGH2O" //LH
+    const.m(17).reactionActive = "LH" //LH
+    const.m(18).reactionActive = "LH2O" //LH2O
+    const.m(19).reactionActive = "OH"
     const.m(20).reactionActive = "XGH2O"
-    const.m(21).reactionActive = "OH"
-    const.m(22).reactionActive = "GH" //OH
+    const.m(21).reactionActive = "OH" //OH
+    const.m(22).reactionActive = "GH" //GH
     const.m(23).reactionActive = "GH2O"
     const.m(24).reactionActive = "XGH2O"
     const.m(25).reactionActive = "ZK"
