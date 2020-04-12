@@ -56,6 +56,7 @@ class MainRoomConstant(val parent: Constants) {
 
     //Reaction control set in ProductionController
     var reactionActive: String = "" //cashed
+    var reactionActiveArr: Array<String> = arrayOf()
 
     //Manual defence
     var manualDefenceRoomMainColorFlag: ColorConstant = COLOR_PURPLE

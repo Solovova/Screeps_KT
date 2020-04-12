@@ -26,4 +26,9 @@ open class AccountInit() {
 
     }
 
+    //call after fill mineral and production
+    open fun initTuning(mainContext: MainContext) {
+
+    }
+
 }

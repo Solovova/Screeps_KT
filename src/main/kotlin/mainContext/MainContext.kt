@@ -33,6 +33,20 @@ class MainContext {
 
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
+        for (room in this.mainRoomCollector.rooms.values) {
+            try {
+                room.fillCash()
+            } catch (e: Exception) {
+                this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
+            }
+        }
+
+        lm.lmGCL.calculate()
+        lm.lmProduction.lmMineralFillData.fill()
+        this.constants.accountInit.initTuning(this)
+        lm.lmProduction.lmMineralFillProduction.fill()
+
+
         lm.lmDefence.lmMainRoomUpgradeWall.calculate()
 
         this.mainRoomCollector.creepsCalculate()
@@ -46,9 +60,7 @@ class MainContext {
             }
         }
 
-        lm.lmGCL.calculate()
-        lm.lmProduction.lmMineralFillData.fill()
-        lm.lmProduction.lmMineralFillProduction.fill()
+
 
         this.battleGroupContainer.runInStartOfTick()
 

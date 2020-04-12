@@ -686,14 +686,6 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
 
     fun runInStartOfTick() {
         this.manualDefenceInStartOfTick()
-        this.fillCash()
-        for (room in this.slaveRooms.values) {
-            try {
-                room.runInStartOfTick()
-            } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "Slave room in start", room.name, COLOR_RED)
-            }
-        }
         this.setMineralNeed()
         this.alarmStorage()
     }
@@ -873,7 +865,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         }
     }
 
-    private fun fillCash() {
+    fun fillCash() {
         val store: StructureStorage? = this.structureStorage[0]
         if (store != null)
             for (record in store.store.toMap()) this.resStorage[record.key] = (this.resStorage[record.key]

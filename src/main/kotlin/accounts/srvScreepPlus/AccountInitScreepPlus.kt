@@ -27,4 +27,8 @@ class AccountInitScreepPlus : AccountInit ()  {
     override fun initMineral(mainContext: MainContext) {
         this.initMineralOut(mainContext)
     }
+
+    override fun initTuning(mainContext: MainContext) {
+        super.initTuning(mainContext)
+    }
 }

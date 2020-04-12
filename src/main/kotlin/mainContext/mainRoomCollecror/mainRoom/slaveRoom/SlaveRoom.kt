@@ -550,9 +550,6 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
         return true
     }
 
-    fun runInStartOfTick() {
-    }
-
     fun runInEndOfTick() {
         this.directControl()
     }

@@ -1,6 +1,7 @@
 package logic.messenger
 
 import creep.getDescribeForQueue
+import logic.extfunc.toSecDigit
 import mainContext.MainContext
 import mainContext.dataclass.MainRoomInfoRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
@@ -199,7 +200,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         var result: String
         if (controller.level==8) {
             val defenceStatus: Int = mainRoom.constant.defenceMinHits - mainRoom.constant.defenceHits
-            result = "def: $defenceStatus".padStart(15)
+            result = "def: ${defenceStatus.toString().toSecDigit().padStart(12)}"
             return MainRoomInfoRecord(result, defenceStatus<0)
         }else{
             result = "l: ${mainRoom.structureController[0]?.level} "

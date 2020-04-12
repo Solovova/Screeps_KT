@@ -63,9 +63,12 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(14).reactionActive = "XGH2O"
     const.m(15).reactionActive = "XGH2O"
     const.m(16).reactionActive = "UL"
-    const.m(17).reactionActive = "LH" //LH
-    const.m(18).reactionActive = "LH2O" //LH2O
-    const.m(19).reactionActive = "OH"
+    //const.m(17).reactionActive = "LH"
+    const.m(17).reactionActiveArr = arrayOf("LH","XGH2O")
+    //const.m(18).reactionActive = "LH2O"
+    const.m(18).reactionActiveArr = arrayOf("LH2O","XGH2O")
+    //const.m(19).reactionActive = "OH"
+    const.m(19).reactionActiveArr = arrayOf("OH","XGH2O")
     const.m(20).reactionActive = "XGH2O"
     const.m(21).reactionActive = "OH" //OH
     const.m(22).reactionActive = "GH" //GH
