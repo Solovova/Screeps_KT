@@ -22,9 +22,9 @@ fun AccountInitMain.initTuningOut(mc: MainContext) {
     }
 
     val minXGH2O: Int = mc.mineralData["XGH2O".unsafeCast<ResourceConstant>()]?.quantity ?: 0
-    if (minXGH2O > 100000) {
+    if (minXGH2O > 150000) {
         mc.constants.globalConstant.creepUpgradableParts[19] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
     } else {
-        mc.constants.globalConstant.creepUpgradableParts[19] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
+        mc.constants.globalConstant.creepUpgradableParts[19] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "GH2O".unsafeCast<ResourceConstant>())
     }
 }

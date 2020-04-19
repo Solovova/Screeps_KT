@@ -48,10 +48,10 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
 }
 
 fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
-    if (sr.mr.name == "E57N51" && sr.name == "E56N53") {
-        sr.need[0][0] = 0
-        sr.need[0][1] = 9
-    }
+//    if (sr.mr.name == "E57N51" && sr.name == "E56N53") {
+//        sr.need[0][0] = 0
+//        sr.need[0][1] = 6
+//    }
 //
 //
 //    if (sr.mr.name == "E57N51" && sr.name == "E58N51") {

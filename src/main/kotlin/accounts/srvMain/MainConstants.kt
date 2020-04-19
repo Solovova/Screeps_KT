@@ -35,15 +35,18 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     const.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
     const.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
-    const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51","E56N53")) //M26
+    const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
-    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf()) //28
+    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52","E57N53")) //28
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(20,0).autoBuildRoad = true
-    const.m(28).creepSpawn = false
-    const.s(26,2).model = 1
+    //const.m(28).creepSpawn = false
+    //const.s(26,2).model = 1
+    //const.s(28,0).autoBuildRoad = true
+    //const.s(28,1).autoBuildRoad = true
+
 
 
     const.m(0).reactionActive = "GH2O"
@@ -70,8 +73,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.m(19).reactionActive = "OH"
     const.m(19).reactionActiveArr = arrayOf("OH","XGH2O")
     const.m(20).reactionActive = "XGH2O"
-    const.m(21).reactionActive = "OH" //OH
-    const.m(22).reactionActive = "GH" //GH
+    const.m(21).reactionActive = "OH"
+    //const.m(22).reactionActive = "GH"
+    const.m(22).reactionActiveArr = arrayOf("GH","XGH2O")
     const.m(23).reactionActive = "GH2O"
     const.m(24).reactionActive = "XGH2O"
     const.m(25).reactionActive = "ZK"
