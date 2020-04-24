@@ -78,7 +78,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
 
 
     mc.mineralData["X".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.400,
+            priceMax = 1.200,
             priceMin = 0.005,
             marketSellExcess = 400000,
             marketBuyLack = 30000,

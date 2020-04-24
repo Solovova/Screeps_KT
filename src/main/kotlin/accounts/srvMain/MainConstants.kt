@@ -37,7 +37,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
     const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52","E58N51")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
-    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52","E57N53")) //28
+    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52","E57N53","E56N54")) //28
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
@@ -81,4 +81,5 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(25).reactionActive = "ZK"
     const.m(26).reactionActive = "UL"
     const.m(27).reactionActive = "G"
+    const.m(28).reactionActive = "XGH2O"
 }
