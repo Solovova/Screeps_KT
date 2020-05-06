@@ -109,4 +109,14 @@ class MainContext {
         this.lm.lmMessenger.log("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
         return true
     }
+
+    fun getNumRoomWithTerminal():Int {
+        var result = 0
+        for (mainRoom in this.mainRoomCollector.rooms.values) {
+            if (Game.rooms[mainRoom.name] != null && mainRoom.structureTerminal[0] != null) {
+                result++
+            }
+        }
+        return result
+    }
 }

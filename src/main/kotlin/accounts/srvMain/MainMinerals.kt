@@ -2,15 +2,14 @@ package accounts.srvMain
 
 import mainContext.MainContext
 import mainContext.dataclass.MineralDataRecord
-import mainContext.getNumRoomWithContainer
 import screeps.api.ResourceConstant
 
 fun AccountInitMain.initMineralOut(mc: MainContext) {
     mc.mineralData["energy".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.200,
             priceMin = 0.020,
-            marketSellExcess = mc.getNumRoomWithContainer() * 250000,
-            marketBuyLack = mc.getNumRoomWithContainer() * 100000,
+            marketSellExcess = mc.getNumRoomWithTerminal() * 250000,
+            marketBuyLack = mc.getNumRoomWithTerminal() * 100000,
             sellFromRoom = "E54N37"
             //buyToRoom = "E54N37"
 

@@ -767,14 +767,19 @@ fun Creep.slaveAttack(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean 
 fun Creep.slaveAttackStructure(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
     var result = false
     if (slaveRoom?.room != null) {
-        var hostileStructure: Structure?
-        if (slaveRoom.name == "E56N51") {
-            hostileStructure = Game.getObjectById("5e782d3f37bb159707daaa37")
+        var hostileStructure: Structure? = null
+        if (slaveRoom.name == "E55N52") {
+            hostileStructure = Game.getObjectById("5a4bf137b4947910caf6c34c")
             if (hostileStructure == null) {
                 hostileStructure = slaveRoom.room.find(FIND_HOSTILE_STRUCTURES).minBy { this.pos.getRangeTo(it.pos) }
             }
-        }else{
+        }
+
+        if (hostileStructure == null) {
             hostileStructure = slaveRoom.room.find(FIND_HOSTILE_STRUCTURES).minBy { this.pos.getRangeTo(it.pos) }
+            if (hostileStructure == null) {
+                hostileStructure = slaveRoom.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_WALL }.minBy { this.pos.getRangeTo(it.pos) }
+            }
         }
 
 

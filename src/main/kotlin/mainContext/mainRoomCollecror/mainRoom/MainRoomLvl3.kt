@@ -1,6 +1,5 @@
 package mainContext.mainRoomCollecror.mainRoom
 
-import mainContext.getNumRoomWithContainer
 import screeps.api.*
 import screeps.api.structures.StructureContainer
 
@@ -37,7 +36,7 @@ fun MainRoom.needCorrection3() {
 
     //2 Upgrader
     val allEnergy:Int = mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0
-    val forceEnergy:Int = mc.getNumRoomWithContainer()*(this.constant.energyExcessSent-5000)
+    val forceEnergy:Int = mc.getNumRoomWithTerminal()*(this.constant.energyExcessSent-5000)
 
     if (this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller &&
             (!this.constant.defenceNeedUpgrade || allEnergy>forceEnergy)) {
