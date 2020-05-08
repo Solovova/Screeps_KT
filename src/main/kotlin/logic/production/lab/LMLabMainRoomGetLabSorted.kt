@@ -74,6 +74,15 @@ class LMLabMainRoomGetLabSorted {
             }
         }
 
+        if (structureLab.size == 1) {
+            tmpResult = this.getLabSortedByArrays(structureLab,
+                    arrayOf(0),
+                    arrayOf(0), minX, minY)
+            if (tmpResult.size == 1) {
+                return tmpResult
+            }
+        }
+
         return emptyResult
     }
 }

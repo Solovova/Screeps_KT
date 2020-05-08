@@ -12,9 +12,45 @@ import kotlin.math.min
 fun MainRoom.setLabFillerTask(creep: Creep) {
     val terminal = this.structureTerminal[0] ?: return
     val lab0 = this.structureLabSort[0] ?: return
+    val listTasks: MutableList<LabFillerTask> = mutableListOf()
+
+
+    //ToDo rewrite it
+    if (this.structureLabSort[1]==null) {
+        val lab2 = this.structureLabSort[0] ?: return
+        val needComponent = min((lab2.energyCapacity - lab2.energy), this.getResourceInTerminal(RESOURCE_ENERGY))
+        if (needComponent >= creep.carryCapacity) {
+            listTasks.add(listTasks.size,
+                    LabFillerTask(terminal, lab2, RESOURCE_ENERGY, needComponent, needComponent + 20000))
+        }
+
+        if (this.creepNeedUpgradeID != "") {
+            val resourceForUpgrade = this.creepNeedUpgradeResource.unsafeCast<ResourceConstant>()
+            val resourceForUpgradeQuantity = this.creepNeedUpgradeResourceQuantity
+            if (lab2.mineralType.unsafeCast<ResourceConstant>() != resourceForUpgrade && lab2.mineralAmount != 0) {
+                listTasks.add(listTasks.size,
+                        LabFillerTask(lab2, terminal, lab2.mineralType.unsafeCast<ResourceConstant>(), min(lab2.mineralAmount, creep.carryCapacity), min(lab2.mineralAmount, creep.carryCapacity) + 20000))
+            }else{
+                val needResourceForUpgradeQuantity = resourceForUpgradeQuantity - lab2.mineralAmount
+                if (needResourceForUpgradeQuantity > 0 )
+                    listTasks.add(listTasks.size,
+                            LabFillerTask(terminal, lab2, resourceForUpgrade, min(needResourceForUpgradeQuantity, creep.carryCapacity), min(needResourceForUpgradeQuantity, creep.carryCapacity) + 20000))
+            }
+        }
+
+        if (listTasks.isNotEmpty()) {
+            val tmpTask: LabFillerTask? = listTasks.toMutableList().maxBy { it.priority }
+            if (tmpTask != null) {
+                //console.log("${tmpTask.StructureFrom}  ${tmpTask.StructureTo} ${tmpTask.quantity} ${tmpTask.resource}")
+                mc.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, tmpTask.StructureFrom.id, tmpTask.StructureFrom.pos,
+                        tmpTask.StructureTo.id, tmpTask.StructureTo.pos, tmpTask.resource, min(creep.carryCapacity, tmpTask.quantity)))}
+        }
+
+        return
+    }
+
     val lab1 = this.structureLabSort[1] ?: return
     val sourceLab = arrayOf(lab0, lab1)
-    val listTasks: MutableList<LabFillerTask> = mutableListOf()
 
     if (creep.carry.toMap().map { it.value }.sum() != 0) {
         val resTransfer = creep.carry.toMap().filter { it.value != 0 }.toList().firstOrNull()

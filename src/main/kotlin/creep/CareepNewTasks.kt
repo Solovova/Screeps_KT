@@ -378,7 +378,7 @@ fun Creep.upgradeCreep(mainContext: MainContext, mainRoom: MainRoom): Boolean {
     // 0 - Source 0, 1 - Source 1, 2 - Controller, 3 - any container
     var result = false
     if (this.memory.upgrade == "w") {
-        val lab2: StructureLab? = mainRoom.structureLabSort[2]
+        val lab2: StructureLab? = mainRoom.getLabForUpgrade()
         if (lab2 == null) {
             this.memory.upgrade = "u"
             return false

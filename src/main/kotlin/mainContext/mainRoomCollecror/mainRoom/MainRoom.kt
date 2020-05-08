@@ -270,6 +270,18 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             return _structureLabSort ?: throw AssertionError("Error get StructureLabSort")
         }
 
+    fun getLabForUpgrade(): StructureLab? {
+        if (this.structureLabSort[2] != null) {
+            return this.structureLabSort[2]
+        }
+
+        if (this.structureLabSort[0] != null) {
+            return this.structureLabSort[0]
+        }
+
+        return null
+    }
+
     private fun buildCreeps() {
         this.needCorrection()
         for (slaveRoomRecord in this.slaveRooms) slaveRoomRecord.value.needCorrection()
