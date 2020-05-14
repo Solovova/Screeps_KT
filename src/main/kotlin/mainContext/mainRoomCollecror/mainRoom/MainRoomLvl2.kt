@@ -3,6 +3,8 @@ package mainContext.mainRoomCollecror.mainRoom
 import screeps.api.*
 import screeps.api.structures.StructureContainer
 
+
+
 fun MainRoom.needCorrection2() {
     //1 harvester ,carrier ,filler , small harvester-filler, small filler
     //1.1 harvester ,carrier

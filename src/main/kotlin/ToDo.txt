@@ -1,7 +1,12 @@
 In future
-//ToDo balance lab
-//ToDo balance upgrade GH2O or XGH2O
-//ToDo sell energy
+//ToDo balance energy to display
+//ToDo buy XLH2O
+//ToDo use XLH2O
+//ToDo new variant of need build important and not important
+//ToDo auto build ramparts under structures
+//ToDo del construction sites not need
+//ToDo level3 room re balance
+
 
 //Main
 // 0 - universal +

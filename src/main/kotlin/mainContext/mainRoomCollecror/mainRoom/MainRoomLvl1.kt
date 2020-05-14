@@ -45,13 +45,6 @@ fun MainRoom.needCorrection1() {
     if (this.have[7] <= 3) this.need[1][6]=this.have[7]
     else this.need[1][6]=this.have[7]-1
 
-    //ToDo костиль
-    if (this.name == "E55N53") {
-        this.need[1][6]=1
-    }
-
-
-
     //2.1 Small upgrader
     if (this.need[0][6] == 0 && this.need[1][6] == 0 && this.need[2][6] == 0 &&
             this.need[0][7] == 0 && this.need[1][7] == 0 && this.need[2][7] == 0 &&
