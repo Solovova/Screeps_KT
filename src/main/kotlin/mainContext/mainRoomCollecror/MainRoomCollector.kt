@@ -50,50 +50,24 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
                 }
             }
 
+            //ToDo can be more then one mainContext.dataclass.getUpgrade, not only then spawn
+            val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
+
+            this.mc.lm.lmCreep.lmUpgrade.creepSetLogic(creep,mainRoom)
+
             // Main rooms
             if (creep.memory.role in 0..99) {
-                val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
+
                 mainRoom.have[creep.memory.role]++
 
                 if (creep.memory.role == 10) mainRoom.constant.creepIdOfBigBuilder = creep.id
                 //Upgrade
-                //ToDo can be more then one mainContext.dataclass.getUpgrade, not only then spawn
-                if (creep.spawning && creep.memory.upgrade == "") {
-                    if (mainRoom.constant.creepUpgradeRole[creep.memory.role] == true) {
-                        var upgradeParts = mainRoom.constant.creepUpgradableParts[creep.memory.role]
-                        if (upgradeParts == null) upgradeParts = mc.constants.globalConstant.creepUpgradableParts[creep.memory.role]
-                        if (upgradeParts != null) {
-                            for (upgradePart in upgradeParts) {
-                                val quantityParts: Int = creep.body.filter { it.type == upgradePart.key }.size
-                                if (quantityParts != 0) {
-                                    creep.memory.upgradeResource = upgradePart.value.unsafeCast<String>()
-                                    creep.memory.upgradeQuantity = quantityParts * 30
-                                    creep.memory.upgrade = "w"
-                                    break
-                                }
-                            }
-                        } else creep.memory.upgrade = "u"
 
-                    } else creep.memory.upgrade = "u"
-                }
-
-                if (creep.memory.upgrade == "w" && mainRoom.creepNeedUpgradeID == "") {
-                    mainRoom.creepNeedUpgradeID = creep.id
-                    mainRoom.creepNeedUpgradeResource = creep.memory.upgradeResource.unsafeCast<ResourceConstant>()
-                    mainRoom.creepNeedUpgradeResourceQuantity = creep.memory.upgradeQuantity
-                    //after this
-                    //LabFiller fill need Resource in Lab2
-                    //Lab reaction in Lab2 stop
-                    //creep have 1 task go to lab and mainContext.dataclass.getUpgrade and if OK write "u" to creep.memory.mainContext.dataclass.getUpgrade
-                }
             }
 
             // Slave rooms
             if (creep.memory.role in 100..199) {
-                val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
                 val slaveRoom: SlaveRoom = mainRoom.slaveRooms[creep.memory.slaveRoom] ?: continue
-
-
 
                 slaveRoom.have[creep.memory.role - 100]++
 

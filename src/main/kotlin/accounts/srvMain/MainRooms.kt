@@ -21,15 +21,7 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
         }
     }
 
-    if (mr.constant.levelOfRoom == 2) {
-        mr.constant.creepUpgradeRole[7] = true
-        mr.constant.creepUpgradeRole[10] = true
-    }
-
-    if (mr.constant.levelOfRoom == 3) {
-        mr.constant.creepUpgradeRole[10] = true
-        mr.constant.creepUpgradeRole[19] = true
-    }
+    mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
 
     if (mr.name in arrayOf("E51N35", "E52N35", "E53N35")) {
         mr.constant.defenceHits = 3000000
@@ -59,7 +51,7 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
 
     if (sr.mr.name == "E57N51" && sr.name == "E59N52") {
         sr.need[0][0] = 1
-        sr.need[0][1] = 8
+        sr.need[0][1] = 9
     }
 //
 //    if (sr.mr.name == "E56N53" && sr.name == "E55N53") {

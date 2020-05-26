@@ -224,6 +224,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 101) {
+        if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.takeDroppedEnergy(creepCarry,mainContext)
         //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
