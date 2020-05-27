@@ -4,30 +4,23 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
 fun AccountInitTest.initMainRoomOut(mr: MainRoom) {
-    val controller = mr.structureController[0]
-    if (controller != null) {
-        if (controller.level == 8) {
-            mr.constant.creepUseBigBuilder = true
-            mr.constant.defenceHits = 300000
-            mr.constant.energyExcessSent = 90000
+    val defenceRoomLow: Array<String> = arrayOf()
+    val defenceRoomLowHits = 1_000_000
+    val defenceRoomNormHits = 2_000_000 //Default
+    val defenceRoomHi: Array<String> = arrayOf()
+    val defenceRoomHiHits = 3_000_000
 
+    if (mr.name in defenceRoomLow) {
+        mr.constant.defenceHits = defenceRoomLowHits
+    } else {
+        if (mr.name in defenceRoomHi) {
+            mr.constant.defenceHits = defenceRoomHiHits
+        }else{
+            mr.constant.defenceHits = defenceRoomNormHits
         }
-
-        if (controller.level == 7) {
-            mr.constant.creepUseBigBuilder = true
-            mr.constant.defenceHits = 300000
-            mr.constant.energyExcessSent = 90000
-        }
-
-        if (controller.level == 6) {
-            mr.constant.creepUseBigBuilder = true
-            mr.constant.defenceHits = 100000
-            mr.constant.energyExcessSent = 90000
-            //mainContext.dataclass.getMainRoom.constant.creepUpgradeRole
-        }
-
-
     }
+
+    mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
 }
 
 fun AccountInitTest.initSlaveRoomOut(sr: SlaveRoom) {

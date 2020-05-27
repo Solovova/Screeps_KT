@@ -8,7 +8,7 @@ var mainContextGlob : MainContext? = null
 fun loop() {
     Memory["account"] = ""
     if (Game.rooms["E54N37"] != null)  Memory["account"] = "main"
-    if (Game.rooms["W3N4"] != null)    Memory["account"] = "ScreepPlus"
+    if (Game.rooms["W5N3"] != null)    Memory["account"] = "test"
     ///if (Game.rooms["W8N3"] != null)    Memory["account"] = "test2"
 
     // Initialisation and protect mainContext
