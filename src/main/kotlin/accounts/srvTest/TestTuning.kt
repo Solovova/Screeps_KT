@@ -1,11 +1,12 @@
-package accounts.srvMain
+package accounts.srvTest
+
 
 import mainContext.MainContext
 import screeps.api.BodyPartConstant
 import screeps.api.ResourceConstant
 import screeps.api.WORK
 
-fun AccountInitMain.initTuningOut(mc: MainContext) {
+fun AccountInitTest.initTuningOut(mc: MainContext) {
     for (mr in mc.mainRoomCollector.rooms.values) {
         if (mr.constant.reactionActive == "" && mr.constant.reactionActiveArr.isNotEmpty()) {
             mr.constant.reactionActive = mr.constant.reactionActiveArr[0]

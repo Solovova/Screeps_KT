@@ -102,15 +102,16 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (this.ticksToLive > 30) {
             if (!isTask) isTask = this.takeFromStorage(creepCarry, mainContext, mainRoom)
             if (!isTask) isTask = this.transferToFilling(creepCarry, mainContext, mainRoom)
-        }else{
-            if (creepCarry != 0) {
-                if (!isTask) isTask = this.transferToStorage(creepCarry, mainContext, mainRoom)
-            }else{
-                this.suicide()
-                return false
+        } else {
+            if (this.ticksToLive != null) {
+                if (creepCarry != 0) {
+                    if (!isTask) isTask = this.transferToStorage(creepCarry, mainContext, mainRoom)
+                } else {
+                    this.suicide()
+                    return false
+                }
             }
         }
-
     }
 
     if (this.memory.role == 6) {
@@ -226,13 +227,13 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     if (this.memory.role == 101) {
         if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
-        if (!isTask) isTask = this.takeDroppedEnergy(creepCarry,mainContext)
+        if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext)
         //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
         if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
-        if (!isTask) isTask = this.slaveTransferToStorageOrContainer(4,creepCarry, mainContext, slaveRoom, 20000)
+        if (!isTask) isTask = this.slaveTransferToStorageOrContainer(4, creepCarry, mainContext, slaveRoom, 20000)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
     }
 
