@@ -1,13 +1,12 @@
-package accounts.srvScreepPlus
+package accounts.srvMain2
 
-import accounts.srvMain.*
 import accounts.AccountInit
 import mainContext.MainContext
 import mainContext.constants.Constants
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
-class AccountInitScreepPlus : AccountInit ()  {
+class AccountInitMain2 : AccountInit ()  {
     override fun initHead(constants: Constants) {
         this.initHeadOut(constants)
     }
@@ -29,6 +28,6 @@ class AccountInitScreepPlus : AccountInit ()  {
     }
 
     override fun initTuning(mainContext: MainContext) {
-        super.initTuning(mainContext)
+        this.initTuningOut(mainContext)
     }
 }

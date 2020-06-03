@@ -1,10 +1,10 @@
-package accounts.srvMain
+package accounts.srvMain2
 
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import screeps.api.ResourceConstant
 
-fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
+fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
     val defenceRoomLow: Array<String> = arrayOf("E52N38","E58N37","E53N38")
     val defenceRoomLowHits = 1_000_000
     val defenceRoomNormHits = 2_000_000 //Default
@@ -39,7 +39,7 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
     //if (mr.name == "E54N39") mr.need[0][30] = 1
 }
 
-fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
+fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
     if (sr.mr.name == "E55N53" && sr.name == "E54N54") {
         sr.need[0][15] = 1
     }

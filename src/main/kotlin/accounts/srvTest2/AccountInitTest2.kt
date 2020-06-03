@@ -28,6 +28,6 @@ class AccountInitTest2 : AccountInit ()  {
     }
 
     override fun initTuning(mainContext: MainContext) {
-        super.initTuning(mainContext)
+        this.initTuningOut(mainContext)
     }
 }

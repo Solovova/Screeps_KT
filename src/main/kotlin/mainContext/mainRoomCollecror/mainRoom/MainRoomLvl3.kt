@@ -94,7 +94,8 @@ fun MainRoom.needCorrection3() {
     if (this.constant.needCleaner) this.need[2][17] = 1
 
     //18 Lab filler
-    if (this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") {
+    if ((this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") ||
+            this.constant.creepUpgradeRole.filter { it.value  }.isNotEmpty()) {
         this.need[1][18] = 1
     }
 

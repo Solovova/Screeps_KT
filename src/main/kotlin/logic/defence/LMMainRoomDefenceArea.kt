@@ -144,7 +144,27 @@ class LMMainRoomDefenceArea() {
         mainRoom.constant.autoDefenceAreaMatrix = matrixArea
         mainRoom.constant.autoDefenceArea = if (result==0) -1 else result
 
+//        console.log("was:" + matrixArea.joinToString { "," }.length)
+//        console.log("is:" + codeMatrix(matrixArea).length)
+
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Defence area: $result  cpu: $cpuStartMCStart")
+    }
+
+    private fun codeMatrix(matrixArea : Array<Array<Int>>):String {
+        val list = mutableListOf<Int>()
+        var count = 0
+        var tmp = 0
+        for (i in matrixArea)
+            for (j in i ) {
+                count++
+                tmp = tmp*2+j
+                if (count == 8) {
+                    list.add(tmp)
+                    tmp = 0
+                    count = 0
+                }
+            }
+        return list.joinToString { ";" }
     }
 }
