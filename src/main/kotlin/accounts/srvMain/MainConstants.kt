@@ -37,7 +37,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
     const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52", "E58N51")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
-    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54")) //28
+    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54","E57N55")) //28
     const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52","E55N54")) //29 ,"E54N54","E54N53"
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
 }
@@ -48,9 +48,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(29,0).model = 1
     //const.s(29,2).model = 2
     //const.s(29,3).model = 2
-    //const.s(26,2).model = 1
-    //const.s(26,2).pathUseGlobalGuideFlag=true
-    //const.s(26,2).pathToRoom= arrayOf("E57N51","E57N50","E58N50","E59N50","E60N50","E60N51","E60N52","E59N52")
+    const.s(28,3).model = 1
+    const.s(28,3).pathUseGlobalGuideFlag=true
+    const.s(28,3).pathToRoom= arrayOf("E56N53","E56N54","E56N55","E57N55")
 
     //const.s(28,0).autoBuildRoad = true
     //const.s(28,1).autoBuildRoad = true
@@ -93,4 +93,5 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(27).reactionActive = "G"
     const.m(28).reactionActive = "XGH2O"
     const.m(29).reactionActive = "XGH2O"
+    const.m(30).reactionActive = "XGH2O"
 }

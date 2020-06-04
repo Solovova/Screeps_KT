@@ -4,8 +4,8 @@ import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 import java.util.*
 
 plugins {
-    id("kotlin2js") version "1.3.31"
-    id("kotlin-dce-js") version "1.3.31"
+    id("kotlin2js") version "1.3.72"
+    id("kotlin-dce-js") version "1.3.72"
     id("org.tenne.rest") version "0.4.2"
 }
 

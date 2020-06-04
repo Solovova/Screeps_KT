@@ -850,6 +850,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 for (link in this.structureLinkNearSource.values)
                     if (link.energy >= 500 && link.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.energy < 300) {
                         link.transferEnergy(fLinkController, min(link.energy, fLinkController.energyCapacity - fLinkController.energy))
+
                         return
                     }
 
