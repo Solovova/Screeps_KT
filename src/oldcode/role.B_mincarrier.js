@@ -3,11 +3,11 @@ var role_B_mincarrier = {
         var objRoom = Memory.Data[creep.memory.dstroom];
         if (objRoom == null) return;
         
-        if(creep.memory.work && _.sum(creep.carry) == 0) {
+        if(creep.memory.work && _.sum(creep.store) == 0) {
             creep.memory.work = false;
             creep.say('load');
 	    }
-	    if(!creep.memory.work && _.sum(creep.carry) == creep.carryCapacity) {
+	    if(!creep.memory.work && _.sum(creep.store) == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

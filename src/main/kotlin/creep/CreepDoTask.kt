@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
+
 package creep
 
 import mainContext.MainContext
@@ -48,7 +50,7 @@ fun Creep.doTask(mainContext: MainContext) {
         TypeOfTask.TransferTo -> {
             if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
             if (task.come) {
-                val structure: Structure? = (Game.getObjectById(task.idObject0) as Structure?)
+                val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
                 if (structure != null) this.transfer(structure, task.resource)
             }
         }
@@ -57,7 +59,7 @@ fun Creep.doTask(mainContext: MainContext) {
             val objForFilling: Creep? = Game.getObjectById(task.idObject0)
             if (objForFilling != null) {
                 if (this.pos.inRangeTo(objForFilling.pos, 1)) {
-                    val carryCreepTo = objForFilling.carry.toMap().map { it.value }.sum()
+                    val carryCreepTo = objForFilling.store.toMap().map { it.value }.sum()
                     if (carryCreepTo == 0)
                         this.transfer(objForFilling, task.resource)
                 } else this.moveTo(objForFilling.pos)
@@ -68,7 +70,7 @@ fun Creep.doTask(mainContext: MainContext) {
             val objForFilling: Creep? = Game.getObjectById(task.idObject0)
             if (objForFilling != null) {
                 if (this.pos.inRangeTo(objForFilling.pos, 1)) {
-                    val carryCreepTo = objForFilling.carry.toMap().map { it.value }.sum()
+                    val carryCreepTo = objForFilling.store.toMap().map { it.value }.sum()
                     if (carryCreepTo != 0)
                         objForFilling.transfer(this, task.resource)
                 } else this.moveTo(objForFilling.pos)
@@ -151,7 +153,7 @@ fun Creep.doTask(mainContext: MainContext) {
         TypeOfTask.Take -> {
             if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
             if (task.come) {
-                val structure: Structure? = (Game.getObjectById(task.idObject0) as Structure?)
+                val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
                 if (structure != null) this.withdraw(structure, task.resource)
             }
         }
@@ -219,7 +221,7 @@ fun Creep.doTask(mainContext: MainContext) {
             if (!task.come) this.doTaskGoTo(task, posGo, 1)
             if (task.come) {
                 if (!task.take) {
-                    val structure: Structure? = (Game.getObjectById(task.idObject0) as Structure?)
+                    val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
                     if (structure != null) {
                         if (task.quantity == 0) this.withdraw(structure, task.resource)
                         else this.withdraw(structure, task.resource, task.quantity)
@@ -227,7 +229,7 @@ fun Creep.doTask(mainContext: MainContext) {
                     task.take = true
                     task.come = false
                 } else {
-                    val structure: Structure? = (Game.getObjectById(task.idObject1) as Structure?)
+                    val structure: StoreOwner? = (Game.getObjectById(task.idObject1) as StoreOwner?)
                     if (structure != null) {
                         if (task.quantity == 0) this.transfer(structure, task.resource)
                         else this.transfer(structure, task.resource, task.quantity)

@@ -88,6 +88,7 @@ class MainContext {
 //        }
 
         lm.lmDirectControl.runs()
+
         this.lm.lmProduction.lmLabMainRoomRun.run()
 
         this.battleGroupContainer.runInEndOfTick()

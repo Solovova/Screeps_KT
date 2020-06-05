@@ -26,7 +26,7 @@ var role_C_Updater = {
             creep.memory.work = false;
             creep.say('harvest');
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('build');
 	    }

@@ -135,7 +135,7 @@ var modul_Tests = {
         if (fTestRole.indexOf(creep.memory.role) != -1) {
             if (Memory.test[creep.memory.dstroom]._ProftCreepHistory[creep.name] != null) {
                 var fEnergyStart = Memory.test[creep.memory.dstroom]._ProftCreepHistory[creep.name];
-                var fEnergyEnd = creep.carry.energy;
+                var fEnergyEnd = creep.store.energy;
                 var fTrasfer = fEnergyStart-fEnergyEnd;
                 if (fEnergyStart!=fEnergyEnd) {
                     Memory.test[creep.memory.dstroom]._ProftCreepHistory[creep.name] = fEnergyEnd;
@@ -149,7 +149,7 @@ var modul_Tests = {
                     }
                 }
             }else{
-                Memory.test[creep.memory.dstroom]._ProftCreepHistory[creep.name] = creep.carry.energy;
+                Memory.test[creep.memory.dstroom]._ProftCreepHistory[creep.name] = creep.store.energy;
             }
         }
     },

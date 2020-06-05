@@ -9,14 +9,14 @@ var role_B_Harvester = {
             creep.memory.role = creep.memory.role + 1000;
 	    };
         
-        if(creep.memory.work && creep.carry.energy == 0) {
+        if(creep.memory.work && creep.store[RESOURCE_ENERGY] ?: 0 == 0) {
             creep.memory.work = false;
             creep.say('harvest');
         }
         
-        var fNeedEnergy = creep.carryCapacity;
+        var fNeedEnergy = creep.store.getCapacity();
         if (creep.memory.info !=null) fNeedEnergy=creep.memory.info;
-	    if(!creep.memory.work && (creep.carry.energy >= (fNeedEnergy))) {
+	    if(!creep.memory.work && (creep.store[RESOURCE_ENERGY] ?: 0 >= (fNeedEnergy))) {
 	        creep.memory.work = true;
 	        creep.say('work');
 	    }

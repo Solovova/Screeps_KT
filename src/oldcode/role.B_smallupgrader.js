@@ -6,12 +6,12 @@ var role_B_smallupgrader = {
         var objRoom = Memory.Data[creep.memory.dstroom];
         if (objRoom == null) return;
 
-        if(creep.memory.work && creep.carry.energy == 0) {
+        if(creep.memory.work && creep.store[RESOURCE_ENERGY] ?: 0 == 0) {
             creep.memory.work = false;
             creep.say('load');
         }
         
-	    if(!creep.memory.work && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.store.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

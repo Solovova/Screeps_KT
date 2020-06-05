@@ -42,10 +42,10 @@ class LMMainRoomCreepAutoDefencePath(val mc: MainContext) {
             return costs
         }
 
-        val goals = object : PathFinder.GoalWithRange {
-            override var pos: RoomPosition = fPos2
-            override var range: Int = range
-        }
+        val goals = GoalWithRange (
+            pos = fPos2,
+            range = range
+        )
 
         return PathFinder.search(fPos1, goals, options {
             maxOps = 5000

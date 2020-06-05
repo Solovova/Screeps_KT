@@ -41,7 +41,7 @@ var role_C_Harvester = {
             creep.say('harvest');
         }
         
-        var fNeedEnergy = creep.carryCapacity;
+        var fNeedEnergy = creep.store.getCapacity();
         if (creep.memory.info !=null) fNeedEnergy=creep.memory.info;
 	    if(!creep.memory.work && (creep.carry.energy >= fNeedEnergy)) {
 	        creep.memory.work = true;

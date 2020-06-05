@@ -585,18 +585,18 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
 
         // Загружаем все extension
         for (extension in this.structureExtension.values)
-            if (extension.energyCapacity > extension.energy)
-                needs[extension] = StructureData(extension.energyCapacity - extension.energy, 1)
+            if (extension.store.getCapacity(RESOURCE_ENERGY) ?: 0 > extension.store[RESOURCE_ENERGY]?: 0)
+                needs[extension] = StructureData(extension.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (extension.store[RESOURCE_ENERGY]?: 0), 1)
 
         // Загружаем все спавны
         for (spawn in this.structureSpawn.values)
-            if (spawn.energyCapacity > spawn.energy)
-                needs[spawn] = StructureData(spawn.energyCapacity - spawn.energy, 1)
+            if (spawn.store.getCapacity(RESOURCE_ENERGY) ?: 0 > spawn.store[RESOURCE_ENERGY]?: 0)
+                needs[spawn] = StructureData(spawn.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (spawn.store[RESOURCE_ENERGY]?: 0), 1)
 
         // Загружаем Tower если енергия меньше 1000
         //ToDo set priority 0 if have hostile creeps and queue < 2
         for (tower in this.structureTower.values)
-            if (tower.energy < 400) needs[tower] = StructureData(tower.energyCapacity - tower.energy, 3)
+            if (tower.store[RESOURCE_ENERGY]?: 0 < 400) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (tower.store[RESOURCE_ENERGY]?: 0), 3)
 
         if (needs.isEmpty()) return null
         // Производим коррекцию с учетем заданий которые делаются и ищем ближайший
@@ -833,11 +833,11 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         val levelOfRoom = this.getLevelOfRoom()
         if (levelOfRoom < 3 || this.have[19] == 0) {
             val fLinkTo: StructureLink = this.structureLinkNearStorage[0] ?: return
-            if (fLinkTo.energy != 0) return
+            if (fLinkTo.store[RESOURCE_ENERGY]?: 0 != 0) return
 
             for (link in this.structureLinkNearSource.values)
-                if (link.energy >= 700 && link.cooldown == 0) {
-                    link.transferEnergy(fLinkTo, link.energy)
+                if (link.store[RESOURCE_ENERGY]?: 0 >= 700 && link.cooldown == 0) {
+                    link.transferEnergy(fLinkTo, link.store[RESOURCE_ENERGY]?: 0)
                     break
                 }
             return
@@ -849,15 +849,15 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 val fLinkController: StructureLink = this.structureLinkNearController[0] ?: return
 
                 for (link in this.structureLinkNearSource.values)
-                    if (link.energy >= 500 && link.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.energy < 300) {
-                        link.transferEnergy(fLinkController, min(link.energy, fLinkController.energyCapacity - fLinkController.energy))
+                    if (link.store[RESOURCE_ENERGY]?: 0 >= 500 && link.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.store[RESOURCE_ENERGY]?: 0 < 300) {
+                        link.transferEnergy(fLinkController, min(link.store[RESOURCE_ENERGY]?: 0, fLinkController.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (fLinkController.store[RESOURCE_ENERGY]?: 0)))
 
                         return
                     }
 
                 for (link in this.structureLinkNearSource.values)
-                    if (link.energy >= 700 && link.cooldown == 0 && fLinkStorage.cooldown == 0 && fLinkStorage.energy == 0) {
-                        link.transferEnergy(fLinkStorage, link.energy)
+                    if (link.store[RESOURCE_ENERGY]?: 0 >= 700 && link.cooldown == 0 && fLinkStorage.cooldown == 0 && fLinkStorage.store[RESOURCE_ENERGY]?: 0 == 0) {
+                        link.transferEnergy(fLinkStorage, link.store[RESOURCE_ENERGY]?: 0)
                         break
                     }
             }
@@ -867,13 +867,13 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 val fLinkController: StructureLink = this.structureLinkNearController[0] ?: return
                 val fLinkSource: StructureLink = this.structureLinkNearSource[0] ?: return
 
-                if (fLinkSource.energy >= 500 && fLinkSource.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.energy < 300) {
-                    fLinkSource.transferEnergy(fLinkController, min(fLinkSource.energy, fLinkController.energyCapacity - fLinkController.energy))
+                if (fLinkSource.store[RESOURCE_ENERGY]?: 0 >= 500 && fLinkSource.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.store[RESOURCE_ENERGY]?: 0 < 300) {
+                    fLinkSource.transferEnergy(fLinkController, min(fLinkSource.store[RESOURCE_ENERGY]?: 0, fLinkController.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (fLinkController.store[RESOURCE_ENERGY]?: 0)))
                     return
                 }
 
-                if (fLinkStorage.energy >= 500 && fLinkStorage.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.energy == 0) {
-                    fLinkStorage.transferEnergy(fLinkController, fLinkSource.energy)
+                if (fLinkStorage.store[RESOURCE_ENERGY]?: 0 >= 500 && fLinkStorage.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.store[RESOURCE_ENERGY]?: 0 == 0) {
+                    fLinkStorage.transferEnergy(fLinkController, fLinkSource.store[RESOURCE_ENERGY]?: 0)
                     return
                 }
             }
@@ -892,14 +892,14 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                     ?: 0) + record.value
     }
 
-    fun needCleanWhat(store: StoreDefinition?, resource: ResourceConstant): ResourceConstant? {
+    fun needCleanWhat(store: Store?, resource: ResourceConstant): ResourceConstant? {
         if (store == null) return null
         for (record in store.keys)
             if (store[record] != null && store[record] != 0 && record != resource) return record
         return null
     }
 
-    private fun needClean(store: StoreDefinition?, resource: ResourceConstant): Boolean {
+    private fun needClean(store: Store?, resource: ResourceConstant): Boolean {
         if (store == null) return false
         return (store[resource] ?: 0) != (store.toMap().map { it.value }.sum())
     }

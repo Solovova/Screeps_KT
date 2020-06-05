@@ -36,7 +36,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
         for (creep in Game.creeps.values) {
             if (creep.memory.tickDeath != 0
                     && creep.ticksToLive < creep.memory.tickDeath
-                    && creep.carry.toMap().map { it.value }.sum() == 0
+                    && creep.store.toMap().map { it.value }.sum() == 0
             ) creep.suicide()
 
             //
@@ -81,7 +81,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             // Logist add transfer
             if (creep.memory.role == 14 || creep.memory.role == 1014) {
                 val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
-                for (res in creep.carry.toMap()) mainRoom.resStorage[res.key] = (mainRoom.resStorage[res.key] ?: 0) + res.value
+                for (res in creep.store.toMap()) mainRoom.resStorage[res.key] = (mainRoom.resStorage[res.key] ?: 0) + res.value
             }
 
 
@@ -94,10 +94,10 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             var resourceQuantityAllLabFiller = 0
             val creepsLabFiller = Game.creeps.toMap().filter { (it.value.memory.role == 18 || it.value.memory.role == 1018)
                     && it.value.memory.mainRoom == mainRoom.name}
-            for (creep in creepsLabFiller) resourceQuantityAllLabFiller += creep.value.carry[resource] ?: 0
+            for (creep in creepsLabFiller) resourceQuantityAllLabFiller += creep.value.store[resource] ?: 0
 
             val lab = mainRoom.structureLabSort[2]
-            val resourceQuantityLab2 = if (lab != null && lab.mineralType.unsafeCast<ResourceConstant>() == resource) lab.mineralAmount else 0
+            val resourceQuantityLab2: Int = if (lab != null) lab.store[resource] ?: 0 else 0
 
             //console.log("Test $resourceQuantityAllLabFiller $resourceQuantityLab2")
 
@@ -113,7 +113,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
                 val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
                 val slaveRoom: SlaveRoom = mainRoom.slaveRooms[creep.memory.slaveRoom] ?: continue
 
-                val carry: Int = creep.carry.energy
+                val carry: Int = creep.store[RESOURCE_ENERGY] ?: 0
                 var oldCarry = 0
                 if (Memory["profit"][creep.id] != null)
                     oldCarry = Memory["profit"][creep.id] as Int

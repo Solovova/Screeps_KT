@@ -571,7 +571,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
         this.constant.profitUp += put
     }
 
-    private fun needClean(store: StoreDefinition?, resource: ResourceConstant): Boolean {
+    private fun needClean(store: Store?, resource: ResourceConstant): Boolean {
         if (store == null) return false
         return (store[resource] ?: 0) != (store.toMap().map { it.value }.sum())
     }

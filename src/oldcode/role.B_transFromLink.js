@@ -10,10 +10,10 @@ var role_B_transFromLink = {
 	    const link    = Game.getObjectById(objRoom.Links[2]);
 	    const storage = Game.getObjectById(objRoom.Storage);
 	    
-        if (creep.memory.work && creep.carry.energy == 0) {
+        if (creep.memory.work && creep.store.energy == 0) {
             creep.memory.work = false;
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.store.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	    }
 

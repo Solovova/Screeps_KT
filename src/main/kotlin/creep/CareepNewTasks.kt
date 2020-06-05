@@ -74,7 +74,7 @@ fun Creep.harvestFromMineral(creepCarry: Int, mainContext: MainContext, mainRoom
         if (extractor != null
                 && container != null
                 && extractor.cooldown == 0
-                && container.store.toMap().map { it.value }.sum() < (container.storeCapacity - 30)) {
+                && container.store.toMap().map { it.value }.sum() < (container.store.getCapacity() - 30)) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mainRoom.mineral.id, posObject0 = mainRoom.mineral.pos))
             result = true
         }
@@ -90,7 +90,7 @@ fun Creep.slaveHarvestFromMineral(creepCarry: Int, mainContext: MainContext, sla
         if (extractor != null
                 && mineral != null
                 && extractor.cooldown == 0
-                && creepCarry != this.carryCapacity) {
+                && creepCarry != this.store.getCapacity()) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mineral.id, posObject0 = mineral.pos))
             result = true
         }
@@ -263,8 +263,8 @@ fun Creep.drop(creepCarry: Int, mainContext: MainContext): Boolean {
     var result = false
     if (creepCarry != 0) {
         var drop: ResourceConstant? = null
-        for (record in this.carry.keys)
-            if (this.carry[record] != 0) {
+        for (record in this.store.keys)
+            if (this.store[record] != 0) {
                 drop = record
                 break
             }
@@ -364,7 +364,7 @@ fun Creep.takeFromContainer(type: Int, creepCarry: Int, mainContext: MainContext
             0 -> objForFilling = mainRoom.structureContainerNearSource[0]
             1 -> objForFilling = mainRoom.structureContainerNearSource[1]
             2 -> objForFilling = mainRoom.structureContainerNearController[0]
-            3 -> objForFilling = mainRoom.structureContainer.values.filter { it.store.energy != 0 }.maxBy { it.store.energy }
+            3 -> objForFilling = mainRoom.structureContainer.values.filter { it.store[RESOURCE_ENERGY] ?: 0 != 0 }.maxBy { it.store[RESOURCE_ENERGY] ?: 0 }
             4 -> objForFilling = mainRoom.structureLinkNearController[0]
         }
         if (objForFilling != null) {
@@ -443,7 +443,7 @@ fun Creep.takeDroppedEnergy(creepCarry: Int, mainContext: MainContext, range: In
 fun Creep.takeFromTombStone(creepCarry: Int, mainContext: MainContext, range: Int = 100): Boolean {
     var result = false
     if (creepCarry == 0) {
-        val objTombStone: Tombstone? = this.room.find(FIND_TOMBSTONES).filter { it.store.energy != 0 }.minBy { this.pos.getRangeTo(it.pos) }
+        val objTombStone: Tombstone? = this.room.find(FIND_TOMBSTONES).filter { it.store[RESOURCE_ENERGY] ?: 0 != 0 }.minBy { this.pos.getRangeTo(it.pos) }
         if (objTombStone != null && objTombStone.pos.inRangeTo(this.pos, range)) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = objTombStone.id, posObject0 = objTombStone.pos))
             result = true
@@ -458,7 +458,7 @@ fun Creep.slaveTakeFromContainer(type: Int, creepCarry: Int, mainContext: MainCo
         var objForFilling: Structure? = null
         when (type) {
             0, 1, 2 -> objForFilling = slaveRoom.structureContainerNearSource[type]
-            4 -> objForFilling = slaveRoom.structureContainer.values.filter { it.store.energy > 0 }.minBy { this.pos.getRangeTo(it) }
+            4 -> objForFilling = slaveRoom.structureContainer.values.filter { it.store[RESOURCE_ENERGY] ?: 0 > 0 }.minBy { this.pos.getRangeTo(it) }
         }
         if (objForFilling != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = objForFilling.id, posObject0 = objForFilling.pos))
@@ -677,7 +677,7 @@ fun Creep.slaveTransferToStorageOrContainer(type: Int, creepCarry: Int, mainCont
                     objForFilling = slaveRoom.structureStorage[0]
                     if (objForFilling != null
                             && putIfEnergyLess!=0
-                            && objForFilling.store.energy> putIfEnergyLess){
+                            && objForFilling.store[RESOURCE_ENERGY] ?: 0> putIfEnergyLess){
                         objForFilling = null
                     }
                 }
@@ -714,15 +714,15 @@ fun Creep.slaveTransferToFilling(creepCarry: Int, mainContext: MainContext, slav
     if (creepCarry > 0 && slaveRoom != null) {
         var objForFilling: Structure? = slaveRoom.room?.find(FIND_STRUCTURES)?.filter {
             it.structureType == STRUCTURE_EXTENSION
-        }?.firstOrNull { (it as StructureExtension).energy < it.energyCapacity }
+        }?.firstOrNull { (it as StructureExtension).store[RESOURCE_ENERGY] ?: 0 < it.store.getCapacity(RESOURCE_ENERGY) ?: 0 }
 
         if (objForFilling == null) objForFilling = slaveRoom.room?.find(FIND_STRUCTURES)?.filter {
             it.structureType == STRUCTURE_SPAWN
-        }?.firstOrNull { (it as StructureSpawn).energy < it.energyCapacity }
+        }?.firstOrNull { (it as StructureSpawn).store[RESOURCE_ENERGY] ?: 0 < it.store.getCapacity(RESOURCE_ENERGY) ?: 0 }
 
         if (objForFilling == null) objForFilling = slaveRoom.room?.find(FIND_STRUCTURES)?.filter {
             it.structureType == STRUCTURE_TOWER
-        }?.firstOrNull { (it as StructureTower).energy < it.energyCapacity }
+        }?.firstOrNull { (it as StructureTower).store[RESOURCE_ENERGY] ?: 0 < it.store.getCapacity(RESOURCE_ENERGY) ?: 0 }
 
         if (objForFilling != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.TransferTo, idObject0 = objForFilling.id, posObject0 = objForFilling.pos))

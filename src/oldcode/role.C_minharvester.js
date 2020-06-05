@@ -27,7 +27,7 @@ var role_C_MinHarvester = {
         if (objRoom.MineralCarrierNear == 1 && creep.carry[fMineral.mineralType]>0 && fDistance<3){
             creep.drop(fMineral.mineralType) 
         }else{
-            if (_.sum(creep.carry)>=creep.carryCapacity) return;
+            if (_.sum(creep.carry)>=creep.store.getCapacity()) return;
             if(creep.harvest(fMineral) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(fMineral, {visualizePathStyle: {stroke: '#ffaa00'}});
             }

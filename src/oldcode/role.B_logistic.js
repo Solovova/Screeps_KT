@@ -25,11 +25,11 @@ var role_B_logistic = {
 
         
         if (creep.memory.isTask == 2){
-            if (_.sum(creep.carry)==0) creep.memory.isTask = 0;
+            if (_.sum(creep.store)==0) creep.memory.isTask = 0;
         }
 
         if (creep.memory.isTask == 0) {
-            var task = logistics.GetTaskForLogist(objRoom,creep.carryCapacity);
+            var task = logistics.GetTaskForLogist(objRoom,creep.store.getCapacity());
             if (task==null) return;
             creep.memory.isTask     = task.isTask;
             creep.memory.idFrom     = task.idFrom;
@@ -44,7 +44,7 @@ var role_B_logistic = {
         if (creep.memory.isTask == 0) return;
 
         if (creep.memory.isTask == 1){
-            if (_.sum(creep.carry)!=0) creep.memory.isTask = 2;
+            if (_.sum(creep.store)!=0) creep.memory.isTask = 2;
         }
    
 	    if(creep.memory.isTask == 2) {
