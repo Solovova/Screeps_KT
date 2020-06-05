@@ -10,4 +10,6 @@ fun AccountInitTest.initHeadOut(const: Constants) {
 fun AccountInitTest.initBodyOut(const: Constants) {
     const.m(0).note = "room 0"
     const.s(0,0).autoBuildRoad = true
+
+    const.m(0).reactionActive = "XLH2O"
 }
