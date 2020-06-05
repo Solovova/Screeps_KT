@@ -17,13 +17,13 @@ fun MainRoom.setLogistTask(creep: Creep) {
     }
 
     if (getLevelOfRoom() == 3 && this.have[19] != 0 && this.source.size == 1) {
-        if (link != null && link.energy < link.energyCapacity && storage != null) {
-            val transportQuantity: Int = min(link.energyCapacity - link.energy, creep.store.getCapacity())
+        if (link != null && link.store[RESOURCE_ENERGY] ?: 0 < link.store.getCapacity(RESOURCE_ENERGY) ?: 0 && storage != null) {
+            val transportQuantity: Int = min(link.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (link.store[RESOURCE_ENERGY] ?: 0), creep.store.getCapacity())
             mc.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, storage.id, storage.pos, link.id, link.pos, RESOURCE_ENERGY, transportQuantity))
             return
         }
     }else{
-        if (link != null && link.energy != 0 && storage != null) {
+        if (link != null && link.store[RESOURCE_ENERGY] ?: 0 != 0 && storage != null) {
             mc.tasks.add(creep.id, CreepTask(TypeOfTask.Transport, link.id, link.pos, storage.id, storage.pos, RESOURCE_ENERGY, 0))
             return
         }

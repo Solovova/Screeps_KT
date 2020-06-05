@@ -18,7 +18,7 @@ fun MainRoom.setLabFillerTask(creep: Creep) {
     //ToDo rewrite it
     if (this.structureLabSort[1]==null) {
         val lab2 = this.structureLabSort[0] ?: return
-        val needComponent = min((lab2.energyCapacity - lab2.energy), this.getResourceInTerminal(RESOURCE_ENERGY))
+        val needComponent = min((lab2.store.getCapacity(RESOURCE_ENERGY) ?: 0 - lab2.energy), this.getResourceInTerminal(RESOURCE_ENERGY))
         if (needComponent >= creep.store.getCapacity()) {
             listTasks.add(listTasks.size,
                     LabFillerTask(terminal, lab2, RESOURCE_ENERGY, needComponent, needComponent + 20000))
@@ -63,7 +63,7 @@ fun MainRoom.setLabFillerTask(creep: Creep) {
 
     //fill energy to Lab2
     val lab2 = this.structureLabSort[2] ?: return
-    val needComponent = min((lab2.energyCapacity - lab2.energy), this.getResourceInTerminal(RESOURCE_ENERGY))
+    val needComponent = min((lab2.store.getCapacity(RESOURCE_ENERGY) ?: 0 - lab2.energy), this.getResourceInTerminal(RESOURCE_ENERGY))
     if (needComponent >= creep.store.getCapacity()) {
         listTasks.add(listTasks.size,
                 LabFillerTask(terminal, lab2, RESOURCE_ENERGY, needComponent, needComponent + 20000))

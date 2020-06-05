@@ -713,15 +713,15 @@ fun Creep.slaveTransferToFilling(creepCarry: Int, mainContext: MainContext, slav
     if (creepCarry > 0 && slaveRoom != null) {
         var objForFilling: Structure? = slaveRoom.room?.find(FIND_STRUCTURES)?.filter {
             it.structureType == STRUCTURE_EXTENSION
-        }?.firstOrNull { (it as StructureExtension).energy < it.energyCapacity }
+        }?.firstOrNull { (it as StructureExtension).store[RESOURCE_ENERGY] ?: 0 < it.store.getCapacity(RESOURCE_ENERGY) ?: 0 }
 
         if (objForFilling == null) objForFilling = slaveRoom.room?.find(FIND_STRUCTURES)?.filter {
             it.structureType == STRUCTURE_SPAWN
-        }?.firstOrNull { (it as StructureSpawn).energy < it.energyCapacity }
+        }?.firstOrNull { (it as StructureSpawn).store[RESOURCE_ENERGY] ?: 0 < it.store.getCapacity(RESOURCE_ENERGY) ?: 0 }
 
         if (objForFilling == null) objForFilling = slaveRoom.room?.find(FIND_STRUCTURES)?.filter {
             it.structureType == STRUCTURE_TOWER
-        }?.firstOrNull { (it as StructureTower).energy < it.energyCapacity }
+        }?.firstOrNull { (it as StructureTower).store[RESOURCE_ENERGY] ?: 0 < it.store.getCapacity(RESOURCE_ENERGY) ?: 0 }
 
         if (objForFilling != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.TransferTo, idObject0 = objForFilling.id, posObject0 = objForFilling.pos))

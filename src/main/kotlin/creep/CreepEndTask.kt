@@ -127,15 +127,15 @@ fun Creep.endTask(mainContext: MainContext) {
                 return
             }
             var filled = false
-            if (structure.structureType == STRUCTURE_EXTENSION && (structure as StructureExtension).energyCapacity == structure.energy) filled = true
-            if (structure.structureType == STRUCTURE_SPAWN && (structure as StructureSpawn).energyCapacity == structure.energy) filled = true
-            if (structure.structureType == STRUCTURE_TOWER && (structure as StructureTower).energyCapacity == structure.energy) filled = true
+            if (structure.structureType == STRUCTURE_EXTENSION && (structure as StructureExtension).store.getCapacity(RESOURCE_ENERGY) ?: 0 == structure.store[RESOURCE_ENERGY] ?: 0) filled = true
+            if (structure.structureType == STRUCTURE_SPAWN && (structure as StructureSpawn).store.getCapacity(RESOURCE_ENERGY) ?: 0 == structure.store[RESOURCE_ENERGY] ?: 0) filled = true
+            if (structure.structureType == STRUCTURE_TOWER && (structure as StructureTower).store.getCapacity(RESOURCE_ENERGY) ?: 0 == structure.store[RESOURCE_ENERGY] ?: 0) filled = true
             if (structure.structureType == STRUCTURE_CONTAINER &&
-                    (structure as StructureContainer).store.toMap().map { it.value }.sum() == structure.storeCapacity)  filled = true
+                    (structure as StructureContainer).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0)  filled = true
             if (structure.structureType == STRUCTURE_STORAGE &&
-                    (structure as StructureStorage).store.toMap().map { it.value }.sum() == structure.storeCapacity)  filled = true
+                    (structure as StructureStorage).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0)  filled = true
             if (structure.structureType == STRUCTURE_TERMINAL &&
-                    (structure as StructureTerminal).store.toMap().map { it.value }.sum() == structure.storeCapacity)  filled = true
+                    (structure as StructureTerminal).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0)  filled = true
             if (filled) mainContext.tasks.deleteTask(this.id)
         }
 
