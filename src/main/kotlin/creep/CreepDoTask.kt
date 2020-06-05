@@ -43,7 +43,7 @@ fun Creep.doTask(mainContext: MainContext) {
             val container: StructureContainer? = mainRoom.structureContainerNearMineral[0]
             val extractor: StructureExtractor? = mainRoom.structureExtractor[0]
             if (mineral != null && container!=null
-                    && container.store.toMap().toList().sumBy{it.second}<container.storeCapacity-100
+                    && container.store.toMap().toList().sumBy{it.second}<container.store.getCapacity()-100
                     && extractor!=null && extractor.cooldown == 0) this.harvest(mineral)
         }
 
