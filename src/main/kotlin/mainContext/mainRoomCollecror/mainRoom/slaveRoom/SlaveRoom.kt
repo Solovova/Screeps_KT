@@ -243,7 +243,9 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             }
 
             103 -> {
-                result = arrayOf(CLAIM, CLAIM, MOVE, MOVE)
+                if (this.mr.room.energyCapacityAvailable < 3900) result = arrayOf(CLAIM, CLAIM, MOVE, MOVE)
+                else result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM,CLAIM,CLAIM,CLAIM,CLAIM,CLAIM)
+
             }
 
             104 -> {

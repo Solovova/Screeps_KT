@@ -103,7 +103,8 @@ fun Creep.transportMineralToStorage(mainContext: MainContext, mainRoom: MainRoom
     val container: StructureContainer? = mainRoom.structureContainerNearMineral[0]
     val storage: StructureStorage? = mainRoom.structureStorage[0]
     if (container != null && storage != null) {
-        mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Transport, idObject0 = container.id, posObject0 = container.pos, idObject1 = storage.id, posObject1 = storage.pos, resource = mainRoom.mineral.mineralType))
+        val transportResource:ResourceConstant = container.store.toMap().maxBy { it.value }?.key ?: mainRoom.mineral.mineralType
+        mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Transport, idObject0 = container.id, posObject0 = container.pos, idObject1 = storage.id, posObject1 = storage.pos, resource = transportResource))
         result = true
     }
     return result

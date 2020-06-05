@@ -38,7 +38,11 @@ fun Creep.doTask(mainContext: MainContext) {
 
         TypeOfTask.HarvestMineral -> {
             val mineral: Mineral? = (Game.getObjectById(task.idObject0) as Mineral?)
-            if (mineral != null) this.harvest(mineral)
+            val container: StructureContainer? = mainRoom.structureContainerNearMineral[0]
+            val extractor: StructureExtractor? = mainRoom.structureExtractor[0]
+            if (mineral != null && container!=null
+                    && container.store.toMap().toList().sumBy{it.second}<container.storeCapacity-100
+                    && extractor!=null && extractor.cooldown == 0) this.harvest(mineral)
         }
 
         TypeOfTask.TransferTo -> {
