@@ -247,12 +247,17 @@ fun Creep.endTask(mainContext: MainContext) {
                 val lab: Structure? = Game.getObjectById(task.idObject1)
                 if (lab != null && lab is StructureLab) {
                     val carryMineral = this.store.toMap().toList().firstOrNull { it.second != 0 }
-                    if (lab.mineralAmount != 0 && carryMineral!= null && carryMineral.first != lab.mineralType.unsafeCast<ResourceConstant>()) mainContext.tasks.deleteTask(this.id)
+                    if (carryMineral!=null) {
+                        val lab2Pair: Pair<ResourceConstant,Int> = lab.store.toMap().filter { it.key != RESOURCE_ENERGY && it.value != 0 }.toList().firstOrNull() ?: Pair(carryMineral.first, 0)
+                        if (lab2Pair.second != 0 && carryMineral.first != lab2Pair.first) mainContext.tasks.deleteTask(this.id)
+                    }
+
                 }
             }
             if (creepCarry == 0 && task.take) mainContext.tasks.deleteTask(this.id)
 
         }
+
 
         TypeOfTask.EraserAttack -> {
             val hostileCreep: Creep? = Game.getObjectById(task.idObject0)

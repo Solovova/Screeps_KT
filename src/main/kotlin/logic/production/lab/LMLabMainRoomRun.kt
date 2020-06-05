@@ -5,7 +5,9 @@ import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.getQuantityAllMineralInStorage
 import screeps.api.COLOR_RED
+import screeps.api.RESOURCE_ENERGY
 import screeps.api.ResourceConstant
+import screeps.utils.toMap
 
 class LMLabMainRoomRun(private val mc: MainContext) {
     private fun needRun(mainRoom: MainRoom): Boolean {
@@ -28,8 +30,15 @@ class LMLabMainRoomRun(private val mc: MainContext) {
         val reactionComponent = mc.constants.globalConstant.labReactionComponent[reaction]
                 ?: return
         if (reactionComponent.size != 2) return
-        if (lab0.mineralAmount != 0 && lab0.mineralType.unsafeCast<ResourceConstant>() != reactionComponent[0]) return
-        if (lab1.mineralAmount != 0 && lab1.mineralType.unsafeCast<ResourceConstant>() != reactionComponent[1]) return
+        val lab0Pair: Pair<ResourceConstant, Int> =
+                lab0.store.toMap().filter { it.key != RESOURCE_ENERGY && it.value !=0 }.toList()
+                        .firstOrNull() ?: Pair(reactionComponent[0],0)
+        if (lab0Pair.second != 0 && lab0Pair.first != reactionComponent[0]) return
+        val lab1Pair: Pair<ResourceConstant, Int> =
+                lab0.store.toMap().filter { it.key != RESOURCE_ENERGY && it.value !=0 }.toList()
+                        .firstOrNull() ?: Pair(reactionComponent[1],0)
+
+        if (lab1Pair.second != 0 && lab1Pair.first != reactionComponent[1]) return
         for (ind in 2 until mainRoom.structureLabSort.size) {
             val lab = mainRoom.structureLabSort[ind] ?: continue
             if (ind == 2 && mainRoom.creepNeedUpgradeID != "") continue

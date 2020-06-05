@@ -97,7 +97,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             for (creep in creepsLabFiller) resourceQuantityAllLabFiller += creep.value.store[resource] ?: 0
 
             val lab = mainRoom.structureLabSort[2]
-            val resourceQuantityLab2 = if (lab != null && lab.mineralType.unsafeCast<ResourceConstant>() == resource) lab.mineralAmount else 0
+            val resourceQuantityLab2: Int = if (lab != null) lab.store[resource] ?: 0 else 0
 
             //console.log("Test $resourceQuantityAllLabFiller $resourceQuantityLab2")
 
