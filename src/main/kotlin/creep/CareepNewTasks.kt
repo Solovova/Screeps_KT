@@ -74,7 +74,7 @@ fun Creep.harvestFromMineral(creepCarry: Int, mainContext: MainContext, mainRoom
         if (extractor != null
                 && container != null
                 && extractor.cooldown == 0
-                && container.store.toMap().map { it.value }.sum() < (container.storeCapacity - 30)) {
+                && container.store.toMap().map { it.value }.sum() < (container.store.getCapacity() - 30)) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mainRoom.mineral.id, posObject0 = mainRoom.mineral.pos))
             result = true
         }
