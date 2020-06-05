@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("ch.delconte.screeps-kotlin:screeps-kotlin-types:1.3.0")
+    implementation("ch.delconte.screeps-kotlin:screeps-kotlin-types:1.8.2")
     implementation(kotlin("stdlib-js"))
     testImplementation(kotlin("test-js"))
 }

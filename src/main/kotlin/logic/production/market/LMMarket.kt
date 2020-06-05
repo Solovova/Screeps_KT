@@ -119,7 +119,7 @@ class LMMarket (val mc:MainContext) {
 
         if (myOrders == null) {
             if (mineralDataRecord.sellFromRoom == "") return null
-            Game.market.createOrder(ORDER_SELL, resource, myOrderPrice, quantityOrderAmount, mineralDataRecord.sellFromRoom)
+            Game.market.createOrder(OrderCreationParams(ORDER_SELL, resource, myOrderPrice, quantityOrderAmount, mineralDataRecord.sellFromRoom))
         } else {
             if (myOrders.remainingAmount < quantityOrderAmount) Game.market.extendOrder(myOrders.id, quantityOrderAmount - myOrders.remainingAmount)
             if (myOrderPrice != myOrders.price) Game.market.changeOrderPrice(myOrders.id, myOrderPrice)
@@ -167,7 +167,7 @@ class LMMarket (val mc:MainContext) {
 
         if (myOrders == null) {
             if (mineralDataRecord.buyToRoom == "") return null
-            Game.market.createOrder(ORDER_BUY, resource, myOrderPrice, quantityOrderAmount, mineralDataRecord.buyToRoom)
+            Game.market.createOrder(OrderCreationParams(ORDER_BUY, resource, myOrderPrice, quantityOrderAmount, mineralDataRecord.buyToRoom))
         } else {
             if (myOrders.remainingAmount < quantityOrderAmount) Game.market.extendOrder(myOrders.id, quantityOrderAmount - myOrders.remainingAmount)
             if (myOrderPrice != myOrders.price) Game.market.changeOrderPrice(myOrders.id, myOrderPrice)
