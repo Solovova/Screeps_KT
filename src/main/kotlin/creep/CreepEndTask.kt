@@ -17,7 +17,7 @@ fun Creep.endTask(mainContext: MainContext) {
     if (!mainContext.tasks.isTaskForCreep(this)) return
     val task: CreepTask = mainContext.tasks.tasks[this.id] ?: return
 
-    val creepCarry: Int = this.carry.toMap().map { it.value }.sum()
+    val creepCarry: Int = this.store.toMap().map { it.value }.sum()
 
 
     //Break in dang room
@@ -78,9 +78,9 @@ fun Creep.endTask(mainContext: MainContext) {
             if (structure == null) mainContext.tasks.deleteTask(this.id)
             else {
                 if (structure.structureType == STRUCTURE_CONTAINER
-                        && (structure as StructureContainer).store.energy == 0) mainContext.tasks.deleteTask(this.id)
+                        && (structure as StructureContainer).store[RESOURCE_ENERGY] ?: 0 == 0) mainContext.tasks.deleteTask(this.id)
                 if (structure.structureType == STRUCTURE_STORAGE
-                        && (structure as StructureStorage).store.energy == 0) mainContext.tasks.deleteTask(this.id)
+                        && (structure as StructureStorage).store[RESOURCE_ENERGY] ?: 0 == 0) mainContext.tasks.deleteTask(this.id)
             }
         }
 
@@ -243,10 +243,10 @@ fun Creep.endTask(mainContext: MainContext) {
         }
 
         TypeOfTask.Transport -> {
-            if (creepCarry - (this.carry[RESOURCE_ENERGY] ?: 0) != 0) {
+            if (creepCarry - (this.store[RESOURCE_ENERGY] ?: 0) != 0) {
                 val lab: Structure? = Game.getObjectById(task.idObject1)
                 if (lab != null && lab is StructureLab) {
-                    val carryMineral = this.carry.toMap().toList().firstOrNull { it.second != 0 }
+                    val carryMineral = this.store.toMap().toList().firstOrNull { it.second != 0 }
                     if (lab.mineralAmount != 0 && carryMineral!= null && carryMineral.first != lab.mineralType.unsafeCast<ResourceConstant>()) mainContext.tasks.deleteTask(this.id)
                 }
             }

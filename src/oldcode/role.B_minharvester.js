@@ -5,14 +5,14 @@ var role_B_MinHarvester = {
         if (objRoom == null) return;
 
         
-        if(creep.memory.work && _.sum(creep.carry) == 0) {
+        if(creep.memory.work && _.sum(creep.store) == 0) {
             creep.memory.work = false;
             creep.say('harvest');
         }
         
         var fNeedEnergy = creep.store.getCapacity();
         if (creep.memory.info !=null) fNeedEnergy=creep.memory.info;
-	    if(!creep.memory.work && (_.sum(creep.carry)>= (fNeedEnergy))) {
+	    if(!creep.memory.work && (_.sum(creep.store)>= (fNeedEnergy))) {
 	        creep.memory.work = true;
 	        creep.say('work');
 	    }

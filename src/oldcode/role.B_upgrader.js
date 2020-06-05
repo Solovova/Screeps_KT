@@ -37,11 +37,11 @@ var role_B_Updater = {
             };    
         }
         
-	    if(creep.memory.work && creep.carry.energy == 0) {
+	    if(creep.memory.work && creep.store.energy == 0) {
             creep.memory.work = false;
             creep.say('harvest');
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
+	    if(!creep.memory.work && creep.store.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('build');
 	    }

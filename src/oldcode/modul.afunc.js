@@ -311,7 +311,7 @@ var afunc = {
     },
     
     KillOldEmptyCreep: function(creep) { 
-		if ( (_.sum(creep.carry) == 0) & (creep.memory.timeForDie > creep.ticksToLive ) ){
+		if ( (_.sum(creep.store) == 0) & (creep.memory.timeForDie > creep.ticksToLive ) ){
 			creep.suicide();
 		}
     },

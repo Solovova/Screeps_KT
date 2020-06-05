@@ -6,7 +6,7 @@ var role_A_garbage = {
         if (objRoom == null) return;
         
 	    //идем скинем енергию перед смертью (((
-        if ((creep.carry.energy != 0) & (creep.memory.timeForDie > creep.ticksToLive )){
+        if ((creep.store.energy != 0) & (creep.memory.timeForDie > creep.ticksToLive )){
             var storage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER) && structure.store.energy <= (structure.storeCapacity-150);
@@ -18,11 +18,11 @@ var role_A_garbage = {
             return;
         };
 
-        if(creep.memory.work && creep.carry.energy == 0) {
+        if(creep.memory.work && creep.store.energy == 0) {
             creep.memory.work = false;
             creep.say('load');
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
+	    if(!creep.memory.work && creep.store.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

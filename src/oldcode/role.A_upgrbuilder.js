@@ -6,11 +6,11 @@ var role_B_upgrbuilder = {
         var objRoom = Memory.Data[creep.memory.dstroom];
         if (objRoom == null) return;
 
-        if(creep.memory.work && creep.carry.energy == 0) {
+        if(creep.memory.work && creep.store.energy == 0) {
             creep.memory.work = false;
             creep.say('load');
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
+	    if(!creep.memory.work && creep.store.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

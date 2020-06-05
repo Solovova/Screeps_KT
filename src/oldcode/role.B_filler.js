@@ -6,7 +6,7 @@ var role_B_Filler = {
         if (objRoom == null) return;
         
 	    //идем скинем енергию перед смертью (((
-        if ((creep.carry.energy != 0) & (creep.memory.timeForDie > creep.ticksToLive )){
+        if ((creep.store.energy != 0) & (creep.memory.timeForDie > creep.ticksToLive )){
             const storage = Game.getObjectById(creep.memory.src);
             if(creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(storage, {visualizePathStyle: {stroke: '#ffffff'}});
@@ -18,11 +18,11 @@ var role_B_Filler = {
             creep.memory.role = creep.memory.role + 1000;
 	    };
 	    
-        if(creep.memory.work && creep.carry.energy == 0) {
+        if(creep.memory.work && creep.store.energy == 0) {
             creep.memory.work = false;
             creep.say('load');
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
+	    if(!creep.memory.work && creep.store.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

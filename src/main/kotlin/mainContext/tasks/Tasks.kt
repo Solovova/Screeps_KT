@@ -65,7 +65,7 @@ class  Tasks(private val parent: MainContext) {
             if (task.value.type != TypeOfTask.TransferTo) continue
             if (task.value.idObject0 != id) continue
             val creep: Creep = Game.getObjectById(task.key) ?: continue
-            result += creep.carry.energy
+            result += creep.store[RESOURCE_ENERGY] ?: 0
         }
         return result
     }

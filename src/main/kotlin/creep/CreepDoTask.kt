@@ -53,7 +53,7 @@ fun Creep.doTask(mainContext: MainContext) {
             val objForFilling: Creep? = Game.getObjectById(task.idObject0)
             if (objForFilling != null) {
                 if (this.pos.inRangeTo(objForFilling.pos, 1)) {
-                    val carryCreepTo = objForFilling.carry.toMap().map { it.value }.sum()
+                    val carryCreepTo = objForFilling.store.toMap().map { it.value }.sum()
                     if (carryCreepTo == 0)
                         this.transfer(objForFilling, task.resource)
                 } else this.moveTo(objForFilling.pos)
@@ -64,7 +64,7 @@ fun Creep.doTask(mainContext: MainContext) {
             val objForFilling: Creep? = Game.getObjectById(task.idObject0)
             if (objForFilling != null) {
                 if (this.pos.inRangeTo(objForFilling.pos, 1)) {
-                    val carryCreepTo = objForFilling.carry.toMap().map { it.value }.sum()
+                    val carryCreepTo = objForFilling.store.toMap().map { it.value }.sum()
                     if (carryCreepTo != 0)
                         objForFilling.transfer(this, task.resource)
                 } else this.moveTo(objForFilling.pos)

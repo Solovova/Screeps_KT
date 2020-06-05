@@ -36,7 +36,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     if (mainContext.tasks.isTaskForCreep(this)) return false
 
     var isTask = false
-    val creepCarry: Int = this.carry.toMap().map { it.value }.sum()
+    val creepCarry: Int = this.store.toMap().map { it.value }.sum()
 
     //Костыль
     //if (mainContext.dataclass.getMainRoom.name in setOf("E53N39")) {

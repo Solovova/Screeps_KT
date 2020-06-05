@@ -52,8 +52,8 @@ fun MainRoom.setLabFillerTask(creep: Creep) {
     val lab1 = this.structureLabSort[1] ?: return
     val sourceLab = arrayOf(lab0, lab1)
 
-    if (creep.carry.toMap().map { it.value }.sum() != 0) {
-        val resTransfer = creep.carry.toMap().filter { it.value != 0 }.toList().firstOrNull()
+    if (creep.store.toMap().map { it.value }.sum() != 0) {
+        val resTransfer = creep.store.toMap().filter { it.value != 0 }.toList().firstOrNull()
         if (resTransfer != null) {
             mc.tasks.add(creep.id, CreepTask(TypeOfTask.TransferTo, terminal.id, terminal.pos,
                     resource = resTransfer.first, quantity = resTransfer.second))
