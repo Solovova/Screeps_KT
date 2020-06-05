@@ -29,7 +29,7 @@ var role_B_logistic = {
         }
 
         if (creep.memory.isTask == 0) {
-            var task = logistics.GetTaskForLogist(objRoom,creep.carryCapacity);
+            var task = logistics.GetTaskForLogist(objRoom,creep.store.getCapacity());
             if (task==null) return;
             creep.memory.isTask     = task.isTask;
             creep.memory.idFrom     = task.idFrom;

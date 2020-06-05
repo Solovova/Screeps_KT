@@ -95,7 +95,7 @@ var role_C_Builder = {
 	    } else {
             var targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_TOWER) && structure.energy <= (structure.energyCapacity-creep.carryCapacity);
+                    return (structure.structureType == STRUCTURE_TOWER) && structure.energy <= (structure.energyCapacity-creep.store.getCapacity());
                 }
             });
             

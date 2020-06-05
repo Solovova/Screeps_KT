@@ -90,7 +90,7 @@ fun Creep.slaveHarvestFromMineral(creepCarry: Int, mainContext: MainContext, sla
         if (extractor != null
                 && mineral != null
                 && extractor.cooldown == 0
-                && creepCarry != this.carryCapacity) {
+                && creepCarry != this.store.getCapacity()) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mineral.id, posObject0 = mineral.pos))
             result = true
         }

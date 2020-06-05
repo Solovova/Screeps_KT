@@ -61,7 +61,7 @@ fun Creep.endTask(mainContext: MainContext) {
         TypeOfTask.Harvest -> {
             val harvestForTick: Int = this.body.filter { it.type == WORK }.size*2
 
-            if (this.carryCapacity - creepCarry < harvestForTick) mainContext.tasks.deleteTask(this.id)
+            if (this.store.getCapacity() - creepCarry < harvestForTick) mainContext.tasks.deleteTask(this.id)
             val source = Game.getObjectById<Source>(task.idObject0)
             if (source?.energy == 0) mainContext.tasks.deleteTask(this.id)
         }

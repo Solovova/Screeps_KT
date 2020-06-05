@@ -22,7 +22,7 @@ var role_B_Fillertw = {
             creep.memory.work = false;
             creep.say('load');
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }
@@ -38,7 +38,7 @@ var role_B_Fillertw = {
         }else{
             var targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_TOWER) && structure.energy <= (structure.energyCapacity-creep.carryCapacity);
+                    return (structure.structureType == STRUCTURE_TOWER) && structure.energy <= (structure.energyCapacity-creep.store.getCapacity());
                 }
             });
             

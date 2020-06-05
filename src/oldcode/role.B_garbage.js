@@ -20,7 +20,7 @@ var role_B_garbage = {
             creep.say('load');
         }
 
-	    if(!creep.memory.work && creep.carry[RESOURCE_ENERGY]  == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.carry[RESOURCE_ENERGY]  == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

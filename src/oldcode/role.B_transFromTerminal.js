@@ -9,7 +9,7 @@ var role_B_transFromTerminal = {
         if (creep.memory.work && creep.carry.energy == 0) {
             creep.memory.work = false;
 	    }
-	    if(!creep.memory.work && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	    }
 

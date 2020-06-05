@@ -7,7 +7,7 @@ var role_B_mincarrier = {
             creep.memory.work = false;
             creep.say('load');
 	    }
-	    if(!creep.memory.work && _.sum(creep.carry) == creep.carryCapacity) {
+	    if(!creep.memory.work && _.sum(creep.carry) == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

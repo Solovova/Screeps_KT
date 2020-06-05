@@ -11,7 +11,7 @@ var role_B_smallupgrader = {
             creep.say('load');
         }
         
-	    if(!creep.memory.work && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.work && creep.carry.energy == creep.store.getCapacity()) {
 	        creep.memory.work = true;
 	        creep.say('carry');
 	    }

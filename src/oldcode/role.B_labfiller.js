@@ -18,7 +18,7 @@ var role_B_LabFiller = {
         }
 
         if (creep.memory.isTask == 0) {
-            var task = logistics.GetTaskForLabfiller(objRoom,creep.carryCapacity);
+            var task = logistics.GetTaskForLabfiller(objRoom,creep.store.getCapacity());
             if (task==null) return;
             creep.memory.isTask     = task.isTask;
             creep.memory.idFrom     = task.idFrom;
