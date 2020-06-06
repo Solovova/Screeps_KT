@@ -863,17 +863,16 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             }
 
             if (this.source.size == 1) {
+
                 val fLinkStorage: StructureLink = this.structureLinkNearStorage[0] ?: return
                 val fLinkController: StructureLink = this.structureLinkNearController[0] ?: return
                 val fLinkSource: StructureLink = this.structureLinkNearSource[0] ?: return
-
                 if (fLinkSource.store[RESOURCE_ENERGY]?: 0 >= 500 && fLinkSource.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.store[RESOURCE_ENERGY]?: 0 < 300) {
                     fLinkSource.transferEnergy(fLinkController, min(fLinkSource.store[RESOURCE_ENERGY]?: 0, fLinkController.store.getCapacity(RESOURCE_ENERGY) ?: 0 - (fLinkController.store[RESOURCE_ENERGY]?: 0)))
                     return
                 }
-
-                if (fLinkStorage.store[RESOURCE_ENERGY]?: 0 >= 500 && fLinkStorage.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.store[RESOURCE_ENERGY]?: 0 == 0) {
-                    fLinkStorage.transferEnergy(fLinkController, fLinkSource.store[RESOURCE_ENERGY]?: 0)
+                if (fLinkStorage.store[RESOURCE_ENERGY]?: 0 > 0 && fLinkStorage.cooldown == 0 && fLinkController.cooldown == 0 && fLinkController.store[RESOURCE_ENERGY]?: 0 == 0) {
+                    fLinkStorage.transferEnergy(fLinkController, fLinkStorage.store[RESOURCE_ENERGY]?: 0)
                     return
                 }
             }

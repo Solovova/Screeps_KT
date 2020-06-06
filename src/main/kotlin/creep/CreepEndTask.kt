@@ -59,7 +59,7 @@ fun Creep.endTask(mainContext: MainContext) {
 
     when (task.type) {
         TypeOfTask.Harvest -> {
-            val harvestForTick: Int = this.body.filter { it.type == WORK }.size*2
+            val harvestForTick: Int = this.body.filter { it.type == WORK }.size * 2
 
             if (this.store.getCapacity() - creepCarry < harvestForTick) mainContext.tasks.deleteTask(this.id)
             val source = Game.getObjectById<Source>(task.idObject0)
@@ -101,9 +101,10 @@ fun Creep.endTask(mainContext: MainContext) {
         }
 
         TypeOfTask.TransferTo -> {
-            if (this.memory.role in arrayOf(106,1006,108,1008,121,123,125,1121,1123,1125)) {
-                val mainRoom: MainRoom = mainContext.mainRoomCollector.rooms[this.memory.mainRoom] ?: return
-                val slaveRoom: SlaveRoom?  = mainRoom.slaveRooms[this.memory.slaveRoom] ?: return
+            if (this.memory.role in arrayOf(106, 1006, 108, 1008, 121, 123, 125, 1121, 1123, 1125)) {
+                val mainRoom: MainRoom = mainContext.mainRoomCollector.rooms[this.memory.mainRoom]
+                        ?: return
+                val slaveRoom: SlaveRoom? = mainRoom.slaveRooms[this.memory.slaveRoom] ?: return
                 if (slaveRoom != null) {
                     if (creepCarry > 0 && slaveRoom.constructionSite.isNotEmpty()) {
                         val tConstructionSite = slaveRoom.getConstructionSite(this.pos)
@@ -131,11 +132,11 @@ fun Creep.endTask(mainContext: MainContext) {
             if (structure.structureType == STRUCTURE_SPAWN && (structure as StructureSpawn).store.getCapacity(RESOURCE_ENERGY) ?: 0 == structure.store[RESOURCE_ENERGY] ?: 0) filled = true
             if (structure.structureType == STRUCTURE_TOWER && (structure as StructureTower).store.getCapacity(RESOURCE_ENERGY) ?: 0 == structure.store[RESOURCE_ENERGY] ?: 0) filled = true
             if (structure.structureType == STRUCTURE_CONTAINER &&
-                    (structure as StructureContainer).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0)  filled = true
+                    (structure as StructureContainer).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0) filled = true
             if (structure.structureType == STRUCTURE_STORAGE &&
-                    (structure as StructureStorage).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0)  filled = true
+                    (structure as StructureStorage).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0) filled = true
             if (structure.structureType == STRUCTURE_TERMINAL &&
-                    (structure as StructureTerminal).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0)  filled = true
+                    (structure as StructureTerminal).store.toMap().map { it.value }.sum() == structure.store.getCapacity(RESOURCE_ENERGY) ?: 0) filled = true
             if (filled) mainContext.tasks.deleteTask(this.id)
         }
 
@@ -193,7 +194,7 @@ fun Creep.endTask(mainContext: MainContext) {
 
         TypeOfTask.GoToPos -> {
             if (task.posObject0 == null) mainContext.tasks.deleteTask(this.id)
-            else if (this.pos.inRangeTo(task.posObject0,task.quantity)) mainContext.tasks.deleteTask(this.id)
+            else if (this.pos.inRangeTo(task.posObject0, task.quantity)) mainContext.tasks.deleteTask(this.id)
         }
 
         TypeOfTask.AttackRange -> {
@@ -247,8 +248,9 @@ fun Creep.endTask(mainContext: MainContext) {
                 val lab: Structure? = Game.getObjectById(task.idObject1)
                 if (lab != null && lab is StructureLab) {
                     val carryMineral = this.store.toMap().toList().firstOrNull { it.second != 0 }
-                    if (carryMineral!=null) {
-                        val lab2Pair: Pair<ResourceConstant,Int> = lab.store.toMap().filter { it.key != RESOURCE_ENERGY && it.value != 0 }.toList().firstOrNull() ?: Pair(carryMineral.first, 0)
+                    if (carryMineral != null) {
+                        val lab2Pair: Pair<ResourceConstant, Int> = lab.store.toMap().filter { it.key != RESOURCE_ENERGY && it.value != 0 }.toList().firstOrNull()
+                                ?: Pair(carryMineral.first, 0)
                         if (lab2Pair.second != 0 && carryMineral.first != lab2Pair.first) mainContext.tasks.deleteTask(this.id)
                     }
 
@@ -268,19 +270,27 @@ fun Creep.endTask(mainContext: MainContext) {
             val structureKeeperLair: StructureKeeperLair? = Game.getObjectById(task.idObject0)
 
             if (structureKeeperLair == null) {
-                mainContext.tasks.deleteTask(this.id);return}
+                mainContext.tasks.deleteTask(this.id);return
+            }
 
-            if (this.pos.inRangeTo(structureKeeperLair.pos,1)) {
-                mainContext.tasks.deleteTask(this.id); return}
+            if (this.pos.inRangeTo(structureKeeperLair.pos, 1)) {
+                mainContext.tasks.deleteTask(this.id); return
+            }
 
             val mainRoom: MainRoom? = mainContext.mainRoomCollector.rooms[this.memory.mainRoom]
-            if (mainRoom == null) {mainContext.tasks.deleteTask(this.id); return}
+            if (mainRoom == null) {
+                mainContext.tasks.deleteTask(this.id); return
+            }
 
             val slaveRoom: SlaveRoom? = mainRoom.slaveRooms[this.memory.slaveRoom]
-            if (slaveRoom == null) {mainContext.tasks.deleteTask(this.id); return}
+            if (slaveRoom == null) {
+                mainContext.tasks.deleteTask(this.id); return
+            }
 
-            val hostileCreep : Creep? =  slaveRoom.room?.find(FIND_HOSTILE_CREEPS)?.firstOrNull()
-            if (hostileCreep != null) {mainContext.tasks.deleteTask(this.id); return}
+            val hostileCreep: Creep? = slaveRoom.room?.find(FIND_HOSTILE_CREEPS)?.firstOrNull()
+            if (hostileCreep != null) {
+                mainContext.tasks.deleteTask(this.id); return
+            }
         }
 
         TypeOfTask.GoToRescueFlag -> {
@@ -299,7 +309,7 @@ fun Creep.endTask(mainContext: MainContext) {
                     if (keeperLair == null) mainContext.tasks.deleteTask(this.id)
                     else {
                         if (keeperLair.ticksToSpawn > 30) {
-                            val hostileNear = this.room.find(FIND_HOSTILE_CREEPS).filter { it.pos.inRangeTo(this.pos,10) }
+                            val hostileNear = this.room.find(FIND_HOSTILE_CREEPS).filter { it.pos.inRangeTo(this.pos, 10) }
                             if (hostileNear.isEmpty()) mainContext.tasks.deleteTask(this.id)
                             return
                         }

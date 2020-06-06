@@ -25,6 +25,7 @@ class LMTerminal(val mainContext: MainContext) {
 
         val terminalFrom: StructureTerminal = mainRoomFrom.structureTerminal[0] ?: return
         val terminalTo: StructureTerminal = mainRoomTo.structureTerminal[0] ?: return
+
         if (terminalFrom.cooldown == 0 && terminalTo.cooldown == 0) {
             //
             val cost = Game.market.calcTransactionCost(sentQuantity, mainRoomFrom.name, mainRoomTo.name)
@@ -37,9 +38,14 @@ class LMTerminal(val mainContext: MainContext) {
             Memory["transCount"] = Memory["transCount"] + 1
             //
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
-            if (result == OK)
+            if (result == OK) {
                 mainContext.lm.lmMessenger.log("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
+            }else{
+                mainContext.lm.lmMessenger.log("ERROR", mainRoomFrom.name,
+                        "Send energy Error: $result cost: $cost quantity: $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
+            }
+
         }
     }
 

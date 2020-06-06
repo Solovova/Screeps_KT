@@ -230,6 +230,7 @@ fun Creep.doTask(mainContext: MainContext) {
                     task.come = false
                 } else {
                     val structure: StoreOwner? = (Game.getObjectById(task.idObject1) as StoreOwner?)
+
                     if (structure != null) {
                         if (task.quantity == 0) this.transfer(structure, task.resource)
                         else this.transfer(structure, task.resource, task.quantity)
