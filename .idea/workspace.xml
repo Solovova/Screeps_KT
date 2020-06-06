@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLogist.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessengerMineral.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessengerMineral.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/terminal/LMTerminal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/terminal/LMTerminal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/MainRoomConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/MainRoomConstant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CreepEndTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CreepEndTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasks.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -52,33 +54,36 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="accounts.srvMain2" />
-    </key>
-    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="mainContext.constants" />
-      <recent name="mainContext.dataclas" />
-      <recent name="logic.defence" />
-      <recent name="logic.production.lab" />
-      <recent name="logic.messenger" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\01_prg\Screeps\screeps-kotlin-starter-master\src\main\kotlin\accounts\srvTest2" />
-      <recent name="D:\01_prg\Screeps\screeps-kotlin-starter-master\src\main\kotlin\accounts\srvMain2" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="logic.creep" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\mainContext\dataclass" />
       <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin" />
       <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\logic\messenger" />
       <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\logic\production\lab" />
       <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\mainContext\tasks" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="accounts.srvMain2" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="logic.creep.tasks" />
+      <recent name="mainContext.mainRoomCollecror.mainRoom" />
+      <recent name="mainContext.constants" />
+      <recent name="mainContext.dataclas" />
+      <recent name="logic.defence" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="logic.creep" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\01_prg\Screeps\screeps-kotlin-starter-master\src\main\kotlin\accounts\srvTest2" />
+      <recent name="D:\01_prg\Screeps\screeps-kotlin-starter-master\src\main\kotlin\accounts\srvMain2" />
     </key>
   </component>
   <component name="RunManager">
@@ -100,13 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00016" summary="v 1.05">
-      <created>1585755994979</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1585755994979</updated>
     </task>
     <task id="LOCAL-00017" summary="v 1.06">
       <created>1585766840098</created>
@@ -444,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591430547880</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="v 5.02 new balance all upgrader and all builder where NeedUpgrade">
+      <created>1591434163695</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1591434163695</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -487,7 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.30" />
     <MESSAGE value="v 1.31" />
     <MESSAGE value="v 1.32" />
     <MESSAGE value="v 1.33" />
@@ -512,17 +516,26 @@
     <MESSAGE value="v 5.00 new version" />
     <MESSAGE value="v 5.01 bug link in room with 1 source" />
     <MESSAGE value="v 5.01" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.01" />
+    <MESSAGE value="v 5.02 new balance all upgrader and all builder where NeedUpgrade" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.02 new balance all upgrader and all builder where NeedUpgrade" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="477" y="252" key="#PSD" timestamp="1591456718847">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="477" y="252" key="#PSD/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591456718847" />
+    <state x="714" y="172" width="495" height="695" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1591457054555">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="714" y="172" width="495" height="695" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591457054555" />
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591430205787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591430546895">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591463464827">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430546895" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591463464827" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -531,6 +544,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="696" y="231" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591427589084" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1591456783022">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591456783022" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591394046538">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

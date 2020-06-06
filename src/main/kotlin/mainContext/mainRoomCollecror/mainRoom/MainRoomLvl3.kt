@@ -35,10 +35,10 @@ fun MainRoom.needCorrection3() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-    val allEnergy: Int = mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0
-    val forceEnergy: Int = mc.getNumRoomWithTerminal() * (this.constant.energyExcessSent - 5000)
-
-    if (this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller) {
+    if ((this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller)
+            && (!this.constant.defenceNeedUpgrade || ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)))
+    )
+            {
         this.need[1][19] = 1
     }
 
@@ -52,7 +52,7 @@ fun MainRoom.needCorrection3() {
     if (this.constant.creepUseBigBuilder) {
         if ((this.constant.defenceNeedUpgrade && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
                 || (this.constructionSite.isNotEmpty() && this.getResourceInStorage() > this.constant.energyBuilder)
-                //|| ((mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
+                //|| ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)
                 //        && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
         ) {
             this.need[1][10] = 1

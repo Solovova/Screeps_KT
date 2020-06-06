@@ -253,11 +253,9 @@ fun Creep.endTask(mainContext: MainContext) {
                                 ?: Pair(carryMineral.first, 0)
                         if (lab2Pair.second != 0 && carryMineral.first != lab2Pair.first) mainContext.tasks.deleteTask(this.id)
                     }
-
                 }
             }
             if (creepCarry == 0 && task.take) mainContext.tasks.deleteTask(this.id)
-
         }
 
 
