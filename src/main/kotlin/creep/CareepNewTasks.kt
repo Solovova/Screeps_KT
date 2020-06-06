@@ -747,15 +747,6 @@ fun Creep.slaveAttackRanged(mainContext: MainContext, slaveRoom: SlaveRoom?): Bo
 fun Creep.slaveAttack(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
     var result = false
     if (slaveRoom?.room != null) {
-        //ToDo костыль
-//        if (mainContext.dataclass.getSlaveRoom.name == "W5N2"){
-//            val structure: Structure? = Game.getObjectById("4158ccbdf12cc91")
-//            if (structure != null) {
-//                mainContext.tasks.add(this.id, mainContext.tasks.CreepTask(TypeOfTask.AttackMile, idObject0 = structure.id, posObject0 = structure.pos))
-//                return true
-//            }
-//        }
-
         val hostileCreep: Creep? = slaveRoom.room.find(FIND_HOSTILE_CREEPS).firstOrNull()
         if (hostileCreep != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.AttackMile, idObject0 = hostileCreep.id, posObject0 = hostileCreep.pos))

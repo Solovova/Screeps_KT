@@ -9,7 +9,7 @@ class GlobalConstant(val constants: Constants) {
     val roomRunNotEveryTickTicksPauseMin: Int = 300
     val roomRunNotEveryTickTicksPauseMax: Int = 400
     var roomRunNotEveryTickNextTickRunMainContext: Int = 0
-    val buttleGroupList: MutableList<String> = MutableList(0){""}
+    val battleGroupList: MutableList<String> = MutableList(0){""}
     val sentMaxMineralQuantity: Int = 10000
 
     var gcl: Int = 0  //cashed

@@ -1,8 +1,8 @@
-.idea/
-*.iml
 .gradle/
 out/
 build/
 
 gradle.properties
 /gradle/wrapper/
+/.idea/caches/
+/.idea/libraries/

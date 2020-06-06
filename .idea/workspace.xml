@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinScripting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/screeps-kotlin-starter.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CareepNewTasks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CareepNewTasks.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/GlobalConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/GlobalConstant.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YPTyNmZ4lTPE4XXvIQPLyRjMVp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="accounts.srvMain2" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="mainContext.constants" />
+      <recent name="mainContext.dataclas" />
+      <recent name="logic.defence" />
+      <recent name="logic.production.lab" />
+      <recent name="logic.messenger" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\01_prg\Screeps\screeps-kotlin-starter-master\src\main\kotlin\accounts\srvTest2" />
+      <recent name="D:\01_prg\Screeps\screeps-kotlin-starter-master\src\main\kotlin\accounts\srvMain2" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="logic.creep" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\mainContext\dataclass" />
+      <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin" />
+      <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\logic\messenger" />
+      <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\logic\production\lab" />
+      <recent name="D:\Programming\Screeps\screeps-kotlin-starter-master\src\main\kotlin\mainContext\tasks" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="" />
+      <created>1582843482205</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582843482205</updated>
+    </task>
+    <task id="LOCAL-00015" summary="v 1.04">
+      <created>1585325691804</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1585325691804</updated>
+    </task>
+    <task id="LOCAL-00016" summary="v 1.05">
+      <created>1585755994979</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1585755994979</updated>
+    </task>
+    <task id="LOCAL-00017" summary="v 1.06">
+      <created>1585766840098</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1585766840098</updated>
+    </task>
+    <task id="LOCAL-00018" summary="v 1.10 big refactoring">
+      <created>1585818556368</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1585818556368</updated>
+    </task>
+    <task id="LOCAL-00019" summary="v 1.11 market buyDirect">
+      <created>1585834576684</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1585834576684</updated>
+    </task>
+    <task id="LOCAL-00020" summary="v 1.12 rewrite defence upgrade">
+      <created>1585856615684</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1585856615684</updated>
+    </task>
+    <task id="LOCAL-00021" summary="v 1.13 terminal bugs">
+      <created>1585857513159</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1585857513160</updated>
+    </task>
+    <task id="LOCAL-00022" summary="v 1.14 refactoring">
+      <created>1585933928801</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1585933928801</updated>
+    </task>
+    <task id="LOCAL-00023" summary="v 1.15 refactoring">
+      <created>1585937193858</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1585937193858</updated>
+    </task>
+    <task id="LOCAL-00024" summary="v 1.16 info def">
+      <created>1585938955355</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1585938955356</updated>
+    </task>
+    <task id="LOCAL-00025" summary="v 1.17 refactor">
+      <created>1585944072233</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1585944072233</updated>
+    </task>
+    <task id="LOCAL-00026" summary="v 1.18 refactor">
+      <created>1585946617536</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1585946617536</updated>
+    </task>
+    <task id="LOCAL-00027" summary="v 1.19 refactor">
+      <created>1586001619519</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1586001619519</updated>
+    </task>
+    <task id="LOCAL-00028" summary="v 1.20">
+      <created>1586003981444</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1586003981444</updated>
+    </task>
+    <task id="LOCAL-00029" summary="v 1.21">
+      <created>1586010272565</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1586010272565</updated>
+    </task>
+    <task id="LOCAL-00030" summary="v 1.22">
+      <created>1586019777484</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1586019777484</updated>
+    </task>
+    <task id="LOCAL-00031" summary="v 1.23">
+      <created>1586086681884</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1586086681884</updated>
+    </task>
+    <task id="LOCAL-00032" summary="v 1.24">
+      <created>1586630505882</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1586630505882</updated>
+    </task>
+    <task id="LOCAL-00033" summary="v 1.24">
+      <created>1586682392286</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1586682392286</updated>
+    </task>
+    <task id="LOCAL-00034" summary="v 1.25">
+      <created>1587269430958</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1587269430961</updated>
+    </task>
+    <task id="LOCAL-00035" summary="v 1.26">
+      <created>1587753854599</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1587753854599</updated>
+    </task>
+    <task id="LOCAL-00036" summary="v 1.28">
+      <created>1588756990149</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1588756990149</updated>
+    </task>
+    <task id="LOCAL-00037" summary="v 1.29">
+      <created>1588970089759</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1588970089759</updated>
+    </task>
+    <task id="LOCAL-00038" summary="v 1.30">
+      <created>1589488202660</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1589488202661</updated>
+    </task>
+    <task id="LOCAL-00039" summary="v 1.31">
+      <created>1590427204777</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1590427204777</updated>
+    </task>
+    <task id="LOCAL-00040" summary="v 1.32">
+      <created>1590512396880</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1590512396880</updated>
+    </task>
+    <task id="LOCAL-00041" summary="v 1.33">
+      <created>1590588542861</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1590588542861</updated>
+    </task>
+    <task id="LOCAL-00042" summary="v 1.34">
+      <created>1590602555025</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1590602555026</updated>
+    </task>
+    <task id="LOCAL-00043" summary="v 1.35">
+      <created>1591183627324</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1591183627325</updated>
+    </task>
+    <task id="LOCAL-00044" summary="v 1.36 start refactor from&#10;ch.delconte.screeps-kotlin:screeps-kotlin-types:1.3.0">
+      <created>1591303241371</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1591303241372</updated>
+    </task>
+    <task id="LOCAL-00045" summary="v 1.37 dev">
+      <created>1591357779555</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1591357779556</updated>
+    </task>
+    <task id="LOCAL-00046" summary="v 1.0">
+      <created>1591359195565</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1591359195565</updated>
+    </task>
+    <task id="LOCAL-00047" summary="v 1.1">
+      <created>1591359801612</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1591359801612</updated>
+    </task>
+    <task id="LOCAL-00048" summary="v 1.2">
+      <created>1591367971993</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1591367971993</updated>
+    </task>
+    <task id="LOCAL-00049" summary="v 1.3">
+      <created>1591368394014</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1591368394014</updated>
+    </task>
+    <task id="LOCAL-00050" summary="v 1.4">
+      <created>1591376000275</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1591376000275</updated>
+    </task>
+    <task id="LOCAL-00051" summary="v 1.5">
+      <created>1591376199297</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1591376199297</updated>
+    </task>
+    <task id="LOCAL-00052" summary="v 1.6 ready for test">
+      <created>1591376560113</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1591376560113</updated>
+    </task>
+    <task id="LOCAL-00053" summary="v 1.7 testing">
+      <created>1591378993265</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1591378993266</updated>
+    </task>
+    <task id="LOCAL-00054" summary="v 1.0">
+      <created>1591381254530</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1591381254530</updated>
+    </task>
+    <task id="LOCAL-00055" summary="v 1.1 carryCapacity -&gt; store.getCapacity()">
+      <created>1591381611988</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1591381611988</updated>
+    </task>
+    <task id="LOCAL-00056" summary="v 1.2 creep.carry -&gt; creep.store&#10;      creep.carry.energu -&gt; creep.store[RESOURCE_ENERGY] ?: 0">
+      <created>1591382276373</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1591382276373</updated>
+    </task>
+    <task id="LOCAL-00057" summary="v 1.3">
+      <created>1591382879965</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1591382879965</updated>
+    </task>
+    <task id="LOCAL-00058" summary="v 1.4  befor mineralwork">
+      <created>1591383076222</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1591383076222</updated>
+    </task>
+    <task id="LOCAL-00059" summary="v 1.4  ready for test">
+      <created>1591385328631</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1591385328631</updated>
+    </task>
+    <task id="LOCAL-00060" summary="v 4.00">
+      <created>1591388762828</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1591388762828</updated>
+    </task>
+    <task id="LOCAL-00061" summary="v dev ready for merge">
+      <created>1591393679374</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1591393679375</updated>
+    </task>
+    <task id="LOCAL-00062" summary="v 5.00 new version">
+      <created>1591394037494</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1591394037495</updated>
+    </task>
+    <task id="LOCAL-00063" summary="v 5.01 bug link in room with 1 source">
+      <created>1591429691699</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1591429691699</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="dev" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="v 1.29" />
+    <MESSAGE value="v 1.30" />
+    <MESSAGE value="v 1.31" />
+    <MESSAGE value="v 1.32" />
+    <MESSAGE value="v 1.33" />
+    <MESSAGE value="v 1.34" />
+    <MESSAGE value="v 1.35" />
+    <MESSAGE value="v 1.36 start refactor from&#10;ch.delconte.screeps-kotlin:screeps-kotlin-types:1.3.0" />
+    <MESSAGE value="v 1.37 dev" />
+    <MESSAGE value="v 1.1" />
+    <MESSAGE value="v 1.2" />
+    <MESSAGE value="v 1.4" />
+    <MESSAGE value="v 1.5" />
+    <MESSAGE value="v 1.6 ready for test" />
+    <MESSAGE value="v 1.7 testing" />
+    <MESSAGE value="v 1.0" />
+    <MESSAGE value="v 1.1 carryCapacity -&gt; store.getCapacity()" />
+    <MESSAGE value="v 1.2 creep.carry -&gt; creep.store&#10;      creep.carry.energu -&gt; creep.store[RESOURCE_ENERGY] ?: 0" />
+    <MESSAGE value="v 1.3" />
+    <MESSAGE value="v 1.4  befor mineralwork" />
+    <MESSAGE value="v 1.4  ready for test" />
+    <MESSAGE value="v 4.00" />
+    <MESSAGE value="v dev ready for merge" />
+    <MESSAGE value="v 5.00 new version" />
+    <MESSAGE value="v 5.01 bug link in room with 1 source" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.01 bug link in room with 1 source" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591430205787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591429690403">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591429690403" />
+    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591382108519" />
+    <state x="696" y="231" key="RollbackChangesDialog" timestamp="1591427589084">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="696" y="231" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591427589084" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591394046538">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591394046538" />
+    <state x="656" y="118" width="998" height="804" key="find.popup" timestamp="1591429855046">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="118" width="998" height="804" key="find.popup/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591429855046" />
+  </component>
+</project>
