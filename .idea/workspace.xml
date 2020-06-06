@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLogist.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopCPUUse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CreepEndTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CreepEndTask.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasks.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,13 +103,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00017" summary="v 1.06">
-      <created>1585766840098</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1585766840098</updated>
     </task>
     <task id="LOCAL-00018" summary="v 1.10 big refactoring">
       <created>1585818556368</created>
@@ -449,7 +440,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591434163695</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="v 5.03 write new LabFiller task, need test and deploy">
+      <created>1591463545259</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1591463545259</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.31" />
     <MESSAGE value="v 1.32" />
     <MESSAGE value="v 1.33" />
     <MESSAGE value="v 1.34" />
@@ -517,7 +514,8 @@
     <MESSAGE value="v 5.01 bug link in room with 1 source" />
     <MESSAGE value="v 5.01" />
     <MESSAGE value="v 5.02 new balance all upgrader and all builder where NeedUpgrade" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.02 new balance all upgrader and all builder where NeedUpgrade" />
+    <MESSAGE value="v 5.03 write new LabFiller task, need test and deploy" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.03 write new LabFiller task, need test and deploy" />
   </component>
   <component name="WindowStateProjectService">
     <state x="477" y="252" key="#PSD" timestamp="1591456718847">
@@ -532,10 +530,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591463464827">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591463544325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591463464827" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591463544325" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -548,10 +546,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591456783022" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591394046538">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591463552550">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591394046538" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591463552550" />
     <state x="656" y="118" width="998" height="804" key="find.popup" timestamp="1591429855046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

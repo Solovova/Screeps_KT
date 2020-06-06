@@ -2,6 +2,7 @@ package mainContext
 
 import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
+import logic.develop.LMDevelopCPUUse
 import mainContext.constants.Constants
 import logic.main.LM
 import mainContext.dataclass.MineralDataRecord
@@ -11,8 +12,9 @@ import screeps.utils.toMap
 import kotlin.random.Random
 
 class MainContext {
+    var cpuStartMC = Game.cpu.getUsed()
+    val lmDevelopCPUUse : LMDevelopCPUUse = LMDevelopCPUUse()
     val lm: LM = LM(this)
-
     //Data
     var flags:List<Flag> = listOf()
     val messengerMap: MutableMap<String, String> = mutableMapOf()
@@ -26,12 +28,15 @@ class MainContext {
 
     init {
         lm.lmProduction.lmMarket.showBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Init")
     }
 
     fun run() {
         flags = Game.flags.toMap().values.toList()
 
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Flag")
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"mainRoomCollector ")
 
         for (room in this.mainRoomCollector.rooms.values) {
             try {
@@ -40,17 +45,23 @@ class MainContext {
                 this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"fillCash ")
 
         lm.lmGCL.calculate()
         lm.lmProduction.lmMineralFillData.fill()
         this.constants.accountInit.initTuning(this)
         lm.lmProduction.lmMineralFillProduction.fill()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Step 1 ")
 
 
         lm.lmDefence.lmMainRoomUpgradeWall.calculate()
 
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMainRoomUpgradeWall ")
+
         this.mainRoomCollector.creepsCalculate()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"creepsCalculate")
         this.mainRoomCollector.creepsCalculateProfit()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"creepsCalculateProfit")
 
         for (room in this.mainRoomCollector.rooms.values) {
             try {
@@ -59,17 +70,19 @@ class MainContext {
                 this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
-
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"runInStartOfTick")
 
 
         this.battleGroupContainer.runInStartOfTick()
 
         //Not every tick
         this.mainRoomCollector.runNotEveryTick()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"runNotEveryTick")
 
         if (Game.time % 10 == 0) {
             lm.lmProduction.lmMarket.sellBuy()
         }
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"sellBuy")
 
         if (this.setNextTickRun()) {
 
@@ -88,15 +101,17 @@ class MainContext {
 //        }
 
         lm.lmDirectControl.runs()
-
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmDirectControl")
         this.lm.lmProduction.lmLabMainRoomRun.run()
-
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmLabMainRoomRun")
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"mainRoomCollector.runInEndOfTick")
         lm.lmTerminal.transactions()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"transactions")
         this.tasks.toMemory()
         this.constants.toMemory()
-
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"toMemory")
         var cpuStartMCStart = Game.cpu.getUsed()
         lm.lmMessenger.show()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
