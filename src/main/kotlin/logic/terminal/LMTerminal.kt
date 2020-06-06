@@ -41,7 +41,7 @@ class LMTerminal(val mainContext: MainContext) {
             if (result == OK) {
                 mainContext.lm.lmMessenger.log("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
-            }else{
+            } else {
                 mainContext.lm.lmMessenger.log("ERROR", mainRoomFrom.name,
                         "Send energy Error: $result cost: $cost quantity: $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
             }
@@ -57,8 +57,7 @@ class LMTerminal(val mainContext: MainContext) {
                 val needResource = needResourceRecord.key
                 var needResourceQuantity = needResourceRecord.value - roomTo.getResource(needResourceRecord.key)
 
-                val canMineralTakeTerminal = roomTo.constant.mineralAllMaxTerminal
-                -(terminalTo.store.toMap().map { it.value }.sum() - roomTo.getResourceInTerminal(RESOURCE_ENERGY))
+                val canMineralTakeTerminal = roomTo.constant.mineralAllMaxTerminal - (terminalTo.store.toMap().map { it.value }.sum() - roomTo.getResourceInTerminal(RESOURCE_ENERGY))
 
                 needResourceQuantity = min(needResourceQuantity, canMineralTakeTerminal)
 

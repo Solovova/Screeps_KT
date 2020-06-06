@@ -4,6 +4,7 @@ import logic.extfunc.toSecDigit
 import mainContext.MainContext
 import mainContext.dataclass.MineralDataRecord
 import mainContext.dataclass.RESOURCES_ALL
+import screeps.api.RESOURCE_ENERGY
 import kotlin.math.min
 
 class LMMessengerMineral(val mainContext: MainContext) {
@@ -46,7 +47,8 @@ class LMMessengerMineral(val mainContext: MainContext) {
                 val strBalance = if (mineralDataRecord.quantityUp - mineralDataRecord.quantityDown == 0) ""
                 else (mineralDataRecord.quantityUp - mineralDataRecord.quantityDown).toString()
 
-                val strNeed = if (mineralDataRecord.need > mineralDataRecord.quantity) (-mineralDataRecord.need + mineralDataRecord.quantity).toString()
+                val strNeed = if (mineralDataRecord.need > mineralDataRecord.quantity
+                        || res== RESOURCE_ENERGY) (-mineralDataRecord.need + mineralDataRecord.quantity).toString()
                 else ""
 
 

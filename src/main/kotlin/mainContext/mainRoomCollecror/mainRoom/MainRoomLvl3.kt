@@ -35,12 +35,10 @@ fun MainRoom.needCorrection3() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-    val allEnergy:Int = mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0
-    val forceEnergy:Int = mc.getNumRoomWithTerminal()*(this.constant.energyExcessSent-5000)
+    val allEnergy: Int = mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0
+    val forceEnergy: Int = mc.getNumRoomWithTerminal() * (this.constant.energyExcessSent - 5000)
 
-    if (this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller &&
-            (!this.constant.defenceNeedUpgrade || allEnergy>forceEnergy)) {
-
+    if (this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller) {
         this.need[1][19] = 1
     }
 
@@ -52,16 +50,11 @@ fun MainRoom.needCorrection3() {
 
     //8 Builder
     if (this.constant.creepUseBigBuilder) {
-        if ((this.constructionSite.isNotEmpty())
-                && (this.getResourceInStorage() > this.constant.energyBuilder)) {
-            this.need[1][10] = 1
-        }
-        this.need[1][11] = this.have[10]
-    }
-
-    if (this.constant.creepUseBigBuilder) {
-        if (this.constant.defenceNeedUpgrade
-                && (this.getResourceInStorage() > this.constant.energyUpgradeDefence)) {
+        if ((this.constant.defenceNeedUpgrade && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
+                || (this.constructionSite.isNotEmpty() && this.getResourceInStorage() > this.constant.energyBuilder)
+                //|| ((mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
+                //        && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
+        ) {
             this.need[1][10] = 1
         }
         this.need[1][11] = this.have[10]
@@ -73,10 +66,10 @@ fun MainRoom.needCorrection3() {
     }
 
 
-    //9 Logist
+    //14 Logist
     this.need[0][14] = 1
 
-    //10 Mineral harvesting
+    //15 Mineral harvesting
     if (this.mineral.mineralAmount > 0 &&
             this.structureContainerNearMineral.size == 1
             && this.structureExtractor.size == 1) {
@@ -95,7 +88,7 @@ fun MainRoom.needCorrection3() {
 
     //18 Lab filler
     if ((this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") ||
-            this.constant.creepUpgradeRole.filter { it.value  }.isNotEmpty()) {
+            this.constant.creepUpgradeRole.filter { it.value }.isNotEmpty()) {
         this.need[1][18] = 1
     }
 
