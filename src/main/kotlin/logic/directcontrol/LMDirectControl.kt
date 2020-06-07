@@ -5,6 +5,7 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 
 class LMDirectControl (val mc: MainContext) {
+    val lmDirectControlDeleteRoads: LMDirectControlDeleteRoads =LMDirectControlDeleteRoads(mc)
     fun dcNN() {
 //        try {
 //            for (creep in Game.creeps.values)
@@ -42,6 +43,15 @@ class LMDirectControl (val mc: MainContext) {
             mc.lm.lmDefence.lmMainRoomDefenceArea.calculate(mr)
         }
         for (flag in flagsRedBlue) flag.remove()
+
+        val flagsRedPurple = mc.flags.filter { it.pos.roomName == mr.name
+                && it.color == COLOR_RED
+                && it.secondaryColor == COLOR_PURPLE }
+        if (flagsRedPurple.isNotEmpty()) {
+            for (flag in flagsRedPurple)
+                mc.lm.lmDirectControl.lmDirectControlDeleteRoads.deleteRoads(mr)
+        }
+        for (flag in flagsRedPurple) flag.remove()
     }
 
     fun runs() {

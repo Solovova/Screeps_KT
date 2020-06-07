@@ -32,11 +32,19 @@ class LMTasksLogist(val mc: MainContext) {
                 && mainRoom.source.size == 1
                 && link.store[RESOURCE_ENERGY] ?: 0 == 0) {
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, link.id, link.pos, RESOURCE_ENERGY, creep.store.getCapacity())
-        } else {
-            if (link.store[RESOURCE_ENERGY] ?: 0 != 0) {
-                return CreepTask(TypeOfTask.Transport, link.id, link.pos, storage.id, storage.pos, RESOURCE_ENERGY, 0)
-            }
         }
+
+        //Need for don't take mineral back to storage
+        if (mainRoom.getLevelOfRoom() == 3
+                && mainRoom.have[19] != 0
+                && mainRoom.source.size == 1) {
+            return null
+        }
+
+        if (link.store[RESOURCE_ENERGY] ?: 0 != 0) {
+            return CreepTask(TypeOfTask.Transport, link.id, link.pos, storage.id, storage.pos, RESOURCE_ENERGY, 0)
+        }
+
         return null
     }
 
@@ -53,7 +61,7 @@ class LMTasksLogist(val mc: MainContext) {
         // 02 Storage > this.constant.energyMaxStorage -> Terminal < this.constant.energyMaxTerminal
         val needInTerminal02: Int = mainRoom.constant.energyMaxTerminal - mainRoom.getResourceInTerminal()
         val haveInStorage02: Int = mainRoom.getResourceInStorage() - mainRoom.constant.energyMaxStorage
-        carry = min(min(haveInStorage02, needInTerminal02),creep.store.getCapacity())
+        carry = min(min(haveInStorage02, needInTerminal02), creep.store.getCapacity())
 
         if (carry > 0 && (carry == creep.store.getCapacity() || carry == needInTerminal02))
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry)
@@ -62,7 +70,7 @@ class LMTasksLogist(val mc: MainContext) {
         val needInTerminal03: Int = if (mainRoom.constant.sentEnergyToRoom == "") mainRoom.constant.energyMinTerminal - mainRoom.getResourceInTerminal()
         else mainRoom.constant.energyMaxTerminal - mainRoom.getResourceInTerminal()
         val haveInStorage03: Int = mainRoom.getResourceInStorage() - mainRoom.constant.energyMinStorage
-        carry = min(min(needInTerminal03, haveInStorage03),creep.store.getCapacity())
+        carry = min(min(needInTerminal03, haveInStorage03), creep.store.getCapacity())
 
         if (carry > 0 && (carry == creep.store.getCapacity() || carry == needInTerminal03))
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry)

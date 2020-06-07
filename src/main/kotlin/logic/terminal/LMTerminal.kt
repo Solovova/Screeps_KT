@@ -64,7 +64,7 @@ class LMTerminal(val mainContext: MainContext) {
                 if (needResourceQuantity <= 0) continue
                 needResourceQuantity = max(needResourceQuantity, 100)
 
-
+                //println("Test" + roomTo.name + ":" + needResource +" " +needResourceQuantity)
                 val roomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values
                         .filter {
                             it.name != roomTo.name
@@ -86,7 +86,7 @@ class LMTerminal(val mainContext: MainContext) {
                 val quantityTransfer = min(min(
                         haveResourceQuantity, needResourceQuantity),
                         mainContext.constants.globalConstant.sentMaxMineralQuantity)
-
+                //println("Test<----" + roomFrom.name + " " + quantityTransfer + " have in terminal:"+ haveResourceQuantityInTerminal)
                 //wait because not all resource transfer from storage to terminal
                 if (haveResourceQuantityInTerminal < quantityTransfer) continue
                 if (quantityTransfer < 100) continue
