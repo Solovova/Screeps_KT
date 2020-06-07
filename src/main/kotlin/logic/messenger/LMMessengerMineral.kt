@@ -48,7 +48,7 @@ class LMMessengerMineral(val mainContext: MainContext) {
                 else (mineralDataRecord.quantityUp - mineralDataRecord.quantityDown).toString()
 
                 val strNeed = if (mineralDataRecord.need > mineralDataRecord.quantity
-                        || res== RESOURCE_ENERGY) (-mineralDataRecord.need + mineralDataRecord.quantity).toString()
+                        || res== RESOURCE_ENERGY) (mineralDataRecord.need - mineralDataRecord.quantity).toString()
                 else ""
 
 

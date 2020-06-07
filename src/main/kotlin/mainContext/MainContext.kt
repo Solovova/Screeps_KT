@@ -12,7 +12,7 @@ import screeps.utils.toMap
 import kotlin.random.Random
 
 class MainContext {
-    var cpuStartMC = Game.cpu.getUsed()
+
     val lmDevelopCPUUse : LMDevelopCPUUse = LMDevelopCPUUse()
     val lm: LM = LM(this)
     //Data
@@ -27,11 +27,13 @@ class MainContext {
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
     init {
-        lm.lmProduction.lmMarket.showBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Init")
+        //lm.lmProduction.lmMarket.showBuyOrdersRealPrice("energy".unsafeCast<ResourceConstant>(), 10)
+
     }
 
     fun run() {
+        var cpuStartMC = Game.cpu.getUsed()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Init")
         flags = Game.flags.toMap().values.toList()
 
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Flag")
@@ -48,10 +50,13 @@ class MainContext {
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"fillCash ")
 
         lm.lmGCL.calculate()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmGCL.calculate ")
         lm.lmProduction.lmMineralFillData.fill()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMineralFillData")
         this.constants.accountInit.initTuning(this)
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"accountInit")
         lm.lmProduction.lmMineralFillProduction.fill()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Step 1 ")
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMineralFillProduction")
 
 
         lm.lmDefence.lmMainRoomUpgradeWall.calculate()

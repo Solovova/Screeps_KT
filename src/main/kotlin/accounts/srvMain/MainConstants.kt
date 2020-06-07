@@ -57,7 +57,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.m(4).reactionActive = "ZK"
     const.m(4).reactionActiveArr = arrayOf("ZK", "XGH2O")
     const.m(5).reactionActive = "OH"
-    const.m(6).reactionActive = "XGH2O"
+    const.m(6).reactionActive = "OH"
     //const.m(7).reactionActive = "G"
     const.m(7).reactionActiveArr = arrayOf("G", "XGH2O")
     const.m(8).reactionActive = "OH"
@@ -65,9 +65,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(10).reactionActive = "OH"
     const.m(11).reactionActive = "OH"
     const.m(12).reactionActive = "OH"
-    const.m(13).reactionActive = "XGH2O"
-    const.m(14).reactionActive = "XGH2O"
-    const.m(15).reactionActive = "XGH2O"
+    const.m(13).reactionActive = "ZK"
+    const.m(14).reactionActive = "UL"
+    const.m(15).reactionActive = "G"
     //const.m(16).reactionActive = "UL"
     const.m(16).reactionActiveArr = arrayOf("UL", "XGH2O")
     //const.m(17).reactionActive = "LH"
@@ -76,16 +76,16 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(18).reactionActiveArr = arrayOf("LH2O", "XGH2O")
     //const.m(19).reactionActive = "OH"
     const.m(19).reactionActiveArr = arrayOf("OH", "XGH2O")
-    const.m(20).reactionActive = "XGH2O"
+    const.m(20).reactionActive = "OH"
     const.m(21).reactionActive = "OH"
     //const.m(22).reactionActive = "GH"
     const.m(22).reactionActiveArr = arrayOf("GH", "XGH2O")
     const.m(23).reactionActive = "GH2O"
-    const.m(24).reactionActive = "XGH2O"
+    const.m(24).reactionActive = "GH2O"
     const.m(25).reactionActive = "ZK"
     const.m(26).reactionActive = "UL"
     const.m(27).reactionActive = "G"
-    const.m(28).reactionActive = "XGH2O"
+    const.m(28).reactionActive = "GH"
     const.m(29).reactionActive = "XGH2O"
     const.m(30).reactionActive = "XGH2O"
 }
