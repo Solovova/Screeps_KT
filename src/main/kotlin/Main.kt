@@ -19,6 +19,7 @@ fun loop() {
 
     val protectedMainContext = mainContextGlob ?: return
 
+    //println("Current game tick is ${Game.time} _________________________________________")
     protectedMainContext.lm.lmMessenger.log("HEAD", "", "Current game tick is ${Game.time} _________________________________________", COLOR_WHITE)
 
     // Start tick functions
