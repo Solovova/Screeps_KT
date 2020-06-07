@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainRooms.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainRooms.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/Creep.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/Creep.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgrade.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgrade.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopCPUUse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopCPUUse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLabFillerTask.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLogistTask.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,13 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00021" summary="v 1.13 terminal bugs">
-      <created>1585857513159</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1585857513160</updated>
     </task>
     <task id="LOCAL-00022" summary="v 1.14 refactoring">
       <created>1585933928801</created>
@@ -450,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591515449479</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="v 5.07">
+      <created>1591535388404</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1591535388405</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.35" />
     <MESSAGE value="v 1.36 start refactor from&#10;ch.delconte.screeps-kotlin:screeps-kotlin-types:1.3.0" />
     <MESSAGE value="v 1.37 dev" />
     <MESSAGE value="v 1.1" />
@@ -518,7 +516,8 @@
     <MESSAGE value="v 5.04" />
     <MESSAGE value="v 5.05 ready for deploy LabFiller and Logist" />
     <MESSAGE value="v 5.06" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.06" />
+    <MESSAGE value="v 5.07" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.07" />
   </component>
   <component name="WindowStateProjectService">
     <state x="477" y="252" key="#PSD" timestamp="1591456718847">
@@ -537,10 +536,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591515448150">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591535387224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591515448150" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591535387224" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

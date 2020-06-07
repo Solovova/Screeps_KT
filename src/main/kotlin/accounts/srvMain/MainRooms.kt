@@ -46,8 +46,8 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
 
     if (sr.mr.name == "E56N53" && sr.name == "E57N55") {
         sr.need[0][0] = 0
-        sr.need[0][1] = 9
-        sr.need[0][11] = 1
+        sr.need[0][1] = 7
+        sr.need[0][11] = 0
     }
 
 //

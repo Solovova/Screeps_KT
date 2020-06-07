@@ -4,8 +4,6 @@ import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainContext.dataclass.mainRoom
-import mainContext.mainRoomCollecror.mainRoom.setLabFillerTask
-import mainContext.mainRoomCollecror.mainRoom.setLogistTask
 import mainContext.dataclass.role
 import screeps.api.*
 import screeps.utils.toMap
@@ -226,7 +224,8 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
     }
 
-    if (this.memory.role == 101) {
+    if (this.memory.role == 101 || this.memory.role == 1101) {
+        if (this.memory.role == 101 && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext)
