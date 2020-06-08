@@ -37,7 +37,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N46").initSlaveRoomConstantContainer(arrayOf()) //M25
     const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52", "E58N51")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
-    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54","E57N55")) //28
+    const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54")) //28
     const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52","E55N54")) //29
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf()) //31
@@ -45,10 +45,10 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.m(31).creepSpawn = false
-    const.s(28,3).model = 1
-    const.s(28,3).pathUseGlobalGuideFlag=true
-    const.s(28,3).pathToRoom= arrayOf("E56N53","E56N54","E56N55","E57N55")
+//    const.m(31).creepSpawn = false
+//    const.s(28,3).model = 1
+//    const.s(28,3).pathUseGlobalGuideFlag=true
+//    const.s(28,3).pathToRoom= arrayOf("E56N53","E56N54","E56N55","E57N55")
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"

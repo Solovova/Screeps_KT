@@ -217,6 +217,24 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             return _structureTerminal ?: throw AssertionError("Error get StructureTerminal")
         }
 
+    //StructureNuker
+    private var _structureNuker: Map<Int, StructureNuker>? = null
+    val structureNuker: Map<Int, StructureNuker>
+        get() {
+            if (this._structureNuker == null)
+                _structureNuker = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_NUKER && it.isActive() }.withIndex().associate { it.index to it.value as StructureNuker }
+            return _structureNuker ?: throw AssertionError("Error get StructureNuker")
+        }
+
+    //StructureObserver
+    private var _structureObserver: Map<Int, StructureObserver>? = null
+    val structureObserver: Map<Int, StructureObserver>
+        get() {
+            if (this._structureObserver == null)
+                _structureObserver = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_OBSERVER && it.isActive() }.withIndex().associate { it.index to it.value as StructureObserver }
+            return _structureObserver ?: throw AssertionError("Error get StructureObserver")
+        }
+
     //Mineral
     private var _mineral: Mineral? = null
     val mineral: Mineral
@@ -825,6 +843,8 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             if (this.structureExtractor.size != 1) return " Missing extractor"
             if (this.structureContainerNearMineral.size != 1) return " Missing container near mineral"
             if (this.structureLab.size < 10) return " Missing lab"
+            if (this.structureNuker.size != 1) return " Missing nuker"
+            if (this.structureObserver.size != 1) return " Missing observer"
         }
         return ""
     }

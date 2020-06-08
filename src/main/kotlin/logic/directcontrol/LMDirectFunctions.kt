@@ -5,8 +5,9 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureRoad
 import screeps.api.structures.StructureStorage
+import screeps.utils.toMap
 
-class LMDirectControlDeleteRoads(val mc: MainContext) {
+class LMDirectFunctions(val mc: MainContext) {
     private fun getRoadToSlaveRoom(mainRoom: MainRoom):Array<RoomPosition>? {
         val storage: StructureStorage = mainRoom.structureStorage[0] ?: return null
         var result:Array<RoomPosition> = arrayOf()
@@ -47,4 +48,22 @@ class LMDirectControlDeleteRoads(val mc: MainContext) {
             }
 
     }
+
+    fun comparePos(Pos1: RoomPosition, Pos2: RoomPosition):Boolean {
+        return (Pos1.x == Pos2.x && Pos1.y == Pos2.y && Pos1.roomName == Pos2.roomName)
+    }
+
+    fun showCons() {
+        val mainRooms = mc.mainRoomCollector.rooms.values
+        val cs: List<ConstructionSite> = Game.constructionSites.values.filter { csElem -> mainRooms.none { it.name == csElem.pos.roomName } }
+
+        val groupCs = cs.groupBy{it.pos.roomName}.map { it.key to it.value.size }
+        println(groupCs)
+    }
+
+    fun flagsDelete() {
+        val flags = Game.flags.values.filter { it.color != COLOR_WHITE && it.secondaryColor != COLOR_WHITE}
+        for (flag in flags) flag.remove()
+    }
+
 }

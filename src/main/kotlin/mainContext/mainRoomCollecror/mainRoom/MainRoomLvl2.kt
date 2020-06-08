@@ -111,10 +111,10 @@ fun MainRoom.needCorrection2() {
     if (this.constant.needCleaner) this.need[2][17] = 1
 
     //18 Lab filler
-    if ((this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") ||
-            this.constant.creepUpgradeRole.filter { it.value  }.isNotEmpty()) {
-        this.need[1][18] = 1
-    }
+//    if ((this.structureLabSort.isNotEmpty() && this.constant.reactionActive != "") ||
+//            this.constant.creepUpgradeRole.filter { it.value  }.isNotEmpty()) {
+//        this.need[1][18] = 1
+//    }
 
     //Manual defence
     this.need[1][20] = this.room.find(FIND_FLAGS).filter { it.color == COLOR_PURPLE }.size

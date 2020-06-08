@@ -15,16 +15,6 @@ import screeps.utils.toMap
 import kotlin.math.min
 
 class LMTasksLabFiller(val mc: MainContext) {
-    private fun emptyCreep(creep: Creep, storage: StructureStorage): CreepTask? {
-        if (creep.store.getUsedCapacity() != 0) {
-            val resTransfer = creep.store.toMap().filter { it.value != 0 }.toList().firstOrNull()
-            if (resTransfer != null) {
-                return CreepTask(TypeOfTask.TransferTo, storage.id, storage.pos, resource = resTransfer.first, quantity = resTransfer.second)
-            }
-        }
-        return null
-    }
-
     private fun fillEnergyToLab2(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom, lab2: StructureLab?): CreepTask? {
         if (lab2 == null) return null
         val needEnergy = min(lab2.store.getFreeCapacity(RESOURCE_ENERGY)
@@ -159,20 +149,31 @@ class LMTasksLabFiller(val mc: MainContext) {
         return null
     }
 
-
-    fun newTask(creep: Creep):Boolean {
+    fun newTaskResourcesForUpgrade(creep: Creep):Boolean {
         val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
         val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return false
-        val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false
+
+        var creepTask: CreepTask? = null
+
+        if (creepTask == null) creepTask = this.fillEnergyToLab2(creep, terminal, mainRoom, mainRoom.structureLabSort[2])
+        if (creepTask == null) creepTask = this.fillResourceForUpgradeToLab2(creep, terminal, mainRoom, mainRoom.structureLabSort[2])
+
+        if (creepTask!=null) {
+            mc.tasks.add(creep.id, creepTask)
+            return true
+        }
+        return false
+    }
+
+    fun newTaskLabResources(creep: Creep):Boolean {
+        val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
+        val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return false
         val lab0: StructureLab = mainRoom.structureLabSort[0] ?: return false
         val lab1: StructureLab = mainRoom.structureLabSort[1] ?: return false
         val sourceLab: Array<StructureLab> = arrayOf(lab0, lab1)
 
         var creepTask: CreepTask? = null
 
-        if (creepTask == null) creepTask = this.emptyCreep(creep, storage)
-        if (creepTask == null) creepTask = this.fillEnergyToLab2(creep, terminal, mainRoom, mainRoom.structureLabSort[2])
-        if (creepTask == null) creepTask = this.fillResourceForUpgradeToLab2(creep, terminal, mainRoom, mainRoom.structureLabSort[2])
         if (creepTask == null) creepTask = this.resourceForReactions(creep, terminal, mainRoom, sourceLab)
         if (creepTask == null) creepTask = this.getProductions(creep, terminal, mainRoom)
 

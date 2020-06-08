@@ -14,14 +14,17 @@ import kotlin.math.min
 
 class LMTasksLogist(val mc: MainContext) {
 
-    private fun emptyCreep(creep: Creep, storage: StructureStorage): CreepTask? {
+    fun newTaskEmptyCreep(creep: Creep): Boolean {
+        val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
+        val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false
         if (creep.store.getUsedCapacity() != 0) {
             val resTransfer = creep.store.toMap().filter { it.value != 0 }.toList().firstOrNull()
             if (resTransfer != null) {
-                return CreepTask(TypeOfTask.TransferTo, storage.id, storage.pos, resource = resTransfer.first, quantity = resTransfer.second)
+                mc.tasks.add(creep.id, CreepTask(TypeOfTask.TransferTo, storage.id, storage.pos, resource = resTransfer.first, quantity = resTransfer.second))
+                return true
             }
         }
-        return null
+        return false
     }
 
     private fun linkTransfer(creep: Creep, storage: StructureStorage, mainRoom: MainRoom): CreepTask? {
@@ -127,18 +130,37 @@ class LMTasksLogist(val mc: MainContext) {
         return null
     }
 
-    fun newTask(creep: Creep): Boolean {
+    fun newTaskLinkAndTerminalStorageBalance(creep: Creep): Boolean {
         val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
         val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return false
         val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false
 
         var creepTask: CreepTask? = null
 
-        if (creepTask == null) creepTask = this.emptyCreep(creep, storage)
         if (creepTask == null) creepTask = this.linkTransfer(creep, storage, mainRoom)
         if (creepTask == null) creepTask = this.energyLogist(creep, storage, terminal, mainRoom)
         if (creepTask == null) creepTask = this.mineralStorageToTerminal(creep, storage, terminal, mainRoom)
         if (creepTask == null) creepTask = this.mineralTerminalToStorage(creep, storage, terminal, mainRoom)
+
+        if (creepTask != null) {
+            mc.tasks.add(creep.id, creepTask)
+            return true
+        }
+
+        return false
+    }
+
+    fun newTaskNuke(creep: Creep): Boolean {
+        val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
+        val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return false
+        val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false
+
+        var creepTask: CreepTask? = null
+
+//        if (creepTask == null) creepTask = this.linkTransfer(creep, storage, mainRoom)
+//        if (creepTask == null) creepTask = this.energyLogist(creep, storage, terminal, mainRoom)
+//        if (creepTask == null) creepTask = this.mineralStorageToTerminal(creep, storage, terminal, mainRoom)
+//        if (creepTask == null) creepTask = this.mineralTerminalToStorage(creep, storage, terminal, mainRoom)
 
         if (creepTask != null) {
             mc.tasks.add(creep.id, creepTask)

@@ -39,6 +39,8 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
                     && creep.store.toMap().map { it.value }.sum() == 0
             ) creep.suicide()
 
+            //if (creep.memory.role == 18) creep.suicide()
+
             //
             if (creep.memory.role == 5 || creep.memory.role == 1005) {
                 if (Memory["5Busy"] == null) Memory["5Busy"] = 0
