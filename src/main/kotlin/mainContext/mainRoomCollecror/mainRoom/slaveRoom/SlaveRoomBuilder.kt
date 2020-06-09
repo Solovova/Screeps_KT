@@ -33,7 +33,7 @@ fun SlaveRoom.building() {
     //8 COLOR_BROWN     STRUCTURE_SPAWN
 
     if (this.room == null) return
-    if (this.constant.model != 1) return  // Build by flag only in colonize room
+    if (this.constant.model != SlaveRoomType.colonize) return  // Build by flag only in colonize room
 
     if(this.constructionSite.isNotEmpty()) return
     if (this.buildStructure(COLOR_WHITE, COLOR_BROWN, STRUCTURE_SPAWN,1)) return

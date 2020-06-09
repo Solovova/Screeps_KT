@@ -1,8 +1,12 @@
 package mainContext.constants
 
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+
 class SlaveRoomConstant {
-    var model: Int = 0 //simple //0 - harvesting room, 1 - colonize room, 2 - danged harvesting room
+    var model:SlaveRoomType = SlaveRoomType.normal
     var autoBuildRoad: Boolean = false
+    //Fro madel 3
+    var checkpointRoom: String = ""
 
     //Profit
     var profitUp: Int = 0 //cashed

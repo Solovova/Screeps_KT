@@ -36,7 +36,7 @@ fun MainRoom.needCorrection3() {
 
     //2 Upgrader
     if ((this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller)
-            && (!this.constant.defenceNeedUpgrade || ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)))
+            && (!this.constant.defenceNeedUpgrade)// || ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)))
     )
             {
         this.need[1][19] = 1

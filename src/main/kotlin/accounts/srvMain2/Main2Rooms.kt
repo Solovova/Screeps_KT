@@ -5,10 +5,10 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import screeps.api.ResourceConstant
 
 fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
-    val defenceRoomLow: Array<String> = arrayOf("E52N38","E58N37","E53N38")
+    val defenceRoomLow: Array<String> = arrayOf()
     val defenceRoomLowHits = 1_000_000
     val defenceRoomNormHits = 2_000_000 //Default
-    val defenceRoomHi: Array<String> = arrayOf("E51N35","E52N35","E53N35","E58N43")
+    val defenceRoomHi: Array<String> = arrayOf()
     val defenceRoomHiHits = 3_000_000
 
     if (mr.name in defenceRoomLow) {
@@ -23,9 +23,7 @@ fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
 
     mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
 
-    if (mr.name in arrayOf("E51N35", "E52N35", "E53N35")) {
-        mr.constant.defenceHits = 3000000
-    }
+
 
     //ToDo auto
     if (mr.name == "E54N39") mr.needMineral["GH2O".unsafeCast<ResourceConstant>()] = 10000
@@ -40,27 +38,8 @@ fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
 }
 
 fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
-    if (sr.mr.name == "E55N53" && sr.name == "E54N54") {
-        sr.need[0][15] = 1
+    if (sr.mr.name == "W5N7" && sr.name == "W2N5") {
+        sr.need[0][0] = 0
+        sr.need[0][1] = 0
     }
-
-    if (sr.mr.name == "E55N53" && sr.name == "E54N54") {
-        sr.need[0][0] = 1
-        sr.need[0][1] = 8
-    }
-
-    if (sr.mr.name == "E57N51" && sr.name == "E59N52") {
-        sr.need[0][0] = 1
-        sr.need[0][1] = 7
-    }
-//
-//    if (sr.mr.name == "E56N53" && sr.name == "E55N53") {
-//        sr.need[0][0] = 0
-//        sr.need[0][1] = 5
-//    }
-//
-//
-//    if (sr.mr.name == "E57N51" && sr.name == "E58N51") {
-//        sr.need[0][11] = 1
-//    }
 }

@@ -6,11 +6,15 @@ var mainContextGlob : MainContext? = null
 
 @Suppress("unused")
 fun loop() {
-    Memory["account"] = ""
-    if (Game.rooms["E54N37"] != null)  Memory["account"] = "main"
-    if (Game.rooms["E43N34"] != null)  Memory["account"] = "main2"
-    if (Game.rooms["W5N3"] != null)    Memory["account"] = "test"
-    ///if (Game.rooms["W8N3"] != null)    Memory["account"] = "test2"
+    if (Memory["account"] == "" || Memory["account"] == null) {
+        //Memory["account"] = ""
+        if (Game.rooms["E54N37"] != null)  Memory["account"] = "main"
+        if (Game.rooms["W5N7"] != null)  Memory["account"] = "main2"
+        ///if (Game.rooms["W8N3"] != null)    Memory["account"] = "test2"
+        if (Game.rooms["W5N3"] != null)    Memory["account"] = "test"
+    }
+
+
 
     // Initialisation and protect mainContext
     if (mainContextGlob == null) {

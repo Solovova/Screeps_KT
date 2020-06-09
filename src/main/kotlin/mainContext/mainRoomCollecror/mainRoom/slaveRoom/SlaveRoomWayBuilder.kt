@@ -23,7 +23,7 @@ fun SlaveRoom.buildWaysInRoom():Boolean {
     for (ind in 0..1) {
         if (this.structureContainerNearSource.containsKey(ind)) {
             val cacheCarrier: CacheCarrier = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer$ind", mainRoom = this.mr,
-                    slaveRoom = this, inSwampCost = 6, inPlainCost = 6, recalculate = true)
+                    slaveRoom = this, inSwampCost = 4, inPlainCost = 2, recalculate = true)
                     ?: return false
             if (cacheCarrier.mPath.isEmpty()) return false
             if (!this.buildWayByPath(cacheCarrier.mPath)) return false

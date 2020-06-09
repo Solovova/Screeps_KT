@@ -2,20 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomCentral.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomDangeon.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomNormal.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomType.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/admin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/Creep.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/Creep.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLabFiller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLabFiller.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLogist.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLogist.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgrade.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgrade.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/directcontrol/LMDirectControl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/directcontrol/LMDirectControl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/directcontrol/LMDirectControlDeleteRoads.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/directcontrol/LMDirectFunctions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/MainRoomCollector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/MainRoomCollector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoom.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Minerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Minerals.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Rooms.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Rooms.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvTest2/Test2Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvTest2/Test2Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CareepNewTasks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CareepNewTasks.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/harvest/LMHarvestCacheRecordRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/harvest/LMHarvestCacheRecordRoom.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/harvest/LMHarvestGetCarrierAuto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/harvest/LMHarvestGetCarrierAuto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessenger.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessenger.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/SlaveRoomConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/SlaveRoomConstant.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoom.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomWayBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomWayBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/screeps.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screeps.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +53,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin File" />
+        <option value="Kotlin Enum" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -113,13 +124,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00024" summary="v 1.16 info def">
-      <created>1585938955355</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1585938955356</updated>
     </task>
     <task id="LOCAL-00025" summary="v 1.17 refactor">
       <created>1585944072233</created>
@@ -457,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591562003736</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="v 5.10">
+      <created>1591618878143</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1591618878143</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -500,7 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.1" />
     <MESSAGE value="v 1.2" />
     <MESSAGE value="v 1.4" />
     <MESSAGE value="v 1.5" />
@@ -525,7 +535,8 @@
     <MESSAGE value="v 5.07" />
     <MESSAGE value="v 5.08" />
     <MESSAGE value="v 5.09" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.09" />
+    <MESSAGE value="v 5.10" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.10" />
   </component>
   <component name="WindowStateProjectService">
     <state x="477" y="252" key="#PSD" timestamp="1591456718847">
@@ -544,10 +555,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591562002708">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591618876814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591562002708" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591618876814" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -560,10 +571,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591456783022" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591562011502">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591618885032">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591562011502" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591618885032" />
     <state x="656" y="118" width="998" height="804" key="find.popup" timestamp="1591429855046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

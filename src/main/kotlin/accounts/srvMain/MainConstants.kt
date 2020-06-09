@@ -1,6 +1,7 @@
 package accounts.srvMain
 
 import mainContext.constants.Constants
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
 
 fun AccountInitMain.initHeadOut(const: Constants) {
     //M0       M1       M2       M3       M4       M5       M6       M7       M8       M9
@@ -30,7 +31,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                //M18
     const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
     const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                        //M20
-    const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                        //M21
+    const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35","E55N35"))                                        //M21
     const.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43", "E59N43"))   //M22
     const.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     const.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
@@ -45,6 +46,8 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
+    const.s(21,1).model = SlaveRoomType.central
+    const.s(21,1).checkpointRoom = "E54N35"
 //    const.m(31).creepSpawn = false
 //    const.s(28,3).model = 1
 //    const.s(28,3).pathUseGlobalGuideFlag=true

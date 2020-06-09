@@ -9,7 +9,7 @@ import screeps.api.Game
 import screeps.api.structures.Structure
 
 class LMHarvestCacheRecordRoom(val mc:MainContext) {
-    fun gets(type: String, mainRoom: MainRoom, slaveRoom: SlaveRoom? = null, recalculate: Boolean = false, inSwampCost: Int = 10, inPlainCost: Int = 2) : CacheCarrier? {
+    fun gets(type: String, mainRoom: MainRoom, slaveRoom: SlaveRoom? = null, recalculate: Boolean = false, inSwampCost: Int = 10, inPlainCost: Int = 2, doNotCalculateRoads: Boolean = false) : CacheCarrier? {
         var objectTo : Structure? = null
 
         when(type) {
@@ -34,8 +34,7 @@ class LMHarvestCacheRecordRoom(val mc:MainContext) {
             //if  (mainContext.dataclass.getSlaveRoom?.name == "E56N34") console.log(objectTo.pos)
             mc.lm.lmMessenger.log("TEST", mainRoom.name, "Recalculate ways: $type ${!ret.incomplete}", COLOR_YELLOW)
             if (!ret.incomplete) {
-                if  (slaveRoom?.name == "E56N34") console.log(objectTo.pos)
-                carrierAuto = mc.lm.lmHarvestGetCarrierAuto.gets(ret, mainRoom, slaveRoom = slaveRoom)
+                carrierAuto = mc.lm.lmHarvestGetCarrierAuto.gets(ret, mainRoom, slaveRoom = slaveRoom, doNotCalculateRoads = doNotCalculateRoads)
                 mc.constants.globalConstant.dataCacheCarrierAuto[keyRecord] = carrierAuto
             }
         }
