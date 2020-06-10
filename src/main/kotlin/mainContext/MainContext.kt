@@ -3,6 +3,7 @@ package mainContext
 import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import logic.develop.LMDevelopCPUUse
+import logic.develop.LMDevelopSafeMove
 import mainContext.constants.Constants
 import logic.main.LM
 import mainContext.dataclass.MineralDataRecord
@@ -39,6 +40,9 @@ class MainContext {
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Flag")
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"mainRoomCollector ")
+
+        LMDevelopSafeMove(this).testSafeWay()
+        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Test safeWay ")
 
         for (room in this.mainRoomCollector.rooms.values) {
             try {

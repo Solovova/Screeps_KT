@@ -111,7 +111,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 val resultContainer = mutableMapOf<Int, StructureContainer>()
                 for (sourceRec in this.source)
                     for (container in this.structureContainer.values)
-                        if (!resultContainer.containsValue(container) && sourceRec.value.pos.inRangeTo(container.pos, 2))
+                        if (!resultContainer.containsValue(container) && sourceRec.value.pos.inRangeTo(container.pos, 1))
                             resultContainer[sourceRec.key] = container
                 _structureContainerNearSource = resultContainer
             }

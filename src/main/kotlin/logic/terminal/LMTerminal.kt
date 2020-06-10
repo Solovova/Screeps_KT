@@ -117,6 +117,7 @@ class LMTerminal(val mainContext: MainContext) {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
                     && it.getResource() > emergencyMineralQuantity
+                    && it.name != mainRoomTo.name
         }.maxBy {
             it.getResource() + if (it.constant.levelOfRoom == 3) {
                 1000000
@@ -189,11 +190,12 @@ class LMTerminal(val mainContext: MainContext) {
             it.structureTerminal[0] != null
                     && it.constant.defenceNeedUpgrade
                     && it.getResource() < it.constant.energyUpgradeDefence
+                    && it.name != mainRoomFrom.name
         }.minBy { it.getResource() }
-                ?: mainContext.mainRoomCollector.rooms.values.filter {
-                    it.structureTerminal[0] != null
-                            && it.getResource() < (it.constant.energyExcessSent - sentQuantity)
-                }.minBy { it.getResource() }
+//                ?: mainContext.mainRoomCollector.rooms.values.filter {
+//                    it.structureTerminal[0] != null
+//                            && it.getResource() < (it.constant.energyExcessSent - sentQuantity)
+//                }.minBy { it.getResource() }
                 ?: return
 
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "ExcessSent")

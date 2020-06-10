@@ -3,7 +3,7 @@ package logic.harvest
 import screeps.api.*
 
 class LMHarvestGetWayFromPosToPos {
-    fun gets(fPos1: RoomPosition, fPos2: RoomPosition, inSwampCost: Int = 10, inPlainCost: Int = 2): PathFinder.Path {
+    fun gets(fPos1: RoomPosition, fPos2: RoomPosition, inSwampCost: Int = 10, inPlainCost: Int = 2, safeMove: Boolean = false): PathFinder.Path {
         fun roomCallback(roomName: String): CostMatrix {
             val room: Room = Game.rooms[roomName] ?: return PathFinder.CostMatrix()
             val costs = PathFinder.CostMatrix()
@@ -28,6 +28,16 @@ class LMHarvestGetWayFromPosToPos {
 
             room.find(FIND_HOSTILE_STRUCTURES).forEach { struct ->
                 costs.set(struct.pos.x, struct.pos.y, 0xff)
+            }
+
+            if (safeMove) {
+                room.find(FIND_HOSTILE_STRUCTURES).filter { it.structureType == STRUCTURE_KEEPER_LAIR }.forEach { keeper ->
+                    for (dx in (keeper.pos.x - 5)..(keeper.pos.x + 5))
+                        for (dy in (keeper.pos.y - 5)..(keeper.pos.y + 5)) {
+                            if (dx !in 0..49 || dy !in 0..49) continue
+                            costs.set(dx, dy, 0xff)
+                        }
+                }
             }
             return costs
         }

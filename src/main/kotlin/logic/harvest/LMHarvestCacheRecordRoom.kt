@@ -1,6 +1,7 @@
 package logic.harvest
 
 import constants.CacheCarrier
+import logic.develop.LMDevelopSafeMove
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
@@ -9,7 +10,7 @@ import screeps.api.Game
 import screeps.api.structures.Structure
 
 class LMHarvestCacheRecordRoom(val mc:MainContext) {
-    fun gets(type: String, mainRoom: MainRoom, slaveRoom: SlaveRoom? = null, recalculate: Boolean = false, inSwampCost: Int = 10, inPlainCost: Int = 2, doNotCalculateRoads: Boolean = false) : CacheCarrier? {
+    fun gets(type: String, mainRoom: MainRoom, slaveRoom: SlaveRoom? = null, recalculate: Boolean = false, inSwampCost: Int = 10, inPlainCost: Int = 2, doNotCalculateRoads: Boolean = false, safeMove: Boolean = false) : CacheCarrier? {
         var objectTo : Structure? = null
 
         when(type) {
@@ -34,7 +35,7 @@ class LMHarvestCacheRecordRoom(val mc:MainContext) {
             //if  (mainContext.dataclass.getSlaveRoom?.name == "E56N34") console.log(objectTo.pos)
             mc.lm.lmMessenger.log("TEST", mainRoom.name, "Recalculate ways: $type ${!ret.incomplete}", COLOR_YELLOW)
             if (!ret.incomplete) {
-                carrierAuto = mc.lm.lmHarvestGetCarrierAuto.gets(ret, mainRoom, slaveRoom = slaveRoom, doNotCalculateRoads = doNotCalculateRoads)
+                carrierAuto = mc.lm.lmHarvestGetCarrierAuto.gets(ret, mainRoom, slaveRoom = slaveRoom, doNotCalculateRoads = doNotCalculateRoads, safeMove = safeMove)
                 mc.constants.globalConstant.dataCacheCarrierAuto[keyRecord] = carrierAuto
             }
         }

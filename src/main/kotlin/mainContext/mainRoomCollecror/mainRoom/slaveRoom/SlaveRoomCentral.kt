@@ -53,19 +53,19 @@ fun SlaveRoom.correctionCentral() {
     this.need[1][20] = 1
 
 
-    val carrierAuto0: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this, true)
+    val carrierAuto0: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this, true,safeMove = true)
     if (carrierAuto0 != null) {
         if (this.need[1][21] == 0) this.need[1][21] = carrierAuto0.needCarriers
     }
 
     this.need[1][22] = 1
-    val carrierAuto1: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this, true)
+    val carrierAuto1: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this, true, safeMove = true)
     if (carrierAuto1 != null) {
         if (this.need[1][23] == 0) this.need[1][23] = carrierAuto1.needCarriers
     }
 
     this.need[1][24] = 1
-    val carrierAuto2: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer2", this.mr, this, true)
+    val carrierAuto2: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer2", this.mr, this, true, safeMove = true)
     if (carrierAuto2 != null) {
         if (this.need[1][25] == 0) this.need[1][25] = carrierAuto2.needCarriers
     }

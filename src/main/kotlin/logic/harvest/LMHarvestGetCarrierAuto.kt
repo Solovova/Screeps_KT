@@ -10,7 +10,7 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 
 class LMHarvestGetCarrierAuto {
-    fun gets (ret: PathFinder.Path, mainRoom: MainRoom, slaveRoom: SlaveRoom?, doNotCalculateRoads: Boolean = false): CacheCarrier {
+    fun gets (ret: PathFinder.Path, mainRoom: MainRoom, slaveRoom: SlaveRoom?, doNotCalculateRoads: Boolean = false, safeMove:Boolean = false): CacheCarrier {
         //ToDo SOURCE_ENERGY_KEEPER_CAPACITY
         val weight: Int
         val fMaxCapacity: Int
