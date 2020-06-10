@@ -38,8 +38,8 @@ fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
 }
 
 fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
-    if (sr.mr.name == "W5N7" && sr.name == "W2N5") {
+    if (sr.mr.name == "W2N5" && sr.name == "W3N1") {
         sr.need[0][0] = 0
-        sr.need[0][1] = 0
+        sr.need[0][1] = 6
     }
 }

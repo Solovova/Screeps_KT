@@ -192,10 +192,6 @@ class LMTerminal(val mainContext: MainContext) {
                     && it.getResource() < it.constant.energyUpgradeDefence
                     && it.name != mainRoomFrom.name
         }.minBy { it.getResource() }
-//                ?: mainContext.mainRoomCollector.rooms.values.filter {
-//                    it.structureTerminal[0] != null
-//                            && it.getResource() < (it.constant.energyExcessSent - sentQuantity)
-//                }.minBy { it.getResource() }
                 ?: return
 
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "ExcessSent")

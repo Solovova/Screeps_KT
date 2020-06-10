@@ -86,6 +86,7 @@ class LMDevelopSafeMove(val mc: MainContext) {
 
         val safeWay = getSafeWay(posFrom, posTo)
         println("Test way ${safeWay.incomplete} len: ${safeWay.path.size}")
+        println("Test way ${safeWay.path}")
 
     }
 

@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/slaveroom/LMTasksSlaveRoomRepairRoad.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopMoveByPath.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Rooms.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Rooms.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CreepDoTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CreepDoTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopSafeMove.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopSafeMove.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/terminal/LMTerminal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/terminal/LMTerminal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoom.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/screeps.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screeps.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,13 +111,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00026" summary="v 1.18 refactor">
-      <created>1585946617536</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1585946617536</updated>
     </task>
     <task id="LOCAL-00027" summary="v 1.19 refactor">
       <created>1586001619519</created>
@@ -445,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591783581034</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="v 5.12 delete old code">
+      <created>1591784398290</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1591784398291</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -488,7 +498,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.4" />
     <MESSAGE value="v 1.5" />
     <MESSAGE value="v 1.6 ready for test" />
     <MESSAGE value="v 1.7 testing" />
@@ -513,7 +522,8 @@
     <MESSAGE value="v 5.09" />
     <MESSAGE value="v 5.10" />
     <MESSAGE value="v 5.11" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.11" />
+    <MESSAGE value="v 5.12 delete old code" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.12 delete old code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="477" y="252" key="#PSD" timestamp="1591456718847">
@@ -532,10 +542,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591783580036">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591784397050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591783580036" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591784397050" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -548,10 +558,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591456783022" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591783592849">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591784405229">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591783592849" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591784405229" />
     <state x="656" y="118" width="998" height="804" key="find.popup" timestamp="1591429855046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

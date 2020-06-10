@@ -2,6 +2,8 @@
 
 package creep
 
+import constants.CacheCarrier
+import logic.creep.tasks.slaveroom.LMTasksSlaveRoomRepairRoad
 import mainContext.MainContext
 import mainContext.dataclass.*
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
@@ -14,6 +16,8 @@ import mainContext.dataclass.role
 import screeps.utils.toMap
 import mainContext.dataclass.slaveRoom
 import mainContext.dataclass.upgrade
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.correctionCentral
 
 fun Creep.doTask(mainContext: MainContext) {
     if (!mainContext.tasks.isTaskForCreep(this)) return
@@ -31,7 +35,7 @@ fun Creep.doTask(mainContext: MainContext) {
 
     when (task.type) {
         TypeOfTask.Harvest -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val source: Source? = (Game.getObjectById(task.idObject0) as Source?)
                 if (source != null) this.harvest(source)
@@ -42,13 +46,13 @@ fun Creep.doTask(mainContext: MainContext) {
             val mineral: Mineral? = (Game.getObjectById(task.idObject0) as Mineral?)
             val container: StructureContainer? = mainRoom.structureContainerNearMineral[0]
             val extractor: StructureExtractor? = mainRoom.structureExtractor[0]
-            if (mineral != null && container!=null
-                    && container.store.toMap().toList().sumBy{it.second}<container.store.getCapacity()-100
-                    && extractor!=null && extractor.cooldown == 0) this.harvest(mineral)
+            if (mineral != null && container != null
+                    && container.store.toMap().toList().sumBy { it.second } < container.store.getCapacity() - 100
+                    && extractor != null && extractor.cooldown == 0) this.harvest(mineral)
         }
 
         TypeOfTask.TransferTo -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
                 if (structure != null) this.transfer(structure, task.resource)
@@ -93,7 +97,7 @@ fun Creep.doTask(mainContext: MainContext) {
 
 
         TypeOfTask.Upgrade -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3, mainContext)
             if (task.come) {
                 val controller: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 if (controller != null) this.upgradeController(controller)
@@ -101,7 +105,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.UpgradeCreep -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val lab: StructureLab? = (Game.getObjectById(task.idObject0) as StructureLab?)
                 if (lab == null) this.memory.upgrade = "u"
@@ -113,7 +117,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.Build -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3, mainContext)
             if (task.come) {
                 val building: ConstructionSite? = (Game.getObjectById(task.idObject0) as ConstructionSite?)
                 if (building != null) this.build(building)
@@ -121,7 +125,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.UpgradeStructure -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3, mainContext)
             if (task.come) {
                 val building: Structure? = (Game.getObjectById(task.idObject0) as Structure?)
                 if (building != null) this.repair(building)
@@ -129,7 +133,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.Repair -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3, mainContext)
             if (task.come) {
                 val repairStructure: Structure? = (Game.getObjectById(task.idObject0) as Structure?)
                 if (repairStructure != null) {
@@ -143,7 +147,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.Claim -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 if (structureController != null) this.claimController(structureController)
@@ -151,7 +155,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.Take -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
                 if (structure != null) this.withdraw(structure, task.resource)
@@ -159,7 +163,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.TakeDropped -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val resource: Resource? = (Game.getObjectById(task.idObject0) as Resource?)
                 if (resource != null) this.pickup(resource)
@@ -171,7 +175,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.Reserve -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 if (structureController != null) this.reserveController(structureController)
@@ -179,7 +183,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToPos -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, task.quantity)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, task.quantity, mainContext)
         }
 
         TypeOfTask.AttackRange -> {
@@ -199,7 +203,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.SignRoom -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 if (structureController != null) this.signController(structureController, mainRoom.describe)
@@ -207,7 +211,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.SignSlaveRoom -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
             if (task.come) {
                 val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 val slaveRoom: SlaveRoom? = mainRoom.slaveRooms[this.memory.slaveRoom]
@@ -218,7 +222,7 @@ fun Creep.doTask(mainContext: MainContext) {
         TypeOfTask.Transport -> {
             val posGo: RoomPosition = (if (task.take) task.posObject1 else task.posObject0)
                     ?: return
-            if (!task.come) this.doTaskGoTo(task, posGo, 1)
+            if (!task.come) this.doTaskGoTo(task, posGo, 1, mainContext)
             if (task.come) {
                 if (!task.take) {
                     val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
@@ -270,7 +274,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToRescueFlag -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1, mainContext)
         }
 
 
@@ -280,22 +284,13 @@ fun Creep.doTask(mainContext: MainContext) {
 }
 
 
-fun Creep.doTaskGoTo(task: CreepTask, pos: RoomPosition, range: Int) {
+fun Creep.doTaskGoTo(task: CreepTask, pos: RoomPosition, range: Int, mc: MainContext) {
     if (this.pos.inRangeTo(pos, range)) task.come = true
     else {
-        if (this.memory.role in arrayOf(106, 108, 1106, 1108, 121, 123, 125))
-            if (this.room.name != this.memory.mainRoom) {
-                val room: Room? = Game.rooms[this.pos.roomName]
-                if (room != null) {
-                    val fFind: Array<Structure> = (room.lookForAt(LOOK_STRUCTURES, this.pos.x, this.pos.y)
-                            ?: arrayOf())
-                            .filter { it.structureType == STRUCTURE_ROAD && it.hits < (it.hitsMax - 100) }.toTypedArray()
-                    if (fFind.isNotEmpty()) this.repair(fFind[0])
-                }
-            }
-
-        if (this.fatigue == 0) {
-            this.moveTo(pos)
-        }
+        LMTasksSlaveRoomRepairRoad().repair(this)
+        if (this.fatigue != 0) return
+        this.moveTo(pos)
     }
 }
+
+

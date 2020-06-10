@@ -41,7 +41,7 @@ class MainContext {
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"mainRoomCollector ")
 
-        LMDevelopSafeMove(this).testSafeWay()
+        //LMDevelopSafeMove(this).testSafeWay()
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Test safeWay ")
 
         for (room in this.mainRoomCollector.rooms.values) {

@@ -127,7 +127,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 val resultContainer = mutableMapOf<Int, StructureContainer>()
                 for (container in this.structureContainer.values) {
                     val protectStructureController: StructureController? = this.structureController[0]
-                    if (protectStructureController != null && !this.structureContainerNearSource.containsValue(container) && protectStructureController.pos.inRangeTo(container.pos, 3))
+                    if (protectStructureController != null
+                            && !this.structureContainerNearSource.containsValue(container)
+                            && !this.structureContainerNearMineral.containsValue(container)
+                            && protectStructureController.pos.inRangeTo(container.pos, 3))
                         resultContainer[0] = container
                 }
                 _structureContainerNearController = resultContainer
