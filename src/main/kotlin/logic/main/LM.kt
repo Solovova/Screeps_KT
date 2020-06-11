@@ -9,6 +9,7 @@ import logic.harvest.LMHarvestCacheRecordRoom
 import logic.harvest.LMHarvestGetCarrierAuto
 import logic.harvest.LMHarvestGetWayFromPosToPos
 import logic.messenger.LMMessenger
+import logic.nuker.LMNuker
 import logic.production.LMProduction
 import logic.terminal.LMTerminal
 import mainContext.MainContext
@@ -26,4 +27,5 @@ class LM(val mc: MainContext) {
     val lmHarvestGetCarrierAuto: LMHarvestGetCarrierAuto = LMHarvestGetCarrierAuto()
     val lmHarvestGetWayFromPosToPos: LMHarvestGetWayFromPosToPos = LMHarvestGetWayFromPosToPos()
     val lmDirectControl: LMDirectControl = LMDirectControl(mc)
+    val lmNuker:LMNuker = LMNuker(mc)
 }

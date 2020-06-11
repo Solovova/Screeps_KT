@@ -3,7 +3,6 @@ package mainContext
 import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import logic.develop.LMDevelopCPUUse
-import logic.develop.LMDevelopSafeMove
 import mainContext.constants.Constants
 import logic.main.LM
 import mainContext.dataclass.MineralDataRecord
@@ -55,6 +54,7 @@ class MainContext {
 
         lm.lmGCL.calculate()
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmGCL.calculate ")
+        lm.lmNuker.lmNukerNeedMineral.fill()
         lm.lmProduction.lmMineralFillData.fill()
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMineralFillData")
         this.constants.accountInit.initTuning(this)

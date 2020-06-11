@@ -7,6 +7,7 @@ import mainContext.dataclass.MainRoomInfoRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureController
+import screeps.api.structures.StructureNuker
 import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
@@ -25,7 +26,8 @@ enum class TypeOfMainRoomInfo {
     InfoPlaceInStorage,
     InfoPlaceInTerminal,
     InfoNeedUpgrade,
-    InfoAutoDefence
+    InfoAutoDefence,
+    InfoShortInfo
 }
 
 data class MainRoomInfoSetup(val type: TypeOfMainRoomInfo,
@@ -82,7 +84,12 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                     "Need building",
                     COLOR_YELLOW,
                     COLOR_RED,
-                    40),
+                    18),
+            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoShortInfo,
+                    "SInfo",
+                    COLOR_YELLOW,
+                    COLOR_RED,
+                    10),
             MainRoomInfoSetup(TypeOfMainRoomInfo.InfoRoomName,
                     "",
                     COLOR_WHITE,
@@ -278,6 +285,30 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                 (mainRoom.constant.autoDefenceArea !in 30..1300))
     }
 
+    private fun getInfoShortInfo(mainRoom: MainRoom): MainRoomInfoRecord {
+        var result = ""
+        var alarm = false
+        if (mainRoom.getLevelOfRoom()==3) {
+            val nuke = mainRoom.structureNuker[0]
+            if (nuke!=null) {
+                if (nuke.store.getFreeCapacity(RESOURCE_ENERGY) != 0
+                        || nuke.store.getFreeCapacity(RESOURCE_GHODIUM) != 0
+                ) {
+                    result += "N"
+                    alarm = true
+                }
+            }
+
+            if (mainRoom.have[19] == 0 && mainRoom.have[10] == 0) {
+                result += "U"
+                alarm = true
+            }
+        }
+
+        return MainRoomInfoRecord(result,
+                alarm)
+    }
+
 
     private fun getInfo(mainRoom: MainRoom): Map<TypeOfMainRoomInfo, MainRoomInfoRecord> {
         val result: MutableMap<TypeOfMainRoomInfo, MainRoomInfoRecord> = mutableMapOf()
@@ -294,6 +325,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         result[TypeOfMainRoomInfo.InfoReaction] = this.getInfoReactionInfo(mainRoom)
         result[TypeOfMainRoomInfo.InfoNeedUpgrade] = this.getInfoNeedUpgrade(mainRoom)
         result[TypeOfMainRoomInfo.InfoAutoDefence] = this.getInfoDefenceArea(mainRoom)
+        result[TypeOfMainRoomInfo.InfoShortInfo] = this.getInfoShortInfo(mainRoom)
         return result
     }
 }

@@ -7,6 +7,7 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.tasks.CreepTask
 import screeps.api.*
 import screeps.api.structures.StructureLink
+import screeps.api.structures.StructureNuker
 import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
@@ -112,6 +113,22 @@ class LMTasksLogist(val mc: MainContext) {
         return null
     }
 
+    private fun fullNuker(creep: Creep, storage: StructureStorage, terminal: StructureTerminal, mainRoom: MainRoom, nuker: StructureNuker): CreepTask? {
+        val needEnergy: Int = nuker.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0
+        if (needEnergy != 0 && mainRoom.getResource(RESOURCE_ENERGY) > mainRoom.constant.energyUpgradeLvl8Controller) {
+            return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, nuker.id, nuker.pos, RESOURCE_ENERGY,
+                    min(creep.store.getCapacity(),needEnergy))
+        }
+
+        val needG: Int = nuker.store.getFreeCapacity(RESOURCE_GHODIUM) ?: 0
+        if (needG != 0 && mainRoom.getResource(RESOURCE_GHODIUM) > 0) {
+            return CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, nuker.id, nuker.pos, RESOURCE_GHODIUM,
+                    min(min(creep.store.getCapacity(),needG),mainRoom.getResource(RESOURCE_GHODIUM)))
+        }
+
+        return null
+    }
+
     private fun mineralTerminalToStorage(creep: Creep, storage: StructureStorage, terminal: StructureTerminal, mainRoom: MainRoom): CreepTask? {
         //Terminal -> Storage all mineral > this.constant.mineralMinTerminal
         var carry: Int
@@ -150,17 +167,21 @@ class LMTasksLogist(val mc: MainContext) {
         return false
     }
 
+
+
     fun newTaskNuke(creep: Creep): Boolean {
         val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
+
+        if (!(mc.constants.globalConstant.nukerFilInRooms.isEmpty()
+                || mainRoom.name in mc.constants.globalConstant.nukerFilInRooms)) return false
+
         val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return false
         val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false
+        val nuker: StructureNuker = mainRoom.structureNuker[0] ?: return false
 
         var creepTask: CreepTask? = null
 
-//        if (creepTask == null) creepTask = this.linkTransfer(creep, storage, mainRoom)
-//        if (creepTask == null) creepTask = this.energyLogist(creep, storage, terminal, mainRoom)
-//        if (creepTask == null) creepTask = this.mineralStorageToTerminal(creep, storage, terminal, mainRoom)
-//        if (creepTask == null) creepTask = this.mineralTerminalToStorage(creep, storage, terminal, mainRoom)
+        if (creepTask == null) creepTask = this.fullNuker(creep, storage, terminal, mainRoom, nuker)
 
         if (creepTask != null) {
             mc.tasks.add(creep.id, creepTask)

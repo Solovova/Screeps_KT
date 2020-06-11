@@ -35,7 +35,7 @@ fun MainRoom.needCorrection3() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-    if ((this.getResourceInStorage() > this.constant.energyUpgradeLvl8Controller)
+    if ((this.getResource() > this.constant.energyUpgradeLvl8Controller)
             && (!this.constant.defenceNeedUpgrade)// || ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)))
     )
             {
@@ -50,8 +50,8 @@ fun MainRoom.needCorrection3() {
 
     //8 Builder
     if (this.constant.creepUseBigBuilder) {
-        if ((this.constant.defenceNeedUpgrade && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
-                || (this.constructionSite.isNotEmpty() && this.getResourceInStorage() > this.constant.energyBuilder)
+        if ((this.constant.defenceNeedUpgrade && this.getResource() > this.constant.energyUpgradeDefence)
+                || (this.constructionSite.isNotEmpty() && this.getResource() > this.constant.energyBuilder)
                 //|| ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)
                 //        && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
         ) {
@@ -59,7 +59,7 @@ fun MainRoom.needCorrection3() {
         }
         this.need[1][11] = this.have[10]
     } else {
-        if ((this.constructionSite.isNotEmpty()) && (this.getResourceInStorage() > this.constant.energyBuilder)) {
+        if ((this.constructionSite.isNotEmpty()) && (this.getResource() > this.constant.energyBuilder)) {
             if (this.constructionSite.size > 2) this.need[1][8] = 2
             else this.need[1][8] = 1
         }
