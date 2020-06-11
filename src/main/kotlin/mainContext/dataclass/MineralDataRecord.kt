@@ -12,7 +12,9 @@ class MineralDataRecord(var quantity: Int = 0,
                         var buyToRoom: String = "",
                         var sellFromRoom: String = "",
                         var need: Int = 0,
-                        var onlyDirectBuy: Boolean = false //direct buy then quantity < storeMax && realPrice < priceMin
+                        var onlyDirectBuy: Boolean = false, //direct buy then quantity < storeMax && realPrice < priceMin
+                        var productionStart: Int = 50000, //Use in reactionActiveArr
+                        var productionStop: Int = 100000
 )
 
 //Sell algorithm

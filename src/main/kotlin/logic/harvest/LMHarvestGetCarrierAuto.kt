@@ -29,8 +29,8 @@ class LMHarvestGetCarrierAuto {
             fBody = arrayOf()
             for (i in 0 until (needCapacity/100)) fBody += arrayOf(CARRY, CARRY, MOVE)
         }else{
-            weight = if (slaveRoom.constant.model == SlaveRoomType.dangeon) (((SOURCE_ENERGY_KEEPER_CAPACITY + 1000)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
-            else (((SOURCE_ENERGY_CAPACITY +300)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
+            weight = if (slaveRoom.constant.model == SlaveRoomType.dangeon) (((SOURCE_ENERGY_KEEPER_CAPACITY + 1500)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
+            else (((SOURCE_ENERGY_CAPACITY +500)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
             fMaxCapacity = min((mainRoom.room.energyCapacityAvailable - 200) / 150 * 100 + 50,1550)
             needCarriers  = weight / fMaxCapacity + 1
 

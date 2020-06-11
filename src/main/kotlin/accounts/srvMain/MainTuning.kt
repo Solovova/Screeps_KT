@@ -13,13 +13,15 @@ fun AccountInitMain.initTuningOut(mc: MainContext) {
 
         if (mr.constant.reactionActiveArr.size > 1) {
             val quantityMineral: Int = mc.mineralData[mr.constant.reactionActiveArr[0].unsafeCast<ResourceConstant>()]?.quantity ?: 0
+            val productionStart: Int = mc.mineralData[mr.constant.reactionActiveArr[0].unsafeCast<ResourceConstant>()]?.productionStart ?: 0
+            val productionStop: Int = mc.mineralData[mr.constant.reactionActiveArr[0].unsafeCast<ResourceConstant>()]?.productionStop ?: 0
             if (mr.constant.reactionActive == mr.constant.reactionActiveArr[0]
-                    && quantityMineral > 100000) {
+                    && quantityMineral > productionStop) {
                 mr.constant.reactionActive = mr.constant.reactionActiveArr[1]
             }
 
             if (mr.constant.reactionActive == mr.constant.reactionActiveArr[1]
-                    && quantityMineral < 50000) {
+                    && quantityMineral < productionStart) {
                 mr.constant.reactionActive = mr.constant.reactionActiveArr[0]
             }
         }

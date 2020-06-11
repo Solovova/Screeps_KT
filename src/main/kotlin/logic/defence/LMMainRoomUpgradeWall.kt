@@ -27,7 +27,8 @@ class LMMainRoomUpgradeWall (val mainContext: MainContext) {
             room.constant.defenceMinHits = getMinHits(room)
 
         val rooms = mainContext.mainRoomCollector.rooms.values.sortedBy { this.getNormalizedHits(it) }
-        val countOfRoomForUpgrade = 8
+        var countOfRoomForUpgrade = mainContext.getNumRoomWithTerminal() /4
+        if (countOfRoomForUpgrade == 0) countOfRoomForUpgrade = 1
         var counter = 0
         for (room in rooms) {
             counter++

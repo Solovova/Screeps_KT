@@ -8,7 +8,7 @@ fun AccountInitMain2.initHeadOut(const: Constants) {
     const.initMainRoomConstantContainer(arrayOf("W5N7","W2N5","W3N1")) //"W3N1","W4N3"
 
     //Colonization E51N41
-    const.getMainRoomConstant("W5N7").initSlaveRoomConstantContainer(arrayOf("W4N7","W5N8")) //M0
+    const.getMainRoomConstant("W5N7").initSlaveRoomConstantContainer(arrayOf("W4N7","W5N8","W5N6")) //M0
     const.getMainRoomConstant("W2N5").initSlaveRoomConstantContainer(arrayOf("W3N5","W2N4","W2N6")) //M1
     const.getMainRoomConstant("W3N1").initSlaveRoomConstantContainer(arrayOf("W2N1","W4N1")) //M2
 

@@ -27,7 +27,8 @@ enum class TypeOfMainRoomInfo {
     InfoPlaceInTerminal,
     InfoNeedUpgrade,
     InfoAutoDefence,
-    InfoShortInfo
+    InfoShortInfo,
+    InfoShortInfoForce
 }
 
 data class MainRoomInfoSetup(val type: TypeOfMainRoomInfo,
@@ -79,7 +80,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                     "Queue",
                     COLOR_YELLOW,
                     COLOR_ORANGE,
-                    80),
+                    65),
             MainRoomInfoSetup(TypeOfMainRoomInfo.InfoNeedBuild,
                     "Need building",
                     COLOR_YELLOW,
@@ -90,6 +91,16 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                     COLOR_YELLOW,
                     COLOR_RED,
                     10),
+            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoShortInfoForce,
+                    "Force",
+                    COLOR_GREEN,
+                    COLOR_GREEN,
+                    3),
+            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoNeedUpgrade,
+                    "Need mainContext.dataclass.getUpgrade",
+                    COLOR_WHITE,
+                    COLOR_ORANGE,
+                    4),
             MainRoomInfoSetup(TypeOfMainRoomInfo.InfoRoomName,
                     "",
                     COLOR_WHITE,
@@ -114,11 +125,6 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                     COLOR_YELLOW,
                     COLOR_ORANGE,
                     5),
-            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoNeedUpgrade,
-                    "Need mainContext.dataclass.getUpgrade",
-                    COLOR_WHITE,
-                    COLOR_ORANGE,
-                    4),
             MainRoomInfoSetup(TypeOfMainRoomInfo.InfoAutoDefence,
                     "Def",
                     COLOR_WHITE,
@@ -188,7 +194,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
             }
         }
 
-        var showText = textSpawning.padEnd(45) + ":"
+        var showText = textSpawning.padEnd(34) + ":"
 
 
         for (record in mainRoom.queue) {
@@ -296,10 +302,12 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                 ) {
                     result += "N"
                     alarm = true
+                    if (mainRoom.mc.constants.globalConstant.nukerFilInRooms.isEmpty()
+                                    || mainRoom.name in mainRoom.mc.constants.globalConstant.nukerFilInRooms) result += "f"
                 }
             }
 
-            if (mainRoom.have[19] == 0 && mainRoom.have[10] == 0) {
+            if (mainRoom.have[19] == 0 && mainRoom.have[1019] == 0 && mainRoom.have[10] == 0) {
                 result += "U"
                 alarm = true
             }
@@ -307,6 +315,19 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
 
         return MainRoomInfoRecord(result,
                 alarm)
+    }
+
+    private fun getInfoShortInfoForce(mainRoom: MainRoom): MainRoomInfoRecord {
+        var result = ""
+        if (mainRoom.getLevelOfRoom()==3) {
+
+            if ((mainRoom.have[19] > 0 || mainRoom.have[1019] > 0) && mainRoom.have[10] > 0) {
+                result += "F"
+            }
+        }
+
+        return MainRoomInfoRecord(result,
+                false)
     }
 
 
@@ -326,6 +347,8 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         result[TypeOfMainRoomInfo.InfoNeedUpgrade] = this.getInfoNeedUpgrade(mainRoom)
         result[TypeOfMainRoomInfo.InfoAutoDefence] = this.getInfoDefenceArea(mainRoom)
         result[TypeOfMainRoomInfo.InfoShortInfo] = this.getInfoShortInfo(mainRoom)
+        result[TypeOfMainRoomInfo.InfoShortInfoForce] = this.getInfoShortInfoForce(mainRoom)
+
         return result
     }
 }

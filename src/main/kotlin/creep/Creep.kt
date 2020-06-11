@@ -15,7 +15,7 @@ fun Creep.getDescribeForQueue(mainContext: MainContext): String {
     if (this.memory.role in 100..199 || this.memory.role in 1100..1199) {
         slaveRoom = mainRoom.slaveRooms[this.memory.slaveRoom] ?: return ""
     }
-    return "(" + (slaveRoom?.describe ?: "").padEnd(7) + this.memory.role.toString().padEnd(3) + ")"
+    return "(" + (slaveRoom?.describe ?: "").padEnd(6) + this.memory.role.toString().padEnd(3) + ")"
 }
 
 fun Creep.newTask(mainContext: MainContext): Boolean {
@@ -307,7 +307,8 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 115 || this.memory.role == 1115) {
-        if ((this.memory.role < 1000) && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
+        val ticks: Int = if (mainRoom.getLevelOfRoom()!=3) 350 else 250
+        if ((this.memory.role < 1000) && this.ticksToLive < ticks) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.slaveEraser(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveAttackStructure(mainContext, slaveRoom)
@@ -360,12 +361,20 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 126) {
+        if (this.ticksToLive<100 && creepCarry == 0) {
+            this.suicide()
+            return isTask
+        }
         if (!isTask) isTask = this.slaveGoToRescueFlag(3, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveGoToPosOfMineral(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveHarvestFromMineral(creepCarry, mainContext, slaveRoom)
     }
 
     if (this.memory.role == 127) {
+        if (this.ticksToLive<100 && creepCarry == 0) {
+            this.suicide()
+            return isTask
+        }
         if (!isTask) isTask = this.slaveGoToRescueFlag(3, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveTakeMineralFromMineralHarvester(creepCarry, mainContext, mainRoom, slaveRoom)
         if (!isTask) isTask = this.slaveTransferMineralToStorage(creepCarry, mainContext, mainRoom, slaveRoom)

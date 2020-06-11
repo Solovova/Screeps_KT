@@ -19,6 +19,7 @@ class LMTerminal(val mainContext: MainContext) {
 
         this.terminalSentEnergyExcessSent()
         this.terminalSentEnergyFrom3To2()
+        this.terminalSentEnergyStorageFullSent()
     }
 
     private fun terminalSentFromTo(mainRoomFrom: MainRoom, mainRoomTo: MainRoom, describe: String) {
@@ -188,12 +189,30 @@ class LMTerminal(val mainContext: MainContext) {
         //Upgrade and less when energyUpgradeDefence
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
-                    && it.constant.defenceNeedUpgrade
-                    && it.getResource() < it.constant.energyUpgradeDefence
+                    && ((it.constant.defenceNeedUpgrade && it.getResource() < it.constant.energyUpgradeDefence)
+                    || it.getResource() < it.constant.energyUpgradeLvl8Controller)
                     && it.name != mainRoomFrom.name
         }.minBy { it.getResource() }
                 ?: return
 
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "ExcessSent")
+    }
+
+    private fun terminalSentEnergyStorageFullSent() {
+        val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.structureTerminal[0] != null
+                    && it.getResource() > 500_000
+        }.maxBy { it.getResource() }
+                ?: return
+
+        //Upgrade and less when energyUpgradeDefence
+        val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.structureTerminal[0] != null
+                    && it.getResource() < 450_000
+                    && it.name != mainRoomFrom.name
+        }.minBy { it.getResource() }
+                ?: return
+
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "StorageFullSent")
     }
 }

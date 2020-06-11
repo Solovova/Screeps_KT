@@ -151,7 +151,8 @@ fun Creep.endTask(mainContext: MainContext) {
         }
 
         TypeOfTask.TransferFromCreep -> {
-            if (creepCarry != 0) mainContext.tasks.deleteTask(this.id)
+            val objForTake: Creep? = Game.getObjectById(task.idObject0)
+            if (creepCarry != 0 || objForTake==null) mainContext.tasks.deleteTask(this.id)
         }
 
         TypeOfTask.HealCreep -> {

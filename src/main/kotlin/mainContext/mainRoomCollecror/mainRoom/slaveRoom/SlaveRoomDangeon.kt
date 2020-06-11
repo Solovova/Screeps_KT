@@ -54,11 +54,13 @@ fun SlaveRoom.correctionDangeon() {
     this.need[0][4] = 1
     this.need[1][15] = 1
 
+    if (this.constructionSite.size>10) {
+        this.need[1][9] = 2
+    }
+
     if (this.source.containsKey(0) && this.rescueFlag.containsKey(0)) this.need[1][20] = 1
     val carrierAuto0: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
-    //if (this.name == "E56N34") console.log("null")
     if (carrierAuto0 != null) {
-        //if (this.name == "E56N34") console.log("${carrierAuto0.needCarriers}")
         if (this.need[1][21] == 0) this.need[1][21] = carrierAuto0.needCarriers
     }
 
