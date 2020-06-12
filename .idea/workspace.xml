@@ -2,20 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/develop/LMDevelopSumAllRamparts.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/screeps-kotlin-starter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/screeps-kotlin-starter.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainTuning.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainTuning.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainConstants.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Tuning.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Tuning.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CareepNewTasks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CareepNewTasks.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/Creep.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/Creep.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CreepDoTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CreepDoTask.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/creep/CreepEndTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/creep/CreepEndTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLabFiller.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLabFiller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLogist.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/tasks/LMTasksLogist.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/defence/LMMainRoomUpgradeWall.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/defence/LMMainRoomUpgradeWall.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/harvest/LMHarvestGetCarrierAuto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/harvest/LMHarvestGetCarrierAuto.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessengerMainRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessengerMainRoom.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessengerSlaveRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/messenger/LMMessengerSlaveRoom.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/terminal/LMTerminal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/terminal/LMTerminal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/dataclass/MineralDataRecord.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/dataclass/MineralDataRecord.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomDangeon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomDangeon.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/MainContext.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/GlobalConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/GlobalConstant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomTower.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomTower.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,13 +119,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00029" summary="v 1.21">
-      <created>1586010272565</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1586010272565</updated>
     </task>
     <task id="LOCAL-00030" summary="v 1.22">
       <created>1586019777484</created>
@@ -458,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591875352072</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="v 5.15">
+      <created>1591896260814</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1591896260814</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.7 testing" />
     <MESSAGE value="v 1.0" />
     <MESSAGE value="v 1.1 carryCapacity -&gt; store.getCapacity()" />
     <MESSAGE value="v 1.2 creep.carry -&gt; creep.store&#10;      creep.carry.energu -&gt; creep.store[RESOURCE_ENERGY] ?: 0" />
@@ -526,7 +530,8 @@
     <MESSAGE value="v 5.12 delete old code" />
     <MESSAGE value="v 5.13" />
     <MESSAGE value="v 5.14" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.14" />
+    <MESSAGE value="v 5.15" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.15" />
   </component>
   <component name="WindowStateProjectService">
     <state x="477" y="252" key="#PSD" timestamp="1591456718847">
@@ -545,10 +550,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591875351108">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1591896259657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591875351108" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591896259657" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

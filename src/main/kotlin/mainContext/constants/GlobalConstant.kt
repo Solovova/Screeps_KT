@@ -30,6 +30,7 @@ class GlobalConstant(val constants: Constants) {
     val creepUpgradableParts: MutableMap<Int, Map<BodyPartConstant,ResourceConstant>> = mutableMapOf()
     val labReactionComponent: MutableMap<ResourceConstant,Array<ResourceConstant>> = mutableMapOf()
     var nukerFilInRooms: Array<String> = arrayOf()
+    var defenceLimitUpgrade: Int = 17_000_000
 
     init {
         constants.mainContext.lm.lmCreep.lmUpgrade.setGlobalConstants(this)

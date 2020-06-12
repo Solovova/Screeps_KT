@@ -9,7 +9,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 class LMTerminal(val mainContext: MainContext) {
-    private val emergencyMineralQuantity = 30000
+    private val emergencyMineralQuantity = 50000
     private val sentQuantity = 5000
 
     fun transactions() {

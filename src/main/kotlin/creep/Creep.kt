@@ -225,7 +225,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (this.memory.role == 101 && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
-        if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext)
+        if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext)
         //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
         if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
@@ -307,9 +307,10 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 115 || this.memory.role == 1115) {
-        val ticks: Int = if (mainRoom.getLevelOfRoom()!=3) 350 else 250
+        val ticks: Int = if (mainRoom.getLevelOfRoom()!=3) 300 else 250
         if ((this.memory.role < 1000) && this.ticksToLive < ticks) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
+        //if (!isTask) isTask = this.slaveEraserType4(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveEraser(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveAttackStructure(mainContext, slaveRoom)
     }
@@ -328,7 +329,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         //ToDo pick up energy and tomb carry ++ 600
         if (!isTask) isTask = this.slaveGoToRescueFlag(indKl, mainContext, slaveRoom)
         //if (!isTask) if (mainContext.dataclass.getSlaveRoom != null && mainContext.dataclass.getSlaveRoom.structureContainerNearSource[indKl] != null) {
-        if (!isTask) isTask = this.takeDroppedEnergy(creepCarry, mainContext, 3)
+        if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext, 3)
         //}
         if (!isTask) isTask = this.slaveGoToPosOfContainer(indKl, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveGoToPosNearSource(indKl, mainContext, slaveRoom)
@@ -368,6 +369,12 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = this.slaveGoToRescueFlag(3, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveGoToPosOfMineral(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveHarvestFromMineral(creepCarry, mainContext, slaveRoom)
+        if (slaveRoom!=null) {
+            val resource = slaveRoom.mineral[0]?.mineralType
+            if (resource != null) {
+                if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext, 3,  resource)
+            }
+        }
     }
 
     if (this.memory.role == 127) {

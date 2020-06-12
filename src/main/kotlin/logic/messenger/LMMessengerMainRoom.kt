@@ -261,7 +261,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
     private fun getInfoPlaceInStorage(mainRoom: MainRoom): MainRoomInfoRecord {
         val resultEmpty = MainRoomInfoRecord("", false)
         val storage: StructureStorage = mainRoom.structureStorage[0] ?: return resultEmpty
-        val placeInStorage: Int = storage.store.getCapacity() - storage.store.toMap().map { it.value }.sum()
+        val placeInStorage: Int = storage.store.getCapacity() ?: 0 - storage.store.toMap().map { it.value }.sum()
         return if (placeInStorage<100000) MainRoomInfoRecord("sp: $placeInStorage", true)
         else return resultEmpty
     }
@@ -269,7 +269,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
     private fun getInfoPlaceInTerminal(mainRoom: MainRoom): MainRoomInfoRecord {
         val resultEmpty = MainRoomInfoRecord("", false)
         val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return resultEmpty
-        val placeInTerminal: Int = terminal.store.getCapacity() - terminal.store.toMap().map { it.value }.sum()
+        val placeInTerminal: Int = terminal.store.getCapacity() ?: 0 - terminal.store.toMap().map { it.value }.sum()
         return if (placeInTerminal<50000) MainRoomInfoRecord("tp: $placeInTerminal", true)
         else return resultEmpty
     }

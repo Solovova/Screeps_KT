@@ -3,6 +3,7 @@ package mainContext
 import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import logic.develop.LMDevelopCPUUse
+import logic.develop.LMDevelopSumAllRamparts
 import mainContext.constants.Constants
 import logic.main.LM
 import mainContext.dataclass.MineralDataRecord
@@ -125,6 +126,8 @@ class MainContext {
         lm.lmMessenger.show()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Show info CPU: $cpuStartMCStart")
+
+        LMDevelopSumAllRamparts(this).show()
     }
 
     private fun setNextTickRun(): Boolean {

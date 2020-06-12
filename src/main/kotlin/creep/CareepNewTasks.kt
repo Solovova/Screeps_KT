@@ -75,7 +75,7 @@ fun Creep.harvestFromMineral(creepCarry: Int, mainContext: MainContext, mainRoom
         if (extractor != null
                 && container != null
                 && extractor.cooldown == 0
-                && container.store.toMap().map { it.value }.sum() < (container.store.getCapacity() - 30)) {
+                && container.store.toMap().map { it.value }.sum() < (container.store.getCapacity() ?: 0 - 30)) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mainRoom.mineral.id, posObject0 = mainRoom.mineral.pos))
             result = true
         }
@@ -429,12 +429,12 @@ fun Creep.slaveSignRoom(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolea
     return result
 }
 
-fun Creep.takeDroppedEnergy(creepCarry: Int, mainContext: MainContext, range: Int = 100): Boolean {
+fun Creep.takeDroppedResource(creepCarry: Int, mainContext: MainContext, range: Int = 100, resource: ResourceConstant = RESOURCE_ENERGY): Boolean {
     var result = false
     if (creepCarry == 0) {
-        val objDroppedEnergy: Resource? = this.room.find(FIND_DROPPED_RESOURCES).filter { it.resourceType == RESOURCE_ENERGY }.minBy { this.pos.getRangeTo(it.pos) }
+        val objDroppedEnergy: Resource? = this.room.find(FIND_DROPPED_RESOURCES).filter { it.resourceType == resource }.minBy { this.pos.getRangeTo(it.pos) }
         if (objDroppedEnergy != null && objDroppedEnergy.pos.inRangeTo(this.pos, range)) {
-            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.TakeDropped, idObject0 = objDroppedEnergy.id, posObject0 = objDroppedEnergy.pos))
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.TakeDropped, idObject0 = objDroppedEnergy.id, posObject0 = objDroppedEnergy.pos, resource = resource))
             result = true
         }
     }
@@ -786,10 +786,54 @@ fun Creep.slaveAttackStructure(mainContext: MainContext, slaveRoom: SlaveRoom?):
     return result
 }
 
+
+
+fun Creep.slaveEraserType4(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
+    //Blue Red - stay
+    //Blue Purple - attack
+    //Blue Blue - heal
+
+
+    var result = false
+    if (slaveRoom?.room != null && slaveRoom.constant.roomHostileType == 4) {
+        val flagBR:Flag = mainContext.flags.firstOrNull{it.color == COLOR_BLUE
+                && it.secondaryColor == COLOR_RED
+                && it.pos.roomName == slaveRoom.name} ?: return false
+        val flagBP:Flag = mainContext.flags.firstOrNull{it.color == COLOR_BLUE
+                && it.secondaryColor == COLOR_PURPLE
+                && it.pos.roomName == slaveRoom.name} ?: return false
+        val flagBB:Flag = mainContext.flags.firstOrNull{it.color == COLOR_BLUE
+                && it.secondaryColor == COLOR_BLUE
+                && it.pos.roomName == slaveRoom.name} ?: return false
+        if (this.hits<this.hitsMax-600) {
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.GoToPos, idObject0 = "", posObject0 = flagBB.pos))
+            result = true
+            return result
+        }
+
+        val rampart = slaveRoom.room.find(FIND_HOSTILE_STRUCTURES).filter {
+            it.structureType == STRUCTURE_RAMPART
+                    && it.pos.x == flagBP.pos.x
+                    && it.pos.y == flagBP.pos.y
+                    && it.pos.roomName == flagBP.pos.roomName
+        }.firstOrNull() ?: return false
+
+        if (this.pos.x == flagBR.pos.x && this.pos.y == flagBR.pos.y && this.pos.roomName == flagBR.pos.roomName) {
+            this.attack(rampart)
+        }else{
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.GoToPos, idObject0 = "", posObject0 = flagBB.pos))
+            result = true
+        }
+    }
+    return result
+}
+
 fun Creep.slaveEraser(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
     var result = false
     if (slaveRoom?.room != null) {
-        val hostileCreep: Creep? = slaveRoom.room.find(FIND_HOSTILE_CREEPS).minBy { it.pos.getRangeTo(this.pos) }
+        val hostileCreep: Creep? = slaveRoom.room.find(FIND_HOSTILE_CREEPS)
+                .filter { hc -> hc.body.any { it.type == HEAL} || hc.body.any { it.type == ATTACK} || hc.body.any { it.type == RANGED_ATTACK}}
+                .minBy { it.pos.getRangeTo(this.pos) }
         if (hostileCreep != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.EraserAttack, idObject0 = hostileCreep.id, posObject0 = hostileCreep.pos))
             result = true

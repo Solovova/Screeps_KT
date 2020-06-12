@@ -63,7 +63,7 @@ fun MainRoom.runTower() {
     if (fTask == null){
         val damagedRamparts =  this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_RAMPART && it.hits < 2000 }
 
-        if(damagedRamparts.isNotEmpty()) {
+        if(damagedRamparts.isNotEmpty() && (Memory["account"] != "main2")) {
             fTask = "repair"
             fTarget = damagedRamparts[0]
             fMaxTower = 1

@@ -4,6 +4,7 @@ import mainContext.MainContext
 import screeps.api.COLOR_WHITE
 import screeps.api.Game
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
 import kotlin.math.roundToInt
 
 class LMMessengerSlaveRoom (val mainContext: MainContext) {
@@ -15,7 +16,9 @@ class LMMessengerSlaveRoom (val mainContext: MainContext) {
             slaveRoom.profitClear()
         }
 
-        if (slaveRoom.constant.profitPerTickPreviousArr[0] > this.mainContext.constants.globalConstant.showProfitWhenLessWhen * slaveRoom.source.size ) return
+        if (slaveRoom.constant.profitPerTickPreviousArr[0] > this.mainContext.constants.globalConstant.showProfitWhenLessWhen * slaveRoom.source.size
+                //&& (slaveRoom.constant.model != SlaveRoomType.dangeon)
+        ) return
 
         var sProfitPT = "0"
         if (slaveRoom.constant.profitStart != Game.time)

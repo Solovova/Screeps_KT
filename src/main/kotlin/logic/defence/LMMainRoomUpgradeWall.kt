@@ -31,6 +31,7 @@ class LMMainRoomUpgradeWall (val mainContext: MainContext) {
         if (countOfRoomForUpgrade == 0) countOfRoomForUpgrade = 1
         var counter = 0
         for (room in rooms) {
+            if (room.constant.defenceMinHits>mainContext.constants.globalConstant.defenceLimitUpgrade) continue
             counter++
             room.constant.defenceNeedUpgrade = (counter<=countOfRoomForUpgrade)
         }
