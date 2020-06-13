@@ -3,9 +3,10 @@ package mainContext
 import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import logic.develop.LMDevelopCPUUse
-import logic.develop.LMDevelopSumAllRamparts
+import logic.messenger.LMMessengerRamparts
 import mainContext.constants.Constants
 import logic.main.LM
+import logic.upgrader.LMUpgraderSet
 import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
@@ -66,9 +67,11 @@ class MainContext {
 
         lm.lmDefence.lmMainRoomUpgradeWall.calculate()
 
+
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMainRoomUpgradeWall ")
 
         this.mainRoomCollector.creepsCalculate()
+        LMUpgraderSet(this).calculate()
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"creepsCalculate")
         this.mainRoomCollector.creepsCalculateProfit()
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"creepsCalculateProfit")
@@ -126,8 +129,6 @@ class MainContext {
         lm.lmMessenger.show()
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Show info CPU: $cpuStartMCStart")
-
-        LMDevelopSumAllRamparts(this).show()
     }
 
     private fun setNextTickRun(): Boolean {

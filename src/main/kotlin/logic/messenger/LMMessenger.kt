@@ -8,6 +8,7 @@ class LMMessenger(val mainContext: MainContext) {
     private val lmMessengerMainRoom: LMMessengerMainRoom = LMMessengerMainRoom(mainContext)
     private val lmMessengerSlaveRoom: LMMessengerSlaveRoom = LMMessengerSlaveRoom(mainContext)
     private val lmMessengerMineral: LMMessengerMineral = LMMessengerMineral(mainContext)
+    private val lmMessengerRamparts: LMMessengerRamparts = LMMessengerRamparts(mainContext)
 
     fun log(type: String, room: String, text: String, color: ColorConstant = COLOR_GREY,
             testBefore: String = "", colorBefore: ColorConstant = COLOR_WHITE,
@@ -92,6 +93,8 @@ class LMMessenger(val mainContext: MainContext) {
     }
 
     fun show() {
+        this.lmMessengerRamparts.log()
+
         this.showSlaveRoomInfo()
         this.showMessengerInfo()
         this.showMineralInfo()

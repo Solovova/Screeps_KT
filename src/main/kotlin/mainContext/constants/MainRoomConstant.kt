@@ -31,6 +31,7 @@ class MainRoomConstant(val parent: Constants) {
     //Creep commands
     var creepSpawn: Boolean = true
     var needCleaner: Boolean = false //cashed
+    var useUpgraderLvl8:Boolean = false //cashed
     var creepIdOfBigBuilder: String = "" //simple
     var creepUseBigBuilder: Boolean = true
 
@@ -45,6 +46,7 @@ class MainRoomConstant(val parent: Constants) {
     var energyMaxTerminal: Int = 60000
     var mineralMinTerminal: Int = 10000
     var mineralAllMaxTerminal: Int = 150000
+
 
     //old
     var marketBuyEnergy: Boolean = false
@@ -101,6 +103,7 @@ class MainRoomConstant(val parent: Constants) {
         result["roomRunNotEveryTickNextTickRun"] = this.roomRunNotEveryTickNextTickRun
         result["levelOfRoom"] = this.levelOfRoom
         result["needCleaner"] = this.needCleaner
+        result["useUpgraderLvl8"] = this.useUpgraderLvl8
         result["defenceNeedUpgrade"] = this.defenceNeedUpgrade
         result["reactionActive"] = this.reactionActive
         result["defenceMinHits"] = this.defenceMinHits
@@ -132,6 +135,7 @@ class MainRoomConstant(val parent: Constants) {
         if (d["autoDefenceArea"] != null) this.autoDefenceArea = d["autoDefenceArea"] as Int
         if (d["autoDefenceAreaMatrix"] != null) this.autoDefenceAreaMatrix = d["autoDefenceAreaMatrix"] as Array<Array<Int>>
 
+        if (d["useUpgraderLvl8"] != null) this.useUpgraderLvl8 = d["useUpgraderLvl8"] as Boolean
 
         if (d["slaveRoomConstantContainer"] != null)
             for (record in slaveRoomConstantContainer)
