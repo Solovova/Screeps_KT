@@ -229,6 +229,24 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             return _structureNuker ?: throw AssertionError("Error get StructureNuker")
         }
 
+    //StructureFactory
+    private var _structureFactory: Map<Int, StructureFactory>? = null
+    val structureFactory: Map<Int, StructureFactory>
+        get() {
+            if (this._structureFactory == null)
+                _structureFactory = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_FACTORY && it.isActive() }.withIndex().associate { it.index to it.value as StructureFactory }
+            return _structureFactory ?: throw AssertionError("Error get StructureFactory")
+        }
+
+    //StructurePowerSpawn
+    private var _structurePowerSpawn: Map<Int, StructurePowerSpawn>? = null
+    val structurePowerSpawn: Map<Int, StructurePowerSpawn>
+        get() {
+            if (this._structurePowerSpawn == null)
+                _structurePowerSpawn = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_POWER_SPAWN && it.isActive() }.withIndex().associate { it.index to it.value as StructurePowerSpawn }
+            return _structurePowerSpawn ?: throw AssertionError("Error get StructureFactory")
+        }
+
     //StructureObserver
     private var _structureObserver: Map<Int, StructureObserver>? = null
     val structureObserver: Map<Int, StructureObserver>
@@ -848,6 +866,8 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             if (this.structureLab.size < 10) return "Lab"
             if (this.structureNuker.size != 1) return "Nuker"
             if (this.structureObserver.size != 1) return "Observer"
+            if (this.structureFactory.size != 1) return "Factory"
+            if (this.structurePowerSpawn.size != 1) return "Power spawn"
         }
         return ""
     }
