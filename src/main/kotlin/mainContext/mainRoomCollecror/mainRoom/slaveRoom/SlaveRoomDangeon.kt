@@ -1,6 +1,7 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
 import constants.CacheCarrier
+import mainContext.mainRoomCollecror.mainRoom.needCorrection3
 import screeps.api.*
 
 fun SlaveRoom.correctionDangeon() {
@@ -54,7 +55,7 @@ fun SlaveRoom.correctionDangeon() {
     this.need[0][4] = 1
     this.need[1][15] = 1
 
-    if (this.constructionSite.size>10) {
+    if (this.constructionSite.size > 10) {
         this.need[1][9] = 2
     }
 
@@ -77,14 +78,27 @@ fun SlaveRoom.correctionDangeon() {
     }
 
     //Mineral
-    val mineral = this.mineral[0]
-    if (mineral != null) {
-        if (mineral.mineralAmount > 0) {
-            if (mr.getResource(mineral.mineralType) < mr.constant.mineralMaxInRoom)
-                this.need[1][26] = 1
-            else mc.lm.lmMessenger.log("INFO", this.name, "Mineral full in parent room", COLOR_RED)
-        }
+//    val mineral = this.mineral[0]
+//    if (mineral != null) {
+//        if (mineral.mineralAmount > 0) {
+//            if (mr.getResource(mineral.mineralType) < mr.constant.mineralMaxInRoom)
+//                this.need[1][26] = 1
+//            else mc.lm.lmMessenger.log("INFO", this.name, "Mineral full in parent room", COLOR_RED)
+//        }
+//
+//        this.need[1][27] = this.have[26]
+//    }
 
-        this.need[1][27] = this.have[26]
+    val mineral = this.mineral[0]
+    if (this.need[1][26] == 0
+            && mineral != null) {
+        if (mineral.mineralAmount > 0) {
+            if (mineral.mineralAmount > 0) {
+                if (mr.getResource(mineral.mineralType) < (mr.constant.mineralMaxInRoom + 50000)
+                        && mc.lm.lmProduction.mineralHarvest.useHarvester(mr, mineral.mineralType))
+                    this.need[1][26] = 1
+            }
+        }
     }
+    this.need[1][27] = this.have[26]
 }

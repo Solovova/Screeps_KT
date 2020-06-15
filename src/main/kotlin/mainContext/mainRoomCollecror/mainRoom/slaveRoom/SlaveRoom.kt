@@ -213,7 +213,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
     }
 
     fun buildQueue(queue: MutableList<QueueSpawnRecord>, priority: Int) {
-        val fPriorityOfRole = arrayOf(10, 11, 15, 4, 0, 1, 2, 3, 5, 7, 9, 6, 8, 20, 22, 24, 21, 23, 25, 26, 27)
+        val fPriorityOfRole = arrayOf(10, 11, 15, 4, 0, 1, 2, 3, 5, 7, 9, 6, 8, 27, 20, 22, 24, 21, 23, 25, 26)
         for (fRole in fPriorityOfRole) {
             var fNeed = this.need[0][fRole]
             if (priority >= 1) fNeed += this.need[1][fRole]

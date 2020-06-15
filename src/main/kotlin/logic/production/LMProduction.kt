@@ -7,6 +7,7 @@ import logic.production.lab.LMLabReactionBalance
 import logic.production.market.LMMarket
 import logic.production.mineral.LMMineralFillData
 import logic.production.mineral.LMMineralFillProduction
+import logic.production.mineral.LMMineralHarvest
 import logic.production.mineral.LMMineralSetGlobalConstant
 import mainContext.MainContext
 
@@ -22,4 +23,5 @@ class LMProduction(val mc: MainContext) {
 
     val labFunc: LMLabFunc = LMLabFunc(mc)
     val labRoomsReactionBalance: LMLabReactionBalance = LMLabReactionBalance(mc)
+    val mineralHarvest: LMMineralHarvest = LMMineralHarvest(mc)
 }

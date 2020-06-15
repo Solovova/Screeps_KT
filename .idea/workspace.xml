@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8305ca-0131-43ae-90e9-2ba7754a333f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgradeConstants.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgradeNeedFor.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/production/lab/LMLabFunc.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/logic/production/mineral/LMMineralHarvest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ToDo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ToDo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainMinerals.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainTuning.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain/MainTuning.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Constants.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Minerals.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Minerals.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Rooms.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Rooms.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Tuning.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/accounts/srvMain2/Main2Tuning.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgrade.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/creep/upgrade/LMUpgrade.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/directcontrol/LMDirectControl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/directcontrol/LMDirectControl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/production/LMProduction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/production/LMProduction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/logic/production/lab/LMLabReactionBalance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/logic/production/lab/LMLabReactionBalance.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/GlobalConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/GlobalConstant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/dataclass/MineralDataRecord.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/dataclass/MineralDataRecord.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/MainRoomConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/constants/MainRoomConstant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/MainRoomLvl3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoom.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomDangeon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/mainContext/mainRoomCollecror/mainRoom/slaveRoom/SlaveRoomDangeon.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,13 +110,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582843482205</updated>
-    </task>
-    <task id="LOCAL-00033" summary="v 1.24">
-      <created>1586682392286</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1586682392286</updated>
     </task>
     <task id="LOCAL-00034" summary="v 1.25">
       <created>1587269430958</created>
@@ -461,7 +447,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592158807215</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="v 5.19">
+      <created>1592249467800</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1592249467801</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -504,7 +497,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v 1.3" />
     <MESSAGE value="v 1.4  befor mineralwork" />
     <MESSAGE value="v 1.4  ready for test" />
     <MESSAGE value="v 4.00" />
@@ -529,7 +521,8 @@
     <MESSAGE value="v 5.16 new types" />
     <MESSAGE value="v 5.17" />
     <MESSAGE value="v 5.18" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 5.18" />
+    <MESSAGE value="v 5.19" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 5.19" />
   </component>
   <component name="WindowStateProjectService">
     <state x="477" y="252" key="#PSD" timestamp="1591456718847">
@@ -548,10 +541,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="376" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1591430205787" />
-    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1592158803390">
+    <state x="588" y="113" key="CommitChangelistDialog2" timestamp="1592249466161">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1592158803390" />
+    <state x="588" y="113" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1592249466161" />
     <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1591382108519">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

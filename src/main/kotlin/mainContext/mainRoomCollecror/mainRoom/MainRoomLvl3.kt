@@ -70,13 +70,13 @@ fun MainRoom.needCorrection3() {
     this.need[0][14] = 1
 
     //15 Mineral harvesting
-    if (this.mineral.mineralAmount > 0 &&
-            this.structureContainerNearMineral.size == 1
+    if (this.need[1][15] == 0
+            && this.mineral.mineralAmount > 0
+            && this.structureContainerNearMineral.size == 1
             && this.structureExtractor.size == 1) {
-        if (getResource(this.mineral.mineralType) < (this.constant.mineralMaxInRoom + 50000))
+        if (getResource(this.mineral.mineralType) < (this.constant.mineralMaxInRoom + 50000)
+                && mc.lm.lmProduction.mineralHarvest.useHarvester(this, this.mineral.mineralType))
             this.need[1][15] = 1
-        if (getResource(this.mineral.mineralType) > this.constant.mineralMaxInRoom)
-            mc.lm.lmMessenger.log("INFO", this.name, "Mineral full", COLOR_RED)
     }
 
     val container: StructureContainer? = this.structureContainerNearMineral[0]
