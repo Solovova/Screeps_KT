@@ -49,7 +49,7 @@ class LMDirectControl (val mc: MainContext) {
                 && it.secondaryColor == COLOR_PURPLE }
         if (flagsRedPurple.isNotEmpty()) {
             for (flag in flagsRedPurple){
-                //mc.lm.lmDirectControl.lmDirectFunctions.deleteRoads(mr)
+                mc.lm.lmDirectControl.lmDirectFunctions.deleteRoads(mr)
                 //mc.lm.lmDirectControl.lmDirectFunctions.flagsDelete()
             }
 

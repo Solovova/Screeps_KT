@@ -1,11 +1,8 @@
 In future
-//ToDo balance energy to display
-//ToDo buy XLH2O
-//ToDo use XLH2O
-//ToDo new variant of need build important and not important
-//ToDo auto build ramparts under structures
-//ToDo del construction sites not need
-//ToDo level3 room re balance
+//ToDo балансер для апгрейда крипов по ресурсах, запуск балансера тогда когда нужны данные, убрать переменные для апгреда частей
+//ToDo лаборатории баланс и по ресурсам для реакции
+//ToDo ограничитель по защитным структурам
+//ToDo балансер для lvl 8 19 и Builder для поддержания нужного количества енергии
 
 
 //Main

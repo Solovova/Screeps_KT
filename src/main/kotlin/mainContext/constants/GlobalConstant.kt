@@ -28,12 +28,13 @@ class GlobalConstant(val constants: Constants) {
     //CreepUpgrades
     //if in room set it more priority
     val creepUpgradableParts: MutableMap<Int, Map<BodyPartConstant,ResourceConstant>> = mutableMapOf()
+    val creepUpgradablePartsRange:MutableMap<Int,MutableMap<BodyPartConstant,MutableList<Pair<Int,ResourceConstant>>>> = mutableMapOf()
     val labReactionComponent: MutableMap<ResourceConstant,Array<ResourceConstant>> = mutableMapOf()
     var nukerFilInRooms: Array<String> = arrayOf()
     var defenceLimitUpgrade: Int = 17_000_000
 
     init {
-        constants.mainContext.lm.lmCreep.lmUpgrade.setGlobalConstants(this)
+        constants.mainContext.lm.lmCreep.lmUpgrade.setGlobalConstant.setGlobalConstant(this)
         constants.mainContext.lm.lmProduction.lmMineralSetGlobalConstant.setConstant(this)
     }
 

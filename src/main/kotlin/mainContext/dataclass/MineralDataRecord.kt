@@ -3,18 +3,20 @@ package mainContext.dataclass
 class MineralDataRecord(var quantity: Int = 0,
                         var quantityUp: Int = 0,
                         var quantityDown: Int = 0,
-                        var priceMin: Double = 0.0,
-                        var priceMax: Double = 0.0,
-                        var marketSellExcess: Int = 100000000, //if 0 - sell always
-                        var marketBuyLack: Int = 0,
-                        var storeMin: Int = 0,  //production control if stored<storeMin start produce
-                        var storeMax: Int = 0,  //production control if stored>storeMax stop produce
-                        var buyToRoom: String = "",
-                        var sellFromRoom: String = "",
                         var need: Int = 0,
                         var onlyDirectBuy: Boolean = false, //direct buy then quantity < storeMax && realPrice < priceMin
-                        var productionStart: Int = 50000, //Use in reactionActiveArr
-                        var productionStop: Int = 100000
+                        //Market buy
+                        var priceMax: Double = 0.0,
+                        var marketBuyLack: Int = 0,
+                        var buyToRoom: String = "",
+                        //Market sell
+                        var priceMin: Double = 0.0,
+                        var marketSellExcess: Int = 100000000, //if 0 - sell always
+                        var sellFromRoom: String = "",
+                        //Production and harvesting
+                        var storeMax: Int = 0,  //production control if stored>storeMax stop produce and harvest
+                        var balancingStart: Int = 50000, //Use in reactionActiveArr
+                        var balancingStop: Int = 100000
 )
 
 //Sell algorithm

@@ -13,12 +13,8 @@ import screeps.api.ResourceConstant
 import screeps.api.WORK
 
 class LMUpgrade(val mainContext: MainContext) {
-    fun setGlobalConstants(globalConstant: GlobalConstant) {
-        globalConstant.creepUpgradableParts[7] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
-        globalConstant.creepUpgradableParts[19] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
-        globalConstant.creepUpgradableParts[101] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
-        globalConstant.creepUpgradableParts[10] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "LH2O".unsafeCast<ResourceConstant>())
-    }
+    val needForUpgrade: LMUpgradeNeedFor = LMUpgradeNeedFor(mainContext)
+    val setGlobalConstant: LMUpgradeConstants = LMUpgradeConstants()
 
     fun setMainRoomUpgradeConstants(mr: MainRoom) {
         if (mr.constant.levelOfRoom == 2) {
@@ -33,7 +29,7 @@ class LMUpgrade(val mainContext: MainContext) {
         }
     }
 
-    private fun getUpgradeParts (creep: Creep, mr: MainRoom):Map<BodyPartConstant,ResourceConstant>? {
+    private fun getUpgradeParts(creep: Creep, mr: MainRoom): Map<BodyPartConstant, ResourceConstant>? {
         var upgradeParts = mr.constant.creepUpgradableParts[creep.memory.role] //Upgrade parts can be other in every room
         if (upgradeParts == null) upgradeParts = mr.mc.constants.globalConstant.creepUpgradableParts[creep.memory.role]
         return upgradeParts
@@ -42,7 +38,7 @@ class LMUpgrade(val mainContext: MainContext) {
     fun creepSetLogic(creep: Creep, mr: MainRoom) {
         if (creep.spawning && creep.memory.upgrade == "") {
             if (mr.constant.creepUpgradeRole[creep.memory.role] == true) {
-                val upgradeParts = this.getUpgradeParts(creep,mr)
+                val upgradeParts = this.getUpgradeParts(creep, mr)
                 if (upgradeParts != null) {
                     for (upgradePart in upgradeParts) {
                         val quantityParts: Int = creep.body.filter { it.type == upgradePart.key }.size
