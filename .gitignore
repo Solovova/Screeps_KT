@@ -6,3 +6,4 @@ gradle.properties
 /gradle/wrapper/
 /.idea/caches/
 /.idea/libraries/
+/.idea/workspace.xml
