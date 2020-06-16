@@ -6,8 +6,6 @@ var mainContextGlob : MainContext? = null
 
 @Suppress("unused")
 fun loop() {
-    println("test")
-
     if (Memory["account"] == "" || Memory["account"] == null) {
         if (Game.rooms["E54N37"] != null)  Memory["account"] = "main"
         if (Game.rooms["W5N3"] != null)  Memory["account"] = "main2"

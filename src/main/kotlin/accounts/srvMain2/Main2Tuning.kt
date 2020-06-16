@@ -34,6 +34,7 @@ fun AccountInitMain2.initTuningOut(mc: MainContext) {
 
     val minXGH2O: Int = mc.mineralData["XGH2O".unsafeCast<ResourceConstant>()]?.quantity ?: 0
     val minXLH2O: Int = mc.mineralData["XLH2O".unsafeCast<ResourceConstant>()]?.quantity ?: 0
+    val minLH2O: Int = mc.mineralData["LH2O".unsafeCast<ResourceConstant>()]?.quantity ?: 0
 
     if (minXGH2O > 150000) {
         mc.constants.globalConstant.creepUpgradableParts[19] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XGH2O".unsafeCast<ResourceConstant>())
@@ -50,6 +51,10 @@ fun AccountInitMain2.initTuningOut(mc: MainContext) {
     if (minXLH2O > 10000) {
         mc.constants.globalConstant.creepUpgradableParts[10] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "XLH2O".unsafeCast<ResourceConstant>())
     } else {
-        mc.constants.globalConstant.creepUpgradableParts[10] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "LH2O".unsafeCast<ResourceConstant>())
+        if (minLH2O > 3000) {
+            mc.constants.globalConstant.creepUpgradableParts[10] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "LH2O".unsafeCast<ResourceConstant>())
+        } else {
+            mc.constants.globalConstant.creepUpgradableParts[10] = mutableMapOf<BodyPartConstant, ResourceConstant>(WORK to "LH".unsafeCast<ResourceConstant>())
+        }
     }
 }

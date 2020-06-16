@@ -309,6 +309,24 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             return _structureLabSort ?: throw AssertionError("Error get StructureLabSort")
         }
 
+    //upgradeLab
+    private var _upgradeLab: StructureLab? = null
+    val upgradeLab: StructureLab?
+        get() {
+            if (this._upgradeLab == null)
+                _upgradeLab = null
+            return _upgradeLab
+        }
+
+    //upgradeLabIndexSorted
+    private var _upgradeLabIndexSorted: Int? = null
+    val upgradeLabIndexSorted: Int
+        get() {
+            if (this._upgradeLabIndexSorted == null)
+                _upgradeLabIndexSorted = -1
+            return _upgradeLabIndexSorted ?: -1
+        }
+
     fun getLabForUpgrade(): StructureLab? {
         if (this.structureLabSort[2] != null) {
             return this.structureLabSort[2]

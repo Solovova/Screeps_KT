@@ -22,5 +22,5 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     //const.s(0,2).pathToRoom = arrayOf("W5N3","W6N3","W7N3","W8N3","W8N2")
 
 //    const.globalConstant.defenceLimitUpgrade = 50_000
-
+    const.m(0).reactionActive = ""
 }

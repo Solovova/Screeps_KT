@@ -46,7 +46,8 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.globalConstant.nukerFilInRooms = arrayOf("E54N37","E59N36","E52N38","E52N37","E54N39","E53N38","E51N39","E51N37")
+    const.globalConstant.nukerFilInRooms = arrayOf("E54N37","E59N36","E52N38","E52N37","E54N39","E53N38","E51N39","E51N37",
+    "E59N38","E58N37","E52N36","E58N39","E57N39","E57N37","E53N39","E49N39")
     const.s(21,1).model = SlaveRoomType.central
     const.s(21,1).checkpointRoom = "E54N35"
 //    const.m(31).creepSpawn = false
