@@ -50,7 +50,7 @@ class LMLabMainRoomRun(private val mc: MainContext) {
         if (lab1Pair.second != 0 && lab1Pair.first != reactionComponent[1]) return
         for (ind in 2 until mainRoom.structureLabSort.size) {
             val lab = mainRoom.structureLabSort[ind] ?: continue
-            if (ind == 2 && mainRoom.creepNeedUpgradeID != "") continue
+            if (ind == mainRoom.upgradeLabIndexSorted && mainRoom.creepNeedUpgradeID != "") continue
             if (lab.cooldown != 0) continue
             lab.runReaction(lab0, lab1)
         }

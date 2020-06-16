@@ -52,6 +52,14 @@ class MainContext {
                 this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
+
+        //Tests
+        val mrTest = mainRoomCollector.rooms["W8N2"]
+        if (mrTest!=null) {
+            println("Test lab ${mrTest.upgradeLab?.id}  index: ${mrTest.upgradeLabIndexSorted}")
+        }
+        //
+
         cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"fillCash ")
 
         lm.lmGCL.calculate()

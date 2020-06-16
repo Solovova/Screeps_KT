@@ -9,13 +9,12 @@ import screeps.api.Creep
 import screeps.api.RESOURCE_ENERGY
 import screeps.api.ResourceConstant
 import screeps.api.structures.StructureLab
-import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
 import kotlin.math.min
 
 class LMTasksLabFiller(val mc: MainContext) {
-    private fun fillEnergyToLab2(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom, lab2: StructureLab?): CreepTask? {
+    private fun fillEnergyToLab(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom, lab2: StructureLab?): CreepTask? {
         if (lab2 == null) return null
         val needEnergy = min(lab2.store.getFreeCapacity(RESOURCE_ENERGY)
                 ?: 0, mainRoom.getResourceInTerminal(RESOURCE_ENERGY))
@@ -25,7 +24,7 @@ class LMTasksLabFiller(val mc: MainContext) {
         return null
     }
 
-    private fun fillResourceForUpgradeToLab2(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom, lab2: StructureLab?): CreepTask? {
+    private fun fillResourceForUpgradeToLab(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom, lab2: StructureLab?): CreepTask? {
         if (mainRoom.creepNeedUpgradeID == "") return null
         if (lab2 == null) return null
         val resourceForUpgrade: ResourceConstant = mainRoom.creepNeedUpgradeResource ?: return null
@@ -71,7 +70,7 @@ class LMTasksLabFiller(val mc: MainContext) {
     private fun emptyLabs(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom): CreepTask? {
         var creepTask: CreepTask?
         for (labKey in mainRoom.structureLabSort.keys) {
-            if (labKey == 2 && mainRoom.creepNeedUpgradeID != "") continue
+            if (labKey == mainRoom.upgradeLabIndexSorted && mainRoom.creepNeedUpgradeID != "") continue
             creepTask = checkResourceForReactionsInLab(creep, terminal, mainRoom.structureLabSort[labKey], null)
             if (creepTask != null) return creepTask
         }
@@ -106,7 +105,7 @@ class LMTasksLabFiller(val mc: MainContext) {
         } else {
             //All is ok, first check labs for needs resources
             for (labKey in mainRoom.structureLabSort.keys) {
-                if (labKey == 2 && mainRoom.creepNeedUpgradeID != "") continue
+                if (labKey == mainRoom.upgradeLabIndexSorted && mainRoom.creepNeedUpgradeID != "") continue
                 val needResource: ResourceConstant? = when (labKey) {
                     in 0..1 -> reactionComponent[labKey]
                     in 2..9 -> reaction
@@ -136,7 +135,7 @@ class LMTasksLabFiller(val mc: MainContext) {
     private fun getProductions(creep: Creep, terminal: StructureTerminal, mainRoom: MainRoom): CreepTask? {
         for (labKey in mainRoom.structureLabSort.keys) {
             if (labKey in 0..1) continue
-            if (labKey == 2 && mainRoom.creepNeedUpgradeID != "") continue
+            if (labKey == mainRoom.upgradeLabIndexSorted && mainRoom.creepNeedUpgradeID != "") continue
             val lab: StructureLab = mainRoom.structureLabSort[labKey] ?: continue
             val resLab: Pair<ResourceConstant, Int> = lab.store.toMap()
                     .filter { it.key != RESOURCE_ENERGY && it.value != 0 }.toList()
@@ -155,8 +154,8 @@ class LMTasksLabFiller(val mc: MainContext) {
 
         var creepTask: CreepTask? = null
 
-        if (creepTask == null) creepTask = this.fillEnergyToLab2(creep, terminal, mainRoom, mainRoom.structureLabSort[2])
-        if (creepTask == null) creepTask = this.fillResourceForUpgradeToLab2(creep, terminal, mainRoom, mainRoom.structureLabSort[2])
+        if (creepTask == null) creepTask = this.fillEnergyToLab(creep, terminal, mainRoom, mainRoom.upgradeLab)
+        if (creepTask == null) creepTask = this.fillResourceForUpgradeToLab(creep, terminal, mainRoom, mainRoom.upgradeLab)
 
         if (creepTask!=null) {
             mc.tasks.add(creep.id, creepTask)
