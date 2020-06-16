@@ -5,22 +5,6 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import screeps.api.ResourceConstant
 
 fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
-    val defenceRoomLow: Array<String> = arrayOf()
-    val defenceRoomLowHits = 1_000_000
-    val defenceRoomNormHits = 2_000_000 //Default
-    val defenceRoomHi: Array<String> = arrayOf()
-    val defenceRoomHiHits = 3_000_000
-
-    if (mr.name in defenceRoomLow) {
-        mr.constant.defenceHits = defenceRoomLowHits
-    } else {
-        if (mr.name in defenceRoomHi) {
-            mr.constant.defenceHits = defenceRoomHiHits
-        }else{
-            mr.constant.defenceHits = defenceRoomNormHits
-        }
-    }
-
     mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
 
 
@@ -41,5 +25,6 @@ fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
     if (sr.mr.name == "W5N3" && sr.name == "W6N3") {
         sr.need[0][0] = 0
         sr.need[0][1] = 6
+        sr.need[0][11] = 0
     }
 }

@@ -75,7 +75,7 @@ fun Creep.harvestFromMineral(creepCarry: Int, mainContext: MainContext, mainRoom
         if (extractor != null
                 && container != null
                 && extractor.cooldown == 0
-                && container.store.toMap().map { it.value }.sum() < ((container.store.getCapacity() ?: 0) - 30)) {
+                && container.store.toMap().map { it.value }.sum() < ((container.store.getCapacity()) - 30)) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mainRoom.mineral.id, posObject0 = mainRoom.mineral.pos))
             result = true
         }
@@ -188,7 +188,6 @@ fun Creep.buildBigStructure(mainContext: MainContext, mainRoom: MainRoom): Boole
     if (!result) {
         structure = mainRoom.room.find(FIND_STRUCTURES).filter {
             (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
-                    && it.hits < mainRoom.constant.defenceHits
                     && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0
         }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 30000 }
 

@@ -2,11 +2,8 @@ package mainContext
 
 import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
-import logic.develop.LMDevelopCPUUse
-import logic.messenger.LMMessengerRamparts
 import mainContext.constants.Constants
-import logic.main.LM
-import logic.upgrader.LMUpgraderSet
+import logic.LogicMain
 import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
@@ -14,9 +11,7 @@ import screeps.utils.toMap
 import kotlin.random.Random
 
 class MainContext {
-
-    val lmDevelopCPUUse : LMDevelopCPUUse = LMDevelopCPUUse()
-    val lm: LM = LM(this)
+    val lm: LogicMain = LogicMain(this)
     //Data
     var flags:List<Flag> = listOf()
     val messengerMap: MutableMap<String, String> = mutableMapOf()
@@ -34,16 +29,9 @@ class MainContext {
     }
 
     fun run() {
-        var cpuStartMC = Game.cpu.getUsed()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Init")
         flags = Game.flags.toMap().values.toList()
 
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Flag")
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"mainRoomCollector ")
-
-        //LMDevelopSafeMove(this).testSafeWay()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"Test safeWay ")
 
         for (room in this.mainRoomCollector.rooms.values) {
             try {
@@ -54,35 +42,28 @@ class MainContext {
         }
 
         //Tests
-        val mrTest = mainRoomCollector.rooms["W8N2"]
-        if (mrTest!=null) {
-            println("Test lab ${mrTest.upgradeLab?.id}  index: ${mrTest.upgradeLabIndexSorted}")
-        }
+//        val mrTest = mainRoomCollector.rooms["W3N1"]
+//        if (mrTest!=null) {
+//            println("Test lab ${mrTest.upgradeLab?.id}  index: ${mrTest.upgradeLabIndexSorted}")
+//        }
         //
 
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"fillCash ")
 
         lm.lmGCL.calculate()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmGCL.calculate ")
+
         lm.lmNuker.lmNukerNeedMineral.fill()
         lm.lmProduction.lmMineralFillData.fill()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMineralFillData")
+
         this.constants.accountInit.initTuning(this)
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"accountInit")
         lm.lmProduction.lmMineralFillProduction.fill()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMineralFillProduction")
 
 
-        lm.lmDefence.lmMainRoomUpgradeWall.calculate()
-
-
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmMainRoomUpgradeWall ")
 
         this.mainRoomCollector.creepsCalculate()
-        LMUpgraderSet(this).calculate()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"creepsCalculate")
+        lm.balanceUpgrader.setNeedUpgrader()
+        lm.balanceBuilderWall.setNeedBuilder()
+
         this.mainRoomCollector.creepsCalculateProfit()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"creepsCalculateProfit")
 
         for (room in this.mainRoomCollector.rooms.values) {
             try {
@@ -91,19 +72,16 @@ class MainContext {
                 this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"runInStartOfTick")
 
 
         this.battleGroupContainer.runInStartOfTick()
 
         //Not every tick
         this.mainRoomCollector.runNotEveryTick()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"runNotEveryTick")
 
         if (Game.time % 10 == 0) {
             lm.lmProduction.lmMarket.sellBuy()
         }
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"sellBuy")
 
         if (this.setNextTickRun()) {
 
@@ -124,21 +102,14 @@ class MainContext {
 //        }
 
         lm.lmDirectControl.runs()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmDirectControl")
         this.lm.lmProduction.lmLabMainRoomRun.run()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"lmLabMainRoomRun")
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"mainRoomCollector.runInEndOfTick")
         lm.lmTerminal.transactions()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"transactions")
         this.tasks.toMemory()
         this.constants.toMemory()
-        cpuStartMC = lmDevelopCPUUse.cutoff(cpuStartMC,"toMemory")
-        var cpuStartMCStart = Game.cpu.getUsed()
+
         lm.lmMessenger.show()
-        cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
-        console.log("Show info CPU: $cpuStartMCStart")
     }
 
     private fun setNextTickRun(): Boolean {

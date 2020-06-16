@@ -37,8 +37,7 @@ class LMLabReactionBalance(val mc: MainContext) {
         }
 
         val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
-        if (mineralDataRecord.quantity > mineralDataRecord.balancingStart) return false
-        return true
+        return mineralDataRecord.quantity < mineralDataRecord.balancingStart
     }
 
     private fun needStop(mr: MainRoom): Boolean {
@@ -52,17 +51,19 @@ class LMLabReactionBalance(val mc: MainContext) {
 
         val reaction = mr.constant.reactionActive.unsafeCast<ResourceConstant>()
         val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return true
-        if (mineralDataRecord.quantity > mineralDataRecord.balancingStop) return true
-        return false
+        return mineralDataRecord.quantity > mineralDataRecord.balancingStop
     }
 
     //Need fill minerals
     private fun balancingForRoom(mr: MainRoom) {
+
         if (mr.constant.reactionActive != ""
                 && mr.constant.reactionActiveArr.size > 1
                 && needStop(mr)) {
             mr.constant.reactionActive = ""
         }
+
+        //println("Room: ${mr.name} needStop: ${needStop(mr)} canStart: ${canStart("LH".unsafeCast<ResourceConstant>())} reaction: ${mr.constant.reactionActive}")
 
         if (mr.constant.reactionActive == ""
                 && mr.constant.reactionActiveArr.isNotEmpty()) {
@@ -74,6 +75,8 @@ class LMLabReactionBalance(val mc: MainContext) {
                 }
             }
         }
+
+        //println("Room: ${mr.name} needStop: ${needStop(mr)} canStart: ${canStart("LH".unsafeCast<ResourceConstant>())} reaction: ${mr.constant.reactionActive}")
     }
 
     fun balancing() {

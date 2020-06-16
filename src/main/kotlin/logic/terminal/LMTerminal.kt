@@ -109,7 +109,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Build to
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
-                    && it.getResource() < 100000
+                    && it.getResource() < it.constant.energyBuilder
                     && it.constructionSite.isNotEmpty()
         }.minBy { it.getResource() }
                 ?: return
@@ -118,6 +118,7 @@ class LMTerminal(val mainContext: MainContext) {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
                     && it.getResource() > emergencyMineralQuantity
+                    && it.constructionSite.isEmpty()
                     && it.name != mainRoomTo.name
         }.maxBy {
             it.getResource() + if (it.constant.levelOfRoom == 3) {
@@ -189,7 +190,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Upgrade and less when energyUpgradeDefence
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
-                    && ((it.constant.defenceNeedUpgrade && it.getResource() < it.constant.energyUpgradeDefence)
+                    && ((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
                     || it.getResource() < it.constant.energyUpgradeLvl8Controller)
                     && it.name != mainRoomFrom.name
         }.minBy { it.getResource() }

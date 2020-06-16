@@ -23,7 +23,6 @@ fun MainRoom.needCorrection0() {
 
     if (this.source.containsKey(0) && this.structureContainerNearSource.containsKey(0)) {
         if (this.need[1][1] == 0) this.need[1][1] = 1
-        //this.need[0][0] = this.need[0][0] - 2
     }
 
     if (this.source.containsKey(1) && this.structureContainerNearSource.containsKey(1))

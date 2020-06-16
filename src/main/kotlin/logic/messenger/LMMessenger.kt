@@ -93,6 +93,11 @@ class LMMessenger(val mainContext: MainContext) {
     }
 
     fun show() {
+        if (mainContext.flags.firstOrNull{it.color == COLOR_YELLOW && it.secondaryColor == COLOR_YELLOW} != null) {
+            println("Current game tick is ${Game.time} _________________________________________")
+            return
+        }
+
         this.lmMessengerRamparts.log()
 
         this.showSlaveRoomInfo()

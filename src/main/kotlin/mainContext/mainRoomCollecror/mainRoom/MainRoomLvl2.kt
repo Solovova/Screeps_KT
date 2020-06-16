@@ -4,7 +4,6 @@ import screeps.api.*
 import screeps.api.structures.StructureContainer
 
 
-
 fun MainRoom.needCorrection2() {
     //1 harvester ,carrier ,filler , small harvester-filler, small filler
     //1.1 harvester ,carrier
@@ -26,11 +25,11 @@ fun MainRoom.needCorrection2() {
     //2 Upgrader
 
     val controller = this.structureController[0]
-    if (controller!=null && controller.level<8) {
+    if (controller != null && controller.level < 8) {
         this.need[1][7] = 1
         this.need[2][7] = 0
 
-        if ((this.getResourceInStorage() > this.constant.energyUpgradeForce)
+        if ((this.getResource() > this.constant.energyUpgradeForce)
                 && this.constructionSite.isEmpty()) {
             this.need[1][7] = 2
             this.need[2][7] = 2
@@ -44,7 +43,7 @@ fun MainRoom.needCorrection2() {
             this.need[2][7] = 0
         }
 
-        if (this.getResourceInStorage() < this.constant.energyUpgradeLow) {
+        if (this.getResource() < this.constant.energyUpgradeLow) {
             this.need[1][7] = 0
             this.need[2][7] = 0
         }
@@ -59,35 +58,24 @@ fun MainRoom.needCorrection2() {
         this.need[1][6] = this.have[7]
     }
 
-    //2.1 Small upgrader
+    //13 Small upgrader
     if (this.need[0][6] == 0 && this.need[1][6] == 0 && this.need[2][6] == 0 &&
             this.need[0][7] == 0 && this.need[1][7] == 0 && this.need[2][7] == 0 &&
             this.have[6] == 0 && this.have[7] == 0 && this.getTicksToDowngrade() < 10000)
         this.need[0][13] = 1
 
-    //8 Builder
 
-    //8 Builder
-    if (this.constant.creepUseBigBuilder) {
-        if ((this.constructionSite.isNotEmpty())
-                && (this.getResourceInStorage() > this.constant.energyBuilder)) {
-            this.need[1][10] = 1
-        }
-        this.need[1][11] = this.have[10]
+    //10 Builder
+    if ((this.constructionSite.isNotEmpty())
+            && (this.getResource() > this.constant.energyBuilder)) {
+        this.need[1][10] = 1
     }
 
-    if (this.constant.creepUseBigBuilder) {
-        if (this.constant.defenceNeedUpgrade
-                && (this.getResourceInStorage() > this.constant.energyUpgradeDefence)) {
-            this.need[1][10] = 1
-        }
-        this.need[1][11] = this.have[10]
-    } else {
-        if ((this.constructionSite.isNotEmpty()) && (this.getResourceInStorage() > this.constant.energyBuilder)) {
-            if (this.constructionSite.size > 2) this.need[1][8] = 2
-            else this.need[1][8] = 1
-        }
+    if (this.constant.needBuilder
+            && (this.getResource() > this.constant.energyUpgradeDefence)) {
+        this.need[1][10] = 1
     }
+    this.need[1][11] = this.have[10]
 
 
     //9 Logist

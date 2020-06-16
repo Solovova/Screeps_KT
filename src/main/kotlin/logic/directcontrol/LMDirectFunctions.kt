@@ -3,6 +3,7 @@ package logic.directcontrol
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
+import screeps.api.structures.StructureRampart
 import screeps.api.structures.StructureRoad
 import screeps.api.structures.StructureStorage
 import screeps.utils.toMap
@@ -34,6 +35,19 @@ class LMDirectFunctions(val mc: MainContext) {
                 if (roadSafe!=null && roadSafe.any
                         { it.x == road.pos.x && it.y == road.pos.y && it.roomName == road.pos.roomName}) continue
                 road.destroy()
+            }
+
+    }
+
+    fun deleteRamparts(mainRoom: MainRoom) {
+        val ramparts:List<StructureRampart>? = Game.rooms[mainRoom.name]
+                ?.find(FIND_STRUCTURES)
+                ?.filter { it.structureType == STRUCTURE_RAMPART}
+                ?.map { it as StructureRampart }
+
+        if (ramparts!= null)
+            for (rampart in ramparts) {
+                rampart.destroy()
             }
 
     }

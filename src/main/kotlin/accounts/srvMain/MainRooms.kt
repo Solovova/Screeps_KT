@@ -5,27 +5,7 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import screeps.api.ResourceConstant
 
 fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
-    val defenceRoomLow: Array<String> = arrayOf("E52N38","E58N37","E53N38")
-    val defenceRoomLowHits = 1_000_000
-    val defenceRoomNormHits = 2_000_000 //Default
-    val defenceRoomHi: Array<String> = arrayOf("E51N35","E52N35","E53N35","E58N43")
-    val defenceRoomHiHits = 3_000_000
-
-    if (mr.name in defenceRoomLow) {
-        mr.constant.defenceHits = defenceRoomLowHits
-    } else {
-        if (mr.name in defenceRoomHi) {
-            mr.constant.defenceHits = defenceRoomHiHits
-        }else{
-            mr.constant.defenceHits = defenceRoomNormHits
-        }
-    }
-
     mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
-
-    if (mr.name in arrayOf("E51N35", "E52N35", "E53N35")) {
-        mr.constant.defenceHits = 3000000
-    }
 
     //ToDo auto
     if (mr.name == "E54N39") mr.needMineral["GH2O".unsafeCast<ResourceConstant>()] = 10000

@@ -3,6 +3,7 @@ package accounts.srvMain2
 import accounts.AccountInit
 import mainContext.MainContext
 import mainContext.constants.Constants
+import mainContext.constants.GlobalConstant
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
@@ -29,5 +30,9 @@ class AccountInitMain2 : AccountInit ()  {
 
     override fun initTuning(mainContext: MainContext) {
         this.initTuningOut(mainContext)
+    }
+
+    override fun initGlobalConstants(gc: GlobalConstant) {
+        this.initGlobalConstantsOut(gc)
     }
 }

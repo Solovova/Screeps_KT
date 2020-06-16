@@ -37,7 +37,7 @@ fun MainRoom.needCorrection3() {
     //2 Upgrader
     if (this.name == "E54N37") println("Test 111")
     if (this.getResource() > this.constant.energyUpgradeLvl8Controller
-            && this.constant.useUpgraderLvl8) {
+            && this.constant.needUpgrader) {
         if (this.name == "E54N37") println("Test 222")
         this.need[1][19] = 1
     }
@@ -50,7 +50,7 @@ fun MainRoom.needCorrection3() {
 
     //8 Builder
     if (this.constant.creepUseBigBuilder) {
-        if ((this.constant.defenceNeedUpgrade && this.getResource() > this.constant.energyUpgradeDefence)
+        if ((this.constant.needBuilder && this.getResource() > this.constant.energyUpgradeDefence)
                 || (this.constructionSite.isNotEmpty() && this.getResource() > this.constant.energyBuilder)
         //|| ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)
         //        && this.getResourceInStorage() > this.constant.energyUpgradeDefence)

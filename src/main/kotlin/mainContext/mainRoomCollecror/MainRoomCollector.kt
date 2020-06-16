@@ -82,7 +82,6 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
 
             // Logist add transfer
             if (creep.memory.role == 14 || creep.memory.role == 1014) {
-                val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
                 for (res in creep.store.toMap()) mainRoom.resStorage[res.key] = (mainRoom.resStorage[res.key] ?: 0) + res.value
             }
 

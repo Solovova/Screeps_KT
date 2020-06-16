@@ -1,5 +1,7 @@
-package logic.main
+package logic
 
+import logic.balance.LMBalanceBuilderWall
+import logic.balance.LMBalanceUpgrader
 import logic.building.LMBuilding
 import logic.creep.LMCreep
 import logic.defence.LMDefence
@@ -8,13 +10,14 @@ import logic.directcontrol.LMDirectControl
 import logic.harvest.LMHarvestCacheRecordRoom
 import logic.harvest.LMHarvestGetCarrierAuto
 import logic.harvest.LMHarvestGetWayFromPosToPos
+import logic.main.LMGCL
 import logic.messenger.LMMessenger
 import logic.nuker.LMNuker
 import logic.production.LMProduction
 import logic.terminal.LMTerminal
 import mainContext.MainContext
 
-class LM(val mc: MainContext) {
+class LogicMain(val mc: MainContext) {
     val lmGCL: LMGCL = LMGCL(mc)
     val lmTerminal: LMTerminal = LMTerminal(mc)
     val lmProduction: LMProduction = LMProduction(mc)
@@ -28,4 +31,7 @@ class LM(val mc: MainContext) {
     val lmHarvestGetWayFromPosToPos: LMHarvestGetWayFromPosToPos = LMHarvestGetWayFromPosToPos()
     val lmDirectControl: LMDirectControl = LMDirectControl(mc)
     val lmNuker:LMNuker = LMNuker(mc)
+
+    val balanceBuilderWall: LMBalanceBuilderWall = LMBalanceBuilderWall(mc)
+    val balanceUpgrader: LMBalanceUpgrader = LMBalanceUpgrader(mc)
 }

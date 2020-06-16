@@ -7,7 +7,6 @@ import mainContext.dataclass.MainRoomInfoRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureController
-import screeps.api.structures.StructureNuker
 import screeps.api.structures.StructureStorage
 import screeps.api.structures.StructureTerminal
 import screeps.utils.toMap
@@ -27,8 +26,8 @@ enum class TypeOfMainRoomInfo {
     InfoPlaceInTerminal,
     InfoNeedUpgrade,
     InfoAutoDefence,
-    InfoShortInfo,
-    InfoShortInfoForce
+    InfoNuker,
+    InfoBalance
 }
 
 data class MainRoomInfoSetup(val type: TypeOfMainRoomInfo,
@@ -72,7 +71,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
             MainRoomInfoSetup(TypeOfMainRoomInfo.InfoController,
                     "Controller",
                     COLOR_WHITE,
-                    COLOR_RED,
+                    COLOR_YELLOW,
                     38,
                     prefix = "(",
                     suffix = ")  "),
@@ -86,12 +85,12 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                     COLOR_YELLOW,
                     COLOR_RED,
                     18),
-            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoShortInfo,
+            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoNuker,
                     "SInfo",
                     COLOR_YELLOW,
                     COLOR_RED,
                     10),
-            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoShortInfoForce,
+            MainRoomInfoSetup(TypeOfMainRoomInfo.InfoBalance,
                     "Force",
                     COLOR_GREEN,
                     COLOR_GREEN,
@@ -212,18 +211,21 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         val controller: StructureController = mainRoom.structureController[0] ?: return MainRoomInfoRecord("", false)
         var result: String
         if (controller.level==8) {
-            val defenceStatus: Int = mainRoom.constant.defenceMinHits - mainRoom.constant.defenceHits
+            val defenceStatus: Int = mainRoom.constant.defenceMinHits
             result = "def: ${defenceStatus.toString().toSecDigit().padStart(12)}"
             return MainRoomInfoRecord(result, defenceStatus<0)
         }else{
             result = "l: ${mainRoom.structureController[0]?.level} "
             result += "${mainRoom.structureController[0]?.progress}".padStart(9)
             result += "/ "
-            result += "${mainRoom.structureController[0]?.progressTotal}".padStart(9)
-            result += "  "
+            //result += "${mainRoom.structureController[0]?.progressTotal}".padStart(9)
+            //result += "  "
             result += "${(mainRoom.structureController[0]?.progressTotal
                     ?: 0) - (mainRoom.structureController[0]?.progress ?: 0)}".padStart(9)
-            return MainRoomInfoRecord(result, false)
+            val defenceStatus: Int = mainRoom.constant.defenceMinHits / 1000
+            val defenceAlarm: Boolean = mainRoom.constant.defenceMinHits < mainContext.constants.globalConstant.defenceLimitUpgrade
+            result += "  D ${defenceStatus.toString().toSecDigit().padStart(7)}"
+            return MainRoomInfoRecord(result, defenceAlarm)
         }
     }
 
@@ -261,7 +263,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
     private fun getInfoPlaceInStorage(mainRoom: MainRoom): MainRoomInfoRecord {
         val resultEmpty = MainRoomInfoRecord("", false)
         val storage: StructureStorage = mainRoom.structureStorage[0] ?: return resultEmpty
-        val placeInStorage: Int = (storage.store.getCapacity() ?: 0) - storage.store.toMap().map { it.value }.sum()
+        val placeInStorage: Int = (storage.store.getCapacity()) - storage.store.toMap().map { it.value }.sum()
         return if (placeInStorage<100000) MainRoomInfoRecord("sp: $placeInStorage", true)
         else return resultEmpty
     }
@@ -269,14 +271,14 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
     private fun getInfoPlaceInTerminal(mainRoom: MainRoom): MainRoomInfoRecord {
         val resultEmpty = MainRoomInfoRecord("", false)
         val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return resultEmpty
-        val placeInTerminal: Int = (terminal.store.getCapacity() ?: 0) - terminal.store.toMap().map { it.value }.sum()
+        val placeInTerminal: Int = (terminal.store.getCapacity()) - terminal.store.toMap().map { it.value }.sum()
         return if (placeInTerminal<50000) MainRoomInfoRecord("tp: $placeInTerminal", true)
         else return resultEmpty
     }
 
     private fun getInfoNeedUpgrade(mainRoom: MainRoom): MainRoomInfoRecord {
-        var result:String = if (mainRoom.constant.defenceNeedUpgrade) "D " else "  "
-        result += if (mainRoom.constant.useUpgraderLvl8) "U" else " "
+        var result:String = if (mainRoom.constant.needBuilder) "B " else "  "
+        result += if (mainRoom.constant.needUpgrader) "U" else " "
 
         return MainRoomInfoRecord(result, false)
     }
@@ -293,7 +295,7 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                 (mainRoom.constant.autoDefenceArea !in 30..1300))
     }
 
-    private fun getInfoShortInfo(mainRoom: MainRoom): MainRoomInfoRecord {
+    private fun getInfoNuker(mainRoom: MainRoom): MainRoomInfoRecord {
         var result = ""
         var alarm = false
         if (mainRoom.getLevelOfRoom()==3) {
@@ -308,25 +310,16 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
                                     || mainRoom.name in mainRoom.mc.constants.globalConstant.nukerFilInRooms) result += "f"
                 }
             }
-
-            if (mainRoom.have[19] == 0 && mainRoom.have[1019] == 0 && mainRoom.have[10] == 0) {
-                result += "U"
-                alarm = true
-            }
         }
 
         return MainRoomInfoRecord(result,
                 alarm)
     }
 
-    private fun getInfoShortInfoForce(mainRoom: MainRoom): MainRoomInfoRecord {
+    private fun getInfoBalance(mainRoom: MainRoom): MainRoomInfoRecord {
         var result = ""
-        if (mainRoom.getLevelOfRoom()==3) {
-
-            if ((mainRoom.have[19] > 0 || mainRoom.have[1019] > 0) && mainRoom.have[10] > 0) {
-                result += "F"
-            }
-        }
+        result += if (mainRoom.have[10] > 0) "B" else " "
+        result += if (mainRoom.have[7] > 0 || mainRoom.have[19] > 0 || mainRoom.have[1019] > 0) "U" else " "
 
         return MainRoomInfoRecord(result,
                 false)
@@ -348,8 +341,8 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         result[TypeOfMainRoomInfo.InfoReaction] = this.getInfoReactionInfo(mainRoom)
         result[TypeOfMainRoomInfo.InfoNeedUpgrade] = this.getInfoNeedUpgrade(mainRoom)
         result[TypeOfMainRoomInfo.InfoAutoDefence] = this.getInfoDefenceArea(mainRoom)
-        result[TypeOfMainRoomInfo.InfoShortInfo] = this.getInfoShortInfo(mainRoom)
-        result[TypeOfMainRoomInfo.InfoShortInfoForce] = this.getInfoShortInfoForce(mainRoom)
+        result[TypeOfMainRoomInfo.InfoNuker] = this.getInfoNuker(mainRoom)
+        result[TypeOfMainRoomInfo.InfoBalance] = this.getInfoBalance(mainRoom)
 
         return result
     }

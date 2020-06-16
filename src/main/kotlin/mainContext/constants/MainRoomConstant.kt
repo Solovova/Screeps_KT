@@ -8,16 +8,12 @@ class MainRoomConstant(val parent: Constants) {
     //Energy management
     var energyBuilder : Int = 60000 //simple //how much energy must be in storage for start building
     var energyUpgradeLvl8Controller: Int = 100000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
-    var energyUpgradeDefence : Int = 200000
+    var energyUpgradeDefence : Int = 110000
     var energyExcessSent: Int = 250000
-
     var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
     var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
 
-    //Upgrade defence
-    var defenceHits: Int    = 200000
 
-    var defenceNeedUpgrade: Boolean = false //cashed
 
 
 
@@ -26,12 +22,11 @@ class MainRoomConstant(val parent: Constants) {
 
     //service
     var towerLastTarget: String = ""        //cashed
-    var defenceMinHits: Int = 0 //cashed
+
 
     //Creep commands
     var creepSpawn: Boolean = true
     var needCleaner: Boolean = false //cashed
-    var useUpgraderLvl8:Boolean = false //cashed
     var creepIdOfBigBuilder: String = "" //simple
     var creepUseBigBuilder: Boolean = true
 
@@ -64,6 +59,13 @@ class MainRoomConstant(val parent: Constants) {
     var manualDefenceRoomMainColorFlag: ColorConstant = COLOR_PURPLE
     var manualDefenceGroupPos: RoomPosition? = null //manualDefenceRoomMainColorFlag
     var manualDefenceTargetCreep: Creep? = null
+
+    //Balancing upgrade
+    var defenceMinHits: Int = 0 //cashed
+    var needUpgrader:Boolean = false //cashed
+    var needBuilder:Boolean = false //cashed
+
+
 
     //Auto defence
     var autoDefenceAreaMatrix: Array<Array<Int>> = arrayOf()
@@ -102,12 +104,12 @@ class MainRoomConstant(val parent: Constants) {
         result["roomRunNotEveryTickNextTickRun"] = this.roomRunNotEveryTickNextTickRun
         result["levelOfRoom"] = this.levelOfRoom
         result["needCleaner"] = this.needCleaner
-        result["useUpgraderLvl8"] = this.useUpgraderLvl8
-        result["defenceNeedUpgrade"] = this.defenceNeedUpgrade
+
         result["reactionActive"] = this.reactionActive
+
+        result["needUpgrader"] = this.needUpgrader
+        result["needBuilder"] = this.needBuilder
         result["defenceMinHits"] = this.defenceMinHits
-
-
 
         result["autoDefenceArea"] = this.autoDefenceArea
         result["autoDefenceAreaMatrix"] = this.autoDefenceAreaMatrix
@@ -127,14 +129,18 @@ class MainRoomConstant(val parent: Constants) {
         if (d["roomRunNotEveryTickNextTickRun"] != null) this.roomRunNotEveryTickNextTickRun = d["roomRunNotEveryTickNextTickRun"] as Int
         if (d["levelOfRoom"] != null) this.levelOfRoom = d["levelOfRoom"] as Int
         if (d["needCleaner"] != null) this.needCleaner = d["needCleaner"] as Boolean
-        if (d["defenceNeedUpgrade"] != null) this.defenceNeedUpgrade = d["defenceNeedUpgrade"] as Boolean
+
         if (d["reactionActive"] != null) this.reactionActive = d["reactionActive"] as String
-        if (d["defenceMinHits"] != null) this.defenceMinHits = d["defenceMinHits"] as Int
+
 
         if (d["autoDefenceArea"] != null) this.autoDefenceArea = d["autoDefenceArea"] as Int
         if (d["autoDefenceAreaMatrix"] != null) this.autoDefenceAreaMatrix = d["autoDefenceAreaMatrix"] as Array<Array<Int>>
 
-        if (d["useUpgraderLvl8"] != null) this.useUpgraderLvl8 = d["useUpgraderLvl8"] as Boolean
+
+
+        if (d["needUpgrader"] != null) this.needUpgrader = d["needUpgrader"] as Boolean
+        if (d["needBuilder"] != null) this.needBuilder = d["needBuilder"] as Boolean
+        if (d["defenceMinHits"] != null) this.defenceMinHits = d["defenceMinHits"] as Int
 
         if (d["slaveRoomConstantContainer"] != null)
             for (record in slaveRoomConstantContainer)
