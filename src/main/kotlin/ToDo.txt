@@ -5,8 +5,8 @@ In future
 //ToDo балансер для lvl 8 19 и Builder для поддержания нужного количества енергии
 
 //Tests
-//Upgrade 1 Lab
-//Upgrade 4 Lab
+//++Upgrade 1 Lab
+//Upgrade 4 Lab working reaction
 
 
 //Main

@@ -112,6 +112,8 @@ class MainContext {
             lm.lmProduction.lmMarket.deleteEmptyOffers()
         }
 
+        lm.lmProduction.labRoomsReactionBalance.balancing()
+
         //End of tick
         //ToDo rewrite
 //        for (room in mainRoomCollector.rooms.values) {

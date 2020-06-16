@@ -1,18 +1,58 @@
 package logic.production.lab
 
 import mainContext.MainContext
+import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.ResourceConstant
 
 class LMLabReactionBalance(val mc: MainContext) {
-    private fun canStart(mr: MainRoom, reaction: ResourceConstant): Boolean {
+//    if (mr.constant.reactionActive == "" && mr.constant.reactionActiveArr.isNotEmpty()) {
+//        mr.constant.reactionActive = mr.constant.reactionActiveArr[0]
+//    }
+//
+//    if (mr.constant.reactionActiveArr.size > 1) {
+//        val quantityMineral: Int = mc.mineralData[mr.constant.reactionActiveArr[0].unsafeCast<ResourceConstant>()]?.quantity ?: 0
+//        val productionStart: Int = mc.mineralData[mr.constant.reactionActiveArr[0].unsafeCast<ResourceConstant>()]?.balancingStart ?: 0
+//        val productionStop: Int = mc.mineralData[mr.constant.reactionActiveArr[0].unsafeCast<ResourceConstant>()]?.balancingStop ?: 0
+//
+//        if (mr.constant.reactionActive == mr.constant.reactionActiveArr[0]
+//                && quantityMineral > productionStop) {
+//            mr.constant.reactionActive = mr.constant.reactionActiveArr[1]
+//        }
+//
+//        if (mr.constant.reactionActive == mr.constant.reactionActiveArr[1]
+//                && quantityMineral < productionStart) {
+//            mr.constant.reactionActive = mr.constant.reactionActiveArr[0]
+//        }
+//    }
 
-        return false
+
+    private fun canStart(reaction: ResourceConstant): Boolean {
+        val reactionCompounds = mc.lm.lmProduction.labFunc.getReactionCompounds(reaction)
+        if (reactionCompounds.size != 2) return true
+
+        for(compound in reactionCompounds) {
+            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
+            if (mineralDataRecord.quantity < 6000) return false
+        }
+
+        val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
+        if (mineralDataRecord.quantity > mineralDataRecord.balancingStart) return false
+        return true
     }
 
     private fun needStop(mr: MainRoom): Boolean {
         val reactionCompounds = mc.lm.lmProduction.labFunc.getReactionCompounds(mr.constant.reactionActive.unsafeCast<ResourceConstant>())
+        if (reactionCompounds.size != 2) return true
 
+        for(compound in reactionCompounds) {
+            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return true
+            if (mineralDataRecord.quantity < 2000) return true
+        }
+
+        val reaction = mr.constant.reactionActive.unsafeCast<ResourceConstant>()
+        val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return true
+        if (mineralDataRecord.quantity > mineralDataRecord.balancingStop) return true
         return false
     }
 
@@ -28,7 +68,7 @@ class LMLabReactionBalance(val mc: MainContext) {
                 && mr.constant.reactionActiveArr.isNotEmpty()) {
             for (newReaction in mr.constant.reactionActiveArr) {
                 if (newReaction == "") continue
-                if (canStart(mr, newReaction.unsafeCast<ResourceConstant>())) {
+                if (canStart(newReaction.unsafeCast<ResourceConstant>())) {
                     mr.constant.reactionActive = newReaction
                     break
                 }
@@ -44,6 +84,5 @@ class LMLabReactionBalance(val mc: MainContext) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing!")
             }
         }
-
     }
 }

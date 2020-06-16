@@ -69,7 +69,6 @@ class MainRoomConstant(val parent: Constants) {
     var autoDefenceAreaMatrix: Array<Array<Int>> = arrayOf()
     var autoDefenceArea: Int = 0
 
-    val creepUpgradableParts: MutableMap<Int, Map<BodyPartConstant,ResourceConstant>> = mutableMapOf()
     val creepUpgradeRole: MutableMap<Int, Boolean> = mutableMapOf()
 
     private fun getSlaveRoomConstant(slaveRoomName: String) : SlaveRoomConstant {

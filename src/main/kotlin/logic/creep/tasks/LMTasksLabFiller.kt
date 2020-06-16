@@ -37,6 +37,7 @@ class LMTasksLabFiller(val mc: MainContext) {
 
         if (resLab2.first == resourceForUpgrade && resLab2.second >= resourceForUpgradeQuantity) return null
 
+        println("fiiiiiiiil")
         if (resLab2.first != resourceForUpgrade && resLab2.second != 0) {
             return CreepTask(TypeOfTask.Transport, lab2.id, lab2.pos, terminal.id, terminal.pos,
                     resource = resLab2.first, quantity = min((creep.store.getCapacity() ?: 0) , resLab2.second))
