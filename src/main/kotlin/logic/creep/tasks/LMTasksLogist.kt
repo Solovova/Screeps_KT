@@ -114,6 +114,9 @@ class LMTasksLogist(val mc: MainContext) {
     }
 
     private fun fullNuker(creep: Creep, storage: StructureStorage, terminal: StructureTerminal, mainRoom: MainRoom, nuker: StructureNuker): CreepTask? {
+        val globNeedEnergy: Int = mc.mineralData[RESOURCE_ENERGY]?.need ?: 0
+        if (globNeedEnergy >0 ) return null
+
         val needEnergy: Int = nuker.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0
         if (needEnergy != 0 && mainRoom.getResource(RESOURCE_ENERGY) > mainRoom.constant.energyUpgradeLvl8Controller) {
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, nuker.id, nuker.pos, RESOURCE_ENERGY,
