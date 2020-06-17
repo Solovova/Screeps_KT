@@ -1,8 +1,7 @@
 package logic.upgrader
 
 import mainContext.MainContext
-import screeps.api.Game
-import screeps.api.RESOURCE_ENERGY
+import screeps.api.*
 
 class LMUpgraderSet(val mc:MainContext) {
     fun calculate() {
@@ -12,6 +11,21 @@ class LMUpgraderSet(val mc:MainContext) {
         val mineralsNeed = (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
         var countOfRoomForUpgrade = 25
         if (countOfRoomForUpgrade == 0) countOfRoomForUpgrade = 1
+
+        //Balancing
+        if (Game.time % 1500 == 0) {
+            val arrMinerals: Array<Int> = if (Memory["balancingMineral"] == null) arrayOf()
+            else (Memory["balancingMineral"] as Array<Int>)
+
+            val arrUpgrader: Array<Int> = if (Memory["balancingUpgrader"] == null) arrayOf()
+            else (Memory["balancingUpgrader"] as Array<Int>)
+
+            arrMinerals[arrMinerals.size] = mineralsNeed
+            arrUpgrader[arrUpgrader.size] = countOfRoomForUpgrade
+
+            Memory["balancingMineral"] = arrMinerals
+            Memory["balancingUpgrader"] = arrUpgrader
+        }
 
         mc.lm.lmMessenger.log("INFO","Glob","Upgrader QTY lvl3: $counter lvl2: $counterLvl2 Target:$countOfRoomForUpgrade Minerals: $mineralsNeed")
         if (Game.time % 10 != 0) return
