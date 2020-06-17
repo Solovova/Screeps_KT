@@ -27,11 +27,11 @@ fun MainRoom.needCorrection1() {
     if (this.getResourceInStorage()==0)  this.need[0][0]=2
 
     //2 Upgrader
-    if (this.room.energyCapacityAvailable >= 1800) {
-        this.need[1][7] = 1
+    if (this.getResource() > this.constant.energyExcessSent) {
+        this.need[1][7] = 2
         this.need[2][7] = 3
     } else {
-        this.need[1][7] = 2
+        this.need[1][7] = 1
         this.need[2][7] = 2
     }
 

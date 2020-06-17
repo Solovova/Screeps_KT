@@ -33,7 +33,9 @@ class LMLabReactionBalance(val mc: MainContext) {
 
         for(compound in reactionCompounds) {
             val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
-            if (mineralDataRecord.quantity < 6000) return false
+            val startResource: Int = 4000 + mc.mainRoomCollector.rooms.values
+                    .filter { it.constant.reactionActive ==  reaction.toString()}.size * 4000
+            if (mineralDataRecord.quantity < startResource) return false
         }
 
         val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
