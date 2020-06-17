@@ -28,7 +28,7 @@ class LMMineralHarvest(val mc: MainContext) {
         }
 
         if (mr.getResource(mineral) > mr.constant.mineralMaxInRoom) {
-            mc.lm.lmMessenger.log("INFO", mr.name, "Harvester mineral full", COLOR_YELLOW)
+            mc.lm.lmMessenger.log("INFO", mr.name, "Harvester mineral $mineral full", COLOR_YELLOW)
             return false
         }
 

@@ -8,7 +8,7 @@ class MainRoomConstant(val parent: Constants) {
     //Energy management
     var energyBuilder : Int = 60000 //simple //how much energy must be in storage for start building
     var energyUpgradeLvl8Controller: Int = 100000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
-    var energyUpgradeDefence : Int = 110000
+    var energyUpgradeDefence : Int = 150000
     var energyExcessSent: Int = 250000
     var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
     var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
