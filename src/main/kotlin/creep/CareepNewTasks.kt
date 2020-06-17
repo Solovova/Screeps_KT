@@ -189,13 +189,13 @@ fun Creep.buildBigStructure(mainContext: MainContext, mainRoom: MainRoom): Boole
         structure = mainRoom.room.find(FIND_STRUCTURES).filter {
             (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
                     && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0
-        }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 30000 }
+        }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 10000 }
 
         if (structure == null) {
             structure = mainRoom.room.find(FIND_STRUCTURES).filter {
                 ((it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
                         && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0)
-            }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 30000 }
+            }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 10000 }
         }
 
         if (structure != null) {
@@ -412,7 +412,9 @@ fun Creep.slaveSignRoom(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolea
     var result = false
     if (slaveRoom != null) {
         val structureController: StructureController? = slaveRoom.structureController[0]
-        if (structureController != null) {
+        if (structureController != null && !structureController.my && structureController.owner !=null) return false
+
+        if (structureController != null && structureController.my) {
             val sign = structureController.sign
             var needSign = false
             if (sign != null && sign.text != slaveRoom.describe) needSign = true
@@ -525,7 +527,8 @@ fun Creep.slaveClaim(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
     var result = false
     if (slaveRoom != null) {
         val structureController: StructureController? = slaveRoom.structureController[0]
-        if (structureController != null && !structureController.my) {
+
+        if (structureController != null && !structureController.my && structureController.owner == null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Claim, idObject0 = structureController.id, posObject0 = structureController.pos))
             result = true
         }
@@ -537,8 +540,20 @@ fun Creep.slaveReserve(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean
     var result = false
     if (slaveRoom != null) {
         val structureController: StructureController? = slaveRoom.structureController[0]
-        if (structureController != null && !structureController.my) {
+        if (structureController != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Reserve, idObject0 = structureController.id, posObject0 = structureController.pos))
+            result = true
+        }
+    }
+    return result
+}
+
+fun Creep.slaveAttackController(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
+    var result = false
+    if (slaveRoom != null) {
+        val structureController: StructureController? = slaveRoom.structureController[0]
+        if (structureController != null) {
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.AttackController, idObject0 = structureController.id, posObject0 = structureController.pos))
             result = true
         }
     }

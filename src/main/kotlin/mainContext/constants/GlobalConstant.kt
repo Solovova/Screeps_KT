@@ -5,6 +5,7 @@ import constants.CacheCarrier
 import screeps.api.*
 
 class GlobalConstant(val constants: Constants) {
+    var username: String = ""
     val dataCacheCarrierAuto: MutableMap<String, CacheCarrier> = mutableMapOf() //cashed
     val roomRunNotEveryTickTicksPauseMin: Int = 300
     val roomRunNotEveryTickTicksPauseMax: Int = 400

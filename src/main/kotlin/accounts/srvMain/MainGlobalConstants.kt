@@ -6,6 +6,8 @@ import screeps.api.ResourceConstant
 import screeps.api.WORK
 
 fun AccountInitMain.initGlobalConstantsOut(gc: GlobalConstant) {
+    gc.username = "SoloVova"
+
     gc.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant,List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(

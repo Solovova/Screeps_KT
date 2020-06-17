@@ -20,6 +20,7 @@ class LMTerminal(val mainContext: MainContext) {
         this.terminalSentEnergyExcessSent()
         this.terminalSentEnergyFrom3To2()
         this.terminalSentEnergyStorageFullSent()
+        this.terminalSentEnergyForWallUpgrader()
     }
 
     private fun terminalSentFromTo(mainRoomFrom: MainRoom, mainRoomTo: MainRoom, describe: String) {
@@ -164,13 +165,13 @@ class LMTerminal(val mainContext: MainContext) {
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
                     && it.constant.levelOfRoom == 2
-                    && it.getResource() < (it.constant.energyUpgradeForce+10000)
+                    && it.getResource() < (it.constant.energyUpgradeForce + 10000)
         }.minBy { it.getResource() }
                 ?: return
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom == 3
-                    && it.getResource() > (it.constant.energyUpgradeDefence+20000)
+                    && it.getResource() > (it.constant.energyUpgradeDefence + 20000)
         }.maxBy { it.getResource() }
                 ?: return
 
@@ -212,5 +213,27 @@ class LMTerminal(val mainContext: MainContext) {
                 ?: return
 
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "StorageFullSent")
+    }
+
+    private fun terminalSentEnergyForWallUpgrader() {
+        val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.structureTerminal[0] != null
+                    && ((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
+                    || (it.constant.needUpgrader && it.getResource() < it.constant.energyUpgradeLvl8Controller))
+                    && it.getLevelOfRoom() == 3
+        }.minBy { it.constant.defenceMinHits }
+                ?: return
+
+        val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.structureTerminal[0] != null
+                    && it.getResource() > it.constant.energyExcessSent
+                    && it.getLevelOfRoom() == 3
+                    && !((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
+                    || (it.constant.needUpgrader && it.getResource() < it.constant.energyUpgradeLvl8Controller))
+                    && it.name != mainRoomTo.name
+        }.maxBy { it.getResource() }
+                ?: return
+
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "ForWallUpgrader")
     }
 }

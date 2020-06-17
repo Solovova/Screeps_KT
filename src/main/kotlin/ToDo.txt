@@ -71,6 +71,7 @@ model 2
 //25 - carrier harvester 2
 //26 - harvester mineral -
 //27 - carrier mineral -
+//28 - controller attacker
 
 
 

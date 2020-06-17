@@ -22,9 +22,10 @@ fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
 }
 
 fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
-    if (sr.mr.name == "W3N1" && sr.name == "W3N5") {
+    if (sr.mr.name == "W5N3" && sr.name == "W4N3") {
         sr.need[0][0] = 0
-        sr.need[0][1] = 3
+        sr.need[0][3] = 0
+        sr.need[0][1] = 6
         sr.need[0][11] = 0
     }
 }

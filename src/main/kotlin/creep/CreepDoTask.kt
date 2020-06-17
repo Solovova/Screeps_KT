@@ -174,8 +174,22 @@ fun Creep.doTask(mainContext: MainContext) {
         TypeOfTask.Reserve -> {
             if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
             if (task.come) {
+
                 val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
-                if (structureController != null) this.reserveController(structureController)
+                if (structureController != null) {
+                    this.reserveController(structureController)
+                }
+            }
+        }
+
+        TypeOfTask.AttackController -> {
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
+            if (task.come) {
+
+                val structureController: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
+                if (structureController != null) {
+                    this.attackController(structureController)
+                }
             }
         }
 

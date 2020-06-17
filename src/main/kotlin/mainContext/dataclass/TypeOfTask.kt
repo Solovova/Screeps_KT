@@ -27,5 +27,6 @@ enum class TypeOfTask {
     GoToRescueFlag,
     TransferFromCreep,
     GoToMainRoomRescueFlag,
-    UpgradeCreep
+    UpgradeCreep,
+    AttackController
 }

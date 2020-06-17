@@ -387,6 +387,11 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = this.slaveTransferMineralToStorage(creepCarry, mainContext, mainRoom, slaveRoom)
     }
 
+    if (this.memory.role == 128) {
+        if (!isTask) isTask = this.slaveGoToRoom(mainContext)
+        if (!isTask) isTask = this.slaveAttackController(mainContext, slaveRoom)
+    }
+
     return isTask
 
 }
