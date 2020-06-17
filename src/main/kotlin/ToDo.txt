@@ -4,6 +4,11 @@ In future
 //ToDo ограничитель по защитным структурам
 //ToDo балансер для lvl 8 19 и Builder для поддержания нужного количества енергии
 
+//ToDo shapshot analiz
+//ToDo build rampart where need
+
+//ToDo SortedLab -> cash
+
 //Tests
 //++Upgrade 1 Lab
 //Upgrade 4 Lab working reaction

@@ -53,7 +53,7 @@ fun AccountInitMain2.initMineralOut(mc: MainContext) {
 
     mc.mineralData["XLH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             storeMax = 100000,
-            balancingStart = 20000,
+            balancingStart = 60000,
             balancingStop = 70000
     )
 }

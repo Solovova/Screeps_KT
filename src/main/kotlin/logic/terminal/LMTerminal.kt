@@ -161,19 +161,16 @@ class LMTerminal(val mainContext: MainContext) {
     }
 
     private fun terminalSentEnergyFrom3To2() {
-        val energyMinQuantityIn2 = 120000
-        val energyMinQuantityIn3 = 80000
-
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
                     && it.constant.levelOfRoom == 2
-                    && it.getResource() < energyMinQuantityIn2
+                    && it.getResource() < (it.constant.energyUpgradeForce+10000)
         }.minBy { it.getResource() }
                 ?: return
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom == 3
-                    && it.getResource() > energyMinQuantityIn3
+                    && it.getResource() > (it.constant.energyUpgradeDefence+20000)
         }.maxBy { it.getResource() }
                 ?: return
 

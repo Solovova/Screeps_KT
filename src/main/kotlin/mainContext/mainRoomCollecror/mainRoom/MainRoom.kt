@@ -8,6 +8,7 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
 import mainContext.dataclass.BgSpawnResult
 import mainContext.mainRoomCollecror.MainRoomCollector
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.correctionCentral
 import screeps.api.*
 import screeps.api.structures.*
 import screeps.utils.toMap
@@ -653,10 +654,25 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                         ?: 0 - (spawn.store[RESOURCE_ENERGY] ?: 0), 1)
 
         // Загружаем Tower если енергия меньше 1000
-        //ToDo set priority 0 if have hostile creeps and queue < 2
-        for (tower in this.structureTower.values)
-            if (tower.store[RESOURCE_ENERGY] ?: 0 < 400) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
-                    ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 3)
+
+
+
+        if (this.constant.roomHostile) {
+            if (this.queue.size < 2) {
+                for (tower in this.structureTower.values)
+                    if (tower.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0 >= 300) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
+                            ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 0)
+            }else{
+                for (tower in this.structureTower.values)
+                    if (tower.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0 >= 300) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
+                            ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 3)
+            }
+        }else{
+            for (tower in this.structureTower.values)
+                if (tower.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0 >= 300) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
+                        ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 3)
+        }
+
 
         if (needs.isEmpty()) return null
         // Производим коррекцию с учетем заданий которые делаются и ищем ближайший
@@ -758,7 +774,37 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         return true
     }
 
+    private fun setHostile() {
+        val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER }
+
+        if (towerInvader != null) {
+            this.constant.roomHostileType = 4
+            this.constant.roomHostileNum = 5
+            this.constant.roomHostile = true
+        } else {
+            val invader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_INVADER_CORE }
+            if (invader != null) {
+                this.constant.roomHostileType = 3
+                this.constant.roomHostileNum = 1
+                this.constant.roomHostile = true
+            } else {
+                val hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS).filter { it.name.startsWith("invader") }
+                this.constant.roomHostile = hostileCreeps.isNotEmpty()
+                var typeAttack = 2 //ranged
+                for (hostileCreep in hostileCreeps)
+                    if (hostileCreep.body.firstOrNull { it.type == ATTACK } != null) {
+                        typeAttack = 1
+                        break
+                    }
+                this.constant.roomHostileType = typeAttack
+                this.constant.roomHostileNum = hostileCreeps.size
+            }
+        }
+    }
+
+
     fun runInStartOfTick() {
+        this.setHostile()
         this.manualDefenceInStartOfTick()
         this.setMineralNeed()
         this.alarmStorage()
@@ -885,10 +931,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             if (this.structureExtractor.size != 1) return "Extractor"
             if (this.structureContainerNearMineral.size != 1) return "Cont. mineral"
             if (this.structureLab.size < 10) return "Lab"
-            if (this.structureNuker.size != 1) return "Nuker"
             if (this.structureObserver.size != 1) return "Observer"
             if (this.structureFactory.size != 1) return "Factory"
             if (this.structurePowerSpawn.size != 1) return "Power spawn"
+            if (this.structureNuker.size != 1) return "Nuker"
         }
         return ""
     }

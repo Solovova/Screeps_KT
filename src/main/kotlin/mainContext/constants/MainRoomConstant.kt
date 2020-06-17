@@ -13,7 +13,9 @@ class MainRoomConstant(val parent: Constants) {
     var energyUpgradeLow : Int = 100000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
     var energyUpgradeForce: Int = 110000 //simple //how much energy must be in storage for start mainContext.dataclass.getUpgrade controller
 
-
+    var roomHostile: Boolean = false
+    var roomHostileType: Int = 0 // 1 -  mile, 2 - ranged, 3 - invader
+    var roomHostileNum: Int = 0
 
 
 

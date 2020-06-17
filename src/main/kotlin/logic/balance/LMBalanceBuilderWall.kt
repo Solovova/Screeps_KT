@@ -10,7 +10,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
     private fun getMinHits(mainRoom: MainRoom): Int {
         val structure: Structure = mainRoom.room.find(FIND_STRUCTURES).filter {
             (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
-        }.minBy { it.hits } ?: return WALL_HITS_MAX
+        }.minBy { it.hits } ?: return 0
         return structure.hits
     }
 
@@ -43,8 +43,8 @@ class LMBalanceBuilderWall(val mc: MainContext) {
         refreshDefenceMinHits()
 
 
-        val rooms = mc.mainRoomCollector.rooms.values.filter {
-            it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
+        val rooms = mc.mainRoomCollector.rooms.values.filter {it.constant.defenceMinHits!=0
+                && it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
                     && it.have[10] == 0
         }.sortedBy { this.getNormalizedHits(it) }
 

@@ -211,9 +211,14 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         val controller: StructureController = mainRoom.structureController[0] ?: return MainRoomInfoRecord("", false)
         var result: String
         if (controller.level==8) {
-            val defenceStatus: Int = mainRoom.constant.defenceMinHits
-            result = "def: ${defenceStatus.toString().toSecDigit().padStart(12)}"
-            return MainRoomInfoRecord(result, defenceStatus<0)
+            val defenceStatus: Int = mainRoom.constant.defenceMinHits / 1000
+            val defenceNeed: Int = mainContext.constants.globalConstant.defenceLimitUpgrade / 1000
+            result = "def: ${defenceStatus.toString().toSecDigit().padStart(8)}"
+            result += "/ ${defenceNeed.toString().toSecDigit().padStart(8)}"
+            val percent:Float = defenceStatus.toFloat() / defenceNeed.toFloat() * 100f
+
+            result += " ${(percent.asDynamic().toFixed(2)).toString().padStart(6)}"
+            return MainRoomInfoRecord(result, defenceStatus<defenceNeed)
         }else{
             result = "l: ${mainRoom.structureController[0]?.level} "
             result += "${mainRoom.structureController[0]?.progress}".padStart(9)
