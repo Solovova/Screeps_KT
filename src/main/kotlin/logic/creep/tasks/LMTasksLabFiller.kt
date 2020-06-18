@@ -37,7 +37,6 @@ class LMTasksLabFiller(val mc: MainContext) {
 
         if (resLab2.first == resourceForUpgrade && resLab2.second >= resourceForUpgradeQuantity) return null
 
-        println("fiiiiiiiil")
         if (resLab2.first != resourceForUpgrade && resLab2.second != 0) {
             return CreepTask(TypeOfTask.Transport, lab2.id, lab2.pos, terminal.id, terminal.pos,
                     resource = resLab2.first, quantity = min((creep.store.getCapacity() ?: 0) , resLab2.second))
@@ -80,10 +79,10 @@ class LMTasksLabFiller(val mc: MainContext) {
 
     private fun resourceForReactionsToLab(creep: Creep, terminal: StructureTerminal,lab: StructureLab,resLab: Pair<ResourceConstant, Int>):CreepTask? {
         var quantityTransfer: Int = lab.store.getFreeCapacity(resLab.first) ?: 0
-        if (quantityTransfer < creep.store.getCapacity() ?: 0) return null
-        quantityTransfer = min(quantityTransfer,creep.store.getCapacity() ?: 0)
+        if (quantityTransfer < creep.store.getCapacity()) return null
+        quantityTransfer = min(quantityTransfer,creep.store.getCapacity())
         return CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, lab.id, lab.pos,
-                resource = resLab.first, quantity = min(quantityTransfer,creep.store.getCapacity() ?: 0))
+                resource = resLab.first, quantity = min(quantityTransfer,creep.store.getCapacity()))
     }
 
 

@@ -56,9 +56,6 @@ class MainRoomConstant(val parent: Constants) {
     //Reaction control set in ProductionController
     var reactionActive: String = "" //cashed
     var reactionActiveArr: Array<String> = arrayOf()
-    var reactionActivePriority: Boolean = true
-    //false, assign reactionActive reaction from reactionActiveArr only if reactionActive = ""
-    //true, assign reactionActive reaction from reactionActiveArr if can start reaction with big priority (index in reactionActiveArr)
 
     //Manual defence
     var manualDefenceRoomMainColorFlag: ColorConstant = COLOR_PURPLE

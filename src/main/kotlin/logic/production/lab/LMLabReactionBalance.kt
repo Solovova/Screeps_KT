@@ -32,22 +32,19 @@ class LMLabReactionBalance(val mc: MainContext) {
     private fun needStop(mr: MainRoom): Boolean {
         val reactionCompounds: List<ResourceConstant> = mc.lm.lmProduction.labFunc.getReactionCompounds(mr.constant.reactionActive.unsafeCast<ResourceConstant>())
         if (reactionCompounds.size != 2) return true
-        if (!haveMineralsForReactionInLabs(mr, reactionCompounds)) return true
+
+        for (compound in reactionCompounds) {
+            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return true
+            if (mineralDataRecord.quantity < 1000 && !haveMineralsForReactionInLabs(mr, reactionCompounds)) return true
+        }
 
         val reaction = mr.constant.reactionActive.unsafeCast<ResourceConstant>()
         val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return true
         return mineralDataRecord.quantity > mineralDataRecord.balancingStop
     }
 
-    private fun balancingForRoom(mr: MainRoom) {
-        if (mr.constant.reactionActive != ""
-                && mr.constant.reactionActiveArr.size > 1
-                && needStop(mr)) {
-            mr.constant.reactionActive = ""
-        }
-
-        if ((mr.constant.reactionActive == "" || mr.constant.reactionActivePriority)
-                && mr.constant.reactionActiveArr.isNotEmpty()) {
+    private fun balancingStartForRoom(mr: MainRoom) {
+        if (mr.constant.reactionActiveArr.isNotEmpty()) {
             for (newReaction in mr.constant.reactionActiveArr) {
                 if (newReaction == "") continue
                 if (canStart(newReaction.unsafeCast<ResourceConstant>())) {
@@ -58,12 +55,37 @@ class LMLabReactionBalance(val mc: MainContext) {
         }
     }
 
+    private fun balancingStopForRoom(mr: MainRoom) {
+        if (mr.constant.reactionActive != ""
+                && mr.constant.reactionActiveArr.size > 1
+                && needStop(mr)) {
+            mr.constant.reactionActive = ""
+        }
+    }
+
     fun balancing() {
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
-                balancingForRoom(room)
+                balancingStopForRoom(room)
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing!")
+                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 1!")
+            }
+        }
+
+        for (room in mc.mainRoomCollector.rooms.values) {
+            try {
+                if (room.constant.reactionActive != "") continue
+                balancingStartForRoom(room)
+            } catch (e: Exception) {
+                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 2!")
+            }
+        }
+
+        for (room in mc.mainRoomCollector.rooms.values) {
+            try {
+                balancingStartForRoom(room)
+            } catch (e: Exception) {
+                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
             }
         }
     }
