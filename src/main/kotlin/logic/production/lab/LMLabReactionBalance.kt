@@ -14,7 +14,7 @@ class LMLabReactionBalance(val mc: MainContext) {
         for (compound in reactionCompounds) {
             val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
             val startResource: Int = 4000 + mc.mainRoomCollector.rooms.values
-                    .filter { it.constant.reactionActive == reaction.toString() }.size * 4000
+                    .filter { it.constant.reactionActive == reaction.toString()}.size * 6000
             if (mineralDataRecord.quantity < startResource) return false
         }
 
@@ -63,6 +63,40 @@ class LMLabReactionBalance(val mc: MainContext) {
         }
     }
 
+
+    //Need testing
+    private fun canStartPriorityUp(mainRoom: MainRoom, reaction: ResourceConstant): Boolean {
+        val reactionCompounds = mc.lm.lmProduction.labFunc.getReactionCompounds(reaction)
+        if (reactionCompounds.size != 2) return true
+
+        for (compound in reactionCompounds) {
+            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
+            val startResource: Int = mineralDataRecord.balancingStop + mc.mainRoomCollector.rooms.values
+                    .filter { it.constant.reactionActive == reaction.toString()
+                            && it.name != mainRoom.name}.size * 6000
+            if (mineralDataRecord.quantity < startResource) return false
+        }
+
+        val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
+        return mineralDataRecord.quantity < mineralDataRecord.balancingStop
+    }
+
+
+    private fun balancingStartForRoomPriorityUp(mr: MainRoom) {
+        if (mr.constant.reactionActiveArr.isNotEmpty()) {
+            for (newReaction in mr.constant.reactionActiveArr.reversed()) {
+                if (newReaction == "") continue
+
+                if (mr.constant.reactionActive != "" && mr.constant.reactionActive == newReaction) break
+
+                if (canStartPriorityUp(mr, newReaction.unsafeCast<ResourceConstant>())) {
+                    mr.constant.reactionActive = newReaction
+                    break
+                }
+            }
+        }
+    }
+
     fun balancing() {
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
@@ -74,19 +108,18 @@ class LMLabReactionBalance(val mc: MainContext) {
 
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
-                if (room.constant.reactionActive != "") continue
-                balancingStartForRoom(room)
+                if (room.constant.reactionActive == "") balancingStartForRoom(room)
             } catch (e: Exception) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 2!")
             }
         }
 
-        for (room in mc.mainRoomCollector.rooms.values) {
-            try {
-                balancingStartForRoom(room)
-            } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
-            }
-        }
+//        for (room in mc.mainRoomCollector.rooms.values) {
+//            try {
+//                if (room.constant.reactionActive != "") balancingStartForRoomPriorityUp(room)
+//            } catch (e: Exception) {
+//                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
+//            }
+//        }
     }
 }
