@@ -18,9 +18,10 @@ class LMTerminal(val mainContext: MainContext) {
         this.terminalSentMineral()
 
         this.terminalSentEnergyExcessSent()
+        this.terminalSentEnergyForWallUpgrader()
         this.terminalSentEnergyFrom3To2()
         this.terminalSentEnergyStorageFullSent()
-        this.terminalSentEnergyForWallUpgrader()
+
     }
 
     private fun terminalSentFromTo(mainRoomFrom: MainRoom, mainRoomTo: MainRoom, describe: String) {

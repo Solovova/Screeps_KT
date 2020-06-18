@@ -45,6 +45,42 @@ fun AccountInitMain2.initMineralOut(mc: MainContext) {
             balancingStop = 50000
     )
 
+    mc.mineralData["ZK".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000,
+            balancingStart = 20000,
+            balancingStop = 50000
+    )
+
+    mc.mineralData["UL".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000,
+            balancingStart = 20000,
+            balancingStop = 50000
+    )
+
+    mc.mineralData["G".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000,
+            balancingStart = 20000,
+            balancingStop = 50000
+    )
+
+    mc.mineralData["GH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000,
+            balancingStart = 20000,
+            balancingStop = 50000
+    )
+
+    mc.mineralData["GH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000,
+            balancingStart = 20000,
+            balancingStop = 70000
+    )
+
+    mc.mineralData["XGH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
+            storeMax = 100000,
+            balancingStart = 20000,
+            balancingStop = 100000
+    )
+
     mc.mineralData["LH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             storeMax = 100000,
             balancingStart = 20000,
