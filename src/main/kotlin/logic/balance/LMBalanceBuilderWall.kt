@@ -30,22 +30,20 @@ class LMBalanceBuilderWall(val mc: MainContext) {
 
         var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 }.size
 
-        mc.lm.lmMessenger.log("INFO","Glob","Builder have: $counter Target:$quantityNeedBuilder Deficit: ${quantityNeedBuilder - counter}")
+        mc.lm.lmMessenger.log("INFO", "Glob", "Builder have: $counter Target:$quantityNeedBuilder Deficit: ${quantityNeedBuilder - counter}")
 
         //if (Game.time % 1000 == 0)
 
 
-
         if (Game.time % 11 != 0) return
-        for (room in mc.mainRoomCollector.rooms.values) {
-            room.constant.needBuilder = (room.have[10] > 0)
-        }
+        for (room in mc.mainRoomCollector.rooms.values) room.constant.needBuilder = false
+
         refreshDefenceMinHits()
 
 
-        val rooms = mc.mainRoomCollector.rooms.values.filter {it.constant.defenceMinHits!=0
-                && it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
-                    && it.have[10] == 0
+        val rooms = mc.mainRoomCollector.rooms.values.filter {
+            it.constant.defenceMinHits != 0
+                    && it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
         }.sortedBy { this.getNormalizedHits(it) }
 
         for (room in rooms) {

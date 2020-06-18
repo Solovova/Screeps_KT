@@ -10,7 +10,7 @@ fun AccountInitMain2.initMineralOut(mc: MainContext) {
     )
 
     mc.mineralData["H".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            storeMax = 300000
+            storeMax = 200000
     )
 
     mc.mineralData["L".unsafeCast<ResourceConstant>()] = MineralDataRecord(
@@ -30,7 +30,7 @@ fun AccountInitMain2.initMineralOut(mc: MainContext) {
     )
 
     mc.mineralData["X".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            storeMax = 250000
+            storeMax = 200000
     )
 
     mc.mineralData["LH".unsafeCast<ResourceConstant>()] = MineralDataRecord(

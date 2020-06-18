@@ -6,6 +6,9 @@ import screeps.api.*
 
 class GlobalConstant(val constants: Constants) {
     var username: String = ""
+    var nukerFill: Boolean = false
+    var nukerFilInRooms: Array<String> = arrayOf()
+
     val dataCacheCarrierAuto: MutableMap<String, CacheCarrier> = mutableMapOf() //cashed
     val roomRunNotEveryTickTicksPauseMin: Int = 300
     val roomRunNotEveryTickTicksPauseMax: Int = 400
@@ -30,11 +33,10 @@ class GlobalConstant(val constants: Constants) {
     //if in room set it more priority
     val creepUpgradablePartsRange:MutableMap<Int,Map<BodyPartConstant,List<Pair<Int,ResourceConstant>>>> = mutableMapOf()
     val labReactionComponent: MutableMap<ResourceConstant,Array<ResourceConstant>> = mutableMapOf()
-    var nukerFilInRooms: Array<String> = arrayOf()
+
     var defenceLimitUpgrade: Int = 17_000_000
 
     init {
-        constants.mainContext.lm.lmCreep.lmUpgrade.setGlobalConstant.setGlobalConstant(this)
         constants.mainContext.lm.lmProduction.lmMineralSetGlobalConstant.setConstant(this)
     }
 

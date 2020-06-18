@@ -114,10 +114,13 @@ class LMTasksLogist(val mc: MainContext) {
     }
 
     private fun fullNuker(creep: Creep, storage: StructureStorage, terminal: StructureTerminal, mainRoom: MainRoom, nuker: StructureNuker): CreepTask? {
-//        val globNeedEnergy: Int =  (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
-//        if (globNeedEnergy > 0 ) return null
+        if (!mc.constants.globalConstant.nukerFill) return null
 
-        return null
+        if (!(mc.constants.globalConstant.nukerFilInRooms.isEmpty()
+                        || mainRoom.name in mc.constants.globalConstant.nukerFilInRooms)) return null
+
+        val globNeedEnergy: Int =  (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
+        if (globNeedEnergy > 0 ) return null
 
         val needEnergy: Int = nuker.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0
         if (needEnergy != 0 && mainRoom.getResource(RESOURCE_ENERGY) > mainRoom.constant.energyUpgradeLvl8Controller) {
@@ -176,9 +179,6 @@ class LMTasksLogist(val mc: MainContext) {
 
     fun newTaskNuke(creep: Creep): Boolean {
         val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
-
-        if (!(mc.constants.globalConstant.nukerFilInRooms.isEmpty()
-                || mainRoom.name in mc.constants.globalConstant.nukerFilInRooms)) return false
 
         val terminal: StructureTerminal = mainRoom.structureTerminal[0] ?: return false
         val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false

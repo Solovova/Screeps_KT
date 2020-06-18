@@ -27,10 +27,6 @@ open class AccountInit() {
 
     }
 
-    open fun initGlobalConstants(gc: GlobalConstant) {
-
-    }
-
     //call after fill mineral and production
     open fun initTuning(mainContext: MainContext) {
 

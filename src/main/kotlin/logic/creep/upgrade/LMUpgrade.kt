@@ -12,7 +12,6 @@ import screeps.api.ResourceConstant
 
 class LMUpgrade(val mc: MainContext) {
     val needForUpgrade: LMUpgradeNeedFor = LMUpgradeNeedFor(mc)
-    val setGlobalConstant: LMUpgradeConstants = LMUpgradeConstants()
 
     fun setMainRoomUpgradeConstants(mr: MainRoom) {
         if (mr.constant.levelOfRoom == 2) {

@@ -121,12 +121,8 @@ class MainContext {
     }
 
     fun getNumRoomWithTerminal():Int {
-        var result = 0
-        for (mainRoom in this.mainRoomCollector.rooms.values) {
-            if (Game.rooms[mainRoom.name] != null && mainRoom.structureTerminal[0] != null) {
-                result++
-            }
-        }
-        return result
+        return this.mainRoomCollector.rooms.values.filter {
+            Game.rooms[it.name] != null
+                    && it.structureTerminal[0] != null }.size
     }
 }

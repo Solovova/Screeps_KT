@@ -31,8 +31,4 @@ class AccountInitMain2 : AccountInit ()  {
     override fun initTuning(mainContext: MainContext) {
         this.initTuningOut(mainContext)
     }
-
-    override fun initGlobalConstants(gc: GlobalConstant) {
-        this.initGlobalConstantsOut(gc)
-    }
 }

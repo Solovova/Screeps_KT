@@ -7,6 +7,7 @@ import screeps.api.structures.StructureNuker
 
 class LMNukerNeedMineral(val mc: MainContext) {
     private fun setNeedMineral(mainRoom: MainRoom) {
+        if (!mc.constants.globalConstant.nukerFill) return
         if (mc.constants.globalConstant.nukerFilInRooms.isEmpty()
                 || mainRoom.name in mc.constants.globalConstant.nukerFilInRooms) {
             val nuker:StructureNuker = mainRoom.structureNuker[0] ?: return

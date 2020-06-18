@@ -38,7 +38,7 @@ class LMMineralHarvest(val mc: MainContext) {
             return false
         } else {
             if (mineralDataRecord.quantity > mineralDataRecord.storeMax) {
-                mc.lm.lmMessenger.log("ERROR", mr.name, "Harvester mineral $mineral rich max quantity ${mineralDataRecord.storeMax}", COLOR_YELLOW)
+                mc.lm.lmMessenger.log("INFO", mr.name, "Harvester mineral $mineral rich max quantity ${mineralDataRecord.storeMax}", COLOR_YELLOW)
                 return false
             }
         }

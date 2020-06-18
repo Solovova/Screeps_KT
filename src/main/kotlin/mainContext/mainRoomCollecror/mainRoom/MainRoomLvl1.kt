@@ -53,6 +53,6 @@ fun MainRoom.needCorrection1() {
 
     //8 Builder
     if ((this.constructionSite.isNotEmpty()) && (this.getResourceInStorage() > this.constant.energyBuilder)) {
-        this.need[1][8]=1
+        this.need[1][8]=2
     }
 }

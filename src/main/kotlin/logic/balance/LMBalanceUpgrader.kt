@@ -20,12 +20,12 @@ class LMBalanceUpgrader(val mc:MainContext) {
 
         if (Game.time % 10 != 0) return
         for (room in mc.mainRoomCollector.rooms.values)
-            room.constant.needUpgrader = (room.have[19] > 0 || room.have[7] > 0)
+            room.constant.needUpgrader = false
 
 
-        val rooms = mc.mainRoomCollector.rooms.values.filter { it.getLevelOfRoom() == 3
+        val rooms = mc.mainRoomCollector.rooms.values.filter {
+                it.getLevelOfRoom() == 3
                 && it.getResource() > it.constant.energyUpgradeLvl8Controller
-                && (it.have[19] == 0)
         }.sortedByDescending { it.getResource() }
 
 
