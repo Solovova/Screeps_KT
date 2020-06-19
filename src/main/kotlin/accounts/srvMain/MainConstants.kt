@@ -102,6 +102,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
     const.globalConstant.username = "SoloVova"
     const.globalConstant.nukerFill = false
+    const.globalConstant.balanceQtyUpgraderDefault = 28
+
     const.globalConstant.nukerFilInRooms = arrayOf("E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E53N38", "E51N39", "E51N37",
             "E59N38", "E58N37", "E52N36", "E58N39", "E57N39", "E57N37", "E53N39", "E49N39", "E47N39", "E51N41", "E52N35", "E51N35", "E54N41")
 
@@ -109,7 +111,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(150000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(500000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(100000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )
@@ -118,7 +120,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(10000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(500000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(10000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )

@@ -324,7 +324,9 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
     private fun getInfoBalance(mainRoom: MainRoom): MainRoomInfoRecord {
         var result = ""
         result += if (mainRoom.have[10] > 0) "B" else " "
-        result += if (mainRoom.have[7] > 0 || mainRoom.have[19] > 0 || mainRoom.have[1019] > 0) "U" else " "
+
+        val qtyUpgrader = if  (mainRoom.getLevelOfRoom() == 3) mainRoom.have[19] + mainRoom.have[1019] else mainRoom.have[7]
+        result += if (qtyUpgrader > 0) "${qtyUpgrader}U" else "  "
 
         return MainRoomInfoRecord(result,
                 false)

@@ -22,6 +22,15 @@ class GlobalConstant(val constants: Constants) {
     var gclArrayMaxSize: Int = 100
     var gclPeriod: Int = 1000
 
+    var balanceQtyUpgrader: Array<Int> = arrayOf() //cashed
+    var balanceNeedEnergy: Array<Int> = arrayOf() //cashed
+    var balanceQtyUpgraderNow: Int = -1 //cashed
+    var balanceQtyUpgraderDefault: Int = 15
+    var balanceMaxSize: Int = 100
+    var balancePeriod: Int = 1500
+
+
+
     //Market
     val marketMinCreditForOpenBuyOrder: Double = 100000.0
     val marketBuyPriceEnergy = 0.052 //ToDo auto calculate
@@ -47,6 +56,13 @@ class GlobalConstant(val constants: Constants) {
         result["gclFromTick"] = this.gclFromTick
         result["gclArray"] = this.gclArray
         result["roomRunNotEveryTickNextTickRunMainContext"] = this.roomRunNotEveryTickNextTickRunMainContext
+
+        result["balanceQtyUpgrader"] = this.balanceQtyUpgrader
+        result["balanceNeedEnergy"] = this.balanceNeedEnergy
+        result["balanceQtyUpgraderNow"] = this.balanceQtyUpgraderNow
+
+
+
         //dataCacheCarrierAuto
         result["dataCacheCarrierAuto"] = object {}
         for (record in dataCacheCarrierAuto)
@@ -63,6 +79,11 @@ class GlobalConstant(val constants: Constants) {
         if (d["gcl"] != null) this.gcl = d["gcl"] as Int
         if (d["gclFromTick"] != null) this.gclFromTick = d["gclFromTick"] as Int
         if (d["gclArray"] != null) this.gclArray = d["gclArray"] as Array<Int>
+
+        if (d["balanceQtyUpgrader"] != null) this.balanceQtyUpgrader = d["balanceQtyUpgrader"] as Array<Int>
+        if (d["balanceNeedEnergy"] != null) this.balanceNeedEnergy = d["balanceNeedEnergy"] as Array<Int>
+        if (d["balanceQtyUpgraderNow"] != null) this.balanceQtyUpgraderNow = d["balanceQtyUpgraderNow"] as Int
+
 
         //dataCacheCarrierAuto
         if (d["dataCacheCarrierAuto"] != null)

@@ -11,8 +11,6 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             marketSellExcess = mc.getNumRoomWithTerminal() * 250000,
             marketBuyLack = mc.getNumRoomWithTerminal() * 100000,
             sellFromRoom = "E54N37"
-            //buyToRoom = "E54N37"
-
     )
 
     mc.mineralData["O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
@@ -91,17 +89,19 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             priceMin = 0.005,
             marketBuyLack = 30000,
             storeMax = 100000,
-            buyToRoom = "E56N53"
+            buyToRoom = "E56N53",
+            balancingStart = 20000,
+            balancingStop = 100000
     )
 
     mc.mineralData["XGH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 2.000,
             priceMin = 1.400,
             marketSellExcess = 500000,
-            storeMax = 400000,
+            storeMax = 700000,
             sellFromRoom = "E52N38",
-            balancingStart = 300000,
-            balancingStop = 400000
+            balancingStart = 600000,
+            balancingStop = 600000
     )
 
     mc.mineralData["XGHO2".unsafeCast<ResourceConstant>()] = MineralDataRecord(
@@ -115,7 +115,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
     mc.mineralData["GH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 1.200,
             priceMin = 0.900,
-            storeMax = 400000,
+            storeMax = 450000,
             marketSellExcess = 0,
             sellFromRoom = "E54N39",
             balancingStart = 300000,
@@ -125,41 +125,55 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
     mc.mineralData["OH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.060,
             priceMin = 0.060,
-            storeMax = 100000,
+            storeMax = 110000,
             buyToRoom = "E52N35",
-            onlyDirectBuy = true
+            onlyDirectBuy = true,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
     mc.mineralData["ZK".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.050,
             priceMin = 0.050,
-            storeMax = 100000,
+            storeMax = 110000,
             buyToRoom = "E54N37",
-            onlyDirectBuy = true
+            onlyDirectBuy = true,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
     mc.mineralData["UL".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.050,
             priceMin = 0.050,
-            storeMax = 100000,
+            storeMax = 110000,
             buyToRoom = "E53N39",
-            onlyDirectBuy = true
+            onlyDirectBuy = true,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
     mc.mineralData["G".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            storeMax = 100000
+            storeMax = 110000,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
     mc.mineralData["GH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            storeMax = 100000
+            storeMax = 110000,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
     mc.mineralData["LH2O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            storeMax = 100000
+            storeMax = 110000,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
     mc.mineralData["LH".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            storeMax = 100000
+            storeMax = 110000,
+            balancingStart = 50000,
+            balancingStop = 100000
     )
 
 }
