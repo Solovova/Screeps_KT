@@ -5,7 +5,17 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import screeps.api.ResourceConstant
 
 fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
-    mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
+    if (mr.constant.levelOfRoom == 2) {
+        mr.constant.creepUpgradeRole[7] = true
+        mr.constant.creepUpgradeRole[10] = true
+        mr.constant.creepUpgradeRole[101] = true
+    }
+
+    if (mr.constant.levelOfRoom == 3) {
+        mr.constant.creepUpgradeRole[10] = true
+        mr.constant.creepUpgradeRole[19] = true
+        mr.constant.creepUpgradeRole[101] = true
+    }
 
     //ToDo auto
     if (mr.name == "E54N39") mr.needMineral["GH2O".unsafeCast<ResourceConstant>()] = 10000

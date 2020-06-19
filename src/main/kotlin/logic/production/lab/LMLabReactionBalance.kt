@@ -1,106 +1,19 @@
 package logic.production.lab
 
 import mainContext.MainContext
-import mainContext.dataclass.MineralDataRecord
-import mainContext.mainRoomCollecror.mainRoom.MainRoom
-import screeps.api.ResourceConstant
-import screeps.api.get
 
 class LMLabReactionBalance(val mc: MainContext) {
-    private fun canStart(reaction: ResourceConstant): Boolean {
-        val reactionCompounds = mc.lm.lmProduction.labFunc.getReactionCompounds(reaction)
-        if (reactionCompounds.size != 2) return true
-
-        for (compound in reactionCompounds) {
-            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
-            val startResource: Int = 4000 + mc.mainRoomCollector.rooms.values
-                    .filter { it.constant.reactionActive == reaction.toString()}.size * 6000
-            if (mineralDataRecord.quantity < startResource) return false
-        }
-
-        val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
-        return mineralDataRecord.quantity < mineralDataRecord.balancingStart
-    }
-
-    private fun haveMineralsForReactionInLabs(mr: MainRoom, reactionCompounds: List<ResourceConstant>): Boolean {
-        val lab0 = mr.structureLabSort[0] ?: return false
-        val lab1 = mr.structureLabSort[1] ?: return false
-        return (lab0.store[reactionCompounds[0]] ?: 0) >= 5 && (lab1.store[reactionCompounds[1]]
-                ?: 0) >= 5
-    }
-
-    private fun needStop(mr: MainRoom): Boolean {
-        val reactionCompounds: List<ResourceConstant> = mc.lm.lmProduction.labFunc.getReactionCompounds(mr.constant.reactionActive.unsafeCast<ResourceConstant>())
-        if (reactionCompounds.size != 2) return true
-
-        for (compound in reactionCompounds) {
-            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return true
-            if (mineralDataRecord.quantity < 1000 && !haveMineralsForReactionInLabs(mr, reactionCompounds)) return true
-        }
-
-        val reaction = mr.constant.reactionActive.unsafeCast<ResourceConstant>()
-        val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return true
-        return mineralDataRecord.quantity > mineralDataRecord.balancingStop
-    }
-
-    private fun balancingStartForRoom(mr: MainRoom) {
-        if (mr.constant.reactionActiveArr.isNotEmpty()) {
-            for (newReaction in mr.constant.reactionActiveArr) {
-                if (newReaction == "") continue
-                if (canStart(newReaction.unsafeCast<ResourceConstant>())) {
-                    mr.constant.reactionActive = newReaction
-                    break
-                }
-            }
-        }
-    }
-
-    private fun balancingStopForRoom(mr: MainRoom) {
-        if (mr.constant.reactionActive != ""
-                && mr.constant.reactionActiveArr.size > 1
-                && needStop(mr)) {
-            mr.constant.reactionActive = ""
-        }
-    }
-
-
-    //Need testing
-    private fun canStartPriorityUp(mainRoom: MainRoom, reaction: ResourceConstant): Boolean {
-        val reactionCompounds = mc.lm.lmProduction.labFunc.getReactionCompounds(reaction)
-        if (reactionCompounds.size != 2) return true
-
-        for (compound in reactionCompounds) {
-            val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
-            val startResource: Int = mineralDataRecord.balancingStop + mc.mainRoomCollector.rooms.values
-                    .filter { it.constant.reactionActive == reaction.toString()
-                            && it.name != mainRoom.name}.size * 6000
-            if (mineralDataRecord.quantity < startResource) return false
-        }
-
-        val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
-        return mineralDataRecord.quantity < mineralDataRecord.balancingStop
-    }
-
-
-    private fun balancingStartForRoomPriorityUp(mr: MainRoom) {
-        if (mr.constant.reactionActiveArr.isNotEmpty()) {
-            for (newReaction in mr.constant.reactionActiveArr.reversed()) {
-                if (newReaction == "") continue
-
-                if (mr.constant.reactionActive != "" && mr.constant.reactionActive == newReaction) break
-
-                if (canStartPriorityUp(mr, newReaction.unsafeCast<ResourceConstant>())) {
-                    mr.constant.reactionActive = newReaction
-                    break
-                }
-            }
-        }
-    }
+    private val labBalancingType1: LMLabReactionBalanceType1 = LMLabReactionBalanceType1(mc)
+    private val labBalancingType2: LMLabReactionBalanceType2 = LMLabReactionBalanceType2(mc)
 
     fun balancing() {
+        //Type 1 balancing not interrupt reaction
+        //Stop reaction only if don't have resource for reaction or mineral quantity > balancingStop
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
-                balancingStopForRoom(room)
+                if (room.constant.reactionActiveBalancingType <= 2) {
+                    labBalancingType1.balancingStopForRoom(room)
+                }
             } catch (e: Exception) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 1!")
             }
@@ -108,18 +21,21 @@ class LMLabReactionBalance(val mc: MainContext) {
 
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
-                if (room.constant.reactionActive == "") balancingStartForRoom(room)
+                if (room.constant.reactionActiveBalancingType <= 2
+                                && room.constant.reactionActive == "") labBalancingType1.balancingStartForRoom(room)
             } catch (e: Exception) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 2!")
             }
         }
 
-//        for (room in mc.mainRoomCollector.rooms.values) {
-//            try {
-//                if (room.constant.reactionActive != "") balancingStartForRoomPriorityUp(room)
-//            } catch (e: Exception) {
-//                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
-//            }
-//        }
+        //Type 2 balancing can interrupt reaction
+        //Stop reaction if need start reaction with big priority
+        for (room in mc.mainRoomCollector.rooms.values) {
+            try {
+                if (room.constant.reactionActiveBalancingType == 2) labBalancingType2.balancingStartForRoom(room)
+            } catch (e: Exception) {
+                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
+            }
+        }
     }
 }

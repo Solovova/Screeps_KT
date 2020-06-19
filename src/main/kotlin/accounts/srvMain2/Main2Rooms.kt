@@ -5,7 +5,17 @@ import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import screeps.api.ResourceConstant
 
 fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
-    mr.mc.lm.lmCreep.lmUpgrade.setMainRoomUpgradeConstants(mr)
+    if (mr.constant.levelOfRoom == 2) {
+        mr.constant.creepUpgradeRole[7] = true
+        mr.constant.creepUpgradeRole[10] = true
+        mr.constant.creepUpgradeRole[101] = false
+    }
+
+    if (mr.constant.levelOfRoom == 3) {
+        mr.constant.creepUpgradeRole[10] = true
+        mr.constant.creepUpgradeRole[19] = true
+        mr.constant.creepUpgradeRole[101] = false
+    }
 
 
 
@@ -22,8 +32,8 @@ fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
 }
 
 fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
-    if (sr.mr.name == "W5N3" && sr.name == "W4N3") {
-        sr.need[0][0] = 0
+    if (sr.mr.name == "W3N5" && sr.name == "W3N6") {
+        sr.need[0][0] = 1
         sr.need[0][3] = 0
         sr.need[0][1] = 6
         sr.need[0][11] = 0

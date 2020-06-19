@@ -90,7 +90,7 @@ class MainContext {
             lm.lmProduction.lmMarket.deleteEmptyOffers()
         }
 
-        lm.lmProduction.labRoomsReactionBalance.balancing()
+        lm.lmProduction.labBalancing.balancing()
 
         //End of tick
         //ToDo rewrite

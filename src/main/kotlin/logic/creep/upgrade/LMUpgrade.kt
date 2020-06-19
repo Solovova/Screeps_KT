@@ -11,20 +11,7 @@ import screeps.api.Creep
 import screeps.api.ResourceConstant
 
 class LMUpgrade(val mc: MainContext) {
-    val needForUpgrade: LMUpgradeNeedFor = LMUpgradeNeedFor(mc)
-
-    fun setMainRoomUpgradeConstants(mr: MainRoom) {
-        if (mr.constant.levelOfRoom == 2) {
-            mr.constant.creepUpgradeRole[7] = true
-            mr.constant.creepUpgradeRole[10] = true
-        }
-
-        if (mr.constant.levelOfRoom == 3) {
-            mr.constant.creepUpgradeRole[10] = true
-            mr.constant.creepUpgradeRole[19] = true
-            mr.constant.creepUpgradeRole[101] = true
-        }
-    }
+    private val needForUpgrade: LMUpgradeNeedFor = LMUpgradeNeedFor(mc)
 
     fun creepSetLogic(creep: Creep, mr: MainRoom) {
         if (creep.spawning && creep.memory.upgrade == "") {

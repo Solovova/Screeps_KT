@@ -94,7 +94,8 @@ fun Creep.doTask(mainContext: MainContext) {
 
 
         TypeOfTask.Upgrade -> {
-            if (!task.come) this.doTaskGoTo(task, task.posObject0, 3)
+            val range: Int = if (this.memory.role in arrayOf(19,1019)) 1 else 3
+            if (!task.come) this.doTaskGoTo(task, task.posObject0, range)
             if (task.come) {
                 val controller: StructureController? = (Game.getObjectById(task.idObject0) as StructureController?)
                 if (controller != null) this.upgradeController(controller)
