@@ -11,12 +11,14 @@ class LMBalanceUpgrader(val mc:MainContext) {
         val counterLvl3 = mc.mainRoomCollector.rooms.values.filter { it.have[19] > 0}.size
         val counterLvl2 = mc.mainRoomCollector.rooms.values.filter { it.getLevelOfRoom() == 2}.sumBy{ it.have[7]}
         val qtyLvl2 = mc.mainRoomCollector.rooms.values.filter { it.getLevelOfRoom() == 2}.size
+        val qtyLvl3 = mc.mainRoomCollector.rooms.values.filter { it.getLevelOfRoom() == 3}.size
 
 
         val mineralsNeed = (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
 
         val qtyUpgraderNeedLvl2 = qtyLvl2*4
-        val qtyUpgraderNeed = balanceLog.getUpgrader(qtyUpgraderNeedLvl2)
+        val qtyUpgraderMax = qtyUpgraderNeedLvl2 + qtyLvl3
+        val qtyUpgraderNeed = balanceLog.getUpgrader(qtyUpgraderNeedLvl2, qtyUpgraderMax)
 
         balanceLog.saveLog(qtyUpgraderNeed, mineralsNeed)
         balanceLog.show()

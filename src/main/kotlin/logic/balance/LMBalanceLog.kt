@@ -42,9 +42,8 @@ class LMBalanceLog(val mainContext: MainContext) {
         mainContext.constants.globalConstant.balanceNeedEnergy[sizeBalanceNeedEnergy] = needMineral
     }
 
-    fun getUpgrader(qtyUpgraderMin: Int): Int {
-//        if (addedNew) {
-//            addedNew = false
+    fun getUpgrader(qtyUpgraderMin: Int, qtyUpgraderMax: Int): Int {
+
         if (mainContext.constants.globalConstant.balanceNeedEnergy.size >= 2) {
             val oneUpgraderUse = 20500
             val qtyUpgraderNow = mainContext.constants.globalConstant.balanceQtyUpgraderNow
@@ -82,11 +81,18 @@ class LMBalanceLog(val mainContext: MainContext) {
                 }
             }
 
+            if (qtyPrediction > qtyUpgraderMax) qtyPrediction = qtyUpgraderMax
+
             strPrediction += "prediction: $qtyPrediction "
 
             mainContext.lm.lmMessenger.log("INFO", "Glob", strPrediction)
+
+            if (addedNew) {
+                addedNew = false
+                //ToDo
+                //mainContext.constants.globalConstant.balanceQtyUpgraderNow = strPrediction
+            }
         }
-//        }
 
         var result: Int = mainContext.constants.globalConstant.balanceQtyUpgraderNow
 
