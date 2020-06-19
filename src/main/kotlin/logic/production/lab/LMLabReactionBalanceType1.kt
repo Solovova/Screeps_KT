@@ -14,12 +14,13 @@ class LMLabReactionBalanceType1(val mc: MainContext) {
         for (compound in reactionCompounds) {
             val mineralDataRecord: MineralDataRecord = mc.mineralData[compound] ?: return false
             val startResource: Int = 4000 + mc.mainRoomCollector.rooms.values
-                    .filter { it.constant.reactionActive == reaction.toString()}.size * 10000
+                    .filter { it.constant.reactionActive == reaction.toString() }.size * 10000
             if (mineralDataRecord.quantity < startResource) return false
         }
 
         val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
-        return mineralDataRecord.quantity < mineralDataRecord.balancingStart
+        val balance = mineralDataRecord.quantityUp - mineralDataRecord.quantityDown
+        return (mineralDataRecord.quantity + balance) < mineralDataRecord.balancingStart
     }
 
     private fun haveMineralsForReactionInLabs(mr: MainRoom, reactionCompounds: List<ResourceConstant>): Boolean {
@@ -43,23 +44,26 @@ class LMLabReactionBalanceType1(val mc: MainContext) {
         return mineralDataRecord.quantity > mineralDataRecord.balancingStop
     }
 
-    fun balancingStartForRoom(mr: MainRoom) {
+    fun balancingStartForRoom(mr: MainRoom): Boolean {
         if (mr.constant.reactionActiveArr.isNotEmpty()) {
             for (newReaction in mr.constant.reactionActiveArr) {
                 if (newReaction == "") continue
                 if (canStart(newReaction.unsafeCast<ResourceConstant>())) {
                     mr.constant.reactionActive = newReaction
-                    break
+                    return true
                 }
             }
         }
+        return false
     }
 
-    fun balancingStopForRoom(mr: MainRoom) {
+    fun balancingStopForRoom(mr: MainRoom): Boolean {
         if (mr.constant.reactionActive != ""
                 && mr.constant.reactionActiveArr.size > 1
                 && needStop(mr)) {
             mr.constant.reactionActive = ""
+            return true
         }
+        return false
     }
 }

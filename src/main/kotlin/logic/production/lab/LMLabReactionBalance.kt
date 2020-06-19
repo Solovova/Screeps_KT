@@ -7,12 +7,14 @@ class LMLabReactionBalance(val mc: MainContext) {
     private val labBalancingType2: LMLabReactionBalanceType2 = LMLabReactionBalanceType2(mc)
 
     fun balancing() {
+        //One per tick
+
         //Type 1 balancing not interrupt reaction
         //Stop reaction only if don't have resource for reaction or mineral quantity > balancingStop
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
                 if (room.constant.reactionActiveBalancingType <= 2) {
-                    labBalancingType1.balancingStopForRoom(room)
+                    if (labBalancingType1.balancingStopForRoom(room)) return
                 }
             } catch (e: Exception) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 1!")
@@ -22,7 +24,9 @@ class LMLabReactionBalance(val mc: MainContext) {
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
                 if (room.constant.reactionActiveBalancingType <= 2
-                                && room.constant.reactionActive == "") labBalancingType1.balancingStartForRoom(room)
+                                && room.constant.reactionActive == "") {
+                    if (labBalancingType1.balancingStartForRoom(room)) return
+                }
             } catch (e: Exception) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 2!")
             }
@@ -32,7 +36,9 @@ class LMLabReactionBalance(val mc: MainContext) {
         //Stop reaction if need start reaction with big priority
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
-                if (room.constant.reactionActiveBalancingType == 2) labBalancingType2.balancingStartForRoom(room)
+                if (room.constant.reactionActiveBalancingType == 2) {
+                    if (labBalancingType2.balancingStartForRoom(room)) return
+                }
             } catch (e: Exception) {
                 mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
             }

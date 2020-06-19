@@ -8,13 +8,13 @@ fun AccountInitMain2.initMainRoomOut(mr: MainRoom) {
     if (mr.constant.levelOfRoom == 2) {
         mr.constant.creepUpgradeRole[7] = true
         mr.constant.creepUpgradeRole[10] = true
-        mr.constant.creepUpgradeRole[101] = false
+        mr.constant.creepUpgradeRole[101] = true
     }
 
     if (mr.constant.levelOfRoom == 3) {
         mr.constant.creepUpgradeRole[10] = true
         mr.constant.creepUpgradeRole[19] = true
-        mr.constant.creepUpgradeRole[101] = false
+        mr.constant.creepUpgradeRole[101] = true
     }
 
 

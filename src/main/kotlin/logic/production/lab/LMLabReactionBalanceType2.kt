@@ -18,19 +18,21 @@ class LMLabReactionBalanceType2(val mc: MainContext) {
         }
 
         val mineralDataRecord: MineralDataRecord = mc.mineralData[reaction] ?: return false
-        return mineralDataRecord.quantity < mineralDataRecord.balancingStart
+        val balance = mineralDataRecord.quantityUp - mineralDataRecord.quantityDown
+        return (mineralDataRecord.quantity + balance) < mineralDataRecord.balancingStart
     }
 
-    fun balancingStartForRoom(mr: MainRoom) {
+    fun balancingStartForRoom(mr: MainRoom):Boolean {
         if (mr.constant.reactionActiveArr.isNotEmpty()) {
             for (newReaction in mr.constant.reactionActiveArr) {
                 if (newReaction == "") continue
-                if (newReaction==mr.constant.reactionActive) return
+                if (newReaction==mr.constant.reactionActive) return false
                 if (canStart(newReaction.unsafeCast<ResourceConstant>())) {
                     mr.constant.reactionActive = newReaction
-                    return
+                    return true
                 }
             }
         }
+        return false
     }
 }
