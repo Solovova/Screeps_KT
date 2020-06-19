@@ -9,7 +9,7 @@ class LMUpgraderSet(val mc:MainContext) {
         val counterLvl2 = mc.mainRoomCollector.rooms.values.filter { it.getLevelOfRoom() == 2}.sumBy{ it.have[7]}
 
         val mineralsNeed = (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
-        var countOfRoomForUpgrade = 25
+        var countOfRoomForUpgrade = 28
         if (countOfRoomForUpgrade == 0) countOfRoomForUpgrade = 1
 
         //Balancing
